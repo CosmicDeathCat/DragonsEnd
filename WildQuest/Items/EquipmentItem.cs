@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WildQuest.Enums;
+using WildQuest.Enums.WildQuest.Enums;
 using WildQuest.Interfaces;
 using WildQuest.Stats;
 
@@ -10,11 +11,14 @@ public class EquipmentItem : Item, IEquipmentItem
     public virtual List<EquipmentSlot> Slots { get; set; }
     public virtual ActorStats Stats { get; set; }
     
-    public EquipmentItem(string name, string description, int price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, bool stackable = true, int quantity = 1) 
+    public virtual GearTier GearTier { get; set; }
+    
+    public EquipmentItem(string name, string description, int price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, bool stackable = true, int quantity = 1) 
         : base(name, description, price, type, stackable, quantity)
     {
         Slots = slots;
         Stats = stats;
+        GearTier = gearTier;
     }
     
     public virtual void Equip(IActor? source, IActor? target)

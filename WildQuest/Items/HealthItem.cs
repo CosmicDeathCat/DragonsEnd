@@ -1,5 +1,8 @@
+using DLS.MessageSystem;
+using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
+using WildQuest.Messaging.Messages;
 
 namespace WildQuest.Items;
 
@@ -31,5 +34,7 @@ public class HealthItem : Item, IHealthItem
                 }
                 break;
         }
+        MessageSystem.MessageManager.SendImmediate(MessageChannels.Items, new ItemMessage(this, source, target));
+
     }
 }
