@@ -6,21 +6,19 @@ public interface ILeveling
 {
     int CurrentLevel { get; set; }
     int MaxLevel { get; set; }
-    int Experience { get; set; }
-    int ExperienceToNextLevel { get; }
-    Dictionary<int, int> ExperienceLevels { get; set; }
+    long Experience { get; set; }
+    long ExperienceToNextLevel { get; }
+    Dictionary<int, long> ExperienceLevels { get; set; }
     void LevelUp();
     void LevelDown();
-    void GainExperience(int amount);
-    void LoseExperience(int amount);
-    void SetExperience(int amount);
+    void GainExperience(long amount);
+    void LoseExperience(long amount);
+    void SetExperience(long amount);
     void SetLevel(int level);
     void SetMaxLevel(int level);
     void ValidateLevel();
     int ValidateLevel(int level);
-    int ValidateExperience(int experience);
-    
-    
+    long ValidateExperience(long experience);
     string ToString();
     
 }

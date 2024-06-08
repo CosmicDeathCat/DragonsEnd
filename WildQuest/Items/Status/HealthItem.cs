@@ -4,13 +4,13 @@ using WildQuest.Enums;
 using WildQuest.Interfaces;
 using WildQuest.Messaging.Messages;
 
-namespace WildQuest.Items;
+namespace WildQuest.Items.Status;
 
 public class HealthItem : Item, IHealthItem
 {
     public virtual int HealPercentage { get; set; }
     
-    public HealthItem(string name, string description, int price, ItemType type, int healPercentage, bool stackable = true, int quantity = 1) : base(name, description, price, type, stackable, quantity)
+    public HealthItem(string name, string description, long price, ItemType type, int healPercentage, bool stackable = true, long quantity = 1, double dropRate = 1) : base(name, description, price, type, stackable, quantity, dropRate)
     {
         HealPercentage = healPercentage;
     }
@@ -36,5 +36,10 @@ public class HealthItem : Item, IHealthItem
         }
         MessageSystem.MessageManager.SendImmediate(MessageChannels.Items, new ItemMessage(this, source, target));
 
+    }
+
+    public override IItem Copy()
+    {
+        return new HealthItem(Name, Description, Price, Type, HealPercentage, Stackable, Quantity);
     }
 }

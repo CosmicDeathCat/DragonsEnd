@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using WildQuest.Enums;
-using WildQuest.Enums.WildQuest.Enums;
 using WildQuest.Stats;
 
 namespace WildQuest.Interfaces;

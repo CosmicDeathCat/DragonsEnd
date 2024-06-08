@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using WildQuest.Enums;
-using WildQuest.Enums.WildQuest.Enums;
 using WildQuest.Interfaces;
 using WildQuest.Stats;
 
-namespace WildQuest.Items;
+namespace WildQuest.Items.Equipment;
 
 public class EquipmentItem : Item, IEquipmentItem
 {
@@ -13,8 +12,8 @@ public class EquipmentItem : Item, IEquipmentItem
     
     public virtual GearTier GearTier { get; set; }
     
-    public EquipmentItem(string name, string description, int price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, bool stackable = true, int quantity = 1) 
-        : base(name, description, price, type, stackable, quantity)
+    public EquipmentItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, bool stackable = true, long quantity = 1, double dropRate = 1) 
+        : base(name, description, price, type, stackable, quantity, dropRate)
     {
         Slots = slots;
         Stats = stats;
@@ -58,5 +57,10 @@ public class EquipmentItem : Item, IEquipmentItem
             target.ActorStats -= Stats;
             source?.Inventory.Add(this);
         }
+    }
+
+    public override IItem Copy()
+    {
+        return new EquipmentItem(Name, Description, Price, Type, Slots, Stats, GearTier, Stackable, Quantity);
     }
 }

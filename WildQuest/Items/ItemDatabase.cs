@@ -2,8 +2,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using WildQuest.Enums;
-using WildQuest.Enums.WildQuest.Enums;
 using WildQuest.Interfaces;
+using WildQuest.Items.Equipment;
+using WildQuest.Items.Status;
 using WildQuest.Stats;
 
 namespace WildQuest.Items;
@@ -13,46 +14,51 @@ public static class ItemDatabase
     public static ConcurrentDictionary<string, IItem> Items { get; set; } = new(StringComparer.OrdinalIgnoreCase)
     {
         // Healing Items
-        ["Weak Health Potion"] = new HealthItem(
-            name: "Weak Health Potion",
+        [ItemNames.WeakHealthPotion] = new HealthItem(
+            name: ItemNames.WeakHealthPotion,
             description: "A weak health potion that restores 25% health.",
             price: 25,
             type: ItemType.Consumable,
             healPercentage: 25,
             stackable: true,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Normal Health Potion"] = new HealthItem(
-            name: "Normal Health Potion",
+        [ItemNames.NormalHealthPotion] = new HealthItem(
+            name: ItemNames.NormalHealthPotion,
             description: "A normal health potion that restores 50% health.",
             price: 50,
             type: ItemType.Consumable,
             healPercentage: 50,
             stackable: true,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
+            
         ),
-        ["Strong Health Potion"] = new HealthItem(
-            name: "Strong Health Potion",
+        [ItemNames.StrongHealthPotion] = new HealthItem(
+            name: ItemNames.StrongHealthPotion,
             description: "A strong health potion that restores 75% health.",
             price: 100,
             type: ItemType.Consumable,
             healPercentage: 75,
             stackable: true,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Elixir"] = new HealthItem(
-            name: "Elixir",
+        [ItemNames.Elixir] = new HealthItem(
+            name: ItemNames.Elixir,
             description: "An elixir that restores 100% health.",
             price: 200,
             type: ItemType.Consumable,
             healPercentage: 100,
             stackable: true,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
 
         // Melee Gear - Bronze Tier
-        ["Bronze Helmet"] = new ArmorItem(
-            name: "Bronze Helmet",
+        [ItemNames.BronzeHelmet] = new ArmorItem(
+            name: ItemNames.BronzeHelmet,
             description: "A bronze helmet that provides 5 melee defense and -2 magic defense.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -62,10 +68,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze Chestplate"] = new ArmorItem(
-            name: "Bronze Chestplate",
+        [ItemNames.BronzeChestplate] = new ArmorItem(
+            name: ItemNames.BronzeChestplate,
             description: "A bronze chestplate that provides 10 melee defense and -5 magic defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -75,10 +82,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze Gauntlets"] = new ArmorItem(
-            name: "Bronze Gauntlets",
+        [ItemNames.BronzeGauntlets] = new ArmorItem(
+            name: ItemNames.BronzeGauntlets,
             description: "Bronze gauntlets that provide 3 melee defense and -1 magic defense.",
             price: 30,
             type: ItemType.NonConsumable,
@@ -88,10 +96,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze Greaves"] = new ArmorItem(
-            name: "Bronze Greaves",
+        [ItemNames.BronzeGreaves] = new ArmorItem(
+            name: ItemNames.BronzeGreaves,
             description: "Bronze greaves that provide 7 melee defense and -3 magic defense.",
             price: 70,
             type: ItemType.NonConsumable,
@@ -101,10 +110,25 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze Dagger"] = new WeaponItem(
-            name: "Bronze Dagger",
+        [ItemNames.BronzeShield] = new ArmorItem(
+            name: ItemNames.BronzeShield,
+            description: "A bronze shield that provides 5 melee defense and -2 magic defense.",
+            price: 80,
+            type: ItemType.NonConsumable,
+            slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
+            stats: new ActorStats(0, 0, 5, 0, 0, 0, -2),
+            combatStyle: CombatStyle.Melee,
+            armorType: ArmorType.Heavy,
+            gearTier: GearTier.Bronze,
+            stackable: false,
+            quantity: 1,
+            dropRate: 1
+        ),
+        [ItemNames.BronzeDagger] = new WeaponItem(
+            name: ItemNames.BronzeDagger,
             description: "A bronze dagger that adds 3 melee attack.",
             price: 40,
             type: ItemType.NonConsumable,
@@ -112,12 +136,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 3, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Dagger,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze Sword"] = new WeaponItem(
-            name: "Bronze Sword",
+        [ItemNames.BronzeSword] = new WeaponItem(
+            name: ItemNames.BronzeSword,
             description: "A bronze sword that adds 5 melee attack.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -125,12 +151,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 5, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Sword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Bronze GreatSword"] = new WeaponItem(
-            name: "Bronze GreatSword",
+        [ItemNames.BronzeGreatSword] = new WeaponItem(
+            name: ItemNames.BronzeGreatSword,
             description: "A bronze greatsword that adds 8 melee attack.",
             price: 70,
             type: ItemType.NonConsumable,
@@ -138,14 +166,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 8, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.GreatSword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Bronze,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Melee Gear - Iron Tier
-        ["Iron Helmet"] = new ArmorItem(
-            name: "Iron Helmet",
+        [ItemNames.IronHelmet] = new ArmorItem(
+            name: ItemNames.IronHelmet,
             description: "An iron helmet that provides 8 melee defense and -3 magic defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -155,10 +185,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron Chestplate"] = new ArmorItem(
-            name: "Iron Chestplate",
+        [ItemNames.IronChestplate] = new ArmorItem(
+            name: ItemNames.IronChestplate,
             description: "An iron chestplate that provides 15 melee defense and -7 magic defense.",
             price: 200,
             type: ItemType.NonConsumable,
@@ -168,10 +199,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron Gauntlets"] = new ArmorItem(
-            name: "Iron Gauntlets",
+        [ItemNames.IronGauntlets] = new ArmorItem(
+            name: ItemNames.IronGauntlets,
             description: "Iron gauntlets that provide 5 melee defense and -2 magic defense.",
             price: 60,
             type: ItemType.NonConsumable,
@@ -181,10 +213,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron Greaves"] = new ArmorItem(
-            name: "Iron Greaves",
+        [ItemNames.IronGreaves] = new ArmorItem(
+            name: ItemNames.IronGreaves,
             description: "Iron greaves that provide 10 melee defense and -5 magic defense.",
             price: 140,
             type: ItemType.NonConsumable,
@@ -194,10 +227,25 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron Dagger"] = new WeaponItem(
-            name: "Iron Dagger",
+        [ItemNames.IronShield] = new ArmorItem(
+            name: ItemNames.IronShield,
+            description: "An iron shield that provides 8 melee defense and -3 magic defense.",
+            price: 160,
+            type: ItemType.NonConsumable,
+            slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
+            stats: new ActorStats(0, 0, 8, 0, 0, 0, -3),
+            combatStyle: CombatStyle.Melee,
+            armorType: ArmorType.Heavy,
+            gearTier: GearTier.Iron,
+            stackable: false,
+            quantity: 1,
+            dropRate: 1
+        ),
+        [ItemNames.IronDagger] = new WeaponItem(
+            name: ItemNames.IronDagger,
             description: "An iron dagger that adds 6 melee attack.",
             price: 80,
             type: ItemType.NonConsumable,
@@ -205,12 +253,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 6, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Dagger,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron Sword"] = new WeaponItem(
-            name: "Iron Sword",
+        [ItemNames.IronSword] = new WeaponItem(
+            name: ItemNames.IronSword,
             description: "An iron sword that adds 10 melee attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -218,12 +268,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 10, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Sword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Iron GreatSword"] = new WeaponItem(
-            name: "Iron GreatSword",
+        [ItemNames.IronGreatSword] = new WeaponItem(
+            name: ItemNames.IronGreatSword,
             description: "An iron greatsword that adds 15 melee attack.",
             price: 140,
             type: ItemType.NonConsumable,
@@ -231,14 +283,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 15, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.GreatSword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Iron,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Melee Gear - Steel Tier
-        ["Steel Helmet"] = new ArmorItem(
-            name: "Steel Helmet",
+        [ItemNames.SteelHelmet] = new ArmorItem(
+            name: ItemNames.SteelHelmet,
             description: "A steel helmet that provides 12 melee defense and -4 magic defense.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -248,10 +302,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Steel Chestplate"] = new ArmorItem(
-            name: "Steel Chestplate",
+        [ItemNames.SteelChestplate] = new ArmorItem(
+            name: ItemNames.SteelChestplate,
             description: "A steel chestplate that provides 20 melee defense and -10 magic defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -261,10 +316,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Steel Gauntlets"] = new ArmorItem(
-            name: "Steel Gauntlets",
+        [ItemNames.SteelGauntlets] = new ArmorItem(
+            name: ItemNames.SteelGauntlets,
             description: "Steel gauntlets that provide 7 melee defense and -3 magic defense.",
             price: 90,
             type: ItemType.NonConsumable,
@@ -274,10 +330,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Steel Greaves"] = new ArmorItem(
-            name: "Steel Greaves",
+        [ItemNames.SteelGreaves] = new ArmorItem(
+            name: ItemNames.SteelGreaves,
             description: "Steel greaves that provide 15 melee defense and -7 magic defense.",
             price: 180,
             type: ItemType.NonConsumable,
@@ -287,10 +344,25 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Steel Dagger"] = new WeaponItem(
-            name: "Steel Dagger",
+        [ItemNames.SteelShield] = new ArmorItem(
+            name: ItemNames.SteelShield,
+            description: "A steel shield that provides 12 melee defense and -4 magic defense.",
+            price: 200,
+            type: ItemType.NonConsumable,
+            slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
+            stats: new ActorStats(0, 0, 12, 0, 0, 0, -4),
+            combatStyle: CombatStyle.Melee,
+            armorType: ArmorType.Heavy,
+            gearTier: GearTier.Steel,
+            stackable: false,
+            quantity: 1,
+            dropRate: 1
+        ),
+        [ItemNames.SteelDagger] = new WeaponItem(
+            name: ItemNames.SteelDagger,
             description: "A steel dagger that adds 8 melee attack.",
             price: 120,
             type: ItemType.NonConsumable,
@@ -298,12 +370,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 8, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Dagger,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Steel Sword"] = new WeaponItem(
-            name: "Steel Sword",
+        [ItemNames.SteelSword] = new WeaponItem(
+            name: ItemNames.SteelSword,
             description: "A steel sword that adds 12 melee attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -311,12 +385,13 @@ public static class ItemDatabase
             stats: new ActorStats(0, 12, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Sword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Steel,
             stackable: false,
             quantity: 1
         ),
-        ["Steel GreatSword"] = new WeaponItem(
-            name: "Steel GreatSword",
+        [ItemNames.SteelGreatSword] = new WeaponItem(
+            name: ItemNames.SteelGreatSword,
             description: "A steel greatsword that adds 18 melee attack.",
             price: 210,
             type: ItemType.NonConsumable,
@@ -324,14 +399,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 18, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.GreatSword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Steel,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
-         // Mithril Gear - Mithril Tier
-        ["Mithril Helmet"] = new ArmorItem(
-            name: "Mithril Helmet",
+        // Mithril Gear - Mithril Tier
+        [ItemNames.MithrilHelmet] = new ArmorItem(
+            name: ItemNames.MithrilHelmet,
             description: "A mithril helmet that provides 20 melee defense and -5 magic defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -341,10 +418,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril Chestplate"] = new ArmorItem(
-            name: "Mithril Chestplate",
+        [ItemNames.MithrilChestplate] = new ArmorItem(
+            name: ItemNames.MithrilChestplate,
             description: "A mithril chestplate that provides 30 melee defense and -12 magic defense.",
             price: 600,
             type: ItemType.NonConsumable,
@@ -354,10 +432,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril Gauntlets"] = new ArmorItem(
-            name: "Mithril Gauntlets",
+        [ItemNames.MithrilGauntlets] = new ArmorItem(
+            name: ItemNames.MithrilGauntlets,
             description: "Mithril gauntlets that provide 10 melee defense and -4 magic defense.",
             price: 180,
             type: ItemType.NonConsumable,
@@ -367,10 +446,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril Greaves"] = new ArmorItem(
-            name: "Mithril Greaves",
+        [ItemNames.MithrilGreaves] = new ArmorItem(
+            name: ItemNames.MithrilGreaves,
             description: "Mithril greaves that provide 20 melee defense and -10 magic defense.",
             price: 360,
             type: ItemType.NonConsumable,
@@ -380,10 +460,25 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril Dagger"] = new WeaponItem(
-            name: "Mithril Dagger",
+        [ItemNames.MithrilShield] = new ArmorItem(
+            name: ItemNames.MithrilShield,
+            description: "A mithril shield that provides 20 melee defense and -5 magic defense.",
+            price: 400,
+            type: ItemType.NonConsumable,
+            slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
+            stats: new ActorStats(0, 0, 20, 0, 0, 0, -5),
+            combatStyle: CombatStyle.Melee,
+            armorType: ArmorType.Heavy,
+            gearTier: GearTier.Mithril,
+            stackable: false,
+            quantity: 1,
+            dropRate: 1
+        ),
+        [ItemNames.MithrilDagger] = new WeaponItem(
+            name: ItemNames.MithrilDagger,
             description: "A mithril dagger that adds 15 melee attack.",
             price: 240,
             type: ItemType.NonConsumable,
@@ -391,12 +486,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 15, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Dagger,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril Sword"] = new WeaponItem(
-            name: "Mithril Sword",
+        [ItemNames.MithrilSword] = new WeaponItem(
+            name: ItemNames.MithrilSword,
             description: "A mithril sword that adds 20 melee attack.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -404,12 +501,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 20, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Sword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mithril GreatSword"] = new WeaponItem(
-            name: "Mithril GreatSword",
+        [ItemNames.MithrilGreatSword] = new WeaponItem(
+            name: ItemNames.MithrilGreatSword,
             description: "A mithril greatsword that adds 30 melee attack.",
             price: 420,
             type: ItemType.NonConsumable,
@@ -417,14 +516,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 30, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.GreatSword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mithril,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Dragon Gear - Dragon Tier
-        ["Dragon Helmet"] = new ArmorItem(
-            name: "Dragon Helmet",
+        [ItemNames.DragonHelmet] = new ArmorItem(
+            name: ItemNames.DragonHelmet,
             description: "A dragon helmet that provides 30 melee defense and -8 magic defense.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -434,10 +535,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon Chestplate"] = new ArmorItem(
-            name: "Dragon Chestplate",
+        [ItemNames.DragonChestplate] = new ArmorItem(
+            name: ItemNames.DragonChestplate,
             description: "A dragon chestplate that provides 40 melee defense and -15 magic defense.",
             price: 1000,
             type: ItemType.NonConsumable,
@@ -447,10 +549,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon Gauntlets"] = new ArmorItem(
-            name: "Dragon Gauntlets",
+        [ItemNames.DragonGauntlets] = new ArmorItem(
+            name: ItemNames.DragonGauntlets,
             description: "Dragon gauntlets that provide 15 melee defense and -5 magic defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -460,10 +563,11 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon Greaves"] = new ArmorItem(
-            name: "Dragon Greaves",
+        [ItemNames.DragonGreaves] = new ArmorItem(
+            name: ItemNames.DragonGreaves,
             description: "Dragon greaves that provide 25 melee defense and -10 magic defense.",
             price: 720,
             type: ItemType.NonConsumable,
@@ -473,10 +577,25 @@ public static class ItemDatabase
             armorType: ArmorType.Heavy,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon Dagger"] = new WeaponItem(
-            name: "Dragon Dagger",
+        [ItemNames.DragonShield] = new ArmorItem(
+            name: ItemNames.DragonShield,
+            description: "A dragon shield that provides 30 melee defense and -8 magic defense.",
+            price: 800,
+            type: ItemType.NonConsumable,
+            slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
+            stats: new ActorStats(0, 0, 30, 0, 0, 0, -8),
+            combatStyle: CombatStyle.Melee,
+            armorType: ArmorType.Heavy,
+            gearTier: GearTier.Dragon,
+            stackable: false,
+            quantity: 1,
+            dropRate: 1
+        ),
+        [ItemNames.DragonDagger] = new WeaponItem(
+            name: ItemNames.DragonDagger,
             description: "A dragon dagger that adds 25 melee attack.",
             price: 600,
             type: ItemType.NonConsumable,
@@ -484,12 +603,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 25, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Dagger,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon Sword"] = new WeaponItem(
-            name: "Dragon Sword",
+        [ItemNames.DragonSword] = new WeaponItem(
+            name: ItemNames.DragonSword,
             description: "A dragon sword that adds 30 melee attack.",
             price: 750,
             type: ItemType.NonConsumable,
@@ -497,12 +618,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 30, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.Sword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Dragon GreatSword"] = new WeaponItem(
-            name: "Dragon GreatSword",
+        [ItemNames.DragonGreatSword] = new WeaponItem(
+            name: ItemNames.DragonGreatSword,
             description: "A dragon greatsword that adds 40 melee attack.",
             price: 900,
             type: ItemType.NonConsumable,
@@ -510,14 +633,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 40, 0, 0, 0, 0, 0),
             combatStyle: CombatStyle.Melee,
             weaponType: WeaponType.GreatSword,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Dragon,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Feeble Gear - Ranged Tier
-        ["Feeble Feather Cap"] = new ArmorItem(
-            name: "Feeble Feather Cap",
+        [ItemNames.FeebleFeatherCap] = new ArmorItem(
+            name: ItemNames.FeebleFeatherCap,
             description: "A feather cap that provides 5 ranged defense and -2 melee defense.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -527,10 +652,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble Leather Vest"] = new ArmorItem(
-            name: "Feeble Leather Vest",
+        [ItemNames.FeebleLeatherVest] = new ArmorItem(
+            name: ItemNames.FeebleLeatherVest,
             description: "A leather vest that provides 10 ranged defense and -5 melee defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -540,10 +666,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble Leather Gloves"] = new ArmorItem(
-            name: "Feeble Leather Gloves",
+        [ItemNames.FeebleLeatherGloves] = new ArmorItem(
+            name: ItemNames.FeebleLeatherGloves,
             description: "Leather gloves that provide 3 ranged defense and -1 melee defense.",
             price: 30,
             type: ItemType.NonConsumable,
@@ -553,10 +680,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble Leather Boots"] = new ArmorItem(
-            name: "Feeble Leather Boots",
+        [ItemNames.FeebleLeatherBoots] = new ArmorItem(
+            name: ItemNames.FeebleLeatherBoots,
             description: "Leather boots that provide 7 ranged defense and -3 melee defense.",
             price: 70,
             type: ItemType.NonConsumable,
@@ -566,10 +694,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble ThrowingKnife"] = new WeaponItem(
-            name: "Feeble ThrowingKnife",
+        [ItemNames.FeebleThrowingKnife] = new WeaponItem(
+            name: ItemNames.FeebleThrowingKnife,
             description: "A throwing knife that adds 5 ranged attack.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -577,12 +706,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 5, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.ThrowingKnife,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble Wood Shortbow"] = new WeaponItem(
-            name: "Feeble Wood Shortbow",
+        [ItemNames.FeebleWoodShortbow] = new WeaponItem(
+            name: ItemNames.FeebleWoodShortbow,
             description: "A wood shortbow that adds 7 ranged attack.",
             price: 70,
             type: ItemType.NonConsumable,
@@ -590,12 +721,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 7, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Bow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Feeble Crossbow"] = new WeaponItem(
-            name: "Feeble Crossbow",
+        [ItemNames.FeebleCrossbow] = new WeaponItem(
+            name: ItemNames.FeebleCrossbow,
             description: "A crossbow that adds 10 ranged attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -603,14 +736,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 10, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Crossbow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Feeble,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Weak Gear - Ranged Tier
-        ["Weak Feather Cap"] = new ArmorItem(
-            name: "Weak Feather Cap",
+        [ItemNames.WeakFeatherCap] = new ArmorItem(
+            name: ItemNames.WeakFeatherCap,
             description: "A feather cap that provides 8 ranged defense and -3 melee defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -620,10 +755,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak Leather Vest"] = new ArmorItem(
-            name: "Weak Leather Vest",
+        [ItemNames.WeakLeatherVest] = new ArmorItem(
+            name: ItemNames.WeakLeatherVest,
             description: "A leather vest that provides 15 ranged defense and -7 melee defense.",
             price: 200,
             type: ItemType.NonConsumable,
@@ -633,10 +769,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak Leather Gloves"] = new ArmorItem(
-            name: "Weak Leather Gloves",
+        [ItemNames.WeakLeatherGloves] = new ArmorItem(
+            name: ItemNames.WeakLeatherGloves,
             description: "Leather gloves that provide 5 ranged defense and -2 melee defense.",
             price: 60,
             type: ItemType.NonConsumable,
@@ -646,10 +783,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak Leather Boots"] = new ArmorItem(
-            name: "Weak Leather Boots",
+        [ItemNames.WeakLeatherBoots] = new ArmorItem(
+            name: ItemNames.WeakLeatherBoots,
             description: "Leather boots that provide 10 ranged defense and -5 melee defense.",
             price: 140,
             type: ItemType.NonConsumable,
@@ -659,10 +797,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak ThrowingKnife"] = new WeaponItem(
-            name: "Weak ThrowingKnife",
+        [ItemNames.WeakThrowingKnife] = new WeaponItem(
+            name: ItemNames.WeakThrowingKnife,
             description: "A throwing knife that adds 8 ranged attack.",
             price: 80,
             type: ItemType.NonConsumable,
@@ -670,12 +809,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 8, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.ThrowingKnife,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak Wood Shortbow"] = new WeaponItem(
-            name: "Weak Wood Shortbow",
+        [ItemNames.WeakWoodShortbow] = new WeaponItem(
+            name: ItemNames.WeakWoodShortbow,
             description: "A wood shortbow that adds 10 ranged attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -683,12 +824,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 10, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Bow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Weak Crossbow"] = new WeaponItem(
-            name: "Weak Crossbow",
+        [ItemNames.WeakCrossbow] = new WeaponItem(
+            name: ItemNames.WeakCrossbow,
             description: "A crossbow that adds 12 ranged attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -696,14 +839,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 12, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Crossbow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Weak,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Strong Gear - Ranged Tier
-        ["Strong Feather Cap"] = new ArmorItem(
-            name: "Strong Feather Cap",
+        [ItemNames.StrongFeatherCap] = new ArmorItem(
+            name: ItemNames.StrongFeatherCap,
             description: "A feather cap that provides 12 ranged defense and -4 melee defense.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -713,10 +858,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong Leather Vest"] = new ArmorItem(
-            name: "Strong Leather Vest",
+        [ItemNames.StrongLeatherVest] = new ArmorItem(
+            name: ItemNames.StrongLeatherVest,
             description: "A leather vest that provides 20 ranged defense and -10 melee defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -726,10 +872,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong Leather Gloves"] = new ArmorItem(
-            name: "Strong Leather Gloves",
+        [ItemNames.StrongLeatherGloves] = new ArmorItem(
+            name: ItemNames.StrongLeatherGloves,
             description: "Leather gloves that provide 7 ranged defense and -3 melee defense.",
             price: 90,
             type: ItemType.NonConsumable,
@@ -739,10 +886,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong Leather Boots"] = new ArmorItem(
-            name: "Strong Leather Boots",
+        [ItemNames.StrongLeatherBoots] = new ArmorItem(
+            name: ItemNames.StrongLeatherBoots,
             description: "Leather boots that provide 15 ranged defense and -7 melee defense.",
             price: 180,
             type: ItemType.NonConsumable,
@@ -752,10 +900,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong ThrowingKnife"] = new WeaponItem(
-            name: "Strong ThrowingKnife",
+        [ItemNames.StrongThrowingKnife] = new WeaponItem(
+            name: ItemNames.StrongThrowingKnife,
             description: "A throwing knife that adds 12 ranged attack.",
             price: 120,
             type: ItemType.NonConsumable,
@@ -763,12 +912,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 12, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.ThrowingKnife,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong Wood Shortbow"] = new WeaponItem(
-            name: "Strong Wood Shortbow",
+        [ItemNames.StrongWoodShortbow] = new WeaponItem(
+            name: ItemNames.StrongWoodShortbow,
             description: "A wood shortbow that adds 15 ranged attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -776,12 +927,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 15, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Bow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Strong Crossbow"] = new WeaponItem(
-            name: "Strong Crossbow",
+        [ItemNames.StrongCrossbow] = new WeaponItem(
+            name: ItemNames.StrongCrossbow,
             description: "A crossbow that adds 20 ranged attack.",
             price: 200,
             type: ItemType.NonConsumable,
@@ -789,14 +942,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 20, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Crossbow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Strong,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
-         // Reinforced Gear - Ranged Tier
-        ["Reinforced Feather Cap"] = new ArmorItem(
-            name: "Reinforced Feather Cap",
+        // Reinforced Gear - Ranged Tier
+        [ItemNames.ReinforcedFeatherCap] = new ArmorItem(
+            name: ItemNames.ReinforcedFeatherCap,
             description: "A feather cap that provides 15 ranged defense and -5 melee defense.",
             price: 250,
             type: ItemType.NonConsumable,
@@ -806,10 +961,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced Leather Vest"] = new ArmorItem(
-            name: "Reinforced Leather Vest",
+        [ItemNames.ReinforcedLeatherVest] = new ArmorItem(
+            name: ItemNames.ReinforcedLeatherVest,
             description: "A leather vest that provides 25 ranged defense and -12 melee defense.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -819,10 +975,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced Leather Gloves"] = new ArmorItem(
-            name: "Reinforced Leather Gloves",
+        [ItemNames.ReinforcedLeatherGloves] = new ArmorItem(
+            name: ItemNames.ReinforcedLeatherGloves,
             description: "Leather gloves that provide 10 ranged defense and -4 melee defense.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -832,10 +989,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced Leather Boots"] = new ArmorItem(
-            name: "Reinforced Leather Boots",
+        [ItemNames.ReinforcedLeatherBoots] = new ArmorItem(
+            name: ItemNames.ReinforcedLeatherBoots,
             description: "Leather boots that provide 20 ranged defense and -10 melee defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -845,10 +1003,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced ThrowingKnife"] = new WeaponItem(
-            name: "Reinforced ThrowingKnife",
+        [ItemNames.ReinforcedThrowingKnife] = new WeaponItem(
+            name: ItemNames.ReinforcedThrowingKnife,
             description: "A throwing knife that adds 18 ranged attack.",
             price: 200,
             type: ItemType.NonConsumable,
@@ -856,12 +1015,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 18, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.ThrowingKnife,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced Wood Shortbow"] = new WeaponItem(
-            name: "Reinforced Wood Shortbow",
+        [ItemNames.ReinforcedWoodShortbow] = new WeaponItem(
+            name: ItemNames.ReinforcedWoodShortbow,
             description: "A wood shortbow that adds 25 ranged attack.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -869,12 +1030,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 25, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Bow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Reinforced Crossbow"] = new WeaponItem(
-            name: "Reinforced Crossbow",
+        [ItemNames.ReinforcedCrossbow] = new WeaponItem(
+            name: ItemNames.ReinforcedCrossbow,
             description: "A crossbow that adds 30 ranged attack.",
             price: 400,
             type: ItemType.NonConsumable,
@@ -882,14 +1045,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 30, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Crossbow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Reinforced,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Crystal Gear - Ranged Tier
-        ["Crystal Feather Cap"] = new ArmorItem(
-            name: "Crystal Feather Cap",
+        [ItemNames.CrystalFeatherCap] = new ArmorItem(
+            name: ItemNames.CrystalFeatherCap,
             description: "A feather cap that provides 20 ranged defense and -6 melee defense.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -899,10 +1064,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal Leather Vest"] = new ArmorItem(
-            name: "Crystal Leather Vest",
+        [ItemNames.CrystalLeatherVest] = new ArmorItem(
+            name: ItemNames.CrystalLeatherVest,
             description: "A leather vest that provides 30 ranged defense and -15 melee defense.",
             price: 1000,
             type: ItemType.NonConsumable,
@@ -912,10 +1078,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal Leather Gloves"] = new ArmorItem(
-            name: "Crystal Leather Gloves",
+        [ItemNames.CrystalLeatherGloves] = new ArmorItem(
+            name: ItemNames.CrystalLeatherGloves,
             description: "Leather gloves that provide 15 ranged defense and -5 melee defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -925,10 +1092,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal Leather Boots"] = new ArmorItem(
-            name: "Crystal Leather Boots",
+        [ItemNames.CrystalLeatherBoots] = new ArmorItem(
+            name: ItemNames.CrystalLeatherBoots,
             description: "Leather boots that provide 25 ranged defense and -12 melee defense.",
             price: 600,
             type: ItemType.NonConsumable,
@@ -938,10 +1106,11 @@ public static class ItemDatabase
             armorType: ArmorType.Light,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal ThrowingKnife"] = new WeaponItem(
-            name: "Crystal ThrowingKnife",
+        [ItemNames.CrystalThrowingKnife] = new WeaponItem(
+            name: ItemNames.CrystalThrowingKnife,
             description: "A throwing knife that adds 25 ranged attack.",
             price: 400,
             type: ItemType.NonConsumable,
@@ -949,25 +1118,29 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 25, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.ThrowingKnife,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal Wood Shortbow"] = new WeaponItem(
-            name: "Crystal Wood Shortbow",
+        [ItemNames.CrystalWoodShortbow] = new WeaponItem(
+            name: ItemNames.CrystalWoodShortbow,
             description: "A wood shortbow that adds 30 ranged attack.",
             price: 600,
             type: ItemType.NonConsumable,
             slots: new List<EquipmentSlot> { EquipmentSlot.MainHand },
             stats: new ActorStats(0, 0, 0, 30, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
+            damageMultiplier: 10.00,
             weaponType: WeaponType.Bow,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Crystal Crossbow"] = new WeaponItem(
-            name: "Crystal Crossbow",
+        [ItemNames.CrystalCrossbow] = new WeaponItem(
+            name: ItemNames.CrystalCrossbow,
             description: "A crossbow that adds 40 ranged attack.",
             price: 800,
             type: ItemType.NonConsumable,
@@ -975,14 +1148,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 40, 0, 0, 0),
             combatStyle: CombatStyle.Ranged,
             weaponType: WeaponType.Crossbow,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Crystal,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Old Gear - Mage Tier
-        ["Old Magic Hat"] = new ArmorItem(
-            name: "Old Magic Hat",
+        [ItemNames.OldMagicHat] = new ArmorItem(
+            name: ItemNames.OldMagicHat,
             description: "A magic hat that provides 5 magic defense and -2 ranged defense.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -992,10 +1167,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Robes"] = new ArmorItem(
-            name: "Old Robes",
+        [ItemNames.OldRobes] = new ArmorItem(
+            name: ItemNames.OldRobes,
             description: "Robes that provide 10 magic defense and -5 ranged defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -1005,10 +1181,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Magic Gloves"] = new ArmorItem(
-            name: "Old Magic Gloves",
+        [ItemNames.OldMagicGloves] = new ArmorItem(
+            name: ItemNames.OldMagicGloves,
             description: "Magic gloves that provide 3 magic defense and -1 ranged defense.",
             price: 30,
             type: ItemType.NonConsumable,
@@ -1018,10 +1195,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Magic Boots"] = new ArmorItem(
-            name: "Old Magic Boots",
+        [ItemNames.OldMagicBoots] = new ArmorItem(
+            name: ItemNames.OldMagicBoots,
             description: "Magic boots that provide 7 magic defense and -3 ranged defense.",
             price: 70,
             type: ItemType.NonConsumable,
@@ -1031,10 +1209,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Magic Staff"] = new WeaponItem(
-            name: "Old Magic Staff",
+        [ItemNames.OldMagicStaff] = new WeaponItem(
+            name: ItemNames.OldMagicStaff,
             description: "A magic staff that adds 5 magic attack.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -1042,12 +1221,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 5, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Staff,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Magic Wand"] = new WeaponItem(
-            name: "Old Magic Wand",
+        [ItemNames.OldMagicWand] = new WeaponItem(
+            name: ItemNames.OldMagicWand,
             description: "A magic wand that adds 5 magic attack.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -1055,12 +1236,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 5, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Wand,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Old Grimoire"] = new WeaponItem(
-            name: "Old Grimoire",
+        [ItemNames.OldGrimoire] = new WeaponItem(
+            name: ItemNames.OldGrimoire,
             description: "A grimoire that adds 5 magic attack.",
             price: 50,
             type: ItemType.NonConsumable,
@@ -1068,14 +1251,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 5, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Grimoire,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Old,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Worn Gear - Mage Tier
-        ["Worn Magic Hat"] = new ArmorItem(
-            name: "Worn Magic Hat",
+        [ItemNames.WornMagicHat] = new ArmorItem(
+            name: ItemNames.WornMagicHat,
             description: "A worn magic hat that provides 8 magic defense and -3 ranged defense.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -1085,10 +1270,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Robes"] = new ArmorItem(
-            name: "Worn Robes",
+        [ItemNames.WornRobes] = new ArmorItem(
+            name: ItemNames.WornRobes,
             description: "Worn robes that provide 15 magic defense and -7 ranged defense.",
             price: 200,
             type: ItemType.NonConsumable,
@@ -1098,10 +1284,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Magic Gloves"] = new ArmorItem(
-            name: "Worn Magic Gloves",
+        [ItemNames.WornMagicGloves] = new ArmorItem(
+            name: ItemNames.WornMagicGloves,
             description: "Worn magic gloves that provide 5 magic defense and -2 ranged defense.",
             price: 60,
             type: ItemType.NonConsumable,
@@ -1111,10 +1298,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Magic Boots"] = new ArmorItem(
-            name: "Worn Magic Boots",
+        [ItemNames.WornMagicBoots] = new ArmorItem(
+            name: ItemNames.WornMagicBoots,
             description: "Worn magic boots that provide 10 magic defense and -5 ranged defense.",
             price: 140,
             type: ItemType.NonConsumable,
@@ -1124,10 +1312,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Magic Staff"] = new WeaponItem(
-            name: "Worn Magic Staff",
+        [ItemNames.WornMagicStaff] = new WeaponItem(
+            name: ItemNames.WornMagicStaff,
             description: "A worn magic staff that adds 8 magic attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -1135,12 +1324,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 8, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Staff,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Magic Wand"] = new WeaponItem(
-            name: "Worn Magic Wand",
+        [ItemNames.WornMagicWand] = new WeaponItem(
+            name: ItemNames.WornMagicWand,
             description: "A worn magic wand that adds 8 magic attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -1148,12 +1339,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 8, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Wand,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Worn Grimoire"] = new WeaponItem(
-            name: "Worn Grimoire",
+        [ItemNames.WornGrimoire] = new WeaponItem(
+            name: ItemNames.WornGrimoire,
             description: "A worn grimoire that adds 8 magic attack.",
             price: 100,
             type: ItemType.NonConsumable,
@@ -1161,14 +1354,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 8, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Grimoire,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Worn,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Enchanted Gear - Mage Tier
-        ["Enchanted Magic Hat"] = new ArmorItem(
-            name: "Enchanted Magic Hat",
+        [ItemNames.EnchantedMagicHat] = new ArmorItem(
+            name: ItemNames.EnchantedMagicHat,
             description: "An enchanted magic hat that provides 12 magic defense and -4 ranged defense.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -1178,10 +1373,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Robes"] = new ArmorItem(
-            name: "Enchanted Robes",
+        [ItemNames.EnchantedRobes] = new ArmorItem(
+            name: ItemNames.EnchantedRobes,
             description: "Enchanted robes that provide 20 magic defense and -10 ranged defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1191,10 +1387,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Magic Gloves"] = new ArmorItem(
-            name: "Enchanted Magic Gloves",
+        [ItemNames.EnchantedMagicGloves] = new ArmorItem(
+            name: ItemNames.EnchantedMagicGloves,
             description: "Enchanted magic gloves that provide 7 magic defense and -3 ranged defense.",
             price: 90,
             type: ItemType.NonConsumable,
@@ -1204,10 +1401,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Magic Boots"] = new ArmorItem(
-            name: "Enchanted Magic Boots",
+        [ItemNames.EnchantedMagicBoots] = new ArmorItem(
+            name: ItemNames.EnchantedMagicBoots,
             description: "Enchanted magic boots that provide 15 magic defense and -7 ranged defense.",
             price: 180,
             type: ItemType.NonConsumable,
@@ -1217,10 +1415,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Magic Staff"] = new WeaponItem(
-            name: "Enchanted Magic Staff",
+        [ItemNames.EnchantedMagicStaff] = new WeaponItem(
+            name: ItemNames.EnchantedMagicStaff,
             description: "An enchanted magic staff that adds 12 magic attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -1228,12 +1427,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 12, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Staff,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Magic Wand"] = new WeaponItem(
-            name: "Enchanted Magic Wand",
+        [ItemNames.EnchantedMagicWand] = new WeaponItem(
+            name: ItemNames.EnchantedMagicWand,
             description: "An enchanted magic wand that adds 12 magic attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -1241,12 +1442,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 12, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Wand,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Enchanted Grimoire"] = new WeaponItem(
-            name: "Enchanted Grimoire",
+        [ItemNames.EnchantedGrimoire] = new WeaponItem(
+            name: ItemNames.EnchantedGrimoire,
             description: "An enchanted grimoire that adds 12 magic attack.",
             price: 150,
             type: ItemType.NonConsumable,
@@ -1254,14 +1457,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 12, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Grimoire,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Enchanted,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Arcane Gear - Mage Tier
-        ["Arcane Magic Hat"] = new ArmorItem(
-            name: "Arcane Magic Hat",
+        [ItemNames.ArcaneMagicHat] = new ArmorItem(
+            name: ItemNames.ArcaneMagicHat,
             description: "An arcane magic hat that provides 20 magic defense and -6 ranged defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1271,10 +1476,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Robes"] = new ArmorItem(
-            name: "Arcane Robes",
+        [ItemNames.ArcaneRobes] = new ArmorItem(
+            name: ItemNames.ArcaneRobes,
             description: "Arcane robes that provide 30 magic defense and -15 ranged defense.",
             price: 600,
             type: ItemType.NonConsumable,
@@ -1284,10 +1490,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Magic Gloves"] = new ArmorItem(
-            name: "Arcane Magic Gloves",
+        [ItemNames.ArcaneMagicGloves] = new ArmorItem(
+            name: ItemNames.ArcaneMagicGloves,
             description: "Arcane magic gloves that provide 15 magic defense and -5 ranged defense.",
             price: 180,
             type: ItemType.NonConsumable,
@@ -1297,10 +1504,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Magic Boots"] = new ArmorItem(
-            name: "Arcane Magic Boots",
+        [ItemNames.ArcaneMagicBoots] = new ArmorItem(
+            name: ItemNames.ArcaneMagicBoots,
             description: "Arcane magic boots that provide 25 magic defense and -10 ranged defense.",
             price: 360,
             type: ItemType.NonConsumable,
@@ -1310,10 +1518,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Magic Staff"] = new WeaponItem(
-            name: "Arcane Magic Staff",
+        [ItemNames.ArcaneMagicStaff] = new WeaponItem(
+            name: ItemNames.ArcaneMagicStaff,
             description: "An arcane magic staff that adds 20 magic attack.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1321,12 +1530,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 20, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Staff,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Magic Wand"] = new WeaponItem(
-            name: "Arcane Magic Wand",
+        [ItemNames.ArcaneMagicWand] = new WeaponItem(
+            name: ItemNames.ArcaneMagicWand,
             description: "An arcane magic wand that adds 20 magic attack.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1334,12 +1545,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 20, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Wand,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Arcane Grimoire"] = new WeaponItem(
-            name: "Arcane Grimoire",
+        [ItemNames.ArcaneGrimoire] = new WeaponItem(
+            name: ItemNames.ArcaneGrimoire,
             description: "An arcane grimoire that adds 20 magic attack.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1347,14 +1560,16 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 20, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Grimoire,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Arcane,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
         
         // Mystic Gear - Mage Tier
-        ["Mystic Magic Hat"] = new ArmorItem(
-            name: "Mystic Magic Hat",
+        [ItemNames.MysticMagicHat] = new ArmorItem(
+            name: ItemNames.MysticMagicHat,
             description: "A mystic magic hat that provides 30 magic defense and -8 ranged defense.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -1364,10 +1579,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Robes"] = new ArmorItem(
-            name: "Mystic Robes",
+        [ItemNames.MysticRobes] = new ArmorItem(
+            name: ItemNames.MysticRobes,
             description: "Mystic robes that provide 40 magic defense and -20 ranged defense.",
             price: 1000,
             type: ItemType.NonConsumable,
@@ -1377,10 +1593,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Magic Gloves"] = new ArmorItem(
-            name: "Mystic Magic Gloves",
+        [ItemNames.MysticMagicGloves] = new ArmorItem(
+            name: ItemNames.MysticMagicGloves,
             description: "Mystic magic gloves that provide 20 magic defense and -7 ranged defense.",
             price: 300,
             type: ItemType.NonConsumable,
@@ -1390,10 +1607,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Magic Boots"] = new ArmorItem(
-            name: "Mystic Magic Boots",
+        [ItemNames.MysticMagicBoots] = new ArmorItem(
+            name: ItemNames.MysticMagicBoots,
             description: "Mystic magic boots that provide 30 magic defense and -15 ranged defense.",
             price: 600,
             type: ItemType.NonConsumable,
@@ -1403,10 +1621,11 @@ public static class ItemDatabase
             armorType: ArmorType.Cloth,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Magic Staff"] = new WeaponItem(
-            name: "Mystic Magic Staff",
+        [ItemNames.MysticMagicStaff] = new WeaponItem(
+            name: ItemNames.MysticMagicStaff,
             description: "A mystic magic staff that adds 30 magic attack.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -1414,12 +1633,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 30, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Staff,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Magic Wand"] = new WeaponItem(
-            name: "Mystic Magic Wand",
+        [ItemNames.MysticMagicWand] = new WeaponItem(
+            name: ItemNames.MysticMagicWand,
             description: "A mystic magic wand that adds 30 magic attack.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -1427,12 +1648,14 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 30, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Wand,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         ),
-        ["Mystic Grimoire"] = new WeaponItem(
-            name: "Mystic Grimoire",
+        [ItemNames.MysticGrimoire] = new WeaponItem(
+            name: ItemNames.MysticGrimoire,
             description: "A mystic grimoire that adds 30 magic attack.",
             price: 500,
             type: ItemType.NonConsumable,
@@ -1440,9 +1663,25 @@ public static class ItemDatabase
             stats: new ActorStats(0, 0, 0, 0, 0, 30, 0),
             combatStyle: CombatStyle.Magic,
             weaponType: WeaponType.Grimoire,
+            damageMultiplier: 10.00,
             gearTier: GearTier.Mystic,
             stackable: false,
-            quantity: 1
+            quantity: 1,
+            dropRate: 1
         )
     };
+
+    public static IItem GetItem (string itemName, long quantity = 1)
+    {
+        if (Items.TryGetValue(itemName, out var item))
+        {
+            var newItem = item.Copy();
+            newItem.Quantity = quantity;
+            return newItem;
+        }
+
+        Console.WriteLine($"Item '{itemName}' not found in database.");
+        return null;
+
+    }
 }

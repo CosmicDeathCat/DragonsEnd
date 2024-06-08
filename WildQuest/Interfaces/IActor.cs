@@ -5,17 +5,20 @@ using WildQuest.Stats;
 
 namespace WildQuest.Interfaces;
 
-public interface IActor 
+public interface IActor :ILootable
 {         
     string Name {get;set;} 
 	Gender Gender {get;set;}
 	ILeveling Leveling {get;set;}
 	CharacterClassType CharacterClass {get;set;}
 	IEquipmentItem?[] Equipment {get;set;}
-	List<IItem> Inventory {get;set;}
+	List<IItem?> Inventory {get;set;}
+	ICurrency Gold {get;set;}
 	ActorStats ActorStats {get;set;}
 	bool IsAlive {get;set;}    
 	IWeaponItem?[] GetWeapons();
 	IArmorItem?[] GetArmor();
 	void ItemMessageHandler(IMessageEnvelope message);
+	void HandleDeath(IActor? source);
+
 }

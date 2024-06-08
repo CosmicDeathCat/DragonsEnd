@@ -1,4 +1,4 @@
-namespace WildQuest.Enums.WildQuest.Enums;
+namespace WildQuest.Enums;
 
 public enum Rarity
 {

@@ -6,11 +6,11 @@ namespace WildQuest.Messaging.Messages;
 public struct LevelingMessage
 {
     public IActor Actor { get; }
-    public int Experience { get; }
+    public long Experience { get; }
     public int Level { get; }
     public LevelingType Type { get; }
     
-    public LevelingMessage(IActor actor, int experience, int level, LevelingType type)
+    public LevelingMessage(IActor actor, long experience, int level, LevelingType type)
     {
         Actor = actor;
         Experience = experience;
