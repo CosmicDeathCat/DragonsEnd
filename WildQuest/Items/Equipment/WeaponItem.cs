@@ -5,6 +5,7 @@ using WildQuest.Stats;
 
 namespace WildQuest.Items.Equipment;
 
+[System.Serializable]
 public class WeaponItem : EquipmentItem, IWeaponItem
 {
     public virtual CombatStyle CombatStyle { get; set; }

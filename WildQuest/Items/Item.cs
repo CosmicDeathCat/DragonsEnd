@@ -6,6 +6,7 @@ using WildQuest.Messaging.Messages;
 
 namespace WildQuest.Items;
 
+[System.Serializable]
 public class Item : IItem
 {
     public virtual string Name {get;set;}

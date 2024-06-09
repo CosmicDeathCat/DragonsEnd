@@ -5,6 +5,7 @@ using WildQuest.Stats;
 
 namespace WildQuest.Items.Equipment;
 
+[System.Serializable]
 public class EquipmentItem : Item, IEquipmentItem
 {
     public virtual List<EquipmentSlot> Slots { get; set; }

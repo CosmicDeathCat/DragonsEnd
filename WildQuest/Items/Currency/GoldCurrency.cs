@@ -2,10 +2,11 @@ using WildQuest.Interfaces;
 
 namespace WildQuest.Items.Currency;
 
+[System.Serializable]
 public class GoldCurrency : ICurrency
 {
     public virtual string Name { get; set; } = "Gold";
-    public virtual string Description { get; set; } = "A shiny gold coin. used for purchasing items.";
+    public virtual string Description { get; set; } = "Shiny gold coins. used for purchasing items.";
     public virtual long CurrentValue
     {
         get

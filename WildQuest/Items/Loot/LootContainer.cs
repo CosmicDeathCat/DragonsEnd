@@ -5,6 +5,7 @@ using WildQuest.Items.Currency.Extensions;
 
 namespace WildQuest.Items.Loot;
 
+[System.Serializable]
 public class LootContainer
 {
     public GoldCurrency Gold { get; set; } = new(0);

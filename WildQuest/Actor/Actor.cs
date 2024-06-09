@@ -19,11 +19,27 @@ public class Actor : IActor
     public virtual string Name {get;set;} 
 	public virtual Gender Gender {get;set;}
 	public virtual ILeveling Leveling {get;set;}
+
 	public virtual CharacterClassType CharacterClass { get; set; }
 	public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
 	public virtual List<IItem?> Inventory { get; set; } = new();
-	public ICurrency Gold { get; set; } = new GoldCurrency(0);
-	public virtual bool IsAlive {get;set;}
+	public GoldCurrency Gold { get; set; } = new(0);
+
+	public virtual bool IsAlive
+	{
+		get => ActorStats.Health.CurrentValue > 0;
+		set
+		{
+			if (value && ActorStats.Health.CurrentValue <= 0)
+			{
+				ActorStats.Health.CurrentValue = ActorStats.Health.MaxValue;
+			}
+			else if (!value && ActorStats.Health.CurrentValue > 0)
+			{
+				Die();
+			}
+		}
+	}
 	public virtual ActorStats ActorStats {get;set;}
 	
 	public List<IDropItem> DropItems { get; set; } = new();
@@ -159,10 +175,10 @@ public class Actor : IActor
 				Console.WriteLine($"{Name} set experience to {data.Experience}.");
 				break;
 			case LevelingType.GainLevel:
-				Console.WriteLine($"{Name} gained a level.");
+				Console.WriteLine($"{Name} gained a level. {Name} is now level {data.Level}.");
 				break;
 			case LevelingType.LoseLevel:
-				Console.WriteLine($"{Name} lost a level.");
+				Console.WriteLine($"{Name} lost a level. {Name} is now level {data.Level}.");
 				break;
 			case LevelingType.SetLevel:
 				Console.WriteLine($"{Name} set level to {data.Level}.");
@@ -171,8 +187,7 @@ public class Actor : IActor
 	}
 
 
-	public LootContainer Loot(
-		IActor? source,            
+	public virtual LootContainer Loot(
 		long minItemAmountDrop = -1L, 
 		long maxItemAmountDrop = -1L, 
 		long minGold = -1L, 
@@ -182,7 +197,7 @@ public class Actor : IActor
 		params IDropItem[] specificLootableItems)
 	{
 		var loot = LootSystem.GenerateLoot(
-			actor: this,
+			lootedObject: this,
 			minItemAmountDrop: minItemAmountDrop,
 			maxItemAmountDrop: maxItemAmountDrop,
 			minGold: minGold,
@@ -192,42 +207,12 @@ public class Actor : IActor
 			specificLootableItems: specificLootableItems);
 		var lootContainer = new LootContainer(loot.gold, loot.experience, loot.items.ToArray());
 		return lootContainer;
-		// long gold = loot.gold;
-		// int experience = loot.experience;
-		// List<IItem> items = loot.items;
-		//
-		// // Add gold to Source inventory
-		// source.Gold.Add(gold);
-		//
-		// // Add items to Source inventory
-		// source.Inventory.AddRange(items);
-		//
-		// // Add experience to Source leveling system
-		// source.Leveling.GainExperience(experience);
 	}
 
-	public void HandleDeath(IActor? source)
+	public virtual void Die()
 	{
-		ActorStats.Health.CurrentValue = 0;
 		IsAlive = false;
-		if (source == null) return;
-		// Loot(source);
-		
-		// // Generate loot for the source
-		// var loot = LootSystem.GenerateLoot();;
-		// long gold = loot.gold;
-		// int experience = loot.experience;
-		// List<IItem> items = loot.items;
-		//
-		// // Create a loot container and add the loot
-		// var lootContainer = new LootContainer();
-		// lootContainer.AddLoot(new GoldCurrency(gold), experience, items);
-		//
-		// // Give the loot to the source
-		// source.Gold.Add(lootContainer.Gold);
-		// source.Leveling.GainExperience(lootContainer.Experience);
-		// source.Inventory.AddRange(lootContainer.Items);
-		MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(source, this));
+		MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(this));	
 	}
 
 }

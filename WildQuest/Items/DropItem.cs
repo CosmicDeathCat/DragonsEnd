@@ -2,6 +2,7 @@ using WildQuest.Interfaces;
 
 namespace WildQuest.Items;
 
+[System.Serializable]
 public class DropItem : IDropItem
 {
     public IItem Item { get; }

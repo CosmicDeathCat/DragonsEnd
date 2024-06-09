@@ -1,5 +1,6 @@
 ﻿namespace WildQuest.Stats;
 
+[System.Serializable]
 public class Stat 
 {         
    protected int _currentValue;

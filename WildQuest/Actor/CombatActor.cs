@@ -8,6 +8,8 @@ namespace WildQuest.Actor;
 public class CombatActor : Actor, ICombatant
 {
 	public virtual double DamageMultiplier { get; set; }
+	public virtual double DamageReductionMultiplier { get; set; }
+
 
 	public CombatActor() : base()
 	{
@@ -19,7 +21,8 @@ public class CombatActor : Actor, ICombatant
 		CharacterClassType characterClass,
 		ActorStats actorStats,
 		int level = 1,
-		double damageMultiplier = 10.00,
+		double damageMultiplier = 1.00,
+		double damageReductionMultiplier = 1.00,
 		long gold = 0,
 		IEquipmentItem[]? equipment = null,
 		IItem[]? inventory = null,
@@ -27,6 +30,7 @@ public class CombatActor : Actor, ICombatant
 		: base(name, gender, characterClass, actorStats, level, gold, equipment, inventory, dropItems)
 	{
 		DamageMultiplier = damageMultiplier;
+		DamageReductionMultiplier = damageReductionMultiplier;
 	}
 
 
@@ -34,9 +38,9 @@ public class CombatActor : Actor, ICombatant
 	{
         var rnd = new Random();
 		bool hit = false;
-		bool blocked = false;
+		bool meleeBlocked = false;
 		bool killed = false;
-		int damage = 0;
+		int meleeDamage = 0;
 		var weapons = source.GetWeapons();
 		var attackType = weapons.Length > 0 ? weapons[0]!.CombatStyle : CombatStyle.Melee;
 
@@ -47,16 +51,28 @@ public class CombatActor : Actor, ICombatant
 				if(meleeHit > 0)
 				{
 					hit = true;
-					var defense = target.ActorStats.MeleeDefense.CurrentValue;
-					blocked = meleeHit - defense <= 0;
-					damage = int.Clamp(meleeHit - defense,0, meleeHit);
-					if(damage > 0)
+					var maxSourceMeleeDamage = Math.Round(source.ActorStats.MeleeAttack.CurrentValue * source.DamageMultiplier, MidpointRounding.AwayFromZero);
+					var maxTargetMeleeDefense = Math.Round(target.ActorStats.MeleeDefense.CurrentValue * target.DamageReductionMultiplier, MidpointRounding.AwayFromZero);
+					meleeBlocked = maxSourceMeleeDamage - maxTargetMeleeDefense <= 0;
+					var roundedMinMeleeDamage = Math.Round(double.Clamp(maxSourceMeleeDamage - maxTargetMeleeDefense, 1, maxSourceMeleeDamage), MidpointRounding.AwayFromZero);
+					var roundedMaxMeleeDamage = Math.Round(double.Clamp(maxSourceMeleeDamage, roundedMinMeleeDamage, maxSourceMeleeDamage), MidpointRounding.AwayFromZero);
+					int randomMeleeDamage = 0;
+					if(meleeBlocked)
+					{
+						randomMeleeDamage = rnd.Next(0, (int)roundedMinMeleeDamage + 1);
+					}
+					else
+					{
+						randomMeleeDamage = rnd.Next((int)roundedMinMeleeDamage, (int)roundedMaxMeleeDamage + 1);
+					}
+					meleeDamage = int.Clamp(randomMeleeDamage,0, (int)maxSourceMeleeDamage);
+					if(meleeDamage > 0)
 					{	
-						target.ActorStats.Health.CurrentValue -= damage;
+						target.ActorStats.Health.CurrentValue -= meleeDamage;
 						if(target.ActorStats.Health.CurrentValue <= 0)
 						{
-							killed = true; 
-							target.IsAlive = false;
+							killed = true;
+							return (hit, meleeBlocked, killed, meleeDamage);
 						}
 					}
 				}
@@ -88,6 +104,6 @@ public class CombatActor : Actor, ICombatant
   //               }
   //           }
   //       }
-		return (hit, blocked, killed, damage);
+		return (hit, meleeBlocked, killed, meleeDamage);
     }
 }

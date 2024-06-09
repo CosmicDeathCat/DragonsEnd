@@ -6,6 +6,7 @@ using WildQuest.Messaging.Messages;
 
 namespace WildQuest.Items.Status;
 
+[System.Serializable]
 public class HealthItem : Item, IHealthItem
 {
     public virtual int HealPercentage { get; set; }

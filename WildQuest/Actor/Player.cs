@@ -1,9 +1,12 @@
+using System;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
+using WildQuest.Items.Currency;
+using WildQuest.Items.Currency.Extensions;
 using WildQuest.Messaging.Messages;
 using WildQuest.Stats;
 
@@ -16,6 +19,10 @@ public class Player : CombatActor, IPlayer
         Gender gender,
         CharacterClassType characterClass,
         ActorStats actorStats,
+        double damageMultiplier = 1.00,
+        double damageReductionMultiplier = 1.00,
+        long gold = 0,
+        IEquipmentItem[]? equipment = null,
         params IItem[] inventory)
         : base()
     {
@@ -25,6 +32,9 @@ public class Player : CombatActor, IPlayer
         ActorStats = actorStats;
         IsAlive = true;
         Leveling = new Leveling(this);
+        DamageMultiplier = damageMultiplier;
+        DamageReductionMultiplier = damageReductionMultiplier;
+        Gold = new GoldCurrency(gold);
         Inventory.AddRange(inventory);
         MessageSystem.MessageManager.RegisterForChannel<ActorDeathMessage>(MessageChannels.Combat, ActorDeathMessageHandler);
     }
@@ -38,12 +48,10 @@ public class Player : CombatActor, IPlayer
     {
         if(!message.Message<ActorDeathMessage>().HasValue) return;
         var data = message.Message<ActorDeathMessage>().GetValueOrDefault();
-        if(data.Source != this) return;
-        var lootable = data.Target as ILootable;
-        if(lootable == null) return;
-        var loot = lootable.Loot(data.Source);
+        if(data.Target == this) return;
+        var loot = data.Target.Loot();
         Leveling.Experience += loot.Experience;
-        Gold.Quantity += loot.Gold.Quantity;
+        Gold.Add(loot.Gold);
         Inventory.AddRange(loot.Items);
     }
 }

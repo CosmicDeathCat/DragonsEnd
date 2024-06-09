@@ -16,15 +16,16 @@ public static class EnemyDatabase
             gender:Gender.Male,
             characterClass:CharacterClassType.Freelancer,
             new ActorStats(
-            health: 3,
+            health: 50,
             meleeAttack: 1,
-            meleeDefense: 0,
+            meleeDefense: 5,
             rangedAttack: 0,
             rangedDefense: 0,
             magicAttack: 0,
             magicDefense: 0),
             level: 1,
-            damageMultiplier: 10.00,
+            damageMultiplier: 1.00,
+            damageReductionMultiplier: 1.00,
             gold: 50,
             equipment:
             [

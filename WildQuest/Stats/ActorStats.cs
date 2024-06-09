@@ -1,5 +1,6 @@
 ﻿namespace WildQuest.Stats;
 
+[System.Serializable]
 public class ActorStats 
 {         
     public virtual Stat Health {get;set;}    

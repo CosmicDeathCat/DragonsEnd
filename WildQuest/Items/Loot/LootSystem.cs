@@ -44,7 +44,7 @@ namespace WildQuest.Items.Loot
         }
 
         public static (long gold, long experience, List<IItem> items) GenerateLoot(
-            IActor actor, 
+            ILootable lootedObject, 
             long minItemAmountDrop = -1L, 
             long maxItemAmountDrop = -1L, 
             long minGold = -1L, 
@@ -54,35 +54,34 @@ namespace WildQuest.Items.Loot
             params IDropItem[] specificLootableItems)
         {
             var lootableItems = specificLootableItems.ToList();
-
-            if (actor is ILootable lootable)
-            {
-                lootableItems.AddRange(lootable.DropItems);
-            }
+            lootableItems.AddRange(lootedObject.DropItems);
             
             if (lootableItems.Count == 0)
             {
-                // Default to using the actor's inventory and equipment as drop items with default drop rates
-                foreach (var item in actor.Inventory)
+                if (lootedObject is IActor actor)
                 {
-                    if (item == null) continue;
-                    lootableItems.Add(new DropItem(item, item.DropRate));
-                }
+                    // Default to using the actor's inventory and equipment as drop items with default drop rates
+                    foreach (var item in actor.Inventory)
+                    {
+                        if (item == null) continue;
+                        lootableItems.Add(new DropItem(item, item.DropRate));
+                    }
 
-                foreach (var item in actor.Equipment)
-                {
-                    if (item == null) continue;
-                    lootableItems.Add(new DropItem(item, item.DropRate));
+                    foreach (var item in actor.Equipment)
+                    {
+                        if (item == null) continue;
+                        lootableItems.Add(new DropItem(item, item.DropRate));
+                    }
                 }
             }
 
             // Set default values if -1 is provided
             if (minItemAmountDrop == -1) minItemAmountDrop = 0;
             if (maxItemAmountDrop == -1) maxItemAmountDrop = lootableItems.Count;
-            if (minGold == -1) minGold = actor.Gold.CurrentValue;
-            if (maxGold == -1) maxGold = actor.Gold.CurrentValue;
-            if (minExperience == -1) minExperience = actor.Leveling.Experience;
-            if (maxExperience == -1) maxExperience = actor.Leveling.Experience;
+            if (minGold == -1) minGold = lootedObject.Gold.CurrentValue;
+            if (maxGold == -1) maxGold = lootedObject.Gold.CurrentValue;
+            if (minExperience == -1) minExperience = lootedObject.Leveling.Experience;
+            if (maxExperience == -1) maxExperience = lootedObject.Leveling.Experience;
 
             return GenerateLoot(
                 minItemAmountDrop: minItemAmountDrop,

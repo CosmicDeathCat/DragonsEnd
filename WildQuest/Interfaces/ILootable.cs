@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using WildQuest.Items.Currency;
 using WildQuest.Items.Loot;
 
 namespace WildQuest.Interfaces;
@@ -6,9 +7,10 @@ namespace WildQuest.Interfaces;
 public interface ILootable
 {
     List<IDropItem> DropItems { get; set; }
+    GoldCurrency Gold { get; set; }
+    ILeveling Leveling {get;set;}
 
     LootContainer Loot(
-        IActor? source,
         long minItemAmountDrop = -1L,
         long maxItemAmountDrop = -1L,
         long minGold = -1L,
