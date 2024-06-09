@@ -11,18 +11,19 @@ public static class EnemyDatabase
 {
     public static ConcurrentDictionary<string, IEnemy> Enemies { get; set; } = new(StringComparer.OrdinalIgnoreCase)
     {
-        [EnemyNames.Rat] = new BasicEnemy(
-            name: EnemyNames.Rat,
-            gender:Gender.Male,
-            characterClass:CharacterClassType.Freelancer,
+        // Slime
+        [EnemyNames.FeebleSlime] = new BasicEnemy(
+            name: EnemyNames.FeebleSlime,
+            gender: Gender.Nonbinary,
+            characterClass: CharacterClassType.Freelancer,
             new ActorStats(
-            health: 5000,
-            meleeAttack: 1,
-            meleeDefense: 5,
-            rangedAttack: 0,
-            rangedDefense: 0,
-            magicAttack: 0,
-            magicDefense: 0),
+                health: 5000,
+                meleeAttack: 1,
+                meleeDefense: 5,
+                rangedAttack: 0,
+                rangedDefense: 0,
+                magicAttack: 0,
+                magicDefense: 0),
             combatStyle: CombatStyle.Melee,
             level: 1,
             experience: 25,
@@ -48,5 +49,4 @@ public static class EnemyDatabase
             ]
         ),
     };
-
 }
