@@ -1736,7 +1736,7 @@ public static class ItemDatabase
         )
     };
 
-    public static IItem GetItem (string itemName, long quantity = 1)
+    public static IItem GetItems (string itemName, long quantity = 1)
     {
         if (Items.TryGetValue(itemName, out var item))
         {
@@ -1745,8 +1745,6 @@ public static class ItemDatabase
             return newItem;
         }
 
-        Console.WriteLine($"Item '{itemName}' not found in database.");
-        return null;
-
+        throw new KeyNotFoundException($"Item '{itemName}' not found in the database.");
     }
 }

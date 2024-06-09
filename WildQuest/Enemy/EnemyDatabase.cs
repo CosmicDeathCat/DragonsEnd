@@ -34,16 +34,16 @@ public static class EnemyDatabase
             ],
             inventory:
             [
-                ItemDatabase.GetItem(ItemNames.WeakHealthPotion, 2),
-                ItemDatabase.GetItem(ItemNames.StrongHealthPotion, 3)
+                ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 2),
+                ItemDatabase.GetItems(ItemNames.StrongHealthPotion, 3)
             ],
             dropItems:
             [
-                new DropItem(ItemDatabase.GetItem(ItemNames.WeakHealthPotion), 1),
-                new DropItem(ItemDatabase.GetItem(ItemNames.StrongHealthPotion, 2), 0.75),
-                new DropItem(ItemDatabase.GetItem(ItemNames.BronzeDagger), 0.50),
-                new DropItem(ItemDatabase.GetItem(ItemNames.BronzeSword), 0.25),
-                new DropItem(ItemDatabase.GetItem(ItemNames.BronzeShield), 0.10),
+                new DropItem(ItemDatabase.GetItems(ItemNames.WeakHealthPotion), 1),
+                new DropItem(ItemDatabase.GetItems(ItemNames.StrongHealthPotion, 2), 0.75),
+                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeDagger), 0.50),
+                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeSword), 0.25),
+                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeShield), 0.10),
             ]
         ),
     };
