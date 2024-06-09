@@ -19,11 +19,12 @@ public class Actor : IActor
     public virtual string Name {get;set;} 
 	public virtual Gender Gender {get;set;}
 	public virtual ILeveling Leveling {get;set;}
-
 	public virtual CharacterClassType CharacterClass { get; set; }
 	public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
 	public virtual List<IItem?> Inventory { get; set; } = new();
 	public GoldCurrency Gold { get; set; } = new(0);
+	public virtual IActor? Target { get; set; }
+
 
 	public virtual bool IsAlive
 	{
@@ -212,7 +213,6 @@ public class Actor : IActor
 	public virtual void Die()
 	{
 		IsAlive = false;
-		MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(this));	
+		MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(Target, this));	
 	}
-
 }

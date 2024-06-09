@@ -13,6 +13,7 @@ public interface IActor : ILootable
 	IEquipmentItem?[] Equipment {get;set;}
 	List<IItem?> Inventory {get;set;}
 	ActorStats ActorStats {get;set;}
+	IActor? Target {get;set;}
 	bool IsAlive {get;set;}    
 	IWeaponItem?[] GetWeapons();
 	IArmorItem?[] GetArmor();

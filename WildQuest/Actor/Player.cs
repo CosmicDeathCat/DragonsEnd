@@ -48,6 +48,7 @@ public class Player : CombatActor, IPlayer
     {
         if(!message.Message<ActorDeathMessage>().HasValue) return;
         var data = message.Message<ActorDeathMessage>().GetValueOrDefault();
+        if(data.Source != this) return;
         if(data.Target == this) return;
         var loot = data.Target.Loot();
         Leveling.Experience += loot.Experience;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
@@ -12,18 +13,6 @@ public class Leveling : ILeveling
     public static long BaseExperience { get; set; } = 50;
     public static double ExperienceExponent { get; set; } = 1.25;
     public static int DefaultMaxLevel { get; set; } = 100;
-
-    public static Dictionary<int, long> GenerateExperienceLevels(int maxLevel = 100, long baseExperience = 50, double exponent = 1.25)
-    {
-        var levels = new Dictionary<int, long>();
-
-        for (int i = 1; i <= maxLevel; i++)
-        {
-            levels.Add(i, (long)(baseExperience * System.Math.Pow(i - 1, exponent)));
-        }
-
-        return levels;
-    }
 
     protected IActor Actor { get; set; }
     protected int _currentLevel = 1;
@@ -53,7 +42,16 @@ public class Leveling : ILeveling
         get => _experience;
         set
         {
+            var oldExperience = _experience;
             _experience = ValidateExperience(value);
+            if (_experience > oldExperience)
+            {
+                MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, _experience - oldExperience, CurrentLevel, LevelingType.GainExperience));
+            }
+            else if (_experience < oldExperience)
+            {
+                MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, oldExperience - _experience, CurrentLevel, LevelingType.LoseExperience));
+            }
             ValidateLevel();
         }
     }
@@ -72,13 +70,26 @@ public class Leveling : ILeveling
         _currentLevel = ValidateLevel(level);
         _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
     }
+    
+    public static Dictionary<int, long> GenerateExperienceLevels(int maxLevel = 100, long baseExperience = 50, double exponent = 1.25)
+    {
+        var levels = new Dictionary<int, long>();
+
+        for (int i = 1; i <= maxLevel; i++)
+        {
+            var experience = (long)Math.Round(baseExperience * Math.Pow(i - 1, exponent), MidpointRounding.AwayFromZero);
+            levels.Add(i, experience);
+        }
+
+        return levels;
+    }
+    
 
     public virtual void LevelUp()
     {
         if (CurrentLevel >= MaxLevel) return;
         CurrentLevel++;
         Experience = ExperienceLevels[CurrentLevel];
-        MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, CurrentLevel, LevelingType.GainLevel));
     }
 
     public virtual void LevelDown()
@@ -86,29 +97,23 @@ public class Leveling : ILeveling
         if (CurrentLevel <= 1) return;
         CurrentLevel--;
         Experience = ExperienceLevels[CurrentLevel];
-        MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, CurrentLevel, LevelingType.LoseLevel));
     }
 
     public virtual void GainExperience(long amount)
     {
         if (Experience >= ExperienceLevels[MaxLevel]) return;
-        MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, amount, CurrentLevel, LevelingType.GainExperience));
         Experience += amount;
-        ValidateLevel();
     }
 
     public virtual void LoseExperience(long amount)
     {
         if (Experience <= 0) return;
-        MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, amount, CurrentLevel, LevelingType.LoseExperience));
         Experience -= amount;
-        ValidateLevel();
     }
 
     public virtual void SetExperience(long amount)
     {
         Experience = amount;
-        ValidateLevel();
         MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, amount, _currentLevel, LevelingType.SetExperience));
     }
 

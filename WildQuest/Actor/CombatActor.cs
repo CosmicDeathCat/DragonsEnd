@@ -36,6 +36,7 @@ public class CombatActor : Actor, ICombatant
 
 	public virtual (bool hasHit, bool isBlocked,bool hasKilled, int damage) Attack(ICombatant source, ICombatant target)
 	{
+		Target = target;
         var rnd = new Random();
 		bool hit = false;
 		bool meleeBlocked = false;
@@ -85,25 +86,6 @@ public class CombatActor : Actor, ICombatant
 				break;
 		}
 		
-		
-		
-		// var attackHit = rnd.Next(0,ActorStats.Attack.CurrentValue + 1);
-		// if(attackHit > 0)
-		// {
-  //           hit = true;
-  //           var defense = target.ActorStats.Defense.CurrentValue;
-		// 	blocked = attackHit - defense <= 0;
-		// 	damage = int.Clamp(attackHit - defense,0, attackHit);
-		// 	if(damage > 0)
-		// 	{	
-  //               target.ActorStats.Health.CurrentValue -= damage;
-		// 		if(target.ActorStats.Health.CurrentValue <= 0)
-		// 		{
-  //                  killed = true; 
-		// 		   target.IsAlive = false;
-  //               }
-  //           }
-  //       }
 		return (hit, meleeBlocked, killed, meleeDamage);
     }
 }
