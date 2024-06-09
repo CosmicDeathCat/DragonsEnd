@@ -61,5 +61,9 @@ public class GoldCurrency : ICurrency
         }
         return currency.Quantity / otherCurrency.Quantity;
     }
-    
+
+    public override string ToString()
+    {
+        return $"{Name}: {Quantity}";
+    }
 }

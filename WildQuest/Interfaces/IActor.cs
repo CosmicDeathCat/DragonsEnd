@@ -7,7 +7,7 @@ namespace WildQuest.Interfaces;
 
 public interface IActor : ILootable
 {         
-    string Name {get;set;} 
+	string Name {get;set;}
 	Gender Gender {get;set;}
 	CharacterClassType CharacterClass {get;set;}
 	IEquipmentItem?[] Equipment {get;set;}
@@ -15,9 +15,11 @@ public interface IActor : ILootable
 	ActorStats ActorStats {get;set;}
 	IActor? Target {get;set;}
 	bool IsAlive {get;set;}    
+	CombatStyle CombatStyle {get; set; }
 	IWeaponItem?[] GetWeapons();
 	IArmorItem?[] GetArmor();
 	void ItemMessageHandler(IMessageEnvelope message);
+	void TakeDamage(IActor sourceActor, int damage);
 	void Die();
 
 }

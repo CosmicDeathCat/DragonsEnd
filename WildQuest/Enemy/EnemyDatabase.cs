@@ -39,11 +39,11 @@ public static class EnemyDatabase
             ],
             dropItems:
             [
-                new DropItem(ItemDatabase.GetItems(ItemNames.WeakHealthPotion), 1),
-                new DropItem(ItemDatabase.GetItems(ItemNames.StrongHealthPotion, 2), 0.75),
-                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeDagger), 0.50),
-                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeSword), 0.25),
-                new DropItem(ItemDatabase.GetItems(ItemNames.BronzeShield), 0.10),
+                ItemDatabase.GetDropItems(ItemNames.WeakHealthPotion, 1, 1),
+                ItemDatabase.GetDropItems(ItemNames.StrongHealthPotion, 2, 0.75),
+                ItemDatabase.GetDropItems(ItemNames.BronzeDagger, 1, 0.50),
+                ItemDatabase.GetDropItems(ItemNames.BronzeSword, 1, 0.25),
+                ItemDatabase.GetDropItems(ItemNames.BronzeShield, 1, 0.10),
             ]
         ),
     };

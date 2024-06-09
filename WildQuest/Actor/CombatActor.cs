@@ -34,7 +34,6 @@ public class CombatActor : Actor, ICombatant
 		DamageReductionMultiplier = damageReductionMultiplier;
 	}
 
-
 	public virtual (bool hasHit, bool isBlocked,bool hasKilled, int damage) Attack(ICombatant source, ICombatant target)
 	{
 		Target = target;
@@ -68,15 +67,29 @@ public class CombatActor : Actor, ICombatant
 						randomMeleeDamage = rnd.Next((int)roundedMinMeleeDamage, (int)roundedMaxMeleeDamage + 1);
 					}
 					meleeDamage = int.Clamp(randomMeleeDamage,0, (int)maxSourceMeleeDamage);
-					if(meleeDamage > 0)
-					{	
-						target.ActorStats.Health.CurrentValue -= meleeDamage;
+					string attackMessage = $"{source.Name} attacks {target.Name} for {meleeDamage} {attackType.ToString()} damage.";
+					string blockedMessage = meleeDamage <= 0 
+						? $"{source.Name} attacks {target.Name}, but the attack is completely blocked!" 
+						: $"{source.Name} attacks {target.Name}, but {target.Name} blocks most of the damage. However, {source.Name} still manages to deal {meleeDamage} {attackType.ToString()} damage.";
+					if (meleeBlocked)
+					{
+						Console.WriteLine(blockedMessage);
+					}
+					else if(meleeDamage > 0)
+					{
+						Console.WriteLine(attackMessage);
+						target.TakeDamage(source, meleeDamage);
+
 						if(target.ActorStats.Health.CurrentValue <= 0)
 						{
 							killed = true;
 							return (hit, meleeBlocked, killed, meleeDamage);
 						}
 					}
+				}
+				else
+				{
+					Console.WriteLine($"{source.Name} attacks {target.Name}, but misses!");
 				}
 				break;
 			case CombatStyle.Ranged:

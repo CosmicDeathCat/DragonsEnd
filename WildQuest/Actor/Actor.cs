@@ -16,8 +16,8 @@ using WildQuest.Stats;
 namespace WildQuest.Actor;
 public class Actor : IActor
 {         
-    public virtual string Name {get;set;} 
-	public virtual Gender Gender {get;set;}
+    public virtual string Name {get;set;}
+    public virtual Gender Gender {get;set;}
 	public virtual ILeveling Leveling {get;set;}
 	public virtual CharacterClassType CharacterClass { get; set; }
 	public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
@@ -44,6 +44,18 @@ public class Actor : IActor
 	public virtual ActorStats ActorStats {get;set;}
 	
 	public List<IDropItem> DropItems { get; set; } = new();
+	
+	protected CombatStyle _combatStyle = CombatStyle.Melee;
+	public CombatStyle CombatStyle
+	{
+		get
+		{
+			var weapons = GetWeapons();
+			weapons = weapons.Where(x => x != null).ToArray();
+			return weapons.Length > 0 ? weapons[0]!.CombatStyle : _combatStyle;
+		}
+		set => _combatStyle = value;
+	}
 
 	public Actor()
 	{
@@ -210,10 +222,21 @@ public class Actor : IActor
 		var lootContainer = new LootContainer(loot.gold, loot.experience, loot.items.ToArray());
 		return lootContainer;
 	}
+	
+	public virtual void TakeDamage(IActor sourceActor, int damage)
+	{
+		Console.WriteLine($"{Name} takes {damage} {sourceActor.CombatStyle.ToString()} damage.");
+		ActorStats.Health.CurrentValue -= damage;
+		if (ActorStats.Health.CurrentValue <= 0)
+		{
+			Die();
+		}
+	}
 
 	public virtual void Die()
 	{
 		IsAlive = false;
+		Console.WriteLine($"{Name} has died!");
 		MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(Target, this));	
 	}
 }

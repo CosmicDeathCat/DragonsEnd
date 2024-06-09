@@ -1747,4 +1747,11 @@ public static class ItemDatabase
 
         throw new KeyNotFoundException($"Item '{itemName}' not found in the database.");
     }
+    
+    public static IDropItem GetDropItems (string itemName, long quantity = 1, double dropRate = 1)
+    {
+        var item = GetItems(itemName, quantity);
+        return new DropItem(item, dropRate);
+    }
+
 }

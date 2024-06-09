@@ -51,8 +51,14 @@ public class Player : CombatActor, IPlayer
         if(data.Source != this) return;
         if(data.Target == this) return;
         var loot = data.Target.Loot();
-        Leveling.Experience += loot.Experience;
+        Leveling.GainExperience(loot.Experience);
         Gold.Add(loot.Gold);
-        Inventory.AddRange(loot.Items);
+        Console.WriteLine($"{Name} has looted {loot.Gold} gold and {loot.Items.Count} items from {data.Target.Name}.");
+        foreach (var item in loot.Items)
+        {
+            Console.WriteLine($"Looted {item.Quantity} {item.Name}.");
+            Inventory.Add(item);
+        }
+        
     }
 }
