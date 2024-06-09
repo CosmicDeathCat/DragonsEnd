@@ -11,20 +11,21 @@ public static class EnemyDatabase
 {
     public static ConcurrentDictionary<string, IEnemy> Enemies { get; set; } = new(StringComparer.OrdinalIgnoreCase)
     {
-        // Slime
-        [EnemyNames.FeebleSlime] = new BasicEnemy(
-            name: EnemyNames.FeebleSlime,
+        // Puny Slime Warrior
+        [EnemyNames.PunySlimeWarrior] = new BasicEnemy(
+            name: EnemyNames.PunySlimeWarrior,
             gender: Gender.Nonbinary,
             characterClass: CharacterClassType.Freelancer,
             new ActorStats(
-                health: 5000,
+                health: 5,
                 meleeAttack: 1,
-                meleeDefense: 5,
+                meleeDefense: 0,
                 rangedAttack: 0,
                 rangedDefense: 0,
                 magicAttack: 0,
                 magicDefense: 0),
             combatStyle: CombatStyle.Melee,
+            enemyTier: EnemyTierType.Puny,
             level: 1,
             experience: 25,
             damageMultiplier: 1.00,

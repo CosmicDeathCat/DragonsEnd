@@ -9,6 +9,7 @@ namespace WildQuest.Enemy;
 
 public class BasicEnemy : CombatActor, IEnemy
 {
+    public virtual EnemyTierType EnemyTier { get; set; }
     public BasicEnemy() :base()
     {
         
@@ -20,6 +21,7 @@ public class BasicEnemy : CombatActor, IEnemy
         CharacterClassType characterClass,
         ActorStats actorStats,
         CombatStyle combatStyle,
+        EnemyTierType enemyTier,
         int level = 1,
         long experience = -1L,
         double damageMultiplier = 1.00,
@@ -30,7 +32,7 @@ public class BasicEnemy : CombatActor, IEnemy
         params IDropItem[] dropItems) 
         : base(name, gender, characterClass, actorStats, combatStyle, level, experience, damageMultiplier, damageReductionMultiplier, gold, equipment, inventory, dropItems)
     {
-        
+        EnemyTier = enemyTier;
     }
     
 }
