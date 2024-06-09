@@ -25,7 +25,7 @@ public class EquipmentItem : Item, IEquipmentItem
     {
         foreach (var slot in Slots)
         {
-            if (target?.Equipment[(int)slot] != this)
+            if (target?.Equipment[(int)slot] != null && target?.Equipment[(int)slot] != this)
             {
                 target?.Equipment[(int)slot]?.Unequip(source, target);
             }
@@ -40,6 +40,15 @@ public class EquipmentItem : Item, IEquipmentItem
         if (target != null)
         {
             target.ActorStats += Stats;
+            if (this is IWeaponItem weaponItem)
+            {
+                target.DamageMultiplier += weaponItem.DamageMultiplier;
+            }
+
+            if (this is IArmorItem armorItem)
+            {
+                target.DamageReductionMultiplier += armorItem.DamageReductionMultiplier;
+            }
         }
     }
 
@@ -56,6 +65,15 @@ public class EquipmentItem : Item, IEquipmentItem
         if (target != null)
         {
             target.ActorStats -= Stats;
+            if (this is IWeaponItem weaponItem)
+            {
+                target.DamageMultiplier -= weaponItem.DamageMultiplier;
+            }
+
+            if (this is IArmorItem armorItem)
+            {
+                target.DamageReductionMultiplier -= armorItem.DamageReductionMultiplier;
+            }
             source?.Inventory.Add(this);
         }
     }

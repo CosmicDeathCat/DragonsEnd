@@ -6,6 +6,7 @@ using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
+using WildQuest.Items;
 using WildQuest.Items.Currency;
 using WildQuest.Items.Currency.Extensions;
 using WildQuest.Messaging.Messages;
@@ -24,7 +25,8 @@ public class Player : CombatActor, IPlayer
         double damageReductionMultiplier = 1.00,
         long gold = 0,
         IEquipmentItem[]? equipment = null,
-        params IItem[] inventory)
+        IItem[]? inventory = null,
+        params IDropItem[] dropItems)
         : base()
     {
         Name = name;
@@ -36,7 +38,46 @@ public class Player : CombatActor, IPlayer
         DamageMultiplier = damageMultiplier;
         DamageReductionMultiplier = damageReductionMultiplier;
         Gold = new GoldCurrency(gold);
-        Inventory.AddRange(inventory);
+        if (inventory != null)
+        {
+            Inventory.AddRange(inventory);
+        }
+        else
+        {
+            Inventory = [];
+        }
+        if (equipment != null)
+        {
+            foreach (var item in equipment)
+            {
+                item.Equip(this,this);
+            }
+        }
+        else
+        {
+            Equipment = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
+        }
+        if (dropItems.Length > 0)
+        {
+            DropItems = dropItems.ToList();
+        }
+        else
+        {
+            // Default to using the provided inventory and equipment as drop items with default drop rates
+            foreach (var item in Inventory)
+            {
+                if(item == null) continue;
+                DropItems.Add(new DropItem(item, item.DropRate));
+            }
+
+            if (equipment != null)
+            {
+                foreach (var item in equipment)
+                {
+                    DropItems.Add(new DropItem(item, item.DropRate));
+                }
+            }
+        }
         MessageSystem.MessageManager.RegisterForChannel<ActorDeathMessage>(MessageChannels.Combat, ActorDeathMessageHandler);
     }
     

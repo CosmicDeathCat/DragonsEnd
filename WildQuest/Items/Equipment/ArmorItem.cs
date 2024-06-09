@@ -19,26 +19,6 @@ public class ArmorItem : EquipmentItem, IArmorItem
         DamageReductionMultiplier = damageReductionMultiplier;
     }
 
-    public override void Equip(IActor? source, IActor? target)
-    {
-        base.Equip(source, target);
-        if (target == null) return;
-        if (target is ICombatant combatant)
-        {
-            combatant.DamageReductionMultiplier += DamageReductionMultiplier;
-        }
-    }
-
-    public override void Unequip(IActor? source, IActor? target)
-    {
-        base.Unequip(source, target);
-        if (target == null) return;
-        if (target is ICombatant combatant)
-        {
-            combatant.DamageReductionMultiplier -= DamageReductionMultiplier;
-        }
-    }
-
     public override IItem Copy()
     {
         return new ArmorItem(Name, Description, Price, Type, Slots, Stats, GearTier, CombatStyle, ArmorType, DamageReductionMultiplier, Stackable, Quantity);

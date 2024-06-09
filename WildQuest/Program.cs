@@ -3,6 +3,7 @@ using WildQuest.Actor;
 using WildQuest.Enemy;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
+using WildQuest.Items;
 using WildQuest.Stats;
 
 namespace WildQuest;
@@ -11,8 +12,30 @@ public static class Program
 {
 	public static void Main()
 	{
-		var player = new Player("Mony", Gender.Nonbinary, CharacterClassType.Freelancer,
-			new ActorStats(100, 8, 4, 1, 1, 1, 1));
+		var player = new Player(
+			name: "Mony",
+			gender: Gender.Nonbinary,
+			characterClass: CharacterClassType.Freelancer,
+			actorStats: new ActorStats(
+				health: 10000,
+				meleeAttack: 8,
+				meleeDefense: 4,
+				rangedAttack: 1,
+				rangedDefense: 1,
+				magicAttack: 1,
+				magicDefense: 1),
+			damageMultiplier: 1.00,
+			damageReductionMultiplier: 1.00,
+			gold: 100,
+			equipment:
+			[
+				(IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
+			],
+			inventory:
+			[
+				ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 1),
+			]
+		);
 
 		var enemy = EnemyDatabase.Enemies[EnemyNames.Rat];
 

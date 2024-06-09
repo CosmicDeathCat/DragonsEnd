@@ -16,7 +16,7 @@ public static class EnemyDatabase
             gender:Gender.Male,
             characterClass:CharacterClassType.Freelancer,
             new ActorStats(
-            health: 50,
+            health: 5000,
             meleeAttack: 1,
             meleeDefense: 5,
             rangedAttack: 0,
