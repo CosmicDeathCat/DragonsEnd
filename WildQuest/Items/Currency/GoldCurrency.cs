@@ -64,6 +64,6 @@ public class GoldCurrency : ICurrency
 
     public override string ToString()
     {
-        return $"{Name}: {Quantity}";
+        return $"{Quantity} {Name}";
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
@@ -53,12 +54,8 @@ public class Player : CombatActor, IPlayer
         var loot = data.Target.Loot();
         Leveling.GainExperience(loot.Experience);
         Gold.Add(loot.Gold);
-        Console.WriteLine($"{Name} has looted {loot.Gold} gold and {loot.Items.Count} items from {data.Target.Name}.");
-        foreach (var item in loot.Items)
-        {
-            Console.WriteLine($"Looted {item.Quantity} {item.Name}.");
-            Inventory.Add(item);
-        }
-        
+        Inventory.AddRange(loot.Items);
+        var lootItemsDisplay = loot.Items.Count > 0 ? $"{loot.Items.Count} Items from {data.Target.Name}\n" + string.Join(", \n", loot.Items.Select(x=> "Looted " + x.Name)) : "No Items";
+        Console.WriteLine($"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
     }
 }
