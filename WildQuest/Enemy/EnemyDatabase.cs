@@ -24,6 +24,7 @@ public static class EnemyDatabase
             magicAttack: 0,
             magicDefense: 0),
             level: 1,
+            experience: 25,
             damageMultiplier: 1.00,
             damageReductionMultiplier: 1.00,
             gold: 50,

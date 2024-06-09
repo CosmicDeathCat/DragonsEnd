@@ -71,6 +71,13 @@ public class Leveling : ILeveling
         _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
     }
     
+    public Leveling(IActor actor, int level = 1, long experience = 0)
+    {
+        Actor = actor;
+        _currentLevel = ValidateLevel(level);
+        _experience = experience < 0 ? ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)] : ValidateExperience(experience);
+    }
+    
     public static Dictionary<int, long> GenerateExperienceLevels(int maxLevel = 100, long baseExperience = 50, double exponent = 1.25)
     {
         var levels = new Dictionary<int, long>();

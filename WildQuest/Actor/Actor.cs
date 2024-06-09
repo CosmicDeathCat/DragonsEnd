@@ -57,7 +57,8 @@ public class Actor : IActor
 		CharacterClassType characterClass,
 		ActorStats actorStats,
 		int level = 1,
-		long gold = 0,
+		long experience = -1L,
+		long gold = 0L,
 		IEquipmentItem[]? equipment = null,
 		IItem[]? inventory = null, 
 		params IDropItem[] dropItems)
@@ -67,7 +68,7 @@ public class Actor : IActor
 		CharacterClass = characterClass;
 		ActorStats = actorStats;
 		IsAlive = true;
-		Leveling = new Leveling(this, level);
+		Leveling = new Leveling(this, level, experience);
 		Gold = new GoldCurrency(gold);
 		if (inventory != null)
 		{
