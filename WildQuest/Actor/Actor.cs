@@ -68,6 +68,7 @@ public class Actor : IActor
 		Gender gender,
 		CharacterClassType characterClass,
 		ActorStats actorStats,
+		CombatStyle combatStyle,
 		int level = 1,
 		long experience = -1L,
 		long gold = 0L,
@@ -79,6 +80,7 @@ public class Actor : IActor
 		Gender = gender;
 		CharacterClass = characterClass;
 		ActorStats = actorStats;
+		CombatStyle = combatStyle;
 		IsAlive = true;
 		Leveling = new Leveling(this, level, experience);
 		Gold = new GoldCurrency(gold);

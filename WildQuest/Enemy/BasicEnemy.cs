@@ -10,6 +10,7 @@ public class BasicEnemy(
     Gender gender,
     CharacterClassType characterClass,
     ActorStats actorStats,
+    CombatStyle combatStyle,
     int level = 1,
     long experience = -1L,
     double damageMultiplier = 1.00,
@@ -18,7 +19,7 @@ public class BasicEnemy(
     IEquipmentItem[]? equipment = null,
     IItem[]? inventory = null,
     params IDropItem[] dropItems) 
-    : CombatActor(name, gender, characterClass, actorStats, level, experience, damageMultiplier, damageReductionMultiplier, gold, equipment, inventory, dropItems), IEnemy
+    : CombatActor(name, gender, characterClass, actorStats, combatStyle, level, experience, damageMultiplier, damageReductionMultiplier, gold, equipment, inventory, dropItems), IEnemy
 {
     
 }

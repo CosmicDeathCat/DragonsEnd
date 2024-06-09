@@ -20,6 +20,7 @@ public class CombatActor : Actor, ICombatant
 		Gender gender,
 		CharacterClassType characterClass,
 		ActorStats actorStats,
+		CombatStyle combatStyle,
 		int level = 1,
 		long experience = -1L,
 		double damageMultiplier = 1.00,
@@ -28,7 +29,7 @@ public class CombatActor : Actor, ICombatant
 		IEquipmentItem[]? equipment = null,
 		IItem[]? inventory = null,
 		params IDropItem[] dropItems) 
-		: base(name, gender, characterClass, actorStats, level, experience, gold, equipment, inventory, dropItems)
+		: base(name, gender, characterClass, actorStats, combatStyle, level, experience, gold, equipment, inventory, dropItems)
 	{
 		DamageMultiplier = damageMultiplier;
 		DamageReductionMultiplier = damageReductionMultiplier;

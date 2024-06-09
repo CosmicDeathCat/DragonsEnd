@@ -23,6 +23,7 @@ public static class EnemyDatabase
             rangedDefense: 0,
             magicAttack: 0,
             magicDefense: 0),
+            combatStyle: CombatStyle.Melee,
             level: 1,
             experience: 25,
             damageMultiplier: 1.00,
