@@ -72,25 +72,25 @@ public class ActorStats
 
     public void AddModifier(ActorStats modifier)
     {
-        Health.AddModifier(modifier.Health.ModifierValue);
-        MeleeAttack.AddModifier(modifier.MeleeAttack.ModifierValue);
-        RangedAttack.AddModifier(modifier.RangedAttack.ModifierValue);
-        MagicAttack.AddModifier(modifier.MagicAttack.ModifierValue);
-        MeleeDefense.AddModifier(modifier.MeleeDefense.ModifierValue);
-        RangedDefense.AddModifier(modifier.RangedDefense.ModifierValue);
-        MagicDefense.AddModifier(modifier.MagicDefense.ModifierValue);
-        CriticalHitChance.AddModifier(modifier.CriticalHitChance.ModifierValue);
+        Health.AddModifier(modifier.Health.CurrentValue);
+        MeleeAttack.AddModifier(modifier.MeleeAttack.CurrentValue);
+        RangedAttack.AddModifier(modifier.RangedAttack.CurrentValue);
+        MagicAttack.AddModifier(modifier.MagicAttack.CurrentValue);
+        MeleeDefense.AddModifier(modifier.MeleeDefense.CurrentValue);
+        RangedDefense.AddModifier(modifier.RangedDefense.CurrentValue);
+        MagicDefense.AddModifier(modifier.MagicDefense.CurrentValue);
+        CriticalHitChance.AddModifier(modifier.CriticalHitChance.CurrentValue);
     }
 
     public void RemoveModifier(ActorStats modifier)
     {
-        Health.RemoveModifier(modifier.Health.ModifierValue);
-        MeleeAttack.RemoveModifier(modifier.MeleeAttack.ModifierValue);
-        RangedAttack.RemoveModifier(modifier.RangedAttack.ModifierValue);
-        MagicAttack.RemoveModifier(modifier.MagicAttack.ModifierValue);
-        MeleeDefense.RemoveModifier(modifier.MeleeDefense.ModifierValue);
-        RangedDefense.RemoveModifier(modifier.RangedDefense.ModifierValue);
-        MagicDefense.RemoveModifier(modifier.MagicDefense.ModifierValue);
-        CriticalHitChance.RemoveModifier(modifier.CriticalHitChance.ModifierValue);
+        Health.RemoveModifier(modifier.Health.CurrentValue);
+        MeleeAttack.RemoveModifier(modifier.MeleeAttack.CurrentValue);
+        RangedAttack.RemoveModifier(modifier.RangedAttack.CurrentValue);
+        MagicAttack.RemoveModifier(modifier.MagicAttack.CurrentValue);
+        MeleeDefense.RemoveModifier(modifier.MeleeDefense.CurrentValue);
+        RangedDefense.RemoveModifier(modifier.RangedDefense.CurrentValue);
+        MagicDefense.RemoveModifier(modifier.MagicDefense.CurrentValue);
+        CriticalHitChance.RemoveModifier(modifier.CriticalHitChance.CurrentValue);
     }
 }

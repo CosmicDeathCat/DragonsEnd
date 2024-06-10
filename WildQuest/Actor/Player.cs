@@ -23,7 +23,7 @@ public class Player : CombatActor, IPlayer
         ActorStats actorStats,
         double damageMultiplier = 1.00,
         double damageReductionMultiplier = 1.00,
-        double criticalHitMultiplier = 1.5,
+        double criticalHitMultiplier = 2.00,
         long gold = 0,
         IEquipmentItem[]? equipment = null,
         IItem[]? inventory = null,

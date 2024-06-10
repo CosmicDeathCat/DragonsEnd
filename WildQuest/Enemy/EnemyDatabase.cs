@@ -21,12 +21,12 @@ public static class EnemyDatabase
                 meleeAttack: 1,
                 meleeDefense: 0,
                 rangedAttack: 0,
-                rangedDefense: 0,
+                rangedDefense: 1,
                 magicAttack: 0,
-                magicDefense: 0),
+                magicDefense: -1),
             combatStyle: CombatStyle.Melee,
             enemyTier: EnemyTierType.Puny,
-            level: 1,
+            level: -1,
             experience: 25,
             damageMultiplier: 1.00,
             damageReductionMultiplier: 1.00,
@@ -36,17 +36,24 @@ public static class EnemyDatabase
             ],
             inventory:
             [
-                ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 2),
-                ItemDatabase.GetItems(ItemNames.StrongHealthPotion, 3)
+                // ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 2),
+                // ItemDatabase.GetItems(ItemNames.StrongHealthPotion, 3)
             ],
             dropItems:
             [
                 ItemDatabase.GetDropItems(ItemNames.WeakHealthPotion, 1, 1),
-                ItemDatabase.GetDropItems(ItemNames.StrongHealthPotion, 2, 0.75),
-                ItemDatabase.GetDropItems(ItemNames.BronzeDagger, 1, 0.50),
-                ItemDatabase.GetDropItems(ItemNames.BronzeSword, 1, 0.25),
-                ItemDatabase.GetDropItems(ItemNames.BronzeShield, 1, 0.10),
+                ItemDatabase.GetDropItems(ItemNames.BronzeDagger, 1, 0.75),
+                ItemDatabase.GetDropItems(ItemNames.BronzeSword, 1, 0.50),
             ]
         ),
     };
+    
+    public static IEnemy GetEnemy(string enemyName)
+    {
+        if (Enemies.TryGetValue(enemyName, out var enemy))
+        {
+            return enemy.Copy() as IEnemy ?? throw new InvalidOperationException();
+        }
+        throw new ArgumentException($"Enemy with name '{enemyName}' not found.");
+    }
 }

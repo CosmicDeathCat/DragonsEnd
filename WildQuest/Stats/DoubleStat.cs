@@ -13,7 +13,7 @@ public class DoubleStat
     public virtual double CurrentValue
     {
         get => _currentValue;
-        set => _currentValue = Math.Clamp(value, 0, _maxValue);
+        set => _currentValue = Math.Clamp(value, double.MinValue, _maxValue);
     }
    
     public virtual double MaxValue
@@ -49,6 +49,8 @@ public class DoubleStat
     public DoubleStat(double baseValue)
     {	
         BaseValue = baseValue;
+        CurrentValue = baseValue;
+        CalculateMaxValue();
     }
    
     public DoubleStat(double currentValue, double baseValue)

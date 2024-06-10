@@ -13,7 +13,10 @@ public class Leveling : ILeveling
     public static long BaseExperience { get; set; } = 50;
     public static double ExperienceExponent { get; set; } = 1.25;
     public static int DefaultMaxLevel { get; set; } = 100;
+    
+    public static double DefaultLevelingThreshold { get; set; } = 10.00;
 
+    public double LevelingThreshold { get; set; } = DefaultLevelingThreshold;
     protected IActor Actor { get; set; }
     protected int _currentLevel = 1;
     public virtual int CurrentLevel
@@ -56,7 +59,15 @@ public class Leveling : ILeveling
         }
     }
 
-    public virtual long ExperienceToNextLevel => ExperienceLevels.ContainsKey(CurrentLevel + 1) ? ExperienceLevels[CurrentLevel + 1] : 0;
+    public virtual long ExperienceToNextLevel
+    {
+        get
+        {
+            if (CurrentLevel >= MaxLevel) return 0;
+            return ExperienceLevels[CurrentLevel + 1] - Experience;
+        }
+    }
+    
     public Dictionary<int, long> ExperienceLevels { get; set; } = GenerateExperienceLevels(DefaultMaxLevel, BaseExperience, ExperienceExponent);
 
     public Leveling(IActor actor)
@@ -71,11 +82,25 @@ public class Leveling : ILeveling
         _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
     }
     
-    public Leveling(IActor actor, int level = 1, long experience = 0)
+    public Leveling(IActor actor, int level = -1, long experience = -1)
     {
         Actor = actor;
-        _currentLevel = ValidateLevel(level);
-        _experience = experience < 0 ? ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)] : ValidateExperience(experience);
+
+        if (level == -1 && experience == -1)
+        {
+            _currentLevel = 1; // Default to level 1
+            _experience = ExperienceLevels[2]; // Default experience for level 1 to 2
+        }
+        else if (level == -1)
+        {
+            _experience = ValidateExperience(experience);
+            _currentLevel = CalculateLevelFromExperience(_experience); // Calculate level based on experience
+        }
+        else
+        {
+            _currentLevel = ValidateLevel(level);
+            _experience = experience == -1 ? ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)] : ValidateExperience(experience);
+        }
     }
     
     public static Dictionary<int, long> GenerateExperienceLevels(int maxLevel = 100, long baseExperience = 50, double exponent = 1.25)
@@ -127,6 +152,7 @@ public class Leveling : ILeveling
     public virtual void SetLevel(int level)
     {
         CurrentLevel = level;
+        _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
         MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, _currentLevel, LevelingType.SetLevel));
     }
 
@@ -137,14 +163,28 @@ public class Leveling : ILeveling
 
     public virtual int ValidateLevel(int level)
     {
-        if (level < 1) return 1;
-        if (level > MaxLevel) return MaxLevel;
-        return level;
+        if (level < 1) level = 1;
+        if (level > MaxLevel) level = MaxLevel;
+
+        while (_currentLevel < level)
+        {
+            _currentLevel++;
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, _currentLevel, LevelingType.GainLevel));
+        }
+
+        while (_currentLevel > level)
+        {
+            _currentLevel--;
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, _currentLevel, LevelingType.LoseLevel));
+        }
+
+        return _currentLevel;
     }
+
 
     public virtual void ValidateLevel()
     {
-        while (Experience >= ExperienceToNextLevel && CurrentLevel < MaxLevel)
+        while (Experience >= ExperienceLevels[CurrentLevel + 1] && CurrentLevel < MaxLevel)
         {
             _currentLevel++;
             MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, _currentLevel, LevelingType.GainLevel));
@@ -162,6 +202,18 @@ public class Leveling : ILeveling
         if (experience < 0) return 0;
         if (experience > ExperienceLevels[MaxLevel]) return ExperienceLevels[MaxLevel];
         return experience;
+    }
+    
+    public virtual int CalculateLevelFromExperience(long experience)
+    {
+        for (int level = 1; level <= MaxLevel; level++)
+        {
+            if (experience < ExperienceLevels[level])
+            {
+                return level - 1;
+            }
+        }
+        return MaxLevel; // If experience is higher than max level's requirement
     }
 
     public override string ToString()

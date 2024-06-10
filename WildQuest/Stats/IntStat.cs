@@ -14,7 +14,7 @@ public class IntStat
     public virtual int CurrentValue
     {
         get => _currentValue;
-        set => _currentValue = int.Clamp(value, 0, _maxValue);
+        set => _currentValue = int.Clamp(value, int.MinValue, _maxValue);
     }
    
     public virtual int MaxValue
@@ -50,6 +50,8 @@ public class IntStat
     public IntStat(int baseValue)
     {	
         BaseValue = baseValue;
+        CurrentValue = baseValue;
+        CalculateMaxValue();
     }
    
     public IntStat(int currentValue, int baseValue)
@@ -62,7 +64,7 @@ public class IntStat
     public virtual void CalculateMaxValue()
     {
         _maxValue = _baseValue + _modifierValue;
-        _currentValue = Math.Min(_currentValue, _maxValue);
+        _currentValue = _maxValue;
     }
 
     public static IntStat operator +(IntStat a, IntStat b)

@@ -9,6 +9,7 @@ public interface ILeveling
     long Experience { get; set; }
     long ExperienceToNextLevel { get; }
     Dictionary<int, long> ExperienceLevels { get; set; }
+    double LevelingThreshold { get; set; }
     void LevelUp();
     void LevelDown();
     void GainExperience(long amount);
@@ -19,6 +20,7 @@ public interface ILeveling
     void ValidateLevel();
     int ValidateLevel(int level);
     long ValidateExperience(long experience);
+    int CalculateLevelFromExperience(long experience);
     string ToString();
     
 }

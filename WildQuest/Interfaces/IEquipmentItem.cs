@@ -11,6 +11,6 @@ public interface IEquipmentItem : IItem
     GearTier GearTier {get;set;}
     CharacterClassType AllowedClasses {get;set;}
     int RequiredLevel {get;set;}
-    void Equip(IActor? source, IActor? target);
-    void Unequip(IActor? source, IActor? target);
+    bool Equip(IActor? source, IActor? target);
+    bool Unequip(IActor? source, IActor? target);
 }

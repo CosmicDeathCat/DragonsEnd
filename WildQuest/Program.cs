@@ -17,38 +17,60 @@ public static class Program
 			gender: Gender.Nonbinary,
 			characterClass: CharacterClassType.Freelancer,
 			actorStats: new ActorStats(
-				health: 10000,
-				meleeAttack: 8,
-				meleeDefense: 4,
-				rangedAttack: 1,
-				rangedDefense: 1,
-				magicAttack: 1,
-				magicDefense: 1),
+				health: 100,
+				meleeAttack: 5,
+				meleeDefense: 5,
+				rangedAttack: 5,
+				rangedDefense: 5,
+				magicAttack: 5,
+				magicDefense: 5),
 			damageMultiplier: 1.00,
 			damageReductionMultiplier: 1.00,
-			gold: 100,
+			gold: 0,
 			equipment:
 			[
-				(IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
+				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword, 1),
+				(IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
+				(IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
+				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1)
+				// (IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
 			],
 			inventory:
 			[
 				ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 1),
 			]
 		);
+		
+		player.Leveling.SetLevel(100);
 
-		var enemy = EnemyDatabase.Enemies[EnemyNames.Rat];
-
-		// rat.IsAlive = false;
-
-		// var ratLoot = rat.Loot();
-
-		while (player.IsAlive && enemy.IsAlive)
+		int killCount = 0;
+		while (player.IsAlive && killCount < 5)
 		{
-			var enemyHit = player.Attack(player, enemy);
-			if (enemyHit.hasKilled) break;
-			var playerHit = enemy.Attack(enemy, player);
-			if(playerHit.hasKilled) break;
+			var enemy = EnemyDatabase.GetEnemy(EnemyNames.PunySlimeWarrior);
+			while (player.IsAlive && enemy.IsAlive)
+			{
+				var enemyHit = player.Attack(player, enemy);
+				if (enemyHit.hasKilled)
+				{
+					killCount++;
+					break; // Breaks out of the inner while loop
+				}
+				var playerHit = enemy.Attack(enemy, player);
+				if (playerHit.hasKilled)
+				{
+					break; // Breaks out of the inner while loop
+				}
+			}
+			if (!enemy.IsAlive)
+			{
+				continue; // Continues with the next iteration of the outer while loop
+			}
+			if (!player.IsAlive)
+			{
+				break; // Breaks out of the outer while loop
+			}
 		}
+
+
 	}
 }

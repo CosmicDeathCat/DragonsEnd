@@ -13,7 +13,7 @@ public class LongStat
     public virtual long CurrentValue
     {
         get => _currentValue;
-        set => _currentValue = Math.Clamp(value, 0, _maxValue);
+        set => _currentValue = Math.Clamp(value, long.MinValue, _maxValue);
     }
 
     public virtual long MaxValue
@@ -49,6 +49,8 @@ public class LongStat
     public LongStat(long baseValue)
     {
         BaseValue = baseValue;
+        CurrentValue = baseValue;
+        CalculateMaxValue();
     }
 
     public LongStat(long currentValue, long baseValue)

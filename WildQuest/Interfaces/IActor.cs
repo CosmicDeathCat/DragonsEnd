@@ -24,5 +24,8 @@ public interface IActor : ILootable
 	void ItemMessageHandler(IMessageEnvelope message);
 	void TakeDamage(IActor sourceActor, int damage);
 	void Die();
+	void IncreaseStatsForLevel(int level);
+	void DecreaseStatsForLevel(int level);
+	IActor Copy();
 
 }
