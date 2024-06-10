@@ -21,7 +21,7 @@ public class IntStat
         set
         {
             _baseValue = value;
-            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
+            _currentValue = MaxValue;  // Directly set CurrentValue to MaxValue when modifiers are changed.
         }
     }
 
@@ -31,20 +31,20 @@ public class IntStat
         set
         {
             _modifierValue = value;
-            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
+            _currentValue = MaxValue;  // Directly set CurrentValue to MaxValue when modifiers are changed.
         }
     }
 
     public IntStat(int baseValue)
     {	
-        BaseValue = baseValue;
-        CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
+        BaseValue = baseValue; // Initialize base and current values to the baseValue provided.
+        CurrentValue = baseValue; // Set the CurrentValue to the base value initially.
     }
    
     public IntStat(int currentValue, int baseValue)
     {
         _baseValue = baseValue;
-        CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
+        CurrentValue = currentValue; // Initialize and clamp currentValue within the calculated MaxValue.
     }
 
     public static IntStat operator +(IntStat a, IntStat b)
@@ -64,17 +64,18 @@ public class IntStat
    
     public static IntStat operator /(IntStat a, IntStat b)
     {
-        return b.CurrentValue != 0 ? // Prevent division by zero.
-            new IntStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue) : new IntStat(0, a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle zero division safely.
+        return b.CurrentValue != 0 ?
+            new IntStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue) :
+            new IntStat(0, a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle division by zero gracefully.
     }
 
     public void AddModifier(int modifier)
     {
-        ModifierValue += modifier;
+        ModifierValue += modifier; // This will automatically adjust CurrentValue if necessary due to the setter logic.
     }
 
     public void RemoveModifier(int modifier)
     {
-        ModifierValue -= modifier;
+        ModifierValue -= modifier; // This will automatically adjust CurrentValue if necessary due to the setter logic.
     }
 }

@@ -23,7 +23,7 @@ public class DoubleStat
         set
         {
             _baseValue = value;
-            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
+            _currentValue = MaxValue; // Directly set CurrentValue to MaxValue.
         }
     }
 
@@ -33,7 +33,7 @@ public class DoubleStat
         set
         {
             _modifierValue = value;
-            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
+            _currentValue = MaxValue; // Directly set CurrentValue to MaxValue.
         }
     }
 
