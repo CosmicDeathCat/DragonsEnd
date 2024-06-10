@@ -33,7 +33,6 @@ public static class EnemyDatabase
             gold: 10,
             equipment:
             [
-                (IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
             ],
             inventory:
             [

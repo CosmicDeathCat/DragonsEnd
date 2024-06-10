@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WildQuest.Interfaces;
 using WildQuest.Items.Currency;
@@ -5,7 +6,7 @@ using WildQuest.Items.Currency.Extensions;
 
 namespace WildQuest.Items.Loot;
 
-[System.Serializable]
+[Serializable]
 public class LootContainer
 {
     public GoldCurrency Gold { get; set; } = new(0);

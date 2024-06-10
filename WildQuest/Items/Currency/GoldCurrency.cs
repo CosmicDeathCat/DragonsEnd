@@ -1,8 +1,9 @@
+using System;
 using WildQuest.Interfaces;
 
 namespace WildQuest.Items.Currency;
 
-[System.Serializable]
+[Serializable]
 public class GoldCurrency : ICurrency
 {
     public virtual string Name { get; set; } = "Gold";

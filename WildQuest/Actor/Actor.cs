@@ -19,8 +19,9 @@ public class Actor : IActor
     public virtual string Name {get;set;}
     public virtual Gender Gender {get;set;}
 	public virtual ILeveling Leveling {get;set;}
-	public virtual double DamageMultiplier { get; set; }
-	public virtual double DamageReductionMultiplier { get; set; }
+	public virtual DoubleStat DamageMultiplier { get; set; } = new(1.00);
+	public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(1.00);
+	public virtual DoubleStat CriticalHitMultiplier { get; set; } = new(1.5);
 	public virtual CharacterClassType CharacterClass { get; set; }
 	public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
 	public virtual List<IItem?> Inventory { get; set; } = new();
@@ -73,6 +74,7 @@ public class Actor : IActor
 		CombatStyle combatStyle,
 		double damageMultiplier = 1.00,
 		double damageReductionMultiplier = 1.00,
+		double criticalHitMultiplier = 1.5,
 		int level = 1,
 		long experience = -1L,
 		long gold = 0L,
@@ -85,8 +87,9 @@ public class Actor : IActor
 		CharacterClass = characterClass;
 		ActorStats = actorStats;
 		CombatStyle = combatStyle;
-		DamageMultiplier = damageMultiplier;
-		DamageReductionMultiplier = damageReductionMultiplier;
+		DamageMultiplier = new DoubleStat(damageMultiplier);
+		DamageReductionMultiplier = new DoubleStat(damageReductionMultiplier);
+		CriticalHitMultiplier = new DoubleStat(criticalHitMultiplier);
 		IsAlive = true;
 		Leveling = new Leveling(this, level, experience);
 		Gold = new GoldCurrency(gold);

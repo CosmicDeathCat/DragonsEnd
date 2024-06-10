@@ -23,6 +23,7 @@ public class Player : CombatActor, IPlayer
         ActorStats actorStats,
         double damageMultiplier = 1.00,
         double damageReductionMultiplier = 1.00,
+        double criticalHitMultiplier = 1.5,
         long gold = 0,
         IEquipmentItem[]? equipment = null,
         IItem[]? inventory = null,
@@ -35,8 +36,9 @@ public class Player : CombatActor, IPlayer
         ActorStats = actorStats;
         IsAlive = true;
         Leveling = new Leveling(this);
-        DamageMultiplier = damageMultiplier;
-        DamageReductionMultiplier = damageReductionMultiplier;
+        DamageMultiplier = new DoubleStat(damageMultiplier);
+        DamageReductionMultiplier = new DoubleStat(damageReductionMultiplier);
+        CriticalHitMultiplier = new DoubleStat(criticalHitMultiplier);
         Gold = new GoldCurrency(gold);
         if (inventory != null)
         {

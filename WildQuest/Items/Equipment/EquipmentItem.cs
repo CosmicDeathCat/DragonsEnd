@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
@@ -5,7 +6,7 @@ using WildQuest.Stats;
 
 namespace WildQuest.Items.Equipment;
 
-[System.Serializable]
+[Serializable]
 public class EquipmentItem : Item, IEquipmentItem
 {
     public virtual List<EquipmentSlot> Slots { get; set; }
@@ -45,15 +46,15 @@ public class EquipmentItem : Item, IEquipmentItem
 
         if (target != null)
         {
-            target.ActorStats += Stats;
+            target.ActorStats.AddModifier(Stats);
             if (this is IWeaponItem weaponItem)
             {
-                target.DamageMultiplier += weaponItem.DamageMultiplier;
+                target.DamageMultiplier.AddModifier(weaponItem.DamageMultiplier.CurrentValue);
             }
 
             if (this is IArmorItem armorItem)
             {
-                target.DamageReductionMultiplier += armorItem.DamageReductionMultiplier;
+                target.DamageReductionMultiplier.AddModifier(armorItem.DamageReductionMultiplier.CurrentValue);
             }
         }
     }
@@ -70,15 +71,15 @@ public class EquipmentItem : Item, IEquipmentItem
 
         if (target != null)
         {
-            target.ActorStats -= Stats;
+            target.ActorStats.RemoveModifier(Stats);
             if (this is IWeaponItem weaponItem)
             {
-                target.DamageMultiplier -= weaponItem.DamageMultiplier;
+                target.DamageMultiplier.RemoveModifier(weaponItem.DamageMultiplier.CurrentValue);
             }
 
             if (this is IArmorItem armorItem)
             {
-                target.DamageReductionMultiplier -= armorItem.DamageReductionMultiplier;
+                target.DamageReductionMultiplier.RemoveModifier(armorItem.DamageReductionMultiplier.CurrentValue);
             }
             source?.Inventory.Add(this);
         }

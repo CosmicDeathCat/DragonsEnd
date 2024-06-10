@@ -26,11 +26,12 @@ public class BasicEnemy : CombatActor, IEnemy
         long experience = -1L,
         double damageMultiplier = 1.00,
         double damageReductionMultiplier = 1.00,
+        double criticalHitMultiplier = 1.5,
         long gold = 0,
         IEquipmentItem[]? equipment = null,
         IItem[]? inventory = null,
         params IDropItem[] dropItems) 
-        : base(name, gender, characterClass, actorStats, combatStyle, level, experience, damageMultiplier, damageReductionMultiplier, gold, equipment, inventory, dropItems)
+        : base(name, gender, characterClass, actorStats, combatStyle, level, experience, damageMultiplier, damageReductionMultiplier, criticalHitMultiplier, gold, equipment, inventory, dropItems)
     {
         EnemyTier = enemyTier;
     }

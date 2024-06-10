@@ -13,8 +13,9 @@ public interface IActor : ILootable
 	IEquipmentItem?[] Equipment {get;set;}
 	List<IItem?> Inventory {get;set;}
 	ActorStats ActorStats {get;set;}
-	public double DamageMultiplier { get; set; }
-	public double DamageReductionMultiplier { get; set; }
+	public DoubleStat DamageMultiplier { get; set; }
+	public DoubleStat DamageReductionMultiplier { get; set; }
+	DoubleStat CriticalHitMultiplier { get; set; }
 	IActor? Target {get;set;}
 	bool IsAlive {get;set;}    
 	CombatStyle CombatStyle {get; set; }

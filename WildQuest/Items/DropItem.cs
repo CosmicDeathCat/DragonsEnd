@@ -1,8 +1,9 @@
+using System;
 using WildQuest.Interfaces;
 
 namespace WildQuest.Items;
 
-[System.Serializable]
+[Serializable]
 public class DropItem : IDropItem
 {
     public IItem Item { get; }

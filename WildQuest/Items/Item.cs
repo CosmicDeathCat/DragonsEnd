@@ -1,3 +1,4 @@
+using System;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using WildQuest.Enums;
@@ -6,7 +7,7 @@ using WildQuest.Messaging.Messages;
 
 namespace WildQuest.Items;
 
-[System.Serializable]
+[Serializable]
 public class Item : IItem
 {
     public virtual string Name {get;set;}

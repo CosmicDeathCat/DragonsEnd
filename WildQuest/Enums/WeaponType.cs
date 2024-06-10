@@ -24,9 +24,10 @@ public enum WeaponType
     Grimoire,        // Usable by Mage, equipped to Off Hand (One Handed) (Magic)
     Scepter,         // Usable by Mage, equipped to Main Hand (One Handed) (Magic)
 
-    // Hybrid Weapons
-    Whip,            // Usable by Warrior and Archer, equipped to Main Hand or Off Hand (One Handed) (Melee/Ranged)
-    Spellbow,        // Usable by Archer and Mage, equipped to Main Hand and Off Hand (Two Handed) (Ranged/Magic)
-    Spellblade,      // Usable by Warrior and Mage, equipped to Main Hand (One Handed) (Melee/Magic)
-    Gunblade,        // Usable by Warrior and Archer, equipped to Main Hand (One Handed) (Melee/Ranged)
+    //TODO: Maybe add these later on when there a need for them
+    // // Hybrid Weapons
+    // Whip,            // Usable by Warrior and Archer, equipped to Main Hand or Off Hand (One Handed) (Melee/Ranged)
+    // Spellbow,        // Usable by Archer and Mage, equipped to Main Hand and Off Hand (Two Handed) (Ranged/Magic)
+    // Spellblade,      // Usable by Warrior and Mage, equipped to Main Hand (One Handed) (Melee/Magic)
+    // Gunblade,        // Usable by Warrior and Archer, equipped to Main Hand (One Handed) (Melee/Ranged)
 }
