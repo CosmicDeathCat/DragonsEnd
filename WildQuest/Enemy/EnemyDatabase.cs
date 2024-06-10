@@ -17,7 +17,7 @@ public static class EnemyDatabase
             gender: Gender.Nonbinary,
             characterClass: CharacterClassType.Warrior,
             new ActorStats(
-                health: 5,
+                health: 20,
                 meleeAttack: 1,
                 meleeDefense: 0,
                 rangedAttack: 0,

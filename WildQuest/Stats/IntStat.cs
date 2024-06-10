@@ -1,70 +1,50 @@
 ﻿using System;
 
-namespace WildQuest.Stats;
-using System;
-
 [Serializable]
 public class IntStat 
 {         
-    protected int _maxValue;
-    protected int _currentValue;
-    protected int _baseValue;
-    protected int _modifierValue;
+    private int _currentValue;
+    private int _baseValue;
+    private int _modifierValue;
 
-    public virtual int CurrentValue
+    public int CurrentValue
     {
         get => _currentValue;
-        set => _currentValue = int.Clamp(value, int.MinValue, _maxValue);
+        set => _currentValue = Math.Clamp(value, int.MinValue, MaxValue); // Ensures CurrentValue never exceeds MaxValue.
     }
    
-    public virtual int MaxValue
-    {
-        get => _maxValue;
-        set
-        {
-            _maxValue = value;
-            _currentValue = _maxValue;
-        }
-    }
+    public int MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
 
-    public virtual int BaseValue
+    public int BaseValue
     {
         get => _baseValue;
         set
         {
             _baseValue = value;
-            CalculateMaxValue();
+            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
         }
     }
 
-    public virtual int ModifierValue
+    public int ModifierValue
     {
         get => _modifierValue;
         set
         {
             _modifierValue = value;
-            CalculateMaxValue();
+            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
         }
     }
 
     public IntStat(int baseValue)
     {	
         BaseValue = baseValue;
-        CurrentValue = baseValue;
-        CalculateMaxValue();
+        CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
     }
    
     public IntStat(int currentValue, int baseValue)
     {
-        _currentValue = currentValue;
         _baseValue = baseValue;
-        CalculateMaxValue();
-    }
-
-    public virtual void CalculateMaxValue()
-    {
-        _maxValue = _baseValue + _modifierValue;
-        _currentValue = _maxValue;
+        CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
     }
 
     public static IntStat operator +(IntStat a, IntStat b)
@@ -84,18 +64,17 @@ public class IntStat
    
     public static IntStat operator /(IntStat a, IntStat b)
     {
-        return new IntStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue);
+        return b.CurrentValue != 0 ? // Prevent division by zero.
+            new IntStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue) : new IntStat(0, a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle zero division safely.
     }
 
-    public virtual void AddModifier(int modifier)
+    public void AddModifier(int modifier)
     {
         ModifierValue += modifier;
-        CalculateMaxValue();
     }
 
-    public virtual void RemoveModifier(int modifier)
+    public void RemoveModifier(int modifier)
     {
         ModifierValue -= modifier;
-        CalculateMaxValue();
     }
 }

@@ -5,96 +5,78 @@ namespace WildQuest.Stats;
 [Serializable]
 public class LongStat
 {
-    protected long _currentValue;
-    protected long _maxValue;
-    protected long _baseValue;
-    protected long _modifierValue;
+    private long _currentValue;
+    private long _baseValue;
+    private long _modifierValue;
 
-    public virtual long CurrentValue
+    public long CurrentValue
     {
         get => _currentValue;
-        set => _currentValue = Math.Clamp(value, long.MinValue, _maxValue);
+        set => _currentValue = Math.Clamp(value, long.MinValue, MaxValue); // Ensures CurrentValue never exceeds MaxValue.
     }
 
-    public virtual long MaxValue
-    {
-        get => _maxValue;
-        set
-        {
-            _maxValue = value;
-            _currentValue = _maxValue;
-        }
-    }
+    public long MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
 
-    public virtual long BaseValue
+    public long BaseValue
     {
         get => _baseValue;
         set
         {
             _baseValue = value;
-            CalculateMaxValue();
+            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
         }
     }
 
-    public virtual long ModifierValue
+    public long ModifierValue
     {
         get => _modifierValue;
         set
         {
             _modifierValue = value;
-            CalculateMaxValue();
+            _currentValue = Math.Min(_currentValue, MaxValue); // Adjust CurrentValue if necessary.
         }
     }
 
     public LongStat(long baseValue)
-    {
+    {	
         BaseValue = baseValue;
-        CurrentValue = baseValue;
-        CalculateMaxValue();
+        CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
     }
-
+   
     public LongStat(long currentValue, long baseValue)
     {
-        _currentValue = currentValue;
         _baseValue = baseValue;
-        CalculateMaxValue();
-    }
-
-    public virtual void CalculateMaxValue()
-    {
-        _maxValue = _baseValue + _modifierValue;
-        _currentValue = Math.Min(_currentValue, _maxValue);
+        CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
     }
 
     public static LongStat operator +(LongStat a, LongStat b)
     {
         return new LongStat(a.CurrentValue + b.CurrentValue, a.BaseValue + b.BaseValue);
     }
-
+   
     public static LongStat operator -(LongStat a, LongStat b)
     {
         return new LongStat(a.CurrentValue - b.CurrentValue, a.BaseValue - b.BaseValue);
     }
-
+   
     public static LongStat operator *(LongStat a, LongStat b)
     {
         return new LongStat(a.CurrentValue * b.CurrentValue, a.BaseValue * b.BaseValue);
     }
-
+   
     public static LongStat operator /(LongStat a, LongStat b)
     {
-        return new LongStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue);
+        return b.CurrentValue != 0 ? // Prevent division by zero.
+            new LongStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue) : new LongStat(0, a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle zero division safely.
     }
 
-    public virtual void AddModifier(long modifier)
+    public void AddModifier(long modifier)
     {
         ModifierValue += modifier;
-        CalculateMaxValue();
     }
 
-    public virtual void RemoveModifier(long modifier)
+    public void RemoveModifier(long modifier)
     {
         ModifierValue -= modifier;
-        CalculateMaxValue();
     }
 }
