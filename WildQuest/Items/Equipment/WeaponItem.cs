@@ -12,7 +12,7 @@ public class WeaponItem : EquipmentItem, IWeaponItem
     public virtual WeaponType WeaponType { get; set; }
     public virtual double DamageMultiplier { get; set; }
     
-    public WeaponItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, CombatStyle combatStyle, WeaponType weaponType, double damageMultiplier, bool stackable = true, long quantity = 1, double dropRate = 1) : base(name, description, price, type, slots, stats, gearTier, stackable, quantity, dropRate)
+    public WeaponItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, CharacterClassType allowedClasses, int requiredLevel, CombatStyle combatStyle, WeaponType weaponType, double damageMultiplier, bool stackable = true, long quantity = 1, double dropRate = 1) : base(name, description, price, type, slots, stats, gearTier, allowedClasses, requiredLevel, stackable, quantity, dropRate)
     {
         CombatStyle = combatStyle;
         WeaponType = weaponType;
@@ -21,6 +21,6 @@ public class WeaponItem : EquipmentItem, IWeaponItem
 
     public override IItem Copy()
     {
-        return new WeaponItem(Name, Description, Price, Type, Slots, Stats, GearTier, CombatStyle, WeaponType, DamageMultiplier, Stackable, Quantity);
+        return new WeaponItem(Name, Description, Price, Type, Slots, Stats, GearTier, AllowedClasses, RequiredLevel, CombatStyle, WeaponType, DamageMultiplier, Stackable, Quantity);
     }
 }

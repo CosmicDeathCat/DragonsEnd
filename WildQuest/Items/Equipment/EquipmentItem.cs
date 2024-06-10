@@ -13,12 +13,18 @@ public class EquipmentItem : Item, IEquipmentItem
     
     public virtual GearTier GearTier { get; set; }
     
-    public EquipmentItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, bool stackable = true, long quantity = 1, double dropRate = 1) 
+    public virtual CharacterClassType AllowedClasses { get; set; }
+    
+    public virtual int RequiredLevel { get; set; }
+
+    public EquipmentItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots, ActorStats stats, GearTier gearTier, CharacterClassType allowedClasses, int requiredLevel,  bool stackable = true, long quantity = 1, double dropRate = 1) 
         : base(name, description, price, type, stackable, quantity, dropRate)
     {
         Slots = slots;
         Stats = stats;
         GearTier = gearTier;
+        AllowedClasses = allowedClasses;
+        RequiredLevel = requiredLevel;
     }
     
     public virtual void Equip(IActor? source, IActor? target)
@@ -80,6 +86,6 @@ public class EquipmentItem : Item, IEquipmentItem
 
     public override IItem Copy()
     {
-        return new EquipmentItem(Name, Description, Price, Type, Slots, Stats, GearTier, Stackable, Quantity);
+        return new EquipmentItem(Name, Description, Price, Type, Slots, Stats, GearTier, AllowedClasses, RequiredLevel,  Stackable, Quantity);
     }
 }

@@ -15,7 +15,7 @@ public static class EnemyDatabase
         [EnemyNames.PunySlimeWarrior] = new BasicEnemy(
             name: EnemyNames.PunySlimeWarrior,
             gender: Gender.Nonbinary,
-            characterClass: CharacterClassType.Freelancer,
+            characterClass: CharacterClassType.Warrior,
             new ActorStats(
                 health: 5,
                 meleeAttack: 1,
@@ -30,7 +30,7 @@ public static class EnemyDatabase
             experience: 25,
             damageMultiplier: 1.00,
             damageReductionMultiplier: 1.00,
-            gold: 50,
+            gold: 10,
             equipment:
             [
                 (IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
