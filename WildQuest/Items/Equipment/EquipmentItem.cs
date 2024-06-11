@@ -33,6 +33,21 @@ public class EquipmentItem : Item, IEquipmentItem
     public virtual bool Equip(IActor? source, IActor? target)
 {
     if (target == null) return false;
+    
+    if(!AllowedClasses.HasFlag(target.CharacterClass))
+    {
+        Console.WriteLine($"{target.Name} cannot equip {Name}. {Name} is only for {AllowedClasses}.");
+        return false;
+    }
+    
+    
+    if (target.Leveling.CurrentLevel < RequiredLevel)
+    {
+        Console.WriteLine($"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
+        return false;
+    }
+    
+
 
     bool isEquipped = false;
     int mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
@@ -116,7 +131,7 @@ public class EquipmentItem : Item, IEquipmentItem
     }
     else
     {
-        Console.WriteLine($"{target.Name} could not equip {this.Name}.");
+        Console.WriteLine($"{target.Name} could not equip {Name}.");
     }
 
     return isEquipped;
