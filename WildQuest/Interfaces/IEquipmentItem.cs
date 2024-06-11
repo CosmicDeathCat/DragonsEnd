@@ -12,5 +12,5 @@ public interface IEquipmentItem : IItem
     CharacterClassType AllowedClasses {get;set;}
     int RequiredLevel {get;set;}
     bool Equip(IActor? source, IActor? target);
-    bool Unequip(IActor? source, IActor? target);
+    bool Unequip(IActor? source, IActor? target, EquipmentSlot slot);
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
 using WildQuest.Stats;
@@ -30,94 +31,124 @@ public class EquipmentItem : Item, IEquipmentItem
     }
     
     public virtual bool Equip(IActor? source, IActor? target)
+{
+    if (target == null) return false;
+
+    bool isEquipped = false;
+    int mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
+    int offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
+
+    // First, handle items intended for both main and off hand.
+    if (Slots.Contains(EquipmentSlot.MainHand) && Slots.Contains(EquipmentSlot.OffHand))
     {
-        int mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
-        int offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
-        if (target == null) return false;
+        if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
+        {
+            target.Equipment[mainHandIndex] = this;
+        }
+        else if (target.Equipment[mainHandIndex] != null && target.Equipment[offHandIndex] == null)
+        {
+            target.Equipment[offHandIndex] = this;
+        }
+        else if (target.Equipment[mainHandIndex] != null && target.Equipment[offHandIndex] != null)
+        {
+            if (target.Equipment[mainHandIndex] != this)
+            {
+                target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.MainHand);
+                target.Equipment[mainHandIndex] = this;
+            }
+            else
+            {
+                target.Equipment[offHandIndex]?.Unequip(source, target, EquipmentSlot.OffHand);
+                target.Equipment[offHandIndex] = this;
 
-        bool isEquipped = false;
+            }
+        }
 
+        isEquipped = true;
+    }
+    else if (Slots.Contains(EquipmentSlot.TwoHanded))
+    {
+        if (target.Equipment[mainHandIndex] != null && target.Equipment[mainHandIndex] != this)
+        {
+            target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.MainHand);
+        }
+
+        if (target.Equipment[offHandIndex] != null && target.Equipment[offHandIndex] != this)
+        {
+            target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.OffHand);
+
+        }
+        // Unequip(source, target, EquipmentSlot.TwoHanded);
+
+        if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
+        {
+            target.Equipment[mainHandIndex] = this;
+            target.Equipment[offHandIndex] = this;
+            isEquipped = true;
+        }
+
+    }
+    else 
+    {
+        // Then handle each slot individually
         foreach (var slot in Slots)
         {
-            // Check for two-handed weapon handling
-            if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
+            int slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
+            
+            if (target.Equipment[slotIndex] == null || target.Equipment[slotIndex] != this)
             {
-                
-                if (target.Equipment[mainHandIndex] != null)
-                    target.Equipment[mainHandIndex]?.Unequip(source, target);
-
-                if (target.Equipment[offHandIndex] != null)
-                    target.Equipment[offHandIndex]?.Unequip(source, target);
-
-                target.Equipment[mainHandIndex] = this;
-                target.Equipment[offHandIndex] = this;
-                
+                // Equip in specific slot if it's empty
+                if (target.Equipment[slotIndex] != null)
+                {
+                    target.Equipment[slotIndex]?.Unequip(source, target, slot); // Unequip current item in the slot if any
+                }
+                target.Equipment[slotIndex] = this;
                 isEquipped = true;
                 break;
             }
-            else if (slot is EquipmentSlot.MainHand or EquipmentSlot.OffHand)
-            {
-                int slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
-
-                // Check for two-handed weapon blocking
-                if (target.Equipment[slotIndex] != null && 
-                    target.Equipment[slotIndex]!.Slots.Contains(EquipmentSlot.TwoHanded))
-                {
-                    target.Equipment[slotIndex]?.Unequip(source, target);
-                }
-
-                if (target.Equipment[slotIndex] == null)
-                {
-                    target.Equipment[slotIndex] = this;
-
-                    isEquipped = true;
-                    break;
-                }
-            }
         }
-        
-        source?.Inventory.Remove(this);
-
-        ApplyModifiers(target, true);
-
-        if (!isEquipped)
-        {
-            Console.WriteLine($"{target.Name} could not equip {this.Name}.");
-        }
-
-        return isEquipped;
     }
 
-public virtual bool Unequip(IActor? source, IActor? target)
+    if (isEquipped)
+    {
+        source?.Inventory.Remove(this);
+        ApplyModifiers(target, true);
+    }
+    else
+    {
+        Console.WriteLine($"{target.Name} could not equip {this.Name}.");
+    }
+
+    return isEquipped;
+}
+    
+    public virtual bool Unequip(IActor? source, IActor? target, EquipmentSlot slot)
 {
     if (target == null) return false;
     
     int mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
     int offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
     bool isUnequipped = false;
-
-    foreach (var slot in Slots)
+    
+    int slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
+    
+    if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
     {
-        int slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
-
-        if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
+        if (target.Equipment[mainHandIndex] == this)
         {
-            if (target.Equipment[mainHandIndex] == this)
-            {
-                target.Equipment[mainHandIndex] = null;
-            }
-
-            if (target.Equipment[offHandIndex] == this)
-            {
-                target.Equipment[offHandIndex] = null;
-            }
+            target.Equipment[mainHandIndex] = null;
         }
-        else
+
+        if (target.Equipment[offHandIndex] == this)
         {
-            if (target.Equipment[slotIndex] == this)
-            {
-                target.Equipment[slotIndex] = null;
-            }
+            target.Equipment[offHandIndex] = null;
+        }
+    }
+    else
+    {
+        if (target.Equipment[slotIndex] == this)
+        {
+            target.Equipment[slotIndex] = null;
         }
     }
     ApplyModifiers(target, false);
@@ -127,6 +158,48 @@ public virtual bool Unequip(IActor? source, IActor? target)
     isUnequipped = true;
     return isUnequipped;
 }
+    
+    
+    
+// public virtual bool Unequip(IActor? source, IActor? target)
+// {
+//     if (target == null) return false;
+//     
+//     int mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
+//     int offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
+//     bool isUnequipped = false;
+//
+//     foreach (var slot in Slots)
+//     {
+//         int slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
+//
+//         if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
+//         {
+//             if (target.Equipment[mainHandIndex] == this)
+//             {
+//                 target.Equipment[mainHandIndex] = null;
+//             }
+//
+//             if (target.Equipment[offHandIndex] == this)
+//             {
+//                 target.Equipment[offHandIndex] = null;
+//             }
+//         }
+//         else
+//         {
+//             if (target.Equipment[slotIndex] == this)
+//             {
+//                 target.Equipment[slotIndex] = null;
+//             }
+//         }
+//     }
+//     ApplyModifiers(target, false);
+//
+//     source?.Inventory.Add(this);
+//
+//     isUnequipped = true;
+//     return isUnequipped;
+// }
 
 public virtual void ApplyModifiers(IActor target, bool add)
 {
