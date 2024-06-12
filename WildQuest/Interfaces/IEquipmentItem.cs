@@ -13,4 +13,5 @@ public interface IEquipmentItem : IItem
     int RequiredLevel {get;set;}
     bool Equip(IActor? source, IActor? target);
     bool Unequip(IActor? source, IActor? target, EquipmentSlot slot);
+    void ApplyModifiers(IActor target, bool isEquipping);
 }

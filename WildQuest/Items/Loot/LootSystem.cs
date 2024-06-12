@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WildQuest.Interfaces;
+using WildQuest.Utility.Extensions.Random;
 
 namespace WildQuest.Items.Loot
 {

@@ -57,7 +57,7 @@ public class Player : CombatActor, IPlayer
         }
         else
         {
-            Equipment = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
+            Equipment = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length];
         }
         if (dropItems.Length > 0)
         {

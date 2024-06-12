@@ -5,6 +5,7 @@ using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using WildQuest.Enums;
 using WildQuest.Interfaces;
 using WildQuest.Messaging.Messages;
+using WildQuest.Utility.Extensions.Int;
 
 namespace WildQuest.Stats;
 
@@ -79,7 +80,7 @@ public class Leveling : ILeveling
     {
         Actor = actor;
         _currentLevel = ValidateLevel(level);
-        _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
+        _experience = ExperienceLevels[(_currentLevel + 1).Clamp(1, MaxLevel)];
     }
     
     public Leveling(IActor actor, int level = -1, long experience = -1)
@@ -99,7 +100,7 @@ public class Leveling : ILeveling
         else
         {
             _currentLevel = ValidateLevel(level);
-            _experience = experience == -1 ? ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)] : ValidateExperience(experience);
+            _experience = experience == -1 ? ExperienceLevels[(_currentLevel + 1).Clamp(1, MaxLevel)] : ValidateExperience(experience);
         }
     }
     
@@ -152,7 +153,7 @@ public class Leveling : ILeveling
     public virtual void SetLevel(int level)
     {
         CurrentLevel = level;
-        _experience = ExperienceLevels[int.Clamp(_currentLevel + 1, 1, MaxLevel)];
+        _experience = ExperienceLevels[(_currentLevel + 1).Clamp(1, MaxLevel)];
         MessageSystem.MessageManager.SendImmediate(MessageChannels.Level, new LevelingMessage(Actor, Experience, _currentLevel, LevelingType.SetLevel));
     }
 

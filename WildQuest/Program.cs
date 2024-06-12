@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using WildQuest.Actor;
 using WildQuest.Enemy;
 using WildQuest.Enums;
@@ -15,7 +16,7 @@ public static class Program
 		var player = new Player(
 			name: "Mony",
 			gender: Gender.Nonbinary,
-			characterClass: CharacterClassType.Freelancer,
+			characterClass: CharacterClassType.Mage,
 			actorStats: new ActorStats(
 				health: 100,
 				meleeAttack: 5,
@@ -29,9 +30,10 @@ public static class Program
 			gold: 0,
 			equipment:
 			[
+				(IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeClaws, 1),
 				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword, 1),
-				(IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
-				(IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
+				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
+				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1),
 				// (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1)
 				// (IWeaponItem)ItemDatabase.Items[ItemNames.BronzeDagger]
 			],
@@ -40,8 +42,34 @@ public static class Program
 				ItemDatabase.GetItems(ItemNames.WeakHealthPotion, 1),
 			]
 		);
+
+		Console.WriteLine(player);
+		var equippedWeapon = player.Equipment.OfType<IWeaponItem>().FirstOrDefault();
+		equippedWeapon?.Unequip(player,player, EquipmentSlot.TwoHanded);
+
+		Console.WriteLine(player);
+		var dagger = (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1);
+		dagger.Equip(player, player);
 		
-		player.Leveling.SetLevel(100);
+		Console.WriteLine(player);
+		var dagger2 = (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1);
+		dagger2.Equip(player, player);
+		
+		Console.WriteLine(player);
+		var bronzeSword = (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeSword, 1);
+		bronzeSword.Equip(player, player);
+
+		Console.WriteLine(player);
+		var bronzeShield = (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeShield, 1);
+		bronzeShield.Equip(player, player);
+		
+
+
+		Console.WriteLine(player);
+		var dagger3 = (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger, 1);
+		dagger3.Equip(player, player);
+		
+		// player.Leveling.SetLevel(100);
 
 		int killCount = 0;
 		while (player.IsAlive && killCount < 5)

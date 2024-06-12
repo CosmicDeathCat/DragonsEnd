@@ -24,7 +24,7 @@ public class Actor : IActor
     public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(1.00);
     public virtual DoubleStat CriticalHitMultiplier { get; set; } = new(1.5);
     public virtual CharacterClassType CharacterClass { get; set; }
-    public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length -1];
+    public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length -1];
     public virtual List<IItem?> Inventory { get; set; } = new();
     public GoldCurrency Gold { get; set; } = new(0);
     public virtual IActor? Target { get; set; }
@@ -114,7 +114,7 @@ public class Actor : IActor
         }
         else
         {
-            Equipment = new IEquipmentItem[Enum.GetNames<EquipmentSlot>().Length];
+            Equipment = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length];
         }
 
         if (dropItems.Length > 0)
