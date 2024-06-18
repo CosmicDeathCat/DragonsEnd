@@ -20,7 +20,8 @@ namespace DragonsEnd.Actor.Player
 {
     public class Player : Actor, IPlayer
     {
-        public Player(
+        public Player
+        (
             string name,
             Gender gender,
             CharacterClassType characterClass,
@@ -32,7 +33,8 @@ namespace DragonsEnd.Actor.Player
             long gold = 0,
             IEquipmentItem[]? equipment = null,
             List<IItem?>? inventory = null,
-            params IDropItem[] dropItems)
+            params IDropItem[] dropItems
+        )
         {
             Name = name;
             Gender = gender;

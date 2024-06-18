@@ -36,10 +36,23 @@ namespace DragonsEnd.Skills
             WoodcuttingSkill = new WoodcuttingSkill(name: "Woodcutting", actor: actor);
         }
 
-        public ActorSkills(IActor actor, MeleeSkill meleeSkill, RangedSkill rangedSkill, MagicSkill magicSkill, AlchemySkill alchemySkill,
-            CookingSkill cookingSkill, CraftingSkill craftingSkill, EnchantingSkill enchantingSkill, FishingSkill fishingSkill,
-            FletchingSkill fletchingSkill, ForagingSkill foragingSkill, MiningSkill miningSkill, SmithingSkill smithingSkill,
-            WoodcuttingSkill woodcuttingSkill)
+        public ActorSkills
+        (
+            IActor actor,
+            MeleeSkill meleeSkill,
+            RangedSkill rangedSkill,
+            MagicSkill magicSkill,
+            AlchemySkill alchemySkill,
+            CookingSkill cookingSkill,
+            CraftingSkill craftingSkill,
+            EnchantingSkill enchantingSkill,
+            FishingSkill fishingSkill,
+            FletchingSkill fletchingSkill,
+            ForagingSkill foragingSkill,
+            MiningSkill miningSkill,
+            SmithingSkill smithingSkill,
+            WoodcuttingSkill woodcuttingSkill
+        )
         {
             Actor = actor;
             MeleeSkill = meleeSkill;

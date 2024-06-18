@@ -25,7 +25,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Skills\Constants\"/>
-        <Folder Include="Skills\NonCombat\CraftingSkills\" />
-        <Folder Include="Skills\NonCombat\GatheringSkills\" />
+        <Folder Include="Skills\NonCombat\CraftingSkills\"/>
+        <Folder Include="Skills\NonCombat\GatheringSkills\"/>
     </ItemGroup>
 </Project>

@@ -32,11 +32,19 @@ namespace DragonsEnd.Actor.Interfaces
         void ItemMessageHandler(IMessageEnvelope message);
         void TakeDamage(IActor sourceActor, int damage);
 
-        (bool hasHit, bool isBlocked, bool hasKilled, int damage, bool isCriticalHit) Attack(IActor source,
-            IActor target);
+        (bool hasHit, bool isBlocked, bool hasKilled, int damage, bool isCriticalHit) Attack
+        (
+            IActor source,
+            IActor target
+        );
 
-        (bool hit, bool blocked, bool killed, int damage, bool isCriticalHit) HandleAttack(IActor source, IActor target,
-            int attackValue, int defenseValue);
+        (bool hit, bool blocked, bool killed, int damage, bool isCriticalHit) HandleAttack
+        (
+            IActor source,
+            IActor target,
+            int attackValue,
+            int defenseValue
+        );
 
         void Die();
         void IncreaseStatsForLevel(int level);

@@ -6,8 +6,17 @@ namespace DragonsEnd.Stats
     [Serializable]
     public class ActorStats
     {
-        public ActorStats(int health, int meleeAttack, int meleeDefense, int rangedAttack, int rangedDefense,
-            int magicAttack, int magicDefense, double criticalHitChance = 0.05)
+        public ActorStats
+        (
+            int health,
+            int meleeAttack,
+            int meleeDefense,
+            int rangedAttack,
+            int rangedDefense,
+            int magicAttack,
+            int magicDefense,
+            double criticalHitChance = 0.05
+        )
         {
             Health = new IntStat(baseValue: health);
             MeleeAttack = new IntStat(baseValue: meleeAttack);
@@ -19,8 +28,17 @@ namespace DragonsEnd.Stats
             CriticalHitChance = new DoubleStat(baseValue: criticalHitChance);
         }
 
-        public ActorStats(IntStat health, IntStat meleeAttack, IntStat meleeDefense, IntStat rangedAttack,
-            IntStat rangedDefense, IntStat magicAttack, IntStat magicDefense, DoubleStat criticalHitChance)
+        public ActorStats
+        (
+            IntStat health,
+            IntStat meleeAttack,
+            IntStat meleeDefense,
+            IntStat rangedAttack,
+            IntStat rangedDefense,
+            IntStat magicAttack,
+            IntStat magicDefense,
+            DoubleStat criticalHitChance
+        )
         {
             Health = health;
             MeleeAttack = meleeAttack;

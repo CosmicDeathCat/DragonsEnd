@@ -14,7 +14,8 @@ namespace DragonsEnd.Actor.Enemy
         {
         }
 
-        public BasicEnemy(
+        public BasicEnemy
+        (
             string name,
             Gender gender,
             CharacterClassType characterClass,
@@ -29,7 +30,8 @@ namespace DragonsEnd.Actor.Enemy
             long gold = 0,
             IEquipmentItem[]? equipment = null,
             IItem[]? inventory = null,
-            params IDropItem[] dropItems)
+            params IDropItem[] dropItems
+        )
             : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
                 criticalHitMultiplier: criticalHitMultiplier, level: level, experience: experience, gold: gold, equipment: equipment,

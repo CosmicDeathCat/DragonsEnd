@@ -50,8 +50,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Bronze Tier
                 [key: ItemNames.BronzeHelmet] = new ArmorItem(
                     name: ItemNames.BronzeHelmet,
-                    description:
-                    "A bronze helmet that provides 5 melee defense, 7 ranged defense and -2 magic defense.",
+                    description: "A bronze helmet that provides 5 melee defense, 7 ranged defense and -2 magic defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -69,8 +68,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.BronzeChestplate] = new ArmorItem(
                     name: ItemNames.BronzeChestplate,
-                    description:
-                    "A bronze chestplate that provides 10 melee defense, 15 ranged defense and -5 magic defense.",
+                    description: "A bronze chestplate that provides 10 melee defense, 15 ranged defense and -5 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -216,8 +214,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Iron Tier
                 [key: ItemNames.IronHelmet] = new ArmorItem(
                     name: ItemNames.IronHelmet,
-                    description:
-                    "An iron helmet that provides 10 melee defense, 14 ranged defense and -4 magic defense.",
+                    description: "An iron helmet that provides 10 melee defense, 14 ranged defense and -4 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -235,8 +232,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.IronChestplate] = new ArmorItem(
                     name: ItemNames.IronChestplate,
-                    description:
-                    "An iron chestplate that provides 20 melee defense, 30 ranged defense and -10 magic defense.",
+                    description: "An iron chestplate that provides 20 melee defense, 30 ranged defense and -10 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -290,8 +286,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.IronShield] = new ArmorItem(
                     name: ItemNames.IronShield,
-                    description:
-                    "An iron shield that provides 10 melee defense, 14 ranged defense and -4 magic defense.",
+                    description: "An iron shield that provides 10 melee defense, 14 ranged defense and -4 magic defense.",
                     price: 150,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -384,8 +379,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Steel Tier
                 [key: ItemNames.SteelHelmet] = new ArmorItem(
                     name: ItemNames.SteelHelmet,
-                    description:
-                    "A steel helmet that provides 20 melee defense, 28 ranged defense and -8 magic defense.",
+                    description: "A steel helmet that provides 20 melee defense, 28 ranged defense and -8 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -403,8 +397,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SteelChestplate] = new ArmorItem(
                     name: ItemNames.SteelChestplate,
-                    description:
-                    "A steel chestplate that provides 40 melee defense, 60 ranged defense and -20 magic defense.",
+                    description: "A steel chestplate that provides 40 melee defense, 60 ranged defense and -20 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -422,8 +415,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SteelGauntlets] = new ArmorItem(
                     name: ItemNames.SteelGauntlets,
-                    description:
-                    "Steel gauntlets that provide 12 melee defense, 16 ranged defense and -4 magic defense.",
+                    description: "Steel gauntlets that provide 12 melee defense, 16 ranged defense and -4 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -441,8 +433,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SteelGreaves] = new ArmorItem(
                     name: ItemNames.SteelGreaves,
-                    description:
-                    "Steel greaves that provide 28 melee defense, 36 ranged defense and -12 magic defense.",
+                    description: "Steel greaves that provide 28 melee defense, 36 ranged defense and -12 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -460,8 +451,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SteelShield] = new ArmorItem(
                     name: ItemNames.SteelShield,
-                    description:
-                    "A steel shield that provides 20 melee defense, 28 ranged defense and -8 magic defense.",
+                    description: "A steel shield that provides 20 melee defense, 28 ranged defense and -8 magic defense.",
                     price: 300,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -554,8 +544,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Mithril Tier
                 [key: ItemNames.MithrilHelmet] = new ArmorItem(
                     name: ItemNames.MithrilHelmet,
-                    description:
-                    "A mithril helmet that provides 40 melee defense, 56 ranged defense and -16 magic defense.",
+                    description: "A mithril helmet that provides 40 melee defense, 56 ranged defense and -16 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -573,8 +562,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MithrilChestplate] = new ArmorItem(
                     name: ItemNames.MithrilChestplate,
-                    description:
-                    "A mithril chestplate that provides 80 melee defense, 120 ranged defense and -40 magic defense.",
+                    description: "A mithril chestplate that provides 80 melee defense, 120 ranged defense and -40 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -592,8 +580,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MithrilGauntlets] = new ArmorItem(
                     name: ItemNames.MithrilGauntlets,
-                    description:
-                    "Mithril gauntlets that provide 24 melee defense, 32 ranged defense and -8 magic defense.",
+                    description: "Mithril gauntlets that provide 24 melee defense, 32 ranged defense and -8 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -611,8 +598,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MithrilGreaves] = new ArmorItem(
                     name: ItemNames.MithrilGreaves,
-                    description:
-                    "Mithril greaves that provide 56 melee defense, 72 ranged defense and -24 magic defense.",
+                    description: "Mithril greaves that provide 56 melee defense, 72 ranged defense and -24 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -630,8 +616,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MithrilShield] = new ArmorItem(
                     name: ItemNames.MithrilShield,
-                    description:
-                    "A mithril shield that provides 40 melee defense, 56 ranged defense and -16 magic defense.",
+                    description: "A mithril shield that provides 40 melee defense, 56 ranged defense and -16 magic defense.",
                     price: 600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -723,8 +708,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Adamantium Tier
                 [key: ItemNames.AdamantiumHelmet] = new ArmorItem(
                     name: ItemNames.AdamantiumHelmet,
-                    description:
-                    "An adamantium helmet that provides 80 melee defense, 112 ranged defense and -32 magic defense.",
+                    description: "An adamantium helmet that provides 80 melee defense, 112 ranged defense and -32 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -742,8 +726,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AdamantiumChestplate] = new ArmorItem(
                     name: ItemNames.AdamantiumChestplate,
-                    description:
-                    "An adamantium chestplate that provides 160 melee defense, 240 ranged defense and -80 magic defense.",
+                    description: "An adamantium chestplate that provides 160 melee defense, 240 ranged defense and -80 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -761,8 +744,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AdamantiumGauntlets] = new ArmorItem(
                     name: ItemNames.AdamantiumGauntlets,
-                    description:
-                    "Adamantium gauntlets that provide 48 melee defense, 64 ranged defense and -16 magic defense.",
+                    description: "Adamantium gauntlets that provide 48 melee defense, 64 ranged defense and -16 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -780,8 +762,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AdamantiumGreaves] = new ArmorItem(
                     name: ItemNames.AdamantiumGreaves,
-                    description:
-                    "Adamantium greaves that provide 112 melee defense, 144 ranged defense and -48 magic defense.",
+                    description: "Adamantium greaves that provide 112 melee defense, 144 ranged defense and -48 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -799,8 +780,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AdamantiumShield] = new ArmorItem(
                     name: ItemNames.AdamantiumShield,
-                    description:
-                    "An adamantium shield that provides 80 melee defense, 112 ranged defense and -32 magic defense.",
+                    description: "An adamantium shield that provides 80 melee defense, 112 ranged defense and -32 magic defense.",
                     price: 1200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -892,8 +872,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Orichalcum Tier
                 [key: ItemNames.OrichalcumHelmet] = new ArmorItem(
                     name: ItemNames.OrichalcumHelmet,
-                    description:
-                    "An orichalcum helmet that provides 160 melee defense, 224 ranged defense and -64 magic defense.",
+                    description: "An orichalcum helmet that provides 160 melee defense, 224 ranged defense and -64 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -911,8 +890,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OrichalcumChestplate] = new ArmorItem(
                     name: ItemNames.OrichalcumChestplate,
-                    description:
-                    "An orichalcum chestplate that provides 320 melee defense, 480 ranged defense and -160 magic defense.",
+                    description: "An orichalcum chestplate that provides 320 melee defense, 480 ranged defense and -160 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -930,8 +908,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OrichalcumGauntlets] = new ArmorItem(
                     name: ItemNames.OrichalcumGauntlets,
-                    description:
-                    "Orichalcum gauntlets that provide 96 melee defense, 128 ranged defense and -32 magic defense.",
+                    description: "Orichalcum gauntlets that provide 96 melee defense, 128 ranged defense and -32 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -949,8 +926,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OrichalcumGreaves] = new ArmorItem(
                     name: ItemNames.OrichalcumGreaves,
-                    description:
-                    "Orichalcum greaves that provide 224 melee defense, 288 ranged defense and -96 magic defense.",
+                    description: "Orichalcum greaves that provide 224 melee defense, 288 ranged defense and -96 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -968,8 +944,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OrichalcumShield] = new ArmorItem(
                     name: ItemNames.OrichalcumShield,
-                    description:
-                    "An orichalcum shield that provides 160 melee defense, 224 ranged defense and -64 magic defense.",
+                    description: "An orichalcum shield that provides 160 melee defense, 224 ranged defense and -64 magic defense.",
                     price: 2400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1061,8 +1036,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - DarkSteel Tier
                 [key: ItemNames.DarkSteelHelmet] = new ArmorItem(
                     name: ItemNames.DarkSteelHelmet,
-                    description:
-                    "A DarkSteel helmet that provides 320 melee defense, 448 ranged defense and -128 magic defense.",
+                    description: "A DarkSteel helmet that provides 320 melee defense, 448 ranged defense and -128 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -1080,8 +1054,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DarkSteelChestplate] = new ArmorItem(
                     name: ItemNames.DarkSteelChestplate,
-                    description:
-                    "A DarkSteel chestplate that provides 640 melee defense, 960 ranged defense and -320 magic defense.",
+                    description: "A DarkSteel chestplate that provides 640 melee defense, 960 ranged defense and -320 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1099,8 +1072,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DarkSteelGauntlets] = new ArmorItem(
                     name: ItemNames.DarkSteelGauntlets,
-                    description:
-                    "DarkSteel gauntlets that provide 192 melee defense, 256 ranged defense and -64 magic defense.",
+                    description: "DarkSteel gauntlets that provide 192 melee defense, 256 ranged defense and -64 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1118,8 +1090,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DarkSteelGreaves] = new ArmorItem(
                     name: ItemNames.DarkSteelGreaves,
-                    description:
-                    "DarkSteel greaves that provide 448 melee defense, 576 ranged defense and -192 magic defense.",
+                    description: "DarkSteel greaves that provide 448 melee defense, 576 ranged defense and -192 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1137,8 +1108,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DarkSteelShield] = new ArmorItem(
                     name: ItemNames.DarkSteelShield,
-                    description:
-                    "A DarkSteel shield that provides 320 melee defense, 448 ranged defense and -128 magic defense.",
+                    description: "A DarkSteel shield that provides 320 melee defense, 448 ranged defense and -128 magic defense.",
                     price: 4800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1230,8 +1200,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - SunSteel Tier
                 [key: ItemNames.SunSteelHelmet] = new ArmorItem(
                     name: ItemNames.SunSteelHelmet,
-                    description:
-                    "A SunSteel helmet that provides 640 melee defense, 896 ranged defense and -256 magic defense.",
+                    description: "A SunSteel helmet that provides 640 melee defense, 896 ranged defense and -256 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -1249,8 +1218,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SunSteelChestplate] = new ArmorItem(
                     name: ItemNames.SunSteelChestplate,
-                    description:
-                    "A SunSteel chestplate that provides 1280 melee defense, 1920 ranged defense and -640 magic defense.",
+                    description: "A SunSteel chestplate that provides 1280 melee defense, 1920 ranged defense and -640 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1268,8 +1236,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SunSteelGauntlets] = new ArmorItem(
                     name: ItemNames.SunSteelGauntlets,
-                    description:
-                    "SunSteel gauntlets that provide 384 melee defense, 512 ranged defense and -128 magic defense.",
+                    description: "SunSteel gauntlets that provide 384 melee defense, 512 ranged defense and -128 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1287,8 +1254,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SunSteelGreaves] = new ArmorItem(
                     name: ItemNames.SunSteelGreaves,
-                    description:
-                    "SunSteel greaves that provide 896 melee defense, 1152 ranged defense and -384 magic defense.",
+                    description: "SunSteel greaves that provide 896 melee defense, 1152 ranged defense and -384 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1306,8 +1272,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SunSteelShield] = new ArmorItem(
                     name: ItemNames.SunSteelShield,
-                    description:
-                    "A SunSteel shield that provides 640 melee defense, 896 ranged defense and -256 magic defense.",
+                    description: "A SunSteel shield that provides 640 melee defense, 896 ranged defense and -256 magic defense.",
                     price: 9600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1399,8 +1364,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Celestial Tier
                 [key: ItemNames.CelestialHelmet] = new ArmorItem(
                     name: ItemNames.CelestialHelmet,
-                    description:
-                    "A Celestial helmet that provides 1280 melee defense, 1792 ranged defense and -512 magic defense.",
+                    description: "A Celestial helmet that provides 1280 melee defense, 1792 ranged defense and -512 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -1418,8 +1382,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CelestialChestplate] = new ArmorItem(
                     name: ItemNames.CelestialChestplate,
-                    description:
-                    "A Celestial chestplate that provides 2560 melee defense, 3840 ranged defense and -1280 magic defense.",
+                    description: "A Celestial chestplate that provides 2560 melee defense, 3840 ranged defense and -1280 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1437,8 +1400,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CelestialGauntlets] = new ArmorItem(
                     name: ItemNames.CelestialGauntlets,
-                    description:
-                    "Celestial gauntlets that provide 768 melee defense, 1024 ranged defense and -256 magic defense.",
+                    description: "Celestial gauntlets that provide 768 melee defense, 1024 ranged defense and -256 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1456,8 +1418,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CelestialGreaves] = new ArmorItem(
                     name: ItemNames.CelestialGreaves,
-                    description:
-                    "Celestial greaves that provide 1792 melee defense, 2304 ranged defense and -768 magic defense.",
+                    description: "Celestial greaves that provide 1792 melee defense, 2304 ranged defense and -768 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1475,8 +1436,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CelestialShield] = new ArmorItem(
                     name: ItemNames.CelestialShield,
-                    description:
-                    "A Celestial shield that provides 1280 melee defense, 1792 ranged defense and -512 magic defense.",
+                    description: "A Celestial shield that provides 1280 melee defense, 1792 ranged defense and -512 magic defense.",
                     price: 19200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1567,8 +1527,7 @@ namespace DragonsEnd.Items.Database
                 // Melee Gear - Dragon Tier
                 [key: ItemNames.DragonHelmet] = new ArmorItem(
                     name: ItemNames.DragonHelmet,
-                    description:
-                    "A Dragon helmet that provides 2560 melee defense, 3584 ranged defense and -1024 magic defense.",
+                    description: "A Dragon helmet that provides 2560 melee defense, 3584 ranged defense and -1024 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -1586,8 +1545,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DragonChestplate] = new ArmorItem(
                     name: ItemNames.DragonChestplate,
-                    description:
-                    "A Dragon chestplate that provides 5120 melee defense, 7680 ranged defense and -2560 magic defense.",
+                    description: "A Dragon chestplate that provides 5120 melee defense, 7680 ranged defense and -2560 magic defense.",
                     price: 51200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1605,8 +1563,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DragonGauntlets] = new ArmorItem(
                     name: ItemNames.DragonGauntlets,
-                    description:
-                    "Dragon gauntlets that provide 1536 melee defense, 2048 ranged defense and -512 magic defense.",
+                    description: "Dragon gauntlets that provide 1536 melee defense, 2048 ranged defense and -512 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1624,8 +1581,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DragonGreaves] = new ArmorItem(
                     name: ItemNames.DragonGreaves,
-                    description:
-                    "Dragon greaves that provide 3584 melee defense, 4608 ranged defense and -1536 magic defense.",
+                    description: "Dragon greaves that provide 3584 melee defense, 4608 ranged defense and -1536 magic defense.",
                     price: 51200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1643,8 +1599,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DragonShield] = new ArmorItem(
                     name: ItemNames.DragonShield,
-                    description:
-                    "A Dragon shield that provides 2560 melee defense, 3584 ranged defense and -1024 magic defense.",
+                    description: "A Dragon shield that provides 2560 melee defense, 3584 ranged defense and -1024 magic defense.",
                     price: 38400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1736,13 +1691,12 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Feeble Tier
                 [key: ItemNames.FeebleFeatherCap] = new ArmorItem(
                     name: ItemNames.FeebleFeatherCap,
-                    description:
-                    "A feeble feather cap that provides 5 ranged defense, 7 magic defense, and -2 melee defense.",
+                    description: "A feeble feather cap that provides 5 ranged defense, 7 magic defense, and -2 melee defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
                     stats: new ActorStats(health: 0, meleeAttack: 0, meleeDefense: -2, rangedAttack: 0,
-                        rangedDefense: 5, magicAttack: 0, magicDefense: 7),
+                        rangedDefense: 5, magicAttack: 0, magicDefense: 7), /**/
                     combatStyle: CombatStyle.Ranged,
                     armorType: ArmorType.Light,
                     damageReductionMultiplier: 1.00,
@@ -1755,8 +1709,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.FeebleLeatherVest] = new ArmorItem(
                     name: ItemNames.FeebleLeatherVest,
-                    description:
-                    "A feeble leather vest that provides 10 ranged defense, 15 magic defense, and -5 melee defense.",
+                    description: "A feeble leather vest that provides 10 ranged defense, 15 magic defense, and -5 melee defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1774,8 +1727,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.FeebleLeatherGloves] = new ArmorItem(
                     name: ItemNames.FeebleLeatherGloves,
-                    description:
-                    "Feeble leather gloves that provide 3 ranged defense, 4 magic defense, and -1 melee defense.",
+                    description: "Feeble leather gloves that provide 3 ranged defense, 4 magic defense, and -1 melee defense.",
                     price: 25,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1793,8 +1745,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.FeebleLeatherBoots] = new ArmorItem(
                     name: ItemNames.FeebleLeatherBoots,
-                    description:
-                    "Feeble leather boots that provide 7 ranged defense, 9 magic defense, and -3 melee defense.",
+                    description: "Feeble leather boots that provide 7 ranged defense, 9 magic defense, and -3 melee defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1812,8 +1763,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.FeebleBuckler] = new ArmorItem(
                     name: ItemNames.FeebleBuckler,
-                    description:
-                    "A feeble buckler that provides 5 ranged defense, 7 magic defense, and -2 melee defense.",
+                    description: "A feeble buckler that provides 5 ranged defense, 7 magic defense, and -2 melee defense.",
                     price: 75,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -1905,8 +1855,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Weak Tier
                 [key: ItemNames.WeakFeatherCap] = new ArmorItem(
                     name: ItemNames.WeakFeatherCap,
-                    description:
-                    "A weak feather cap that provides 10 ranged defense, 14 magic defense, and -4 melee defense.",
+                    description: "A weak feather cap that provides 10 ranged defense, 14 magic defense, and -4 melee defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -1924,8 +1873,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WeakLeatherVest] = new ArmorItem(
                     name: ItemNames.WeakLeatherVest,
-                    description:
-                    "A weak leather vest that provides 20 ranged defense, 30 magic defense, and -10 melee defense.",
+                    description: "A weak leather vest that provides 20 ranged defense, 30 magic defense, and -10 melee defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -1943,8 +1891,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WeakLeatherGloves] = new ArmorItem(
                     name: ItemNames.WeakLeatherGloves,
-                    description:
-                    "Weak leather gloves that provide 6 ranged defense, 8 magic defense, and -2 melee defense.",
+                    description: "Weak leather gloves that provide 6 ranged defense, 8 magic defense, and -2 melee defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -1962,8 +1909,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WeakLeatherBoots] = new ArmorItem(
                     name: ItemNames.WeakLeatherBoots,
-                    description:
-                    "Weak leather boots that provide 14 ranged defense, 18 magic defense, and -6 melee defense.",
+                    description: "Weak leather boots that provide 14 ranged defense, 18 magic defense, and -6 melee defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -1981,8 +1927,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WeakBuckler] = new ArmorItem(
                     name: ItemNames.WeakBuckler,
-                    description:
-                    "A weak buckler that provides 10 ranged defense, 14 magic defense, and -4 melee defense.",
+                    description: "A weak buckler that provides 10 ranged defense, 14 magic defense, and -4 melee defense.",
                     price: 150,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2074,8 +2019,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Strong Tier
                 [key: ItemNames.StrongFeatherCap] = new ArmorItem(
                     name: ItemNames.StrongFeatherCap,
-                    description:
-                    "A strong feather cap that provides 20 ranged defense, 28 magic defense, and -8 melee defense.",
+                    description: "A strong feather cap that provides 20 ranged defense, 28 magic defense, and -8 melee defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2093,8 +2037,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.StrongLeatherVest] = new ArmorItem(
                     name: ItemNames.StrongLeatherVest,
-                    description:
-                    "A strong leather vest that provides 40 ranged defense, 60 magic defense, and -20 melee defense.",
+                    description: "A strong leather vest that provides 40 ranged defense, 60 magic defense, and -20 melee defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2112,8 +2055,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.StrongLeatherGloves] = new ArmorItem(
                     name: ItemNames.StrongLeatherGloves,
-                    description:
-                    "Strong leather gloves that provide 12 ranged defense, 16 magic defense, and -4 melee defense.",
+                    description: "Strong leather gloves that provide 12 ranged defense, 16 magic defense, and -4 melee defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2131,8 +2073,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.StrongLeatherBoots] = new ArmorItem(
                     name: ItemNames.StrongLeatherBoots,
-                    description:
-                    "Strong leather boots that provide 28 ranged defense, 36 magic defense, and -12 melee defense.",
+                    description: "Strong leather boots that provide 28 ranged defense, 36 magic defense, and -12 melee defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2150,8 +2091,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.StrongBuckler] = new ArmorItem(
                     name: ItemNames.StrongBuckler,
-                    description:
-                    "A strong buckler that provides 20 ranged defense, 28 magic defense, and -8 melee defense.",
+                    description: "A strong buckler that provides 20 ranged defense, 28 magic defense, and -8 melee defense.",
                     price: 300,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2243,8 +2183,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Reinforced Tier
                 [key: ItemNames.ReinforcedFeatherCap] = new ArmorItem(
                     name: ItemNames.ReinforcedFeatherCap,
-                    description:
-                    "A reinforced feather cap that provides 40 ranged defense, 56 magic defense, and -16 melee defense.",
+                    description: "A reinforced feather cap that provides 40 ranged defense, 56 magic defense, and -16 melee defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2262,8 +2201,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ReinforcedLeatherVest] = new ArmorItem(
                     name: ItemNames.ReinforcedLeatherVest,
-                    description:
-                    "A reinforced leather vest that provides 80 ranged defense, 120 magic defense, and -40 melee defense.",
+                    description: "A reinforced leather vest that provides 80 ranged defense, 120 magic defense, and -40 melee defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2281,8 +2219,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ReinforcedLeatherGloves] = new ArmorItem(
                     name: ItemNames.ReinforcedLeatherGloves,
-                    description:
-                    "Reinforced leather gloves that provide 24 ranged defense, 32 magic defense, and -8 melee defense.",
+                    description: "Reinforced leather gloves that provide 24 ranged defense, 32 magic defense, and -8 melee defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2300,8 +2237,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ReinforcedLeatherBoots] = new ArmorItem(
                     name: ItemNames.ReinforcedLeatherBoots,
-                    description:
-                    "Reinforced leather boots that provide 56 ranged defense, 72 magic defense, and -24 melee defense.",
+                    description: "Reinforced leather boots that provide 56 ranged defense, 72 magic defense, and -24 melee defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2319,8 +2255,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ReinforcedBuckler] = new ArmorItem(
                     name: ItemNames.ReinforcedBuckler,
-                    description:
-                    "A reinforced buckler that provides 40 ranged defense, 56 magic defense, and -16 melee defense.",
+                    description: "A reinforced buckler that provides 40 ranged defense, 56 magic defense, and -16 melee defense.",
                     price: 600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2412,8 +2347,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Hardened Tier
                 [key: ItemNames.HardenedFeatherCap] = new ArmorItem(
                     name: ItemNames.HardenedFeatherCap,
-                    description:
-                    "A hardened feather cap that provides 80 ranged defense, 112 magic defense, and -32 melee defense.",
+                    description: "A hardened feather cap that provides 80 ranged defense, 112 magic defense, and -32 melee defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2431,8 +2365,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.HardenedLeatherVest] = new ArmorItem(
                     name: ItemNames.HardenedLeatherVest,
-                    description:
-                    "A hardened leather vest that provides 160 ranged defense, 240 magic defense, and -80 melee defense.",
+                    description: "A hardened leather vest that provides 160 ranged defense, 240 magic defense, and -80 melee defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2450,8 +2383,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.HardenedLeatherGloves] = new ArmorItem(
                     name: ItemNames.HardenedLeatherGloves,
-                    description:
-                    "Hardened leather gloves that provide 48 ranged defense, 64 magic defense, and -16 melee defense.",
+                    description: "Hardened leather gloves that provide 48 ranged defense, 64 magic defense, and -16 melee defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2469,8 +2401,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.HardenedLeatherBoots] = new ArmorItem(
                     name: ItemNames.HardenedLeatherBoots,
-                    description:
-                    "Hardened leather boots that provide 112 ranged defense, 144 magic defense, and -48 melee defense.",
+                    description: "Hardened leather boots that provide 112 ranged defense, 144 magic defense, and -48 melee defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2488,8 +2419,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.HardenedBuckler] = new ArmorItem(
                     name: ItemNames.HardenedBuckler,
-                    description:
-                    "A hardened buckler that provides 80 ranged defense, 112 magic defense, and -32 melee defense.",
+                    description: "A hardened buckler that provides 80 ranged defense, 112 magic defense, and -32 melee defense.",
                     price: 1200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2581,8 +2511,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Sharpshooter Tier
                 [key: ItemNames.SharpshooterFeatherCap] = new ArmorItem(
                     name: ItemNames.SharpshooterFeatherCap,
-                    description:
-                    "A sharpshooter feather cap that provides 160 ranged defense, 224 magic defense, and -64 melee defense.",
+                    description: "A sharpshooter feather cap that provides 160 ranged defense, 224 magic defense, and -64 melee defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2600,8 +2529,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SharpshooterLeatherVest] = new ArmorItem(
                     name: ItemNames.SharpshooterLeatherVest,
-                    description:
-                    "A sharpshooter leather vest that provides 320 ranged defense, 480 magic defense, and -160 melee defense.",
+                    description: "A sharpshooter leather vest that provides 320 ranged defense, 480 magic defense, and -160 melee defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2619,8 +2547,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SharpshooterLeatherGloves] = new ArmorItem(
                     name: ItemNames.SharpshooterLeatherGloves,
-                    description:
-                    "Sharpshooter leather gloves that provide 96 ranged defense, 128 magic defense, and -32 melee defense.",
+                    description: "Sharpshooter leather gloves that provide 96 ranged defense, 128 magic defense, and -32 melee defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2638,8 +2565,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SharpshooterLeatherBoots] = new ArmorItem(
                     name: ItemNames.SharpshooterLeatherBoots,
-                    description:
-                    "Sharpshooter leather boots that provide 224 ranged defense, 288 magic defense, and -96 melee defense.",
+                    description: "Sharpshooter leather boots that provide 224 ranged defense, 288 magic defense, and -96 melee defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2657,8 +2583,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.SharpshooterBuckler] = new ArmorItem(
                     name: ItemNames.SharpshooterBuckler,
-                    description:
-                    "A sharpshooter buckler that provides 160 ranged defense, 224 magic defense, and -64 melee defense.",
+                    description: "A sharpshooter buckler that provides 160 ranged defense, 224 magic defense, and -64 melee defense.",
                     price: 2400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2750,8 +2675,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Precision Tier
                 [key: ItemNames.PrecisionFeatherCap] = new ArmorItem(
                     name: ItemNames.PrecisionFeatherCap,
-                    description:
-                    "A precision feather cap that provides 320 ranged defense, 448 magic defense, and -128 melee defense.",
+                    description: "A precision feather cap that provides 320 ranged defense, 448 magic defense, and -128 melee defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2769,8 +2693,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PrecisionLeatherVest] = new ArmorItem(
                     name: ItemNames.PrecisionLeatherVest,
-                    description:
-                    "A precision leather vest that provides 640 ranged defense, 960 magic defense, and -320 melee defense.",
+                    description: "A precision leather vest that provides 640 ranged defense, 960 magic defense, and -320 melee defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2788,8 +2711,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PrecisionLeatherGloves] = new ArmorItem(
                     name: ItemNames.PrecisionLeatherGloves,
-                    description:
-                    "Precision leather gloves that provide 192 ranged defense, 256 magic defense, and -64 melee defense.",
+                    description: "Precision leather gloves that provide 192 ranged defense, 256 magic defense, and -64 melee defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2807,8 +2729,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PrecisionLeatherBoots] = new ArmorItem(
                     name: ItemNames.PrecisionLeatherBoots,
-                    description:
-                    "Precision leather boots that provide 448 ranged defense, 576 magic defense, and -192 melee defense.",
+                    description: "Precision leather boots that provide 448 ranged defense, 576 magic defense, and -192 melee defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2826,8 +2747,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PrecisionBuckler] = new ArmorItem(
                     name: ItemNames.PrecisionBuckler,
-                    description:
-                    "A precision buckler that provides 320 ranged defense, 448 magic defense, and -128 melee defense.",
+                    description: "A precision buckler that provides 320 ranged defense, 448 magic defense, and -128 melee defense.",
                     price: 4800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -2919,8 +2839,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Marksman Tier
                 [key: ItemNames.MarksmanFeatherCap] = new ArmorItem(
                     name: ItemNames.MarksmanFeatherCap,
-                    description:
-                    "A marksman feather cap that provides 640 ranged defense, 896 magic defense, and -256 melee defense.",
+                    description: "A marksman feather cap that provides 640 ranged defense, 896 magic defense, and -256 melee defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -2938,8 +2857,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MarksmanLeatherVest] = new ArmorItem(
                     name: ItemNames.MarksmanLeatherVest,
-                    description:
-                    "A marksman leather vest that provides 1280 ranged defense, 1920 magic defense, and -640 melee defense.",
+                    description: "A marksman leather vest that provides 1280 ranged defense, 1920 magic defense, and -640 melee defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -2957,8 +2875,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MarksmanLeatherGloves] = new ArmorItem(
                     name: ItemNames.MarksmanLeatherGloves,
-                    description:
-                    "Marksman leather gloves that provide 384 ranged defense, 512 magic defense, and -128 melee defense.",
+                    description: "Marksman leather gloves that provide 384 ranged defense, 512 magic defense, and -128 melee defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -2976,8 +2893,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MarksmanLeatherBoots] = new ArmorItem(
                     name: ItemNames.MarksmanLeatherBoots,
-                    description:
-                    "Marksman leather boots that provide 896 ranged defense, 1152 magic defense, and -384 melee defense.",
+                    description: "Marksman leather boots that provide 896 ranged defense, 1152 magic defense, and -384 melee defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -2995,8 +2911,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MarksmanBuckler] = new ArmorItem(
                     name: ItemNames.MarksmanBuckler,
-                    description:
-                    "A marksman buckler that provides 640 ranged defense, 896 magic defense, and -256 melee defense.",
+                    description: "A marksman buckler that provides 640 ranged defense, 896 magic defense, and -256 melee defense.",
                     price: 9600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -3088,8 +3003,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Phantom Tier
                 [key: ItemNames.PhantomFeatherCap] = new ArmorItem(
                     name: ItemNames.PhantomFeatherCap,
-                    description:
-                    "A phantom feather cap that provides 1280 ranged defense, 1792 magic defense, and -512 melee defense.",
+                    description: "A phantom feather cap that provides 1280 ranged defense, 1792 magic defense, and -512 melee defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3107,8 +3021,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PhantomLeatherVest] = new ArmorItem(
                     name: ItemNames.PhantomLeatherVest,
-                    description:
-                    "A phantom leather vest that provides 2560 ranged defense, 3840 magic defense, and -1280 melee defense.",
+                    description: "A phantom leather vest that provides 2560 ranged defense, 3840 magic defense, and -1280 melee defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -3126,8 +3039,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PhantomLeatherGloves] = new ArmorItem(
                     name: ItemNames.PhantomLeatherGloves,
-                    description:
-                    "Phantom leather gloves that provide 768 ranged defense, 1024 magic defense, and -256 melee defense.",
+                    description: "Phantom leather gloves that provide 768 ranged defense, 1024 magic defense, and -256 melee defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3145,8 +3057,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PhantomLeatherBoots] = new ArmorItem(
                     name: ItemNames.PhantomLeatherBoots,
-                    description:
-                    "Phantom leather boots that provide 1792 ranged defense, 2304 magic defense, and -768 melee defense.",
+                    description: "Phantom leather boots that provide 1792 ranged defense, 2304 magic defense, and -768 melee defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -3164,8 +3075,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.PhantomBuckler] = new ArmorItem(
                     name: ItemNames.PhantomBuckler,
-                    description:
-                    "A phantom buckler that provides 1280 ranged defense, 1792 magic defense, and -512 melee defense.",
+                    description: "A phantom buckler that provides 1280 ranged defense, 1792 magic defense, and -512 melee defense.",
                     price: 19200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -3257,8 +3167,7 @@ namespace DragonsEnd.Items.Database
                 // Ranged Gear - Crystal Tier
                 [key: ItemNames.CrystalFeatherCap] = new ArmorItem(
                     name: ItemNames.CrystalFeatherCap,
-                    description:
-                    "A crystal feather cap that provides 2560 ranged defense, 3584 magic defense, and -1024 melee defense.",
+                    description: "A crystal feather cap that provides 2560 ranged defense, 3584 magic defense, and -1024 melee defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3276,8 +3185,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CrystalLeatherVest] = new ArmorItem(
                     name: ItemNames.CrystalLeatherVest,
-                    description:
-                    "A crystal leather vest that provides 5120 ranged defense, 7680 magic defense, and -2560 melee defense.",
+                    description: "A crystal leather vest that provides 5120 ranged defense, 7680 magic defense, and -2560 melee defense.",
                     price: 51200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -3295,8 +3203,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CrystalLeatherGloves] = new ArmorItem(
                     name: ItemNames.CrystalLeatherGloves,
-                    description:
-                    "Crystal leather gloves that provide 1536 ranged defense, 2048 magic defense, and -512 melee defense.",
+                    description: "Crystal leather gloves that provide 1536 ranged defense, 2048 magic defense, and -512 melee defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3314,8 +3221,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CrystalLeatherBoots] = new ArmorItem(
                     name: ItemNames.CrystalLeatherBoots,
-                    description:
-                    "Crystal leather boots that provide 3584 ranged defense, 4608 magic defense, and -1536 melee defense.",
+                    description: "Crystal leather boots that provide 3584 ranged defense, 4608 magic defense, and -1536 melee defense.",
                     price: 51200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -3333,8 +3239,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.CrystalBuckler] = new ArmorItem(
                     name: ItemNames.CrystalBuckler,
-                    description:
-                    "A crystal buckler that provides 2560 ranged defense, 3584 magic defense, and -1024 melee defense.",
+                    description: "A crystal buckler that provides 2560 ranged defense, 3584 magic defense, and -1024 melee defense.",
                     price: 38400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.OffHand },
@@ -3426,8 +3331,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Old Tier
                 [key: ItemNames.OldMagicHat] = new ArmorItem(
                     name: ItemNames.OldMagicHat,
-                    description:
-                    "An old magic hat that provides 7 melee defense, -2 ranged defense, and 5 magic defense.",
+                    description: "An old magic hat that provides 7 melee defense, -2 ranged defense, and 5 magic defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3463,8 +3367,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OldMagicGloves] = new ArmorItem(
                     name: ItemNames.OldMagicGloves,
-                    description:
-                    "Old magic gloves that provide 4 melee defense, -1 ranged defense, and 3 magic defense.",
+                    description: "Old magic gloves that provide 4 melee defense, -1 ranged defense, and 3 magic defense.",
                     price: 25,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3482,8 +3385,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.OldMagicBoots] = new ArmorItem(
                     name: ItemNames.OldMagicBoots,
-                    description:
-                    "Old magic boots that provide 9 melee defense, -3 ranged defense, and 7 magic defense.",
+                    description: "Old magic boots that provide 9 melee defense, -3 ranged defense, and 7 magic defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -3575,8 +3477,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Worn Tier
                 [key: ItemNames.WornMagicHat] = new ArmorItem(
                     name: ItemNames.WornMagicHat,
-                    description:
-                    "A worn magic hat that provides 14 melee defense, -4 ranged defense, and 10 magic defense.",
+                    description: "A worn magic hat that provides 14 melee defense, -4 ranged defense, and 10 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3612,8 +3513,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WornMagicGloves] = new ArmorItem(
                     name: ItemNames.WornMagicGloves,
-                    description:
-                    "Worn magic gloves that provide 8 melee defense, -2 ranged defense, and 6 magic defense.",
+                    description: "Worn magic gloves that provide 8 melee defense, -2 ranged defense, and 6 magic defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3631,8 +3531,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WornMagicBoots] = new ArmorItem(
                     name: ItemNames.WornMagicBoots,
-                    description:
-                    "Worn magic boots that provide 18 melee defense, -6 ranged defense, and 14 magic defense.",
+                    description: "Worn magic boots that provide 18 melee defense, -6 ranged defense, and 14 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -3724,8 +3623,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Worn Tier
                 [key: ItemNames.WornMagicHat] = new ArmorItem(
                     name: ItemNames.WornMagicHat,
-                    description:
-                    "A worn magic hat that provides 14 melee defense, -4 ranged defense, and 10 magic defense.",
+                    description: "A worn magic hat that provides 14 melee defense, -4 ranged defense, and 10 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3761,8 +3659,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WornMagicGloves] = new ArmorItem(
                     name: ItemNames.WornMagicGloves,
-                    description:
-                    "Worn magic gloves that provide 8 melee defense, -2 ranged defense, and 6 magic defense.",
+                    description: "Worn magic gloves that provide 8 melee defense, -2 ranged defense, and 6 magic defense.",
                     price: 50,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3780,8 +3677,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.WornMagicBoots] = new ArmorItem(
                     name: ItemNames.WornMagicBoots,
-                    description:
-                    "Worn magic boots that provide 18 melee defense, -6 ranged defense, and 14 magic defense.",
+                    description: "Worn magic boots that provide 18 melee defense, -6 ranged defense, and 14 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -3873,8 +3769,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Enchanted Tier
                 [key: ItemNames.EnchantedMagicHat] = new ArmorItem(
                     name: ItemNames.EnchantedMagicHat,
-                    description:
-                    "An enchanted magic hat that provides 28 melee defense, -8 ranged defense, and 20 magic defense.",
+                    description: "An enchanted magic hat that provides 28 melee defense, -8 ranged defense, and 20 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -3892,8 +3787,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EnchantedRobes] = new ArmorItem(
                     name: ItemNames.EnchantedRobes,
-                    description:
-                    "Enchanted robes that provide 60 melee defense, -20 ranged defense, and 40 magic defense.",
+                    description: "Enchanted robes that provide 60 melee defense, -20 ranged defense, and 40 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -3911,8 +3805,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EnchantedMagicGloves] = new ArmorItem(
                     name: ItemNames.EnchantedMagicGloves,
-                    description:
-                    "Enchanted magic gloves that provide 16 melee defense, -4 ranged defense, and 12 magic defense.",
+                    description: "Enchanted magic gloves that provide 16 melee defense, -4 ranged defense, and 12 magic defense.",
                     price: 100,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -3930,8 +3823,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EnchantedMagicBoots] = new ArmorItem(
                     name: ItemNames.EnchantedMagicBoots,
-                    description:
-                    "Enchanted magic boots that provide 36 melee defense, -12 ranged defense, and 28 magic defense.",
+                    description: "Enchanted magic boots that provide 36 melee defense, -12 ranged defense, and 28 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4024,8 +3916,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Arcane Tier
                 [key: ItemNames.ArcaneMagicHat] = new ArmorItem(
                     name: ItemNames.ArcaneMagicHat,
-                    description:
-                    "An arcane magic hat that provides 56 melee defense, -16 ranged defense, and 40 magic defense.",
+                    description: "An arcane magic hat that provides 56 melee defense, -16 ranged defense, and 40 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4043,8 +3934,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ArcaneRobes] = new ArmorItem(
                     name: ItemNames.ArcaneRobes,
-                    description:
-                    "Arcane robes that provide 120 melee defense, -40 ranged defense, and 80 magic defense.",
+                    description: "Arcane robes that provide 120 melee defense, -40 ranged defense, and 80 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4062,8 +3952,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ArcaneMagicGloves] = new ArmorItem(
                     name: ItemNames.ArcaneMagicGloves,
-                    description:
-                    "Arcane magic gloves that provide 32 melee defense, -8 ranged defense, and 24 magic defense.",
+                    description: "Arcane magic gloves that provide 32 melee defense, -8 ranged defense, and 24 magic defense.",
                     price: 200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4081,8 +3970,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.ArcaneMagicBoots] = new ArmorItem(
                     name: ItemNames.ArcaneMagicBoots,
-                    description:
-                    "Arcane magic boots that provide 72 melee defense, -24 ranged defense, and 56 magic defense.",
+                    description: "Arcane magic boots that provide 72 melee defense, -24 ranged defense, and 56 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4174,8 +4062,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Ancient Tier
                 [key: ItemNames.AncientMagicHat] = new ArmorItem(
                     name: ItemNames.AncientMagicHat,
-                    description:
-                    "An ancient magic hat that provides 112 melee defense, -32 ranged defense, and 80 magic defense.",
+                    description: "An ancient magic hat that provides 112 melee defense, -32 ranged defense, and 80 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4193,8 +4080,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AncientRobes] = new ArmorItem(
                     name: ItemNames.AncientRobes,
-                    description:
-                    "Ancient robes that provide 240 melee defense, -80 ranged defense, and 160 magic defense.",
+                    description: "Ancient robes that provide 240 melee defense, -80 ranged defense, and 160 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4212,8 +4098,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AncientMagicGloves] = new ArmorItem(
                     name: ItemNames.AncientMagicGloves,
-                    description:
-                    "Ancient magic gloves that provide 64 melee defense, -16 ranged defense, and 48 magic defense.",
+                    description: "Ancient magic gloves that provide 64 melee defense, -16 ranged defense, and 48 magic defense.",
                     price: 400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4231,8 +4116,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.AncientMagicBoots] = new ArmorItem(
                     name: ItemNames.AncientMagicBoots,
-                    description:
-                    "Ancient magic boots that provide 144 melee defense, -48 ranged defense, and 112 magic defense.",
+                    description: "Ancient magic boots that provide 144 melee defense, -48 ranged defense, and 112 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4325,8 +4209,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Eldritch Tier
                 [key: ItemNames.EldritchMagicHat] = new ArmorItem(
                     name: ItemNames.EldritchMagicHat,
-                    description:
-                    "An eldritch magic hat that provides 224 melee defense, -64 ranged defense, and 160 magic defense.",
+                    description: "An eldritch magic hat that provides 224 melee defense, -64 ranged defense, and 160 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4344,8 +4227,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EldritchRobes] = new ArmorItem(
                     name: ItemNames.EldritchRobes,
-                    description:
-                    "Eldritch robes that provide 480 melee defense, -160 ranged defense, and 320 magic defense.",
+                    description: "Eldritch robes that provide 480 melee defense, -160 ranged defense, and 320 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4363,8 +4245,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EldritchMagicGloves] = new ArmorItem(
                     name: ItemNames.EldritchMagicGloves,
-                    description:
-                    "Eldritch magic gloves that provide 128 melee defense, -32 ranged defense, and 96 magic defense.",
+                    description: "Eldritch magic gloves that provide 128 melee defense, -32 ranged defense, and 96 magic defense.",
                     price: 800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4382,8 +4263,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EldritchMagicBoots] = new ArmorItem(
                     name: ItemNames.EldritchMagicBoots,
-                    description:
-                    "Eldritch magic boots that provide 288 melee defense, -96 ranged defense, and 224 magic defense.",
+                    description: "Eldritch magic boots that provide 288 melee defense, -96 ranged defense, and 224 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4475,8 +4355,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Divine Tier
                 [key: ItemNames.DivineMagicHat] = new ArmorItem(
                     name: ItemNames.DivineMagicHat,
-                    description:
-                    "A divine magic hat that provides 448 melee defense, -128 ranged defense, and 320 magic defense.",
+                    description: "A divine magic hat that provides 448 melee defense, -128 ranged defense, and 320 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4494,8 +4373,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DivineRobes] = new ArmorItem(
                     name: ItemNames.DivineRobes,
-                    description:
-                    "Divine robes that provide 960 melee defense, -320 ranged defense, and 640 magic defense.",
+                    description: "Divine robes that provide 960 melee defense, -320 ranged defense, and 640 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4513,8 +4391,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DivineMagicGloves] = new ArmorItem(
                     name: ItemNames.DivineMagicGloves,
-                    description:
-                    "Divine magic gloves that provide 256 melee defense, -64 ranged defense, and 192 magic defense.",
+                    description: "Divine magic gloves that provide 256 melee defense, -64 ranged defense, and 192 magic defense.",
                     price: 1600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4532,8 +4409,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.DivineMagicBoots] = new ArmorItem(
                     name: ItemNames.DivineMagicBoots,
-                    description:
-                    "Divine magic boots that provide 576 melee defense, -192 ranged defense, and 448 magic defense.",
+                    description: "Divine magic boots that provide 576 melee defense, -192 ranged defense, and 448 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4625,8 +4501,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Runic Tier
                 [key: ItemNames.RunicMagicHat] = new ArmorItem(
                     name: ItemNames.RunicMagicHat,
-                    description:
-                    "A runic magic hat that provides 896 melee defense, -256 ranged defense, and 640 magic defense.",
+                    description: "A runic magic hat that provides 896 melee defense, -256 ranged defense, and 640 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4644,8 +4519,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.RunicRobes] = new ArmorItem(
                     name: ItemNames.RunicRobes,
-                    description:
-                    "Runic robes that provide 1920 melee defense, -640 ranged defense, and 1280 magic defense.",
+                    description: "Runic robes that provide 1920 melee defense, -640 ranged defense, and 1280 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4663,8 +4537,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.RunicMagicGloves] = new ArmorItem(
                     name: ItemNames.RunicMagicGloves,
-                    description:
-                    "Runic magic gloves that provide 512 melee defense, -128 ranged defense, and 384 magic defense.",
+                    description: "Runic magic gloves that provide 512 melee defense, -128 ranged defense, and 384 magic defense.",
                     price: 3200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4682,8 +4555,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.RunicMagicBoots] = new ArmorItem(
                     name: ItemNames.RunicMagicBoots,
-                    description:
-                    "Runic magic boots that provide 1152 melee defense, -384 ranged defense, and 896 magic defense.",
+                    description: "Runic magic boots that provide 1152 melee defense, -384 ranged defense, and 896 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4775,8 +4647,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Ethereal Tier
                 [key: ItemNames.EtherealMagicHat] = new ArmorItem(
                     name: ItemNames.EtherealMagicHat,
-                    description:
-                    "An ethereal magic hat that provides 1792 melee defense, -512 ranged defense, and 1280 magic defense.",
+                    description: "An ethereal magic hat that provides 1792 melee defense, -512 ranged defense, and 1280 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4794,8 +4665,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EtherealRobes] = new ArmorItem(
                     name: ItemNames.EtherealRobes,
-                    description:
-                    "Ethereal robes that provide 3840 melee defense, -1280 ranged defense, and 2560 magic defense.",
+                    description: "Ethereal robes that provide 3840 melee defense, -1280 ranged defense, and 2560 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4813,8 +4683,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EtherealMagicGloves] = new ArmorItem(
                     name: ItemNames.EtherealMagicGloves,
-                    description:
-                    "Ethereal magic gloves that provide 1024 melee defense, -256 ranged defense, and 768 magic defense.",
+                    description: "Ethereal magic gloves that provide 1024 melee defense, -256 ranged defense, and 768 magic defense.",
                     price: 6400,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4832,8 +4701,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.EtherealMagicBoots] = new ArmorItem(
                     name: ItemNames.EtherealMagicBoots,
-                    description:
-                    "Ethereal magic boots that provide 2304 melee defense, -768 ranged defense, and 1792 magic defense.",
+                    description: "Ethereal magic boots that provide 2304 melee defense, -768 ranged defense, and 1792 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },
@@ -4925,8 +4793,7 @@ namespace DragonsEnd.Items.Database
                 // Mage Gear - Mystic Tier
                 [key: ItemNames.MysticMagicHat] = new ArmorItem(
                     name: ItemNames.MysticMagicHat,
-                    description:
-                    "A mystic magic hat that provides 3584 melee defense, -1024 ranged defense, and 2560 magic defense.",
+                    description: "A mystic magic hat that provides 3584 melee defense, -1024 ranged defense, and 2560 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Head },
@@ -4944,8 +4811,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MysticRobes] = new ArmorItem(
                     name: ItemNames.MysticRobes,
-                    description:
-                    "Mystic robes that provide 7680 melee defense, -2560 ranged defense, and 5120 magic defense.",
+                    description: "Mystic robes that provide 7680 melee defense, -2560 ranged defense, and 5120 magic defense.",
                     price: 51200,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Body },
@@ -4963,8 +4829,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MysticMagicGloves] = new ArmorItem(
                     name: ItemNames.MysticMagicGloves,
-                    description:
-                    "Mystic magic gloves that provide 2048 melee defense, -512 ranged defense, and 1536 magic defense.",
+                    description: "Mystic magic gloves that provide 2048 melee defense, -512 ranged defense, and 1536 magic defense.",
                     price: 12800,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Hands },
@@ -4982,8 +4847,7 @@ namespace DragonsEnd.Items.Database
                 ),
                 [key: ItemNames.MysticMagicBoots] = new ArmorItem(
                     name: ItemNames.MysticMagicBoots,
-                    description:
-                    "Mystic magic boots that provide 4608 melee defense, -1536 ranged defense, and 3584 magic defense.",
+                    description: "Mystic magic boots that provide 4608 melee defense, -1536 ranged defense, and 3584 magic defense.",
                     price: 25600,
                     type: ItemType.NonConsumable,
                     slots: new List<EquipmentSlot> { EquipmentSlot.Feet },

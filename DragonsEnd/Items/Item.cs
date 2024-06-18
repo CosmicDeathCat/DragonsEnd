@@ -11,9 +11,16 @@ namespace DragonsEnd.Items
     [Serializable]
     public class Item : IItem
     {
-        public Item(string name, string description, long price, ItemType type, bool stackable = true,
+        public Item
+        (
+            string name,
+            string description,
+            long price,
+            ItemType type,
+            bool stackable = true,
             long quantity = 1,
-            double dropRate = 1)
+            double dropRate = 1
+        )
         {
             Name = name;
             Description = description;

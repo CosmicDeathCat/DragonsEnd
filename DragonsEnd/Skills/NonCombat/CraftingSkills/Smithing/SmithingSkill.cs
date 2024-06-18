@@ -180,7 +180,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing
                 new BasicSkillUnlock(name: ItemNames.DragonClaws, description: "You can now smith Dragon Claws!"),
                 new BasicSkillUnlock(name: ItemNames.DragonGreatSword, description: "You can now smith Dragon GreatSwords!"),
                 new BasicSkillUnlock(name: ItemNames.CrystalThrowingKnife, description: "You can now smith Crystal Throwing Knives!")
-            },
+            }
         };
     }
 }

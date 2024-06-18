@@ -69,7 +69,6 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Mining
             {
                 new BasicSkillUnlock(name: MiningTitles.ElderMiner, description: "You've earned the title of Elder Miner!"),
                 new BasicSkillUnlock(name: OreNames.DragoniteOre, description: "You can now mine Dragonite Ore!")
-
             }
         };
     }

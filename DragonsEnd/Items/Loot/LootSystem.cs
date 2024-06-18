@@ -12,14 +12,16 @@ namespace DragonsEnd.Items.Loot
 {
     public class LootSystem
     {
-        public static (long gold, long experience, List<IItem> items) GenerateLoot(
+        public static (long gold, long experience, List<IItem> items) GenerateLoot
+        (
             long minItemAmountDrop,
             long maxItemAmountDrop,
             long minGold,
             long maxGold,
             long minExperience,
             long maxExperience,
-            params IDropItem[] lootableItems)
+            params IDropItem[] lootableItems
+        )
         {
             var rnd = new Random();
             var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
@@ -52,7 +54,8 @@ namespace DragonsEnd.Items.Loot
             return (gold, experience, items);
         }
 
-        public static (long gold, long experience, List<IItem> items) GenerateLoot(
+        public static (long gold, long experience, List<IItem> items) GenerateLoot
+        (
             ILootable lootedObject,
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,
@@ -60,7 +63,8 @@ namespace DragonsEnd.Items.Loot
             long maxGold = -1L,
             long minExperience = -1L,
             long maxExperience = -1L,
-            params IDropItem[] specificLootableItems)
+            params IDropItem[] specificLootableItems
+        )
         {
             var lootableItems = specificLootableItems.ToList();
             lootableItems.AddRange(collection: lootedObject.DropItems);

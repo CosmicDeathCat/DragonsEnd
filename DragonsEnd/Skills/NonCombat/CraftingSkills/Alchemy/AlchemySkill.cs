@@ -19,7 +19,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
             [key: 1] = new List<ILockable>
             {
                 new BasicSkillUnlock(name: ItemNames.WeakHealthPotion, description: "You can now brew Weak Health Potions!", isLocked: false),
-                new BasicSkillUnlock(name: ItemNames.WeakManaPotion, description: "You can now brew Weak Mana Potions!",isLocked: false),
+                new BasicSkillUnlock(name: ItemNames.WeakManaPotion, description: "You can now brew Weak Mana Potions!", isLocked: false),
                 new BasicSkillUnlock(name: ItemNames.WeakActionPotion, description: "You can now brew Weak Action Potions!", isLocked: false)
             },
             [key: 10] = new List<ILockable>
@@ -110,6 +110,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
                 new BasicSkillUnlock(name: ItemNames.ElixirOfLife, description: "You can now brew Elixirs of Life!"),
                 new BasicSkillUnlock(name: ItemNames.ElixirOfPower, description: "You can now brew Elixirs of Power!"),
                 new BasicSkillUnlock(name: ItemNames.ElixerOfResilience, description: "You can now brew Elixirs of Resilience!"),
+                new BasicSkillUnlock(name: ItemNames.ElixerOfTheAncients, description: "You can now brew Elixirs of the Ancients!"),
                 new BasicSkillUnlock(name: ItemNames.PhoenixDown, description: "You can now create Phoenix Downs!")
             }
         };

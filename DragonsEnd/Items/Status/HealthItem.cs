@@ -12,8 +12,17 @@ namespace DragonsEnd.Items.Status
     [Serializable]
     public class HealthItem : Item, IHealthItem
     {
-        public HealthItem(string name, string description, long price, ItemType type, int healPercentage,
-            bool stackable = true, long quantity = 1, double dropRate = 1) : base(name: name, description: description, price: price, type: type,
+        public HealthItem
+        (
+            string name,
+            string description,
+            long price,
+            ItemType type,
+            int healPercentage,
+            bool stackable = true,
+            long quantity = 1,
+            double dropRate = 1
+        ) : base(name: name, description: description, price: price, type: type,
             stackable: stackable,
             quantity: quantity, dropRate: dropRate)
         {

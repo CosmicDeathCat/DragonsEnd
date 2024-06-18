@@ -71,11 +71,7 @@ namespace DragonsEnd.Leveling
 
         public IActor Actor { get; set; }
 
-        public virtual int CurrentLevel
-        {
-            get => _currentLevel;
-            set => _currentLevel = ValidateLevel(level: value);
-        }
+        public virtual int CurrentLevel { get => _currentLevel; set => _currentLevel = ValidateLevel(level: value); }
 
         public virtual int MaxLevel
         {
@@ -280,8 +276,12 @@ namespace DragonsEnd.Leveling
             return $"Level: {CurrentLevel}, Experience: {Experience}/{nextLevelExperience}";
         }
 
-        public static Dictionary<int, long> GenerateExperienceLevels(int maxLevel = 100, long baseExperience = 50,
-            double exponent = 1.25)
+        public static Dictionary<int, long> GenerateExperienceLevels
+        (
+            int maxLevel = 100,
+            long baseExperience = 50,
+            double exponent = 1.25
+        )
         {
             var levels = new Dictionary<int, long>();
 

@@ -205,7 +205,7 @@ namespace DragonsEnd.Items.Constants
         public const string AscendantSword = "Ascendant Sword";
         public const string AscendantClaws = "Ascendant Claws";
         public const string AscendantGreatSword = "Ascendant GreatSword";
-        
+
         // Melee Gear - Dragon Tier
         public const string DragonHelmet = "Dragon Helmet";
         public const string DragonChestplate = "Dragon Chestplate";

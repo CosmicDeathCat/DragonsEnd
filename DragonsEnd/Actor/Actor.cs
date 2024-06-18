@@ -44,7 +44,8 @@ namespace DragonsEnd.Actor
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
-        public Actor(
+        public Actor
+        (
             string name,
             Gender gender,
             CharacterClassType characterClass,
@@ -58,7 +59,8 @@ namespace DragonsEnd.Actor
             long gold = 0L,
             IEquipmentItem[]? equipment = null,
             IItem[]? inventory = null,
-            params IDropItem[] dropItems)
+            params IDropItem[] dropItems
+        )
         {
             Name = name;
             Gender = gender;
@@ -276,9 +278,11 @@ namespace DragonsEnd.Actor
             Console.WriteLine(value: $"Magic Defense: {oldMagicDefense} -> {ActorStats.MagicDefense.BaseValue}");
         }
 
-        public virtual (bool hasHit, bool isBlocked, bool hasKilled, int damage, bool isCriticalHit) Attack(
+        public virtual (bool hasHit, bool isBlocked, bool hasKilled, int damage, bool isCriticalHit) Attack
+        (
             IActor source,
-            IActor target)
+            IActor target
+        )
         {
             Target = target;
 
@@ -322,9 +326,13 @@ namespace DragonsEnd.Actor
             return (hit, blocked, killed, damage, isCriticalHit);
         }
 
-        public virtual (bool hit, bool blocked, bool killed, int damage, bool isCriticalHit) HandleAttack(IActor source,
+        public virtual (bool hit, bool blocked, bool killed, int damage, bool isCriticalHit) HandleAttack
+        (
+            IActor source,
             IActor target,
-            int attackValue, int defenseValue)
+            int attackValue,
+            int defenseValue
+        )
         {
             Target = target;
 
@@ -413,14 +421,16 @@ namespace DragonsEnd.Actor
         }
 
 
-        public virtual LootContainer Loot(
+        public virtual LootContainer Loot
+        (
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
             long minExperience = -1L,
             long maxExperience = -1L,
-            params IDropItem[] specificLootableItems)
+            params IDropItem[] specificLootableItems
+        )
         {
             var loot = LootSystem.GenerateLoot(
                 lootedObject: this,

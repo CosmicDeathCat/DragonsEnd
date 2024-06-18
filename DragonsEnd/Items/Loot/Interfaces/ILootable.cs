@@ -11,13 +11,15 @@ namespace DragonsEnd.Items.Loot.Interfaces
         GoldCurrency Gold { get; set; }
         ILeveling Leveling { get; set; }
 
-        LootContainer Loot(
+        LootContainer Loot
+        (
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
             long minExperience = -1L,
             long maxExperience = -1L,
-            params IDropItem[] specificLootableItems);
+            params IDropItem[] specificLootableItems
+        );
     }
 }

@@ -11,10 +11,21 @@ namespace DragonsEnd.Items.Equipment
     [Serializable]
     public class EquipmentItem : Item, IEquipmentItem
     {
-        public EquipmentItem(string name, string description, long price, ItemType type, List<EquipmentSlot> slots,
-            ActorStats stats, GearTier gearTier,
-            CharacterClassType allowedClasses, int requiredLevel, bool stackable = true, long quantity = 1,
-            double dropRate = 1)
+        public EquipmentItem
+        (
+            string name,
+            string description,
+            long price,
+            ItemType type,
+            List<EquipmentSlot> slots,
+            ActorStats stats,
+            GearTier gearTier,
+            CharacterClassType allowedClasses,
+            int requiredLevel,
+            bool stackable = true,
+            long quantity = 1,
+            double dropRate = 1
+        )
             : base(name: name, description: description, price: price, type: type, stackable: stackable, quantity: quantity, dropRate: dropRate)
         {
             Slots = slots;
