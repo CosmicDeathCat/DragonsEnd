@@ -24,7 +24,8 @@
         <PackageReference Include="DLS.MessageSystem" Version="2.1.0"/>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Skills\Combat\Interfaces\"/>
-        <Folder Include="Skills\NonCombat\Interfaces\"/>
+        <Folder Include="Skills\Constants\"/>
+        <Folder Include="Skills\NonCombat\CraftingSkills\" />
+        <Folder Include="Skills\NonCombat\GatheringSkills\" />
     </ItemGroup>
 </Project>

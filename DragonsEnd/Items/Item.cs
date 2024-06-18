@@ -4,7 +4,7 @@ using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Interfaces;
-using DragonsEnd.Messaging.Messages;
+using DragonsEnd.Items.Messages;
 
 namespace DragonsEnd.Items
 {
@@ -25,6 +25,7 @@ namespace DragonsEnd.Items
         }
 
         public virtual string Name { get; set; }
+        public virtual Guid ID { get; set; } = Guid.NewGuid();
         public virtual string Description { get; set; }
         public virtual long Price { get; set; }
         public virtual ItemType Type { get; set; }
@@ -35,12 +36,13 @@ namespace DragonsEnd.Items
 
         public virtual void Use(IActor? source, IActor? target)
         {
-            MessageSystem.MessageManager.SendImmediate(MessageChannels.Items, new ItemMessage(this, source, target));
+            MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
+                message: new ItemMessage(item: this, source: source, target: target));
         }
 
         public virtual IItem Copy()
         {
-            return new Item(Name, Description, Price, Type, Stackable, Quantity);
+            return new Item(name: Name, description: Description, price: Price, type: Type, stackable: Stackable, quantity: Quantity);
         }
     }
 }

@@ -30,8 +30,10 @@ namespace DragonsEnd.Actor.Enemy
             IEquipmentItem[]? equipment = null,
             IItem[]? inventory = null,
             params IDropItem[] dropItems)
-            : base(name, gender, characterClass, actorStats, combatStyle, damageMultiplier, damageReductionMultiplier,
-                criticalHitMultiplier, level, experience, gold, equipment, inventory, dropItems)
+            : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, combatStyle: combatStyle,
+                damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
+                criticalHitMultiplier: criticalHitMultiplier, level: level, experience: experience, gold: gold, equipment: equipment,
+                inventory: inventory, dropItems: dropItems)
         {
             EnemyTier = enemyTier;
         }
@@ -41,24 +43,24 @@ namespace DragonsEnd.Actor.Enemy
         public override IActor Copy()
         {
             return new BasicEnemy(
-                Name,
-                Gender,
-                CharacterClass,
-                new ActorStats(
-                    ActorStats.Health.BaseValue,
-                    ActorStats.MeleeAttack.BaseValue,
-                    ActorStats.MeleeDefense.BaseValue,
-                    ActorStats.RangedAttack.BaseValue,
-                    ActorStats.RangedDefense.BaseValue,
-                    ActorStats.MagicAttack.BaseValue,
-                    ActorStats.MagicDefense.BaseValue,
-                    ActorStats.CriticalHitChance.BaseValue),
-                CombatStyle,
-                EnemyTier,
-                Leveling.CurrentLevel,
-                Leveling.Experience,
-                DamageMultiplier.CurrentValue,
-                DamageReductionMultiplier.CurrentValue,
+                name: Name,
+                gender: Gender,
+                characterClass: CharacterClass,
+                actorStats: new ActorStats(
+                    health: ActorStats.Health.BaseValue,
+                    meleeAttack: ActorStats.MeleeAttack.BaseValue,
+                    meleeDefense: ActorStats.MeleeDefense.BaseValue,
+                    rangedAttack: ActorStats.RangedAttack.BaseValue,
+                    rangedDefense: ActorStats.RangedDefense.BaseValue,
+                    magicAttack: ActorStats.MagicAttack.BaseValue,
+                    magicDefense: ActorStats.MagicDefense.BaseValue,
+                    criticalHitChance: ActorStats.CriticalHitChance.BaseValue),
+                combatStyle: CombatStyle,
+                enemyTier: EnemyTier,
+                level: Leveling.CurrentLevel,
+                experience: Leveling.Experience,
+                damageMultiplier: DamageMultiplier.CurrentValue,
+                damageReductionMultiplier: DamageReductionMultiplier.CurrentValue,
                 gold: Gold.CurrentValue,
                 equipment: Equipment!,
                 inventory: Inventory?.ToArray()!,

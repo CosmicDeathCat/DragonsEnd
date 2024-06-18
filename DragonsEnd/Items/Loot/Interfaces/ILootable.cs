@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DragonsEnd.Items.Currency;
 using DragonsEnd.Items.Drops.Interfaces;
-using DragonsEnd.Stats.Leveling.Interfaces;
+using DragonsEnd.Leveling.Interfaces;
 
 namespace DragonsEnd.Items.Loot.Interfaces
 {

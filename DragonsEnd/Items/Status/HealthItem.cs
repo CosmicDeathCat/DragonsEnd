@@ -4,8 +4,8 @@ using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Items.Messages;
 using DragonsEnd.Items.Status.Interfaces;
-using DragonsEnd.Messaging.Messages;
 
 namespace DragonsEnd.Items.Status
 {
@@ -13,9 +13,9 @@ namespace DragonsEnd.Items.Status
     public class HealthItem : Item, IHealthItem
     {
         public HealthItem(string name, string description, long price, ItemType type, int healPercentage,
-            bool stackable = true, long quantity = 1, double dropRate = 1) : base(name, description, price, type,
-            stackable,
-            quantity, dropRate)
+            bool stackable = true, long quantity = 1, double dropRate = 1) : base(name: name, description: description, price: price, type: type,
+            stackable: stackable,
+            quantity: quantity, dropRate: dropRate)
         {
             HealPercentage = healPercentage;
         }
@@ -37,18 +37,20 @@ namespace DragonsEnd.Items.Status
                     Quantity--;
                     if (Quantity <= 0)
                     {
-                        source?.Inventory.Remove(this);
+                        source?.Inventory.Remove(item: this);
                     }
 
                     break;
             }
 
-            MessageSystem.MessageManager.SendImmediate(MessageChannels.Items, new ItemMessage(this, source, target));
+            MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
+                message: new ItemMessage(item: this, source: source, target: target));
         }
 
         public override IItem Copy()
         {
-            return new HealthItem(Name, Description, Price, Type, HealPercentage, Stackable, Quantity);
+            return new HealthItem(name: Name, description: Description, price: Price, type: Type, healPercentage: HealPercentage,
+                stackable: Stackable, quantity: Quantity);
         }
     }
 }

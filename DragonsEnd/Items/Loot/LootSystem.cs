@@ -22,9 +22,9 @@ namespace DragonsEnd.Items.Loot
             params IDropItem[] lootableItems)
         {
             var rnd = new Random();
-            var gold = rnd.NextInt64(minGold, maxGold + 1);
-            var experience = rnd.NextInt64(minExperience, maxExperience + 1);
-            var itemAmount = rnd.NextInt64(minItemAmountDrop, maxItemAmountDrop + 1);
+            var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
+            var experience = rnd.NextInt64(minValue: minExperience, maxValue: maxExperience + 1);
+            var itemAmount = rnd.NextInt64(minValue: minItemAmountDrop, maxValue: maxItemAmountDrop + 1);
             var items = new List<IItem>();
 
             for (var i = 0; i < itemAmount; i++)
@@ -32,10 +32,10 @@ namespace DragonsEnd.Items.Loot
                 var cumulativeProbability = 0.0;
                 var diceRoll = rnd.NextDouble();
 
-                foreach (var dropItem in lootableItems.OrderBy(x => x.DropRate))
+                foreach (var dropItem in lootableItems.OrderBy(keySelector: x => x.DropRate))
                 {
                     cumulativeProbability += dropItem.DropRate;
-                    if (items.Exists(x => x.Name.Equals(dropItem.Item.Name, StringComparison.OrdinalIgnoreCase)))
+                    if (items.Exists(match: x => x.Name.Equals(value: dropItem.Item.Name, comparisonType: StringComparison.OrdinalIgnoreCase)))
                     {
                         continue;
                     }
@@ -43,7 +43,7 @@ namespace DragonsEnd.Items.Loot
                     if (diceRoll <= cumulativeProbability)
                     {
                         var item = dropItem.Item.Copy();
-                        items.Add(item);
+                        items.Add(item: item);
                         break;
                     }
                 }
@@ -63,7 +63,7 @@ namespace DragonsEnd.Items.Loot
             params IDropItem[] specificLootableItems)
         {
             var lootableItems = specificLootableItems.ToList();
-            lootableItems.AddRange(lootedObject.DropItems);
+            lootableItems.AddRange(collection: lootedObject.DropItems);
 
             if (lootableItems.Count == 0)
             {
@@ -77,7 +77,7 @@ namespace DragonsEnd.Items.Loot
                             continue;
                         }
 
-                        lootableItems.Add(new DropItem(item, item.DropRate));
+                        lootableItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                     }
 
                     foreach (var item in actor.Equipment)
@@ -87,7 +87,7 @@ namespace DragonsEnd.Items.Loot
                             continue;
                         }
 
-                        lootableItems.Add(new DropItem(item, item.DropRate));
+                        lootableItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                     }
                 }
             }
@@ -124,13 +124,13 @@ namespace DragonsEnd.Items.Loot
             }
 
             return GenerateLoot(
-                minItemAmountDrop,
-                maxItemAmountDrop,
-                minGold,
-                maxGold,
-                minExperience,
-                maxExperience,
-                lootableItems.ToArray());
+                minItemAmountDrop: minItemAmountDrop,
+                maxItemAmountDrop: maxItemAmountDrop,
+                minGold: minGold,
+                maxGold: maxGold,
+                minExperience: minExperience,
+                maxExperience: maxExperience,
+                lootableItems: lootableItems.ToArray());
         }
     }
 }

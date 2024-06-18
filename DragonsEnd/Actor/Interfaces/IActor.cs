@@ -2,7 +2,6 @@
 using System.Numerics;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Enums;
-using DragonsEnd.Items.Currency;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;

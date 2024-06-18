@@ -9,14 +9,14 @@ namespace DragonsEnd.Stats
         public ActorStats(int health, int meleeAttack, int meleeDefense, int rangedAttack, int rangedDefense,
             int magicAttack, int magicDefense, double criticalHitChance = 0.05)
         {
-            Health = new IntStat(health);
-            MeleeAttack = new IntStat(meleeAttack);
-            RangedAttack = new IntStat(rangedAttack);
-            MagicAttack = new IntStat(magicAttack);
-            MeleeDefense = new IntStat(meleeDefense);
-            RangedDefense = new IntStat(rangedDefense);
-            MagicDefense = new IntStat(magicDefense);
-            CriticalHitChance = new DoubleStat(criticalHitChance);
+            Health = new IntStat(baseValue: health);
+            MeleeAttack = new IntStat(baseValue: meleeAttack);
+            RangedAttack = new IntStat(baseValue: rangedAttack);
+            MagicAttack = new IntStat(baseValue: magicAttack);
+            MeleeDefense = new IntStat(baseValue: meleeDefense);
+            RangedDefense = new IntStat(baseValue: rangedDefense);
+            MagicDefense = new IntStat(baseValue: magicDefense);
+            CriticalHitChance = new DoubleStat(baseValue: criticalHitChance);
         }
 
         public ActorStats(IntStat health, IntStat meleeAttack, IntStat meleeDefense, IntStat rangedAttack,
@@ -43,58 +43,58 @@ namespace DragonsEnd.Stats
 
         public static ActorStats operator +(ActorStats a, ActorStats b)
         {
-            return new ActorStats(a.Health + b.Health, a.MeleeAttack + b.MeleeAttack,
-                a.MeleeDefense + b.MeleeDefense, a.RangedAttack + b.RangedAttack,
-                a.RangedDefense + b.RangedDefense, a.MagicAttack + b.MagicAttack,
-                a.MagicDefense + b.MagicDefense, a.CriticalHitChance + b.CriticalHitChance);
+            return new ActorStats(health: a.Health + b.Health, meleeAttack: a.MeleeAttack + b.MeleeAttack,
+                meleeDefense: a.MeleeDefense + b.MeleeDefense, rangedAttack: a.RangedAttack + b.RangedAttack,
+                rangedDefense: a.RangedDefense + b.RangedDefense, magicAttack: a.MagicAttack + b.MagicAttack,
+                magicDefense: a.MagicDefense + b.MagicDefense, criticalHitChance: a.CriticalHitChance + b.CriticalHitChance);
         }
 
         public static ActorStats operator -(ActorStats a, ActorStats b)
         {
-            return new ActorStats(a.Health - b.Health, a.MeleeAttack - b.MeleeAttack,
-                a.MeleeDefense - b.MeleeDefense, a.RangedAttack - b.RangedAttack,
-                a.RangedDefense - b.RangedDefense, a.MagicAttack - b.MagicAttack,
-                a.MagicDefense - b.MagicDefense, a.CriticalHitChance - b.CriticalHitChance);
+            return new ActorStats(health: a.Health - b.Health, meleeAttack: a.MeleeAttack - b.MeleeAttack,
+                meleeDefense: a.MeleeDefense - b.MeleeDefense, rangedAttack: a.RangedAttack - b.RangedAttack,
+                rangedDefense: a.RangedDefense - b.RangedDefense, magicAttack: a.MagicAttack - b.MagicAttack,
+                magicDefense: a.MagicDefense - b.MagicDefense, criticalHitChance: a.CriticalHitChance - b.CriticalHitChance);
         }
 
         public static ActorStats operator *(ActorStats a, ActorStats b)
         {
-            return new ActorStats(a.Health * b.Health, a.MeleeAttack * b.MeleeAttack,
-                a.MeleeDefense * b.MeleeDefense, a.RangedAttack * b.RangedAttack,
-                a.RangedDefense * b.RangedDefense, a.MagicAttack * b.MagicAttack,
-                a.MagicDefense * b.MagicDefense, a.CriticalHitChance * b.CriticalHitChance);
+            return new ActorStats(health: a.Health * b.Health, meleeAttack: a.MeleeAttack * b.MeleeAttack,
+                meleeDefense: a.MeleeDefense * b.MeleeDefense, rangedAttack: a.RangedAttack * b.RangedAttack,
+                rangedDefense: a.RangedDefense * b.RangedDefense, magicAttack: a.MagicAttack * b.MagicAttack,
+                magicDefense: a.MagicDefense * b.MagicDefense, criticalHitChance: a.CriticalHitChance * b.CriticalHitChance);
         }
 
         public static ActorStats operator /(ActorStats a, ActorStats b)
         {
-            return new ActorStats(a.Health / b.Health, a.MeleeAttack / b.MeleeAttack,
-                a.MeleeDefense / b.MeleeDefense, a.RangedAttack / b.RangedAttack,
-                a.RangedDefense / b.RangedDefense, a.MagicAttack / b.MagicAttack,
-                a.MagicDefense / b.MagicDefense, a.CriticalHitChance / b.CriticalHitChance);
+            return new ActorStats(health: a.Health / b.Health, meleeAttack: a.MeleeAttack / b.MeleeAttack,
+                meleeDefense: a.MeleeDefense / b.MeleeDefense, rangedAttack: a.RangedAttack / b.RangedAttack,
+                rangedDefense: a.RangedDefense / b.RangedDefense, magicAttack: a.MagicAttack / b.MagicAttack,
+                magicDefense: a.MagicDefense / b.MagicDefense, criticalHitChance: a.CriticalHitChance / b.CriticalHitChance);
         }
 
         public void AddModifier(ActorStats modifier)
         {
-            Health.AddModifier(modifier.Health.CurrentValue);
-            MeleeAttack.AddModifier(modifier.MeleeAttack.CurrentValue);
-            RangedAttack.AddModifier(modifier.RangedAttack.CurrentValue);
-            MagicAttack.AddModifier(modifier.MagicAttack.CurrentValue);
-            MeleeDefense.AddModifier(modifier.MeleeDefense.CurrentValue);
-            RangedDefense.AddModifier(modifier.RangedDefense.CurrentValue);
-            MagicDefense.AddModifier(modifier.MagicDefense.CurrentValue);
-            CriticalHitChance.AddModifier(modifier.CriticalHitChance.CurrentValue);
+            Health.AddModifier(modifier: modifier.Health.CurrentValue);
+            MeleeAttack.AddModifier(modifier: modifier.MeleeAttack.CurrentValue);
+            RangedAttack.AddModifier(modifier: modifier.RangedAttack.CurrentValue);
+            MagicAttack.AddModifier(modifier: modifier.MagicAttack.CurrentValue);
+            MeleeDefense.AddModifier(modifier: modifier.MeleeDefense.CurrentValue);
+            RangedDefense.AddModifier(modifier: modifier.RangedDefense.CurrentValue);
+            MagicDefense.AddModifier(modifier: modifier.MagicDefense.CurrentValue);
+            CriticalHitChance.AddModifier(modifier: modifier.CriticalHitChance.CurrentValue);
         }
 
         public void RemoveModifier(ActorStats modifier)
         {
-            Health.RemoveModifier(modifier.Health.CurrentValue);
-            MeleeAttack.RemoveModifier(modifier.MeleeAttack.CurrentValue);
-            RangedAttack.RemoveModifier(modifier.RangedAttack.CurrentValue);
-            MagicAttack.RemoveModifier(modifier.MagicAttack.CurrentValue);
-            MeleeDefense.RemoveModifier(modifier.MeleeDefense.CurrentValue);
-            RangedDefense.RemoveModifier(modifier.RangedDefense.CurrentValue);
-            MagicDefense.RemoveModifier(modifier.MagicDefense.CurrentValue);
-            CriticalHitChance.RemoveModifier(modifier.CriticalHitChance.CurrentValue);
+            Health.RemoveModifier(modifier: modifier.Health.CurrentValue);
+            MeleeAttack.RemoveModifier(modifier: modifier.MeleeAttack.CurrentValue);
+            RangedAttack.RemoveModifier(modifier: modifier.RangedAttack.CurrentValue);
+            MagicAttack.RemoveModifier(modifier: modifier.MagicAttack.CurrentValue);
+            MeleeDefense.RemoveModifier(modifier: modifier.MeleeDefense.CurrentValue);
+            RangedDefense.RemoveModifier(modifier: modifier.RangedDefense.CurrentValue);
+            MagicDefense.RemoveModifier(modifier: modifier.MagicDefense.CurrentValue);
+            CriticalHitChance.RemoveModifier(modifier: modifier.CriticalHitChance.CurrentValue);
         }
     }
 }

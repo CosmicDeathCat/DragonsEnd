@@ -25,7 +25,7 @@ namespace DragonsEnd.Stats.Stat
         {
             get => _currentValue;
             set => _currentValue =
-                Math.Clamp(value, double.MinValue, MaxValue); // Ensures CurrentValue never exceeds MaxValue.
+                Math.Clamp(value: value, min: double.MinValue, max: MaxValue); // Ensures CurrentValue never exceeds MaxValue.
         }
 
         public double MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
@@ -52,25 +52,25 @@ namespace DragonsEnd.Stats.Stat
 
         public static DoubleStat operator +(DoubleStat a, DoubleStat b)
         {
-            return new DoubleStat(a.CurrentValue + b.CurrentValue, a.BaseValue + b.BaseValue);
+            return new DoubleStat(currentValue: a.CurrentValue + b.CurrentValue, baseValue: a.BaseValue + b.BaseValue);
         }
 
         public static DoubleStat operator -(DoubleStat a, DoubleStat b)
         {
-            return new DoubleStat(a.CurrentValue - b.CurrentValue, a.BaseValue - b.BaseValue);
+            return new DoubleStat(currentValue: a.CurrentValue - b.CurrentValue, baseValue: a.BaseValue - b.BaseValue);
         }
 
         public static DoubleStat operator *(DoubleStat a, DoubleStat b)
         {
-            return new DoubleStat(a.CurrentValue * b.CurrentValue, a.BaseValue * b.BaseValue);
+            return new DoubleStat(currentValue: a.CurrentValue * b.CurrentValue, baseValue: a.BaseValue * b.BaseValue);
         }
 
         public static DoubleStat operator /(DoubleStat a, DoubleStat b)
         {
             return b.CurrentValue != 0
                 ? // Prevent division by zero.
-                new DoubleStat(a.CurrentValue / b.CurrentValue, a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue))
-                : new DoubleStat(0, a.BaseValue); // Handle zero division safely.
+                new DoubleStat(currentValue: a.CurrentValue / b.CurrentValue, baseValue: a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue))
+                : new DoubleStat(currentValue: 0, baseValue: a.BaseValue); // Handle zero division safely.
         }
 
         public void AddModifier(double modifier)

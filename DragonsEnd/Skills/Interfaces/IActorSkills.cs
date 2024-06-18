@@ -1,6 +1,17 @@
 ﻿using DragonsEnd.Actor.Interfaces;
-using DragonsEnd.Skills.Combat;
-using DragonsEnd.Skills.NonCombat;
+using DragonsEnd.Skills.Combat.Magic;
+using DragonsEnd.Skills.Combat.Melee;
+using DragonsEnd.Skills.Combat.Ranged;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Crafting;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Enchanting;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Fletching;
+using DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Mining;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Woodcutting;
 
 namespace DragonsEnd.Skills.Interfaces
 {

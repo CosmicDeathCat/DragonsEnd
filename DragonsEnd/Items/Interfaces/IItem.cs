@@ -1,11 +1,11 @@
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
+using DragonsEnd.Identity.Interfaces;
 
 namespace DragonsEnd.Items.Interfaces
 {
-    public interface IItem
+    public interface IItem : IIdentity
     {
-        string Name { get; set; }
         string Description { get; set; }
         long Price { get; set; }
         ItemType Type { get; set; }

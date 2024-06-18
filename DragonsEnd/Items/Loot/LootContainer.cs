@@ -12,50 +12,50 @@ namespace DragonsEnd.Items.Loot
         public LootContainer()
         {
             Items = new List<IItem>();
-            Gold = new GoldCurrency(0);
+            Gold = new GoldCurrency(quantity: 0);
             Items = new List<IItem>();
         }
 
         public LootContainer(GoldCurrency? gold, long experience, params IItem[] items)
         {
-            gold ??= new GoldCurrency(0);
-            AddLoot(gold, experience, items);
+            gold ??= new GoldCurrency(quantity: 0);
+            AddLoot(gold: gold, experience: experience, items: items);
         }
 
         public LootContainer(long gold, long experience, params IItem[] items)
         {
-            AddLoot(gold, experience, items);
+            AddLoot(gold: gold, experience: experience, items: items);
         }
 
         public LootContainer(LootContainer lootContainer)
         {
-            AddLoot(lootContainer);
+            AddLoot(lootContainer: lootContainer);
         }
 
-        public GoldCurrency Gold { get; set; } = new GoldCurrency(0);
+        public GoldCurrency Gold { get; set; } = new(quantity: 0);
         public long Experience { get; set; }
-        public List<IItem> Items { get; set; } = new List<IItem>();
+        public List<IItem> Items { get; set; } = new();
 
         public void AddLoot(GoldCurrency? gold, long experience, params IItem[] items)
         {
-            gold ??= new GoldCurrency(0);
-            Gold.Add(gold);
+            gold ??= new GoldCurrency(quantity: 0);
+            Gold.Add(otherCurrency: gold);
             Experience += experience;
-            Items.AddRange(items);
+            Items.AddRange(collection: items);
         }
 
         public void AddLoot(long gold, long experience, params IItem[] items)
         {
-            Gold.Add(new GoldCurrency(gold));
+            Gold.Add(otherCurrency: new GoldCurrency(quantity: gold));
             Experience += experience;
-            Items.AddRange(items);
+            Items.AddRange(collection: items);
         }
 
         public void AddLoot(LootContainer lootContainer)
         {
-            Gold.Add(lootContainer.Gold);
+            Gold.Add(otherCurrency: lootContainer.Gold);
             Experience += lootContainer.Experience;
-            Items.AddRange(lootContainer.Items);
+            Items.AddRange(collection: lootContainer.Items);
         }
     }
 }

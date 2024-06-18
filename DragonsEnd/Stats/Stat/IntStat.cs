@@ -25,7 +25,7 @@ namespace DragonsEnd.Stats.Stat
         {
             get => _currentValue;
             set => _currentValue =
-                Math.Clamp(value, int.MinValue, MaxValue); // Ensures CurrentValue never exceeds MaxValue.
+                Math.Clamp(value: value, min: int.MinValue, max: MaxValue); // Ensures CurrentValue never exceeds MaxValue.
         }
 
         public int MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
@@ -52,25 +52,25 @@ namespace DragonsEnd.Stats.Stat
 
         public static IntStat operator +(IntStat a, IntStat b)
         {
-            return new IntStat(a.CurrentValue + b.CurrentValue, a.BaseValue + b.BaseValue);
+            return new IntStat(currentValue: a.CurrentValue + b.CurrentValue, baseValue: a.BaseValue + b.BaseValue);
         }
 
         public static IntStat operator -(IntStat a, IntStat b)
         {
-            return new IntStat(a.CurrentValue - b.CurrentValue, a.BaseValue - b.BaseValue);
+            return new IntStat(currentValue: a.CurrentValue - b.CurrentValue, baseValue: a.BaseValue - b.BaseValue);
         }
 
         public static IntStat operator *(IntStat a, IntStat b)
         {
-            return new IntStat(a.CurrentValue * b.CurrentValue, a.BaseValue * b.BaseValue);
+            return new IntStat(currentValue: a.CurrentValue * b.CurrentValue, baseValue: a.BaseValue * b.BaseValue);
         }
 
         public static IntStat operator /(IntStat a, IntStat b)
         {
             return b.CurrentValue != 0
-                ? new IntStat(a.CurrentValue / b.CurrentValue, a.BaseValue / b.BaseValue)
-                : new IntStat(0,
-                    a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle division by zero gracefully.
+                ? new IntStat(currentValue: a.CurrentValue / b.CurrentValue, baseValue: a.BaseValue / b.BaseValue)
+                : new IntStat(currentValue: 0,
+                    baseValue: a.BaseValue / (b.BaseValue == 0 ? 1 : b.BaseValue)); // Handle division by zero gracefully.
         }
 
         public void AddModifier(int modifier)

@@ -16,8 +16,8 @@ namespace DragonsEnd.Utility.Extensions.Random
         {
             if (minValue > maxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(minValue),
-                    "minValue must be less than or equal to maxValue");
+                throw new ArgumentOutOfRangeException(paramName: nameof(minValue),
+                    message: "minValue must be less than or equal to maxValue");
             }
 
             var range = (ulong)(maxValue - minValue);
@@ -26,8 +26,8 @@ namespace DragonsEnd.Utility.Extensions.Random
             do
             {
                 var buffer = new byte[8];
-                rnd.NextBytes(buffer);
-                ulongRand = (ulong)BitConverter.ToInt64(buffer, 0);
+                rnd.NextBytes(buffer: buffer);
+                ulongRand = (ulong)BitConverter.ToInt64(value: buffer, startIndex: 0);
             } while (ulongRand > ulong.MaxValue - (ulong.MaxValue % range + 1) % range);
 
             return (long)(ulongRand % range) + minValue;

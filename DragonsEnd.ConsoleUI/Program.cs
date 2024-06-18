@@ -1,7 +1,11 @@
 ﻿using DragonsEnd.Actor.Enemy;
+using DragonsEnd.Actor.Enemy.Constants;
+using DragonsEnd.Actor.Enemy.Database;
 using DragonsEnd.Actor.Player;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
+using DragonsEnd.Items.Constants;
+using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Stats;
@@ -35,9 +39,13 @@ public static class Program
             }
         );
         
-        player.ActorSkills.CookingSkill.Leveling.SetLevel(10);
+        player.ActorSkills.CookingSkill.Leveling.SetLevel(15);
 
         Console.WriteLine(value: player);
+        
+        player.ActorSkills.CookingSkill.Leveling.SetLevel(2);
+        Console.WriteLine(value: player);
+        
         var equippedWeapon = player.Equipment.OfType<IWeaponItem>().FirstOrDefault();
         equippedWeapon?.Unequip(source: player, target: player, slot: EquipmentSlot.TwoHanded);
 

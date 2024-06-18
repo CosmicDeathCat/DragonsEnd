@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
-using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
-using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
+using DragonsEnd.Actor.Messages;
 using DragonsEnd.Actor.Player.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Currency;
-using DragonsEnd.Items.Currency.Extensions;
 using DragonsEnd.Items.Drops;
 using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
-using DragonsEnd.Messaging.Messages;
 using DragonsEnd.Skills;
-using DragonsEnd.Skills.Combat;
 using DragonsEnd.Skills.Interfaces;
-using DragonsEnd.Skills.NonCombat;
 using DragonsEnd.Stats;
-using DragonsEnd.Stats.Leveling;
 using DragonsEnd.Stats.Stat;
 
 namespace DragonsEnd.Actor.Player
@@ -46,24 +40,24 @@ namespace DragonsEnd.Actor.Player
             ActorStats = actorStats;
             ActorSkills = actorSkills;
             IsAlive = true;
-            Leveling = new Leveling(this);
-            DamageMultiplier = new DoubleStat(damageMultiplier);
-            DamageReductionMultiplier = new DoubleStat(damageReductionMultiplier);
-            CriticalHitMultiplier = new DoubleStat(criticalHitMultiplier);
-            Gold = new GoldCurrency(gold);
-            
-            if(actorSkills != null)
+            Leveling = new Leveling.Leveling(actor: this, name: "Level");
+            DamageMultiplier = new DoubleStat(baseValue: damageMultiplier);
+            DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
+            CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
+            Gold = new GoldCurrency(quantity: gold);
+
+            if (actorSkills != null)
             {
                 ActorSkills = actorSkills;
             }
             else
             {
-                ActorSkills = new ActorSkills(this);
+                ActorSkills = new ActorSkills(actor: this);
             }
-            
+
             if (inventory != null)
             {
-                Inventory.AddRange(inventory);
+                Inventory.AddRange(collection: inventory);
             }
             else
             {
@@ -74,12 +68,12 @@ namespace DragonsEnd.Actor.Player
             {
                 foreach (var item in equipment)
                 {
-                    item.Equip(this, this);
+                    item.Equip(source: this, target: this);
                 }
             }
             else
             {
-                Equipment = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length];
+                Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             }
 
             if (dropItems.Length > 0)
@@ -96,28 +90,27 @@ namespace DragonsEnd.Actor.Player
                         continue;
                     }
 
-                    DropItems.Add(new DropItem(item, item.DropRate));
+                    DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                 }
 
                 if (equipment != null)
                 {
                     foreach (var item in equipment)
                     {
-                        DropItems.Add(new DropItem(item, item.DropRate));
+                        DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                     }
                 }
             }
 
-            MessageSystem.MessageManager.RegisterForChannel<ActorDeathMessage>(MessageChannels.Combat,
-                ActorDeathMessageHandler);
+            MessageSystem.MessageManager.RegisterForChannel<ActorDeathMessage>(channel: MessageChannels.Combat,
+                handler: ActorDeathMessageHandler);
         }
-
 
 
         ~Player()
         {
-            MessageSystem.MessageManager.UnregisterForChannel<ActorDeathMessage>(MessageChannels.Combat,
-                ActorDeathMessageHandler);
+            MessageSystem.MessageManager.UnregisterForChannel<ActorDeathMessage>(channel: MessageChannels.Combat,
+                handler: ActorDeathMessageHandler);
         }
     }
 }

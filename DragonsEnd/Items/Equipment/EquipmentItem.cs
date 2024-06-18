@@ -15,7 +15,7 @@ namespace DragonsEnd.Items.Equipment
             ActorStats stats, GearTier gearTier,
             CharacterClassType allowedClasses, int requiredLevel, bool stackable = true, long quantity = 1,
             double dropRate = 1)
-            : base(name, description, price, type, stackable, quantity, dropRate)
+            : base(name: name, description: description, price: price, type: type, stackable: stackable, quantity: quantity, dropRate: dropRate)
         {
             Slots = slots;
             Stats = stats;
@@ -40,9 +40,9 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-            if (!AllowedClasses.HasFlag(target.CharacterClass))
+            if (!AllowedClasses.HasFlag(flag: target.CharacterClass))
             {
-                Console.WriteLine($"{target.Name} cannot equip {Name}. {Name} is only for {AllowedClasses}.");
+                Console.WriteLine(value: $"{target.Name} cannot equip {Name}. {Name} is only for {AllowedClasses}.");
                 return false;
             }
 
@@ -50,17 +50,17 @@ namespace DragonsEnd.Items.Equipment
             if (target.Leveling.CurrentLevel < RequiredLevel)
             {
                 Console.WriteLine(
-                    $"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
+                    value: $"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
                 return false;
             }
 
 
             var isEquipped = false;
-            var mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
-            var offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
+            var mainHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.MainHand.ToString());
+            var offHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.OffHand.ToString());
 
             // First, handle items intended for both main and off hand.
-            if (Slots.Contains(EquipmentSlot.MainHand) && Slots.Contains(EquipmentSlot.OffHand))
+            if (Slots.Contains(item: EquipmentSlot.MainHand) && Slots.Contains(item: EquipmentSlot.OffHand))
             {
                 if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
                 {
@@ -74,28 +74,28 @@ namespace DragonsEnd.Items.Equipment
                 {
                     if (target.Equipment[mainHandIndex] != this)
                     {
-                        target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.MainHand);
+                        target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.MainHand);
                         target.Equipment[mainHandIndex] = this;
                     }
                     else
                     {
-                        target.Equipment[offHandIndex]?.Unequip(source, target, EquipmentSlot.OffHand);
+                        target.Equipment[offHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
                         target.Equipment[offHandIndex] = this;
                     }
                 }
 
                 isEquipped = true;
             }
-            else if (Slots.Contains(EquipmentSlot.TwoHanded))
+            else if (Slots.Contains(item: EquipmentSlot.TwoHanded))
             {
                 if (target.Equipment[mainHandIndex] != null && target.Equipment[mainHandIndex] != this)
                 {
-                    target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.MainHand);
+                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.MainHand);
                 }
 
                 if (target.Equipment[offHandIndex] != null && target.Equipment[offHandIndex] != this)
                 {
-                    target.Equipment[mainHandIndex]?.Unequip(source, target, EquipmentSlot.OffHand);
+                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
                 }
                 // Unequip(source, target, EquipmentSlot.TwoHanded);
 
@@ -111,7 +111,7 @@ namespace DragonsEnd.Items.Equipment
                 // Then handle each slot individually
                 foreach (var slot in Slots)
                 {
-                    var slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
+                    var slotIndex = Array.IndexOf(array: Enum.GetValues(enumType: typeof(EquipmentSlot)), value: slot);
 
                     if (target.Equipment[slotIndex] == null || target.Equipment[slotIndex] != this)
                     {
@@ -119,7 +119,7 @@ namespace DragonsEnd.Items.Equipment
                         if (target.Equipment[slotIndex] != null)
                         {
                             target.Equipment[slotIndex]
-                                ?.Unequip(source, target, slot); // Unequip current item in the slot if any
+                                ?.Unequip(source: source, target: target, slot: slot); // Unequip current item in the slot if any
                         }
 
                         target.Equipment[slotIndex] = this;
@@ -131,12 +131,12 @@ namespace DragonsEnd.Items.Equipment
 
             if (isEquipped)
             {
-                source?.Inventory.Remove(this);
-                ApplyModifiers(target, true);
+                source?.Inventory.Remove(item: this);
+                ApplyModifiers(target: target, isEquipping: true);
             }
             else
             {
-                Console.WriteLine($"{target.Name} could not equip {Name}.");
+                Console.WriteLine(value: $"{target.Name} could not equip {Name}.");
             }
 
             return isEquipped;
@@ -149,11 +149,11 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-            var mainHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.MainHand.ToString());
-            var offHandIndex = Array.IndexOf(Enum.GetNames(typeof(EquipmentSlot)), EquipmentSlot.OffHand.ToString());
+            var mainHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.MainHand.ToString());
+            var offHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.OffHand.ToString());
             var isUnequipped = false;
 
-            var slotIndex = Array.IndexOf(Enum.GetValues(typeof(EquipmentSlot)), slot);
+            var slotIndex = Array.IndexOf(array: Enum.GetValues(enumType: typeof(EquipmentSlot)), value: slot);
 
             if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
             {
@@ -175,9 +175,9 @@ namespace DragonsEnd.Items.Equipment
                 }
             }
 
-            ApplyModifiers(target, false);
+            ApplyModifiers(target: target, isEquipping: false);
 
-            source?.Inventory.Add(this);
+            source?.Inventory.Add(item: this);
 
             isUnequipped = true;
             return isUnequipped;
@@ -190,11 +190,11 @@ namespace DragonsEnd.Items.Equipment
                 var modifierValue = weaponItem.DamageMultiplier.CurrentValue;
                 if (isEquipping)
                 {
-                    target.DamageMultiplier.AddModifier(modifierValue);
+                    target.DamageMultiplier.AddModifier(modifier: modifierValue);
                 }
                 else
                 {
-                    target.DamageMultiplier.RemoveModifier(modifierValue);
+                    target.DamageMultiplier.RemoveModifier(modifier: modifierValue);
                 }
             }
 
@@ -203,30 +203,31 @@ namespace DragonsEnd.Items.Equipment
                 var modifierValue = armorItem.DamageReductionMultiplier.CurrentValue;
                 if (isEquipping)
                 {
-                    target.DamageReductionMultiplier.AddModifier(modifierValue);
+                    target.DamageReductionMultiplier.AddModifier(modifier: modifierValue);
                 }
                 else
                 {
-                    target.DamageReductionMultiplier.RemoveModifier(modifierValue);
+                    target.DamageReductionMultiplier.RemoveModifier(modifier: modifierValue);
                 }
             }
 
             // Assume Stats is an object that affects multiple actor stats
             if (isEquipping)
             {
-                target.ActorStats.AddModifier(Stats);
+                target.ActorStats.AddModifier(modifier: Stats);
             }
             else
             {
-                target.ActorStats.RemoveModifier(Stats);
+                target.ActorStats.RemoveModifier(modifier: Stats);
             }
         }
 
         public override IItem Copy()
         {
-            return new EquipmentItem(Name, Description, Price, Type, Slots, Stats, GearTier, AllowedClasses,
-                RequiredLevel,
-                Stackable, Quantity);
+            return new EquipmentItem(name: Name, description: Description, price: Price, type: Type, slots: Slots, stats: Stats, gearTier: GearTier,
+                allowedClasses: AllowedClasses,
+                requiredLevel: RequiredLevel,
+                stackable: Stackable, quantity: Quantity);
         }
     }
 }

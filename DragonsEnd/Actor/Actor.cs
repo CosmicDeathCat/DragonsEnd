@@ -7,6 +7,7 @@ using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Actor.Messages;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Currency;
 using DragonsEnd.Items.Currency.Extensions;
@@ -15,14 +16,12 @@ using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot;
-using DragonsEnd.Messaging.Messages;
+using DragonsEnd.Items.Messages;
+using DragonsEnd.Leveling.Interfaces;
+using DragonsEnd.Leveling.Messages;
 using DragonsEnd.Skills;
-using DragonsEnd.Skills.Combat;
 using DragonsEnd.Skills.Interfaces;
-using DragonsEnd.Skills.NonCombat;
 using DragonsEnd.Stats;
-using DragonsEnd.Stats.Leveling;
-using DragonsEnd.Stats.Leveling.Interfaces;
 using DragonsEnd.Stats.Stat;
 
 namespace DragonsEnd.Actor
@@ -34,14 +33,15 @@ namespace DragonsEnd.Actor
         public Actor()
         {
             Name = "Actor";
-            Equipment = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length];
+            Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             Inventory = new List<IItem?>();
             DropItems = new List<IDropItem>();
-            Leveling = new Leveling(this);
-            ActorStats = new ActorStats(100, 1, 1, 1, 1, 1, 1);
-            ActorSkills = new ActorSkills(this);
-            MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(MessageChannels.Items, ItemMessageHandler);
-            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(MessageChannels.Level, LevelingMessageHandler);
+            Leveling = new Leveling.Leveling(actor: this, name: "Level");
+            ActorStats = new ActorStats(health: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
+                magicDefense: 1);
+            ActorSkills = new ActorSkills(actor: this);
+            MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
+            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
         public Actor(
@@ -64,17 +64,17 @@ namespace DragonsEnd.Actor
             Gender = gender;
             CharacterClass = characterClass;
             ActorStats = actorStats;
-            ActorSkills = new ActorSkills(this);
+            ActorSkills = new ActorSkills(actor: this);
             _combatStyle = combatStyle;
-            DamageMultiplier = new DoubleStat(damageMultiplier);
-            DamageReductionMultiplier = new DoubleStat(damageReductionMultiplier);
-            CriticalHitMultiplier = new DoubleStat(criticalHitMultiplier);
+            DamageMultiplier = new DoubleStat(baseValue: damageMultiplier);
+            DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
+            CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             IsAlive = true;
-            Leveling = new Leveling(this, 100, level, experience);
-            Gold = new GoldCurrency(gold);
+            Leveling = new Leveling.Leveling(actor: this, name: "Level", maxLevel: 100, level: level, experience: experience);
+            Gold = new GoldCurrency(quantity: gold);
             if (inventory != null)
             {
-                Inventory.AddRange(inventory);
+                Inventory.AddRange(collection: inventory);
             }
             else
             {
@@ -83,14 +83,14 @@ namespace DragonsEnd.Actor
 
             if (equipment != null)
             {
-                foreach (var item in equipment.Where(x => x != null))
+                foreach (var item in equipment.Where(predicate: x => x != null))
                 {
-                    item.Equip(this, this);
+                    item.Equip(source: this, target: this);
                 }
             }
             else
             {
-                Equipment = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length];
+                Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             }
 
             if (dropItems.Length > 0)
@@ -106,47 +106,48 @@ namespace DragonsEnd.Actor
                     {
                         continue;
                     }
-                    DropItems.Add(new DropItem(item, item.DropRate));
+
+                    DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                 }
 
                 if (equipment != null)
                 {
                     foreach (var item in equipment)
                     {
-                        DropItems.Add(new DropItem(item, item.DropRate));
+                        DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
                     }
                 }
             }
 
-            MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(MessageChannels.Items, ItemMessageHandler);
-            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(MessageChannels.Level, LevelingMessageHandler);
+            MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
+            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
         public virtual string Name { get; set; }
         public virtual Gender Gender { get; set; }
         public Vector2 Position { get; set; }
         public virtual ILeveling Leveling { get; set; }
-        public virtual DoubleStat DamageMultiplier { get; set; } = new DoubleStat(1.00);
-        public virtual DoubleStat DamageReductionMultiplier { get; set; } = new DoubleStat(1.00);
-        public virtual DoubleStat CriticalHitMultiplier { get; set; } = new DoubleStat(1.5);
+        public virtual DoubleStat DamageMultiplier { get; set; } = new(baseValue: 1.00);
+        public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(baseValue: 1.00);
+        public virtual DoubleStat CriticalHitMultiplier { get; set; } = new(baseValue: 1.5);
         public virtual CharacterClassType CharacterClass { get; set; }
 
-        public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(typeof(EquipmentSlot)).Length - 1];
+        public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length - 1];
 
-        public virtual List<IItem?> Inventory { get; set; } = new List<IItem?>();
-        public GoldCurrency Gold { get; set; } = new GoldCurrency(0);
+        public virtual List<IItem?> Inventory { get; set; } = new();
+        public GoldCurrency Gold { get; set; } = new(quantity: 0);
         public virtual IActor? Target { get; set; }
         public virtual ActorStats ActorStats { get; set; }
         public virtual IActorSkills ActorSkills { get; set; }
-        
-        public List<IDropItem> DropItems { get; set; } = new List<IDropItem>();
+
+        public List<IDropItem> DropItems { get; set; } = new();
 
         public CombatStyle CombatStyle
         {
             get
             {
                 var weapons = GetWeapons();
-                weapons = weapons.Where(x => x != null).ToArray();
+                weapons = weapons.Where(predicate: x => x != null).ToArray();
                 return weapons.Length > 0 ? weapons[0]!.CombatStyle : _combatStyle;
             }
             set => _combatStyle = value;
@@ -170,12 +171,12 @@ namespace DragonsEnd.Actor
 
         public virtual IWeaponItem?[] GetWeapons()
         {
-            return Equipment.Where(x => x is IWeaponItem).Cast<IWeaponItem>().Distinct().ToArray();
+            return Equipment.Where(predicate: x => x is IWeaponItem).Cast<IWeaponItem>().Distinct().ToArray();
         }
 
         public virtual IArmorItem?[] GetArmor()
         {
-            return Equipment.Where(x => x is IArmorItem).Cast<IArmorItem>().Distinct().ToArray();
+            return Equipment.Where(predicate: x => x is IArmorItem).Cast<IArmorItem>().Distinct().ToArray();
         }
 
         public virtual void ItemMessageHandler(IMessageEnvelope message)
@@ -196,7 +197,7 @@ namespace DragonsEnd.Actor
                         data.Item.Quantity--;
                         if (data.Item.Quantity <= 0)
                         {
-                            Inventory.Remove(data.Item);
+                            Inventory.Remove(item: data.Item);
                         }
 
                         break;
@@ -208,7 +209,7 @@ namespace DragonsEnd.Actor
                 var equipmentItem = data.Item as IEquipmentItem;
                 if (equipmentItem != null)
                 {
-                    equipmentItem.Equip(data.Source, this);
+                    equipmentItem.Equip(source: data.Source, target: this);
                 }
             }
         }
@@ -233,15 +234,15 @@ namespace DragonsEnd.Actor
             ActorStats.RangedDefense.BaseValue += statIncrease;
             ActorStats.MagicDefense.BaseValue += statIncrease;
 
-            Console.WriteLine($"{Name} has increased stats for level {level}.");
-            Console.WriteLine($"{Name} new base stats:");
-            Console.WriteLine($"Health: {oldHealth} -> {ActorStats.Health.BaseValue}");
-            Console.WriteLine($"Melee Attack: {oldMeleeAttack} -> {ActorStats.MeleeAttack.BaseValue}");
-            Console.WriteLine($"Ranged Attack: {oldRangedAttack} -> {ActorStats.RangedAttack.BaseValue}");
-            Console.WriteLine($"Magic Attack: {oldMagicAttack} -> {ActorStats.MagicAttack.BaseValue}");
-            Console.WriteLine($"Melee Defense: {oldMeleeDefense} -> {ActorStats.MeleeDefense.BaseValue}");
-            Console.WriteLine($"Ranged Defense: {oldRangedDefense} -> {ActorStats.RangedDefense.BaseValue}");
-            Console.WriteLine($"Magic Defense: {oldMagicDefense} -> {ActorStats.MagicDefense.BaseValue}");
+            Console.WriteLine(value: $"{Name} has increased stats for level {level}.");
+            Console.WriteLine(value: $"{Name} new base stats:");
+            Console.WriteLine(value: $"Health: {oldHealth} -> {ActorStats.Health.BaseValue}");
+            Console.WriteLine(value: $"Melee Attack: {oldMeleeAttack} -> {ActorStats.MeleeAttack.BaseValue}");
+            Console.WriteLine(value: $"Ranged Attack: {oldRangedAttack} -> {ActorStats.RangedAttack.BaseValue}");
+            Console.WriteLine(value: $"Magic Attack: {oldMagicAttack} -> {ActorStats.MagicAttack.BaseValue}");
+            Console.WriteLine(value: $"Melee Defense: {oldMeleeDefense} -> {ActorStats.MeleeDefense.BaseValue}");
+            Console.WriteLine(value: $"Ranged Defense: {oldRangedDefense} -> {ActorStats.RangedDefense.BaseValue}");
+            Console.WriteLine(value: $"Magic Defense: {oldMagicDefense} -> {ActorStats.MagicDefense.BaseValue}");
         }
 
         public virtual void DecreaseStatsForLevel(int level)
@@ -264,15 +265,15 @@ namespace DragonsEnd.Actor
             ActorStats.RangedDefense.BaseValue -= statDecrease;
             ActorStats.MagicDefense.BaseValue -= statDecrease;
 
-            Console.WriteLine($"{Name} has decreased stats for level {level}.");
-            Console.WriteLine($"{Name} new base stats:");
-            Console.WriteLine($"Health: {oldHealth} -> {ActorStats.Health.BaseValue}");
-            Console.WriteLine($"Melee Attack: {oldMeleeAttack} -> {ActorStats.MeleeAttack.BaseValue}");
-            Console.WriteLine($"Ranged Attack: {oldRangedAttack} -> {ActorStats.RangedAttack.BaseValue}");
-            Console.WriteLine($"Magic Attack: {oldMagicAttack} -> {ActorStats.MagicAttack.BaseValue}");
-            Console.WriteLine($"Melee Defense: {oldMeleeDefense} -> {ActorStats.MeleeDefense.BaseValue}");
-            Console.WriteLine($"Ranged Defense: {oldRangedDefense} -> {ActorStats.RangedDefense.BaseValue}");
-            Console.WriteLine($"Magic Defense: {oldMagicDefense} -> {ActorStats.MagicDefense.BaseValue}");
+            Console.WriteLine(value: $"{Name} has decreased stats for level {level}.");
+            Console.WriteLine(value: $"{Name} new base stats:");
+            Console.WriteLine(value: $"Health: {oldHealth} -> {ActorStats.Health.BaseValue}");
+            Console.WriteLine(value: $"Melee Attack: {oldMeleeAttack} -> {ActorStats.MeleeAttack.BaseValue}");
+            Console.WriteLine(value: $"Ranged Attack: {oldRangedAttack} -> {ActorStats.RangedAttack.BaseValue}");
+            Console.WriteLine(value: $"Magic Attack: {oldMagicAttack} -> {ActorStats.MagicAttack.BaseValue}");
+            Console.WriteLine(value: $"Melee Defense: {oldMeleeDefense} -> {ActorStats.MeleeDefense.BaseValue}");
+            Console.WriteLine(value: $"Ranged Defense: {oldRangedDefense} -> {ActorStats.RangedDefense.BaseValue}");
+            Console.WriteLine(value: $"Magic Defense: {oldMagicDefense} -> {ActorStats.MagicDefense.BaseValue}");
         }
 
         public virtual (bool hasHit, bool isBlocked, bool hasKilled, int damage, bool isCriticalHit) Attack(
@@ -290,30 +291,31 @@ namespace DragonsEnd.Actor
             switch (CombatStyle)
             {
                 case CombatStyle.Melee:
-                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source, target,
-                        source.ActorStats.MeleeAttack.CurrentValue,
-                        target.ActorStats.MeleeDefense.CurrentValue);
+                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source: source, target: target,
+                        attackValue: source.ActorStats.MeleeAttack.CurrentValue,
+                        defenseValue: target.ActorStats.MeleeDefense.CurrentValue);
                     break;
                 case CombatStyle.Ranged:
-                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source, target,
-                        source.ActorStats.RangedAttack.CurrentValue,
-                        target.ActorStats.RangedDefense.CurrentValue);
+                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source: source, target: target,
+                        attackValue: source.ActorStats.RangedAttack.CurrentValue,
+                        defenseValue: target.ActorStats.RangedDefense.CurrentValue);
                     break;
                 case CombatStyle.Magic:
-                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source, target,
-                        source.ActorStats.MagicAttack.CurrentValue,
-                        target.ActorStats.MagicDefense.CurrentValue);
+                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source: source, target: target,
+                        attackValue: source.ActorStats.MagicAttack.CurrentValue,
+                        defenseValue: target.ActorStats.MagicDefense.CurrentValue);
                     break;
                 case CombatStyle.Hybrid:
                     var avgAttack =
                         (int)Math.Round(
-                            (source.ActorStats.MeleeAttack.CurrentValue + source.ActorStats.RangedAttack.CurrentValue +
-                             source.ActorStats.MagicAttack.CurrentValue) / 3.0, MidpointRounding.AwayFromZero);
+                            value: (source.ActorStats.MeleeAttack.CurrentValue + source.ActorStats.RangedAttack.CurrentValue +
+                                    source.ActorStats.MagicAttack.CurrentValue) / 3.0, mode: MidpointRounding.AwayFromZero);
                     var avgDefense =
                         (int)Math.Round(
-                            (target.ActorStats.MeleeDefense.CurrentValue + target.ActorStats.RangedAttack.CurrentValue +
-                             target.ActorStats.MagicDefense.CurrentValue) / 3.0, MidpointRounding.AwayFromZero);
-                    (hit, blocked, killed, damage, isCriticalHit) = HandleAttack(source, target, avgAttack, avgDefense);
+                            value: (target.ActorStats.MeleeDefense.CurrentValue + target.ActorStats.RangedAttack.CurrentValue +
+                                    target.ActorStats.MagicDefense.CurrentValue) / 3.0, mode: MidpointRounding.AwayFromZero);
+                    (hit, blocked, killed, damage, isCriticalHit) =
+                        HandleAttack(source: source, target: target, attackValue: avgAttack, defenseValue: avgDefense);
                     break;
             }
 
@@ -335,37 +337,38 @@ namespace DragonsEnd.Actor
             var isCriticalHit = critRoll < source.ActorStats.CriticalHitChance.CurrentValue;
 
             // Ensure the roll is between 1 and the effective attack value minus defense value plus 1
-            var attackRoll = rnd.Next(1, Math.Max(2, attackValue - defenseValue + 1)); // Adjusted to ensure at least 1
+            var attackRoll =
+                rnd.Next(minValue: 1, maxValue: Math.Max(val1: 2, val2: attackValue - defenseValue + 1)); // Adjusted to ensure at least 1
 
             if (attackRoll > 0)
             {
                 hit = true;
-                var maxSourceDamage = Math.Round(attackValue * source.DamageMultiplier.CurrentValue,
-                    MidpointRounding.AwayFromZero);
-                var maxTargetDefense = Math.Round(defenseValue * target.DamageReductionMultiplier.CurrentValue,
-                    MidpointRounding.AwayFromZero);
+                var maxSourceDamage = Math.Round(value: attackValue * source.DamageMultiplier.CurrentValue,
+                    mode: MidpointRounding.AwayFromZero);
+                var maxTargetDefense = Math.Round(value: defenseValue * target.DamageReductionMultiplier.CurrentValue,
+                    mode: MidpointRounding.AwayFromZero);
                 blocked = maxSourceDamage - maxTargetDefense <= 0;
-                var roundedMinDamage = Math.Round(Math.Clamp(maxSourceDamage - maxTargetDefense, 1, maxSourceDamage),
-                    MidpointRounding.AwayFromZero);
-                var roundedMaxDamage = Math.Round(Math.Clamp(maxSourceDamage, roundedMinDamage, maxSourceDamage),
-                    MidpointRounding.AwayFromZero);
+                var roundedMinDamage = Math.Round(value: Math.Clamp(value: maxSourceDamage - maxTargetDefense, min: 1, max: maxSourceDamage),
+                    mode: MidpointRounding.AwayFromZero);
+                var roundedMaxDamage = Math.Round(value: Math.Clamp(value: maxSourceDamage, min: roundedMinDamage, max: maxSourceDamage),
+                    mode: MidpointRounding.AwayFromZero);
                 var randomDamage = 0;
                 if (blocked)
                 {
-                    randomDamage = rnd.Next(0, (int)roundedMinDamage + 1);
+                    randomDamage = rnd.Next(minValue: 0, maxValue: (int)roundedMinDamage + 1);
                 }
                 else
                 {
-                    randomDamage = rnd.Next((int)roundedMinDamage, (int)roundedMaxDamage + 1);
+                    randomDamage = rnd.Next(minValue: (int)roundedMinDamage, maxValue: (int)roundedMaxDamage + 1);
                 }
 
-                damage = Math.Clamp(randomDamage, 0, (int)maxSourceDamage);
+                damage = Math.Clamp(value: randomDamage, min: 0, max: (int)maxSourceDamage);
 
                 if (isCriticalHit)
                 {
                     damage = (int)(damage * CriticalHitMultiplier.CurrentValue); // Apply critical hit multiplier
                     Console.WriteLine(
-                        $"{source.Name} lands a critical hit on {target.Name} for {damage} {source.CombatStyle} damage!");
+                        value: $"{source.Name} lands a critical hit on {target.Name} for {damage} {source.CombatStyle} damage!");
                 }
                 else
                 {
@@ -374,24 +377,25 @@ namespace DragonsEnd.Actor
                         if (damage <= 0)
                         {
                             Console.WriteLine(
-                                $"{source.Name} attacks {target.Name}, but the attack is completely blocked!");
+                                value: $"{source.Name} attacks {target.Name}, but the attack is completely blocked!");
                         }
                         else
                         {
                             Console.WriteLine(
+                                value:
                                 $"{source.Name} attacks {target.Name}, but {target.Name} blocks most of the damage. However, {source.Name} still manages to deal {damage} {source.CombatStyle} damage.");
                         }
                     }
                     else
                     {
                         Console.WriteLine(
-                            $"{source.Name} attacks {target.Name} for {damage} {source.CombatStyle} damage.");
+                            value: $"{source.Name} attacks {target.Name} for {damage} {source.CombatStyle} damage.");
                     }
                 }
 
                 if (damage > 0)
                 {
-                    target.TakeDamage(source, damage);
+                    target.TakeDamage(sourceActor: source, damage: damage);
 
                     if (target.ActorStats.Health.CurrentValue <= 0)
                     {
@@ -402,7 +406,7 @@ namespace DragonsEnd.Actor
             }
             else
             {
-                Console.WriteLine($"{source.Name} attacks {target.Name}, but misses!");
+                Console.WriteLine(value: $"{source.Name} attacks {target.Name}, but misses!");
             }
 
             return (hit, blocked, killed, damage, isCriticalHit);
@@ -419,22 +423,22 @@ namespace DragonsEnd.Actor
             params IDropItem[] specificLootableItems)
         {
             var loot = LootSystem.GenerateLoot(
-                this,
-                minItemAmountDrop,
-                maxItemAmountDrop,
-                minGold,
-                maxGold,
-                minExperience,
-                maxExperience,
-                specificLootableItems);
-            var lootContainer = new LootContainer(loot.gold, loot.experience, loot.items.ToArray());
+                lootedObject: this,
+                minItemAmountDrop: minItemAmountDrop,
+                maxItemAmountDrop: maxItemAmountDrop,
+                minGold: minGold,
+                maxGold: maxGold,
+                minExperience: minExperience,
+                maxExperience: maxExperience,
+                specificLootableItems: specificLootableItems);
+            var lootContainer = new LootContainer(gold: loot.gold, experience: loot.experience, items: loot.items.ToArray());
             return lootContainer;
         }
 
         public virtual void TakeDamage(IActor sourceActor, int damage)
         {
             Target = sourceActor;
-            Console.WriteLine($"{Name} takes {damage} {sourceActor.CombatStyle.ToString()} damage.");
+            Console.WriteLine(value: $"{Name} takes {damage} {sourceActor.CombatStyle.ToString()} damage.");
             ActorStats.Health.CurrentValue -= damage;
             if (ActorStats.Health.CurrentValue <= 0)
             {
@@ -445,103 +449,21 @@ namespace DragonsEnd.Actor
         public virtual void Die()
         {
             IsAlive = false;
-            Console.WriteLine($"{Name} has died!");
-            MessageSystem.MessageManager.SendImmediate(MessageChannels.Combat, new ActorDeathMessage(Target, this));
+            Console.WriteLine(value: $"{Name} has died!");
+            MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Combat, message: new ActorDeathMessage(source: Target, target: this));
         }
 
         public virtual IActor Copy()
         {
-            return new Actor(Name, Gender, CharacterClass, ActorStats, CombatStyle, DamageMultiplier.BaseValue,
-                DamageReductionMultiplier.BaseValue,
-                CriticalHitMultiplier.BaseValue, Leveling.CurrentLevel, Leveling.Experience, Gold.CurrentValue,
-                Equipment?.ToArray()!,
-                Inventory?.ToArray()!, DropItems?.ToArray()!);
+            return new Actor(name: Name, gender: Gender, characterClass: CharacterClass, actorStats: ActorStats, combatStyle: CombatStyle,
+                damageMultiplier: DamageMultiplier.BaseValue,
+                damageReductionMultiplier: DamageReductionMultiplier.BaseValue,
+                criticalHitMultiplier: CriticalHitMultiplier.BaseValue, level: Leveling.CurrentLevel, experience: Leveling.Experience,
+                gold: Gold.CurrentValue,
+                equipment: Equipment?.ToArray()!,
+                inventory: Inventory?.ToArray()!, dropItems: DropItems?.ToArray()!);
         }
 
-        ~Actor()
-        {
-            MessageSystem.MessageManager.UnregisterForChannel<ItemMessage>(MessageChannels.Items, ItemMessageHandler);
-            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(MessageChannels.Level,
-                LevelingMessageHandler);
-        }
-
-        public virtual void LevelingMessageHandler(IMessageEnvelope message)
-        {
-            if (!message.Message<LevelingMessage>().HasValue)
-            {
-                return;
-            }
-
-            var data = message.Message<LevelingMessage>().GetValueOrDefault();
-            if (data.Actor != this)
-            {
-                return;
-            }
-
-            if (data.Sender != Leveling)
-            {
-                if (data.Sender == ActorSkills.CookingSkill)
-                {
-                    if(data.Type == LevelingType.GainLevel)
-                    {
-                        Console.WriteLine($"{Name} has gained a level in Cooking. {Name} is now level {data.Level}.");
-                    }
-                    // switch (data.Type)
-                    // {
-                    //     case LevelingType.GainExperience:
-                    //         Console.WriteLine(
-                    //             $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    //         break;
-                    //     case LevelingType.LoseExperience:
-                    //         Console.WriteLine(
-                    //             $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    //         break;
-                    //     case LevelingType.SetExperience:
-                    //         Console.WriteLine($"{Name} set experience to {data.Experience}.");
-                    //         break;
-                    //     case LevelingType.GainLevel:
-                    //         Console.WriteLine($"{Name} gained a level. {Name} is now level {data.Level}.");
-                    //         IncreaseStatsForLevel(data.Level);
-                    //         break;
-                    //     case LevelingType.LoseLevel:
-                    //         Console.WriteLine($"{Name} lost a level. {Name} is now level {data.Level}.");
-                    //         DecreaseStatsForLevel(data.Level);
-                    //         break;
-                    //     case LevelingType.SetLevel:
-                    //         Console.WriteLine($"{Name} set level to {data.Level}.");
-                    //         break;
-                    // }
-                }
-                return;
-            }
-
-            switch (data.Type)
-            {
-                case LevelingType.GainExperience:
-                    Console.WriteLine(
-                        $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    break;
-                case LevelingType.LoseExperience:
-                    Console.WriteLine(
-                        $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    break;
-                case LevelingType.SetExperience:
-                    Console.WriteLine($"{Name} set experience to {data.Experience}.");
-                    break;
-                case LevelingType.GainLevel:
-                    Console.WriteLine($"{Name} gained a level. {Name} is now level {data.Level}.");
-                    IncreaseStatsForLevel(data.Level);
-                    break;
-                case LevelingType.LoseLevel:
-                    Console.WriteLine($"{Name} lost a level. {Name} is now level {data.Level}.");
-                    DecreaseStatsForLevel(data.Level);
-                    break;
-                case LevelingType.SetLevel:
-                    Console.WriteLine($"{Name} set level to {data.Level}.");
-                    break;
-            }
-        }
-        
         public virtual void ActorDeathMessageHandler(IMessageEnvelope message)
         {
             if (!message.Message<ActorDeathMessage>().HasValue)
@@ -561,14 +483,98 @@ namespace DragonsEnd.Actor
             }
 
             var loot = data.Target.Loot();
-            Leveling.GainExperience(loot.Experience);
-            Gold.Add(loot.Gold);
-            Inventory.AddRange(loot.Items);
+            Leveling.GainExperience(amount: loot.Experience);
+            Gold.Add(otherCurrency: loot.Gold);
+            Inventory.AddRange(collection: loot.Items);
             var lootItemsDisplay = loot.Items.Count > 0
                 ? $"{loot.Items.Count} Items from {data.Target.Name}\n" +
-                  string.Join(", \n", loot.Items.Select(x => "Looted " + x.Name))
+                  string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
                 : "No Items";
-            Console.WriteLine($"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
+            Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
+        }
+
+        ~Actor()
+        {
+            MessageSystem.MessageManager.UnregisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
+            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(channel: MessageChannels.Level,
+                handler: LevelingMessageHandler);
+        }
+
+        public virtual void LevelingMessageHandler(IMessageEnvelope message)
+        {
+            if (!message.Message<LevelingMessage>().HasValue)
+            {
+                return;
+            }
+
+            var data = message.Message<LevelingMessage>().GetValueOrDefault();
+            if (data.Actor != this)
+            {
+                return;
+            }
+
+            if (data.SenderIdentity.ID.Equals(g: ActorSkills.CookingSkill.Leveling.ID))
+            {
+                // if (data.Type == LevelingType.GainLevel)
+                // {
+                //     Console.WriteLine($"{Name} has gained a level in Cooking. {Name} is now level {data.Level}.");
+                // }
+                // switch (data.Type)
+                // {
+                //     case LevelingType.GainExperience:
+                //         Console.WriteLine(
+                //             $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
+                //         break;
+                //     case LevelingType.LoseExperience:
+                //         Console.WriteLine(
+                //             $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
+                //         break;
+                //     case LevelingType.SetExperience:
+                //         Console.WriteLine($"{Name} set experience to {data.Experience}.");
+                //         break;
+                //     case LevelingType.GainLevel:
+                //         Console.WriteLine($"{Name} gained a level. {Name} is now level {data.Level}.");
+                //         IncreaseStatsForLevel(data.Level);
+                //         break;
+                //     case LevelingType.LoseLevel:
+                //         Console.WriteLine($"{Name} lost a level. {Name} is now level {data.Level}.");
+                //         DecreaseStatsForLevel(data.Level);
+                //         break;
+                //     case LevelingType.SetLevel:
+                //         Console.WriteLine($"{Name} set level to {data.Level}.");
+                //         break;
+                // }
+                return;
+            }
+
+
+            switch (data.Type)
+            {
+                case LevelingType.GainExperience:
+                    Console.WriteLine(
+                        value:
+                        $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
+                    break;
+                case LevelingType.LoseExperience:
+                    Console.WriteLine(
+                        value:
+                        $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
+                    break;
+                case LevelingType.SetExperience:
+                    Console.WriteLine(value: $"{Name} set experience to {data.Experience}.");
+                    break;
+                case LevelingType.GainLevel:
+                    Console.WriteLine(value: $"{Name} gained a level. {Name} is now level {data.Level}.");
+                    IncreaseStatsForLevel(level: data.Level);
+                    break;
+                case LevelingType.LoseLevel:
+                    Console.WriteLine(value: $"{Name} lost a level. {Name} is now level {data.Level}.");
+                    DecreaseStatsForLevel(level: data.Level);
+                    break;
+                case LevelingType.SetLevel:
+                    Console.WriteLine(value: $"{Name} set level to {data.Level}.");
+                    break;
+            }
         }
     }
 }

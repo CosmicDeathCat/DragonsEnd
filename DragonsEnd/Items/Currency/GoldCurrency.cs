@@ -22,6 +22,7 @@ namespace DragonsEnd.Items.Currency
         }
 
         public virtual string Name { get; set; } = "Gold";
+        public virtual Guid ID { get; set; } = Guid.NewGuid();
         public virtual string Description { get; set; } = "Shiny gold coins. used for purchasing items.";
 
         public virtual long CurrentValue
