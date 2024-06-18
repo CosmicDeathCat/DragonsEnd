@@ -14,7 +14,7 @@ namespace DragonsEnd.Skills
 {
     public abstract class BaseSkill : ISkill
     {
-        public BaseSkill(string name, IActor actor, int maxLevel = 20)
+        public BaseSkill(string name, IActor actor, int maxLevel = 100)
         {
             Name = name;
             Actor = actor;

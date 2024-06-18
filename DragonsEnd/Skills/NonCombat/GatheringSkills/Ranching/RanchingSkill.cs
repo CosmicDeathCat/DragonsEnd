@@ -10,7 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Ranching
 {
     public class RanchingSkill : BaseNonCombatSkill
     {
-        public RanchingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public RanchingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

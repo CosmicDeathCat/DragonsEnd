@@ -9,7 +9,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Enchanting
 {
     public class EnchantingSkill : BaseNonCombatSkill
     {
-        public EnchantingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public EnchantingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

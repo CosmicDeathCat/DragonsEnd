@@ -12,7 +12,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
 {
     public class CookingSkill : BaseNonCombatSkill
     {
-        public CookingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public CookingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }

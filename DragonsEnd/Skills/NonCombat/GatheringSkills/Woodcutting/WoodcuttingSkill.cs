@@ -9,7 +9,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Woodcutting
 {
     public class WoodcuttingSkill : BaseNonCombatSkill
     {
-        public WoodcuttingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public WoodcuttingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

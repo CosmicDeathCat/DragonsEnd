@@ -9,7 +9,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging
 {
     public class ForagingSkill : BaseNonCombatSkill
     {
-        public ForagingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public ForagingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

@@ -9,7 +9,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Mining
 {
     public class MiningSkill : BaseNonCombatSkill
     {
-        public MiningSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public MiningSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

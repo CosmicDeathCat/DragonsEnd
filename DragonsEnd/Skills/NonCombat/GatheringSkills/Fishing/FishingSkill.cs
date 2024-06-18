@@ -9,7 +9,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing
 {
     public class FishingSkill : BaseNonCombatSkill
     {
-        public FishingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public FishingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 

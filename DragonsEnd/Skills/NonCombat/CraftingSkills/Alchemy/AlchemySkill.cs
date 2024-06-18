@@ -10,7 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
 {
     public class AlchemySkill : BaseNonCombatSkill
     {
-        public AlchemySkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public AlchemySkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 
@@ -19,8 +19,8 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
             [key: 1] = new List<ILockable>
             {
                 new BasicSkillUnlock(name: ItemNames.WeakHealthPotion, description: "You can now brew Weak Health Potions!", isLocked: false),
-                new BasicSkillUnlock(name: ItemNames.WeakManaPotion, description: "You can now brew Weak Mana Potions!"),
-                new BasicSkillUnlock(name: ItemNames.WeakActionPotion, description: "You can now brew Weak Action Potions!")
+                new BasicSkillUnlock(name: ItemNames.WeakManaPotion, description: "You can now brew Weak Mana Potions!",isLocked: false),
+                new BasicSkillUnlock(name: ItemNames.WeakActionPotion, description: "You can now brew Weak Action Potions!", isLocked: false)
             },
             [key: 10] = new List<ILockable>
             {

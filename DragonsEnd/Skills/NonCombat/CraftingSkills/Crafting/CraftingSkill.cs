@@ -10,7 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Crafting
 {
     public class CraftingSkill : BaseNonCombatSkill
     {
-        public CraftingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public CraftingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 
@@ -19,10 +19,10 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Crafting
             [key: 1] = new List<ILockable>
             {
                 new BasicSkillUnlock(name: ItemNames.FeebleFeatherCap, description: "You can now craft Feeble Feather Caps!", isLocked: false),
-                new BasicSkillUnlock(name: ItemNames.FeebleLeatherVest, description: "You can now craft Feeble Leather Vests!"),
-                new BasicSkillUnlock(name: ItemNames.FeebleLeatherGloves, description: "You can now craft Feeble Leather Gloves!"),
-                new BasicSkillUnlock(name: ItemNames.FeebleLeatherBoots, description: "You can now craft Feeble Leather Boots!"),
-                new BasicSkillUnlock(name: ItemNames.FeebleBuckler, description: "You can now craft Feeble Bucklers!")
+                new BasicSkillUnlock(name: ItemNames.FeebleLeatherVest, description: "You can now craft Feeble Leather Vests!", isLocked: false),
+                new BasicSkillUnlock(name: ItemNames.FeebleLeatherGloves, description: "You can now craft Feeble Leather Gloves!", isLocked: false),
+                new BasicSkillUnlock(name: ItemNames.FeebleLeatherBoots, description: "You can now craft Feeble Leather Boots!", isLocked: false),
+                new BasicSkillUnlock(name: ItemNames.FeebleBuckler, description: "You can now craft Feeble Bucklers!", isLocked: false)
             },
             [key: 10] = new List<ILockable>
             {

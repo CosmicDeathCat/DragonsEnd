@@ -10,7 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing
 {
     public class SmithingSkill : BaseNonCombatSkill
     {
-        public SmithingSkill(string name, IActor actor, int maxLevel = 20) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public SmithingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
 
