@@ -22,6 +22,8 @@ namespace DragonsEnd.Actor.Enemy.Database
                     characterClass: CharacterClassType.Warrior,
                     actorStats: new ActorStats(
                         health: 20,
+                        mana: 0,
+                        stamina: 20,
                         meleeAttack: 1,
                         meleeDefense: 0,
                         rangedAttack: 0,

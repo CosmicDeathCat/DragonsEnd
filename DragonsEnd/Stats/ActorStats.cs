@@ -9,6 +9,8 @@ namespace DragonsEnd.Stats
         public ActorStats
         (
             int health,
+            int mana,
+            int stamina,
             int meleeAttack,
             int meleeDefense,
             int rangedAttack,
@@ -19,6 +21,8 @@ namespace DragonsEnd.Stats
         )
         {
             Health = new IntStat(baseValue: health);
+            Mana = new IntStat(baseValue: mana);
+            Stamina = new IntStat(baseValue: stamina);
             MeleeAttack = new IntStat(baseValue: meleeAttack);
             RangedAttack = new IntStat(baseValue: rangedAttack);
             MagicAttack = new IntStat(baseValue: magicAttack);
@@ -31,6 +35,8 @@ namespace DragonsEnd.Stats
         public ActorStats
         (
             IntStat health,
+            IntStat mana,
+            IntStat stamina,
             IntStat meleeAttack,
             IntStat meleeDefense,
             IntStat rangedAttack,
@@ -41,6 +47,8 @@ namespace DragonsEnd.Stats
         )
         {
             Health = health;
+            Mana = mana;
+            Stamina = stamina;
             MeleeAttack = meleeAttack;
             RangedAttack = rangedAttack;
             MagicAttack = magicAttack;
@@ -51,6 +59,8 @@ namespace DragonsEnd.Stats
         }
 
         public virtual IntStat Health { get; set; }
+        public virtual IntStat Mana { get; set; }
+        public virtual IntStat Stamina { get; set; }
         public virtual IntStat MeleeAttack { get; set; }
         public virtual IntStat RangedAttack { get; set; }
         public virtual IntStat MagicAttack { get; set; }
@@ -61,7 +71,7 @@ namespace DragonsEnd.Stats
 
         public static ActorStats operator +(ActorStats a, ActorStats b)
         {
-            return new ActorStats(health: a.Health + b.Health, meleeAttack: a.MeleeAttack + b.MeleeAttack,
+            return new ActorStats(health: a.Health + b.Health, mana: a.Mana + b.Mana, stamina: a.Stamina + b.Stamina, meleeAttack: a.MeleeAttack + b.MeleeAttack,
                 meleeDefense: a.MeleeDefense + b.MeleeDefense, rangedAttack: a.RangedAttack + b.RangedAttack,
                 rangedDefense: a.RangedDefense + b.RangedDefense, magicAttack: a.MagicAttack + b.MagicAttack,
                 magicDefense: a.MagicDefense + b.MagicDefense, criticalHitChance: a.CriticalHitChance + b.CriticalHitChance);
@@ -69,7 +79,7 @@ namespace DragonsEnd.Stats
 
         public static ActorStats operator -(ActorStats a, ActorStats b)
         {
-            return new ActorStats(health: a.Health - b.Health, meleeAttack: a.MeleeAttack - b.MeleeAttack,
+            return new ActorStats(health: a.Health - b.Health, mana: a.Mana - b.Mana, stamina: a.Stamina - b.Stamina, meleeAttack: a.MeleeAttack - b.MeleeAttack,
                 meleeDefense: a.MeleeDefense - b.MeleeDefense, rangedAttack: a.RangedAttack - b.RangedAttack,
                 rangedDefense: a.RangedDefense - b.RangedDefense, magicAttack: a.MagicAttack - b.MagicAttack,
                 magicDefense: a.MagicDefense - b.MagicDefense, criticalHitChance: a.CriticalHitChance - b.CriticalHitChance);
@@ -77,7 +87,7 @@ namespace DragonsEnd.Stats
 
         public static ActorStats operator *(ActorStats a, ActorStats b)
         {
-            return new ActorStats(health: a.Health * b.Health, meleeAttack: a.MeleeAttack * b.MeleeAttack,
+            return new ActorStats(health: a.Health * b.Health, mana: a.Mana * b.Mana, stamina: a.Stamina * b.Stamina, meleeAttack: a.MeleeAttack * b.MeleeAttack,
                 meleeDefense: a.MeleeDefense * b.MeleeDefense, rangedAttack: a.RangedAttack * b.RangedAttack,
                 rangedDefense: a.RangedDefense * b.RangedDefense, magicAttack: a.MagicAttack * b.MagicAttack,
                 magicDefense: a.MagicDefense * b.MagicDefense, criticalHitChance: a.CriticalHitChance * b.CriticalHitChance);
@@ -85,7 +95,7 @@ namespace DragonsEnd.Stats
 
         public static ActorStats operator /(ActorStats a, ActorStats b)
         {
-            return new ActorStats(health: a.Health / b.Health, meleeAttack: a.MeleeAttack / b.MeleeAttack,
+            return new ActorStats(health: a.Health / b.Health, mana: a.Mana / b.Mana, stamina: a.Stamina / b.Stamina, meleeAttack: a.MeleeAttack / b.MeleeAttack,
                 meleeDefense: a.MeleeDefense / b.MeleeDefense, rangedAttack: a.RangedAttack / b.RangedAttack,
                 rangedDefense: a.RangedDefense / b.RangedDefense, magicAttack: a.MagicAttack / b.MagicAttack,
                 magicDefense: a.MagicDefense / b.MagicDefense, criticalHitChance: a.CriticalHitChance / b.CriticalHitChance);
@@ -94,6 +104,8 @@ namespace DragonsEnd.Stats
         public void AddModifier(ActorStats modifier)
         {
             Health.AddModifier(modifier: modifier.Health.CurrentValue);
+            Mana.AddModifier(modifier: modifier.Mana.CurrentValue);
+            Stamina.AddModifier(modifier: modifier.Stamina.CurrentValue);
             MeleeAttack.AddModifier(modifier: modifier.MeleeAttack.CurrentValue);
             RangedAttack.AddModifier(modifier: modifier.RangedAttack.CurrentValue);
             MagicAttack.AddModifier(modifier: modifier.MagicAttack.CurrentValue);
@@ -106,6 +118,8 @@ namespace DragonsEnd.Stats
         public void RemoveModifier(ActorStats modifier)
         {
             Health.RemoveModifier(modifier: modifier.Health.CurrentValue);
+            Mana.RemoveModifier(modifier: modifier.Mana.CurrentValue);
+            Stamina.RemoveModifier(modifier: modifier.Stamina.CurrentValue);
             MeleeAttack.RemoveModifier(modifier: modifier.MeleeAttack.CurrentValue);
             RangedAttack.RemoveModifier(modifier: modifier.RangedAttack.CurrentValue);
             MagicAttack.RemoveModifier(modifier: modifier.MagicAttack.CurrentValue);

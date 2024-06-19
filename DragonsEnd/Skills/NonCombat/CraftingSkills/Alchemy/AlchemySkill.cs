@@ -20,7 +20,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
             {
                 new BasicSkillUnlock(name: ItemNames.WeakHealthPotion, description: "You can now brew Weak Health Potions!", isLocked: false),
                 new BasicSkillUnlock(name: ItemNames.WeakManaPotion, description: "You can now brew Weak Mana Potions!", isLocked: false),
-                new BasicSkillUnlock(name: ItemNames.WeakActionPotion, description: "You can now brew Weak Action Potions!", isLocked: false)
+                new BasicSkillUnlock(name: ItemNames.WeakStaminaPotion, description: "You can now brew Weak Action Potions!", isLocked: false)
             },
             [key: 10] = new List<ILockable>
             {
@@ -33,7 +33,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
                 new BasicSkillUnlock(name: ItemNames.WeakMagicDefensePotion, description: "You can now brew Weak Magic Defense Potions!"),
                 new BasicSkillUnlock(name: ItemNames.NormalHealthPotion, description: "You can now brew Normal Health Potions!"),
                 new BasicSkillUnlock(name: ItemNames.NormalManaPotion, description: "You can now brew Normal Mana Potions!"),
-                new BasicSkillUnlock(name: ItemNames.NormalActionPotion, description: "You can now brew Normal Action Potions!"),
+                new BasicSkillUnlock(name: ItemNames.NormalStaminaPotion, description: "You can now brew Normal Action Potions!"),
                 new BasicSkillUnlock(name: ItemNames.WeakElixir, description: "You can now brew Weak Elixirs!")
             },
             [key: 20] = new List<ILockable>
@@ -61,7 +61,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
                 new BasicSkillUnlock(name: AlchemyTitles.JourneymanAlchemist, description: "You've earned the title of Journeyman Alchemist!"),
                 new BasicSkillUnlock(name: ItemNames.StrongHealthPotion, description: "You can now brew Strong Health Potions!"),
                 new BasicSkillUnlock(name: ItemNames.StrongManaPotion, description: "You can now brew Strong Mana Potions!"),
-                new BasicSkillUnlock(name: ItemNames.StrongActionPotion, description: "You can now brew Strong Action Potions!")
+                new BasicSkillUnlock(name: ItemNames.StrongStaminaPotion, description: "You can now brew Strong Action Potions!")
             },
             [key: 50] = new List<ILockable>
             {
@@ -85,7 +85,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
                 new BasicSkillUnlock(name: AlchemyTitles.VeteranAlchemist, description: "You've earned the title of Veteran Alchemist!"),
                 new BasicSkillUnlock(name: ItemNames.UltraHealthPotion, description: "You can now brew Ultra Health Potions!"),
                 new BasicSkillUnlock(name: ItemNames.UltraManaPotion, description: "You can now brew Ultra Mana Potions!"),
-                new BasicSkillUnlock(name: ItemNames.UltraActionPotion, description: "You can now brew Ultra Action Potions!")
+                new BasicSkillUnlock(name: ItemNames.UltraStaminaPotion, description: "You can now brew Ultra Action Potions!")
             },
             [key: 80] = new List<ILockable>
             {

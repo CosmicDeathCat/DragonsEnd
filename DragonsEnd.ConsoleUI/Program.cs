@@ -22,6 +22,8 @@ public static class Program
             characterClass: CharacterClassType.Mage,
             actorStats: new ActorStats(
                 health: 100,
+                mana: 100,
+                stamina: 100,
                 meleeAttack: 5,
                 meleeDefense: 5,
                 rangedAttack: 5,

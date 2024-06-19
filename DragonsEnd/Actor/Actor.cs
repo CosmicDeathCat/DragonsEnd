@@ -37,7 +37,7 @@ namespace DragonsEnd.Actor
             Inventory = new List<IItem?>();
             DropItems = new List<IDropItem>();
             Leveling = new Leveling.Leveling(actor: this, name: "Level");
-            ActorStats = new ActorStats(health: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
+            ActorStats = new ActorStats(health: 100, mana: 100, stamina: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
                 magicDefense: 1);
             ActorSkills = new ActorSkills(actor: this);
             MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);

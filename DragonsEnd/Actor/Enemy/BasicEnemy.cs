@@ -50,6 +50,8 @@ namespace DragonsEnd.Actor.Enemy
                 characterClass: CharacterClass,
                 actorStats: new ActorStats(
                     health: ActorStats.Health.BaseValue,
+                    mana: ActorStats.Mana.BaseValue,
+                    stamina: ActorStats.Stamina.BaseValue,
                     meleeAttack: ActorStats.MeleeAttack.BaseValue,
                     meleeDefense: ActorStats.MeleeDefense.BaseValue,
                     rangedAttack: ActorStats.RangedAttack.BaseValue,
