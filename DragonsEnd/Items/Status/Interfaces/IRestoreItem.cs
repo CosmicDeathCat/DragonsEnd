@@ -4,8 +4,8 @@ namespace DragonsEnd.Items.Status.Interfaces
 {
     public interface IRestoreItem : IItem
     {
-        int HealthHealthRestorePercentage { get; set; }
-        int ManaRestorePercentage { get; set; }
-        int StaminaRestorePercentage { get; set; }
+        double HealthHealthRestorePercentage { get; set; }
+        double ManaRestorePercentage { get; set; }
+        double StaminaRestorePercentage { get; set; }
     }
 }

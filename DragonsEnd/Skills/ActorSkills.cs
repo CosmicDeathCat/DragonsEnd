@@ -12,6 +12,7 @@ using DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Mining;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Ranching;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Woodcutting;
 
 namespace DragonsEnd.Skills
@@ -33,6 +34,7 @@ namespace DragonsEnd.Skills
             ForagingSkill = new ForagingSkill(name: "Foraging", actor: actor);
             MiningSkill = new MiningSkill(name: "Mining", actor: actor);
             SmithingSkill = new SmithingSkill(name: "Smithing", actor: actor);
+            RanchingSkill = new RanchingSkill(name: "Ranching", actor: actor);
             WoodcuttingSkill = new WoodcuttingSkill(name: "Woodcutting", actor: actor);
         }
 
@@ -51,6 +53,7 @@ namespace DragonsEnd.Skills
             ForagingSkill foragingSkill,
             MiningSkill miningSkill,
             SmithingSkill smithingSkill,
+            RanchingSkill ranchingSkill,
             WoodcuttingSkill woodcuttingSkill
         )
         {
@@ -67,6 +70,7 @@ namespace DragonsEnd.Skills
             ForagingSkill = foragingSkill;
             MiningSkill = miningSkill;
             SmithingSkill = smithingSkill;
+            RanchingSkill = ranchingSkill;
             WoodcuttingSkill = woodcuttingSkill;
         }
 
@@ -83,6 +87,7 @@ namespace DragonsEnd.Skills
         public virtual ForagingSkill ForagingSkill { get; set; }
         public virtual MiningSkill MiningSkill { get; set; }
         public virtual SmithingSkill SmithingSkill { get; set; }
+        public virtual RanchingSkill RanchingSkill { get; set; }
         public virtual WoodcuttingSkill WoodcuttingSkill { get; set; }
     }
 }

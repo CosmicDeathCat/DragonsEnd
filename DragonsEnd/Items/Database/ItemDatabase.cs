@@ -23,28 +23,28 @@ namespace DragonsEnd.Items.Database
                     description: "A weak health potion that restores 25% health.",
                     price: 25,
                     type: ItemType.Consumable,
-                    healthRestorePercentage: 25
+                    healthRestorePercentage: 25.0
                 ),
                 [key: ItemNames.NormalHealthPotion] = new RestoreItem(
                     name: ItemNames.NormalHealthPotion,
                     description: "A normal health potion that restores 50% health.",
                     price: 100,
                     type: ItemType.Consumable,
-                    healthRestorePercentage: 50
+                    healthRestorePercentage: 50.0
                 ),
                 [key: ItemNames.StrongHealthPotion] = new RestoreItem(
                     name: ItemNames.StrongHealthPotion,
                     description: "A strong health potion that restores 75% health.",
                     price: 300,
                     type: ItemType.Consumable,
-                    healthRestorePercentage: 75
+                    healthRestorePercentage: 75.0
                 ),
                 [key: ItemNames.UltraHealthPotion] = new RestoreItem(
                     name: ItemNames.UltraHealthPotion,
-                    description: "An elixir that restores 100% health.",
+                    description: "A ultra health potion that restores 100% health.",
                     price: 500,
                     type: ItemType.Consumable,
-                    healthRestorePercentage: 100
+                    healthRestorePercentage: 100.0
                 ),
                 
                 // Mana Items
@@ -53,28 +53,28 @@ namespace DragonsEnd.Items.Database
                     description: "A weak mana potion that restores 25% mana.",
                     price: 25,
                     type: ItemType.Consumable,
-                    manaRestorePercentage: 25
+                    manaRestorePercentage: 25.0
                 ),
                 [key: ItemNames.NormalManaPotion] = new RestoreItem(
                     name: ItemNames.NormalManaPotion,
                     description: "A normal mana potion that restores 50% mana.",
                     price: 100,
                     type: ItemType.Consumable,
-                    manaRestorePercentage: 50
+                    manaRestorePercentage: 50.0
                 ),
                 [key: ItemNames.StrongManaPotion] = new RestoreItem(
                     name: ItemNames.StrongManaPotion,
                     description: "A strong mana potion that restores 75% mana.",
                     price: 300,
                     type: ItemType.Consumable,
-                    manaRestorePercentage: 75
+                    manaRestorePercentage: 75.0
                 ),
                 [key: ItemNames.UltraManaPotion] = new RestoreItem(
                     name: ItemNames.UltraManaPotion,
-                    description: "An elixir that restores 100% mana.",
+                    description: "An ultra mana potion that restores 100% mana.",
                     price: 500,
                     type: ItemType.Consumable,
-                    manaRestorePercentage: 100
+                    manaRestorePercentage: 100.0
                 ),
                 
                 // Stamina Items
@@ -83,28 +83,108 @@ namespace DragonsEnd.Items.Database
                     description: "A weak stamina potion that restores 25% stamina.",
                     price: 25,
                     type: ItemType.Consumable,
-                    staminaRestorePercentage: 25
+                    staminaRestorePercentage: 25.0
                 ),
                 [key: ItemNames.NormalStaminaPotion] = new RestoreItem(
                     name: ItemNames.NormalStaminaPotion,
                     description: "A normal stamina potion that restores 50% stamina.",
                     price: 100,
                     type: ItemType.Consumable,
-                    staminaRestorePercentage: 50
+                    staminaRestorePercentage: 50.0
                 ),
                 [key: ItemNames.StrongStaminaPotion] = new RestoreItem(
                     name: ItemNames.StrongStaminaPotion,
                     description: "A strong stamina potion that restores 75% stamina.",
                     price: 300,
                     type: ItemType.Consumable,
-                    staminaRestorePercentage: 75
+                    staminaRestorePercentage: 75.0
                 ),
                 [key: ItemNames.UltraStaminaPotion] = new RestoreItem(
                     name: ItemNames.UltraStaminaPotion,
-                    description: "An elixir that restores 100% stamina.",
+                    description: "An ultra stamina potion that restores 100% stamina.",
                     price: 500,
                     type: ItemType.Consumable,
-                    staminaRestorePercentage: 100
+                    staminaRestorePercentage: 100.0
+                ),
+                
+                //Elixirs
+                [key: ItemNames.WeakElixir] = new RestoreItem(
+                    name: ItemNames.WeakElixir,
+                    description: "A weak elixir that restores 25% health, mana, and stamina.",
+                    price: 75,
+                    type: ItemType.Consumable,
+                    healthRestorePercentage: 25.0,
+                    manaRestorePercentage: 25.0,
+                    staminaRestorePercentage: 25.0
+                ),
+                [key: ItemNames.NormalElixir] = new RestoreItem(
+                    name: ItemNames.NormalElixir,
+                    description: "A normal elixir that restores 50% health, mana, and stamina.",
+                    price: 300,
+                    type: ItemType.Consumable,
+                    healthRestorePercentage: 50.0,
+                    manaRestorePercentage: 50.0,
+                    staminaRestorePercentage: 50.0
+                ),
+                [key: ItemNames.StrongElixir] = new RestoreItem(
+                    name: ItemNames.StrongElixir,
+                    description: "A strong elixir that restores 75% health, mana, and stamina.",
+                    price: 900,
+                    type: ItemType.Consumable,
+                    healthRestorePercentage: 75.0,
+                    manaRestorePercentage: 75.0,
+                    staminaRestorePercentage: 75.0
+                ),
+                [key: ItemNames.UltraElixir] = new RestoreItem(
+                    name: ItemNames.UltraElixir,
+                    description: "An ultra elixir that restores 100% health, mana, and stamina.",
+                    price: 1500,
+                    type: ItemType.Consumable,
+                    healthRestorePercentage: 100.0,
+                    manaRestorePercentage: 100.0,
+                    staminaRestorePercentage: 100.0
+                ),
+                // Special Potions
+                [key: ItemNames.ElixirOfLife] = new StatIncreaseItem(
+                    name: ItemNames.ElixirOfLife,
+                    description: "An elixir that permanently increases Base Health by 10%",
+                    price: 5000,
+                    type: ItemType.Consumable,
+                    healthIncreasePercentage: 10.0
+                ),
+                [key: ItemNames.ElixirOfMana] = new StatIncreaseItem(
+                    name: ItemNames.ElixirOfMana,
+                    description: "An elixir that permanently increases Base Mana by 10%",
+                    price: 5000,
+                    type: ItemType.Consumable,
+                    manaIncreasePercentage: 10.0
+                ),
+                [key: ItemNames.ElixirOfStamina] = new StatIncreaseItem(
+                    name: ItemNames.ElixirOfStamina,
+                    description: "An elixir that permanently increases Base Stamina by 10%",
+                    price: 5000,
+                    type: ItemType.Consumable,
+                    staminaIncreasePercentage: 10.0
+                ),
+                [key: ItemNames.ElixerOfTheAncients] = new LevelingItem(
+                    name: ItemNames.ElixerOfTheAncients,
+                    description: "An elixir that permanently increases the all skill levels of the by 1.",
+                    price: 10000,
+                    type: ItemType.Consumable,
+                    meleeLevel: 1,
+                    rangedLevel: 1,
+                    magicLevel: 1,
+                    alchemyLevel: 1,
+                    cookingLevel: 1,
+                    craftingLevel: 1,
+                    enchantingLevel: 1,
+                    fletchingLevel: 1,
+                    smithingLevel: 1,
+                    fishingLevel: 1,
+                    foragingLevel: 1,
+                    miningLevel: 1,
+                    ranchingLevel: 1,
+                    woodcuttingLevel: 1
                 ),
 
                 // Melee Gear - Bronze Tier

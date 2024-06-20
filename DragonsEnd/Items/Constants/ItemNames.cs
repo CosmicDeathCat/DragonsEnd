@@ -86,10 +86,12 @@ namespace DragonsEnd.Items.Constants
         public const string UltraElixir = "Ultra Elixir";
 
         // Special Elixirs
-        public const string ElixirOfLife = "Elixir of Life";
-        public const string ElixirOfPower = "Elixir of Power";
-        public const string ElixerOfResilience = "Elixer of Resilience";
-        public const string ElixerOfTheAncients = "Elixer of the Ancients";
+        public const string ElixirOfLife = "Elixir of Life"; // Permanently Increases Max Health by 10%
+        public const string ElixirOfMana = "Elixir of Mana"; // Permanently Increases Max Mana by 10%
+        public const string ElixirOfStamina = "Elixir of Stamina"; // Permanently Increases Max Stamina by 10%
+        public const string ElixirOfPower = "Elixir of Power"; // Permanently Increases Melee Attack, Ranged Attack, Magic Attack, by 10%
+        public const string ElixerOfResilience = "Elixer of Resilience"; // Permanently Increases Melee Defense, Ranged Defense, Magic Defense, by 10%
+        public const string ElixerOfTheAncients = "Elixer of the Ancients"; // Permanently increases all levels by 1 (Max 100)
 
         // Special Potions
         public const string RevivalPotion = "Revival Potion";

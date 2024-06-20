@@ -18,9 +18,9 @@ namespace DragonsEnd.Items.Status
             string description,
             long price,
             ItemType type,
-            int healthRestorePercentage = 0,
-            int manaRestorePercentage = 0,
-            int staminaRestorePercentage = 0,
+            double healthRestorePercentage = 0,
+            double manaRestorePercentage = 0,
+            double staminaRestorePercentage = 0,
             bool stackable = true,
             long quantity = 1,
             double dropRate = 1
@@ -33,17 +33,17 @@ namespace DragonsEnd.Items.Status
             StaminaRestorePercentage = staminaRestorePercentage;
         }
 
-        public virtual int HealthHealthRestorePercentage { get; set; }
-        public virtual int ManaRestorePercentage { get; set; }
-        public virtual int StaminaRestorePercentage { get; set; }
+        public virtual double HealthHealthRestorePercentage { get; set; }
+        public virtual double ManaRestorePercentage { get; set; }
+        public virtual double StaminaRestorePercentage { get; set; }
 
         public override void Use(IActor? source, IActor? target)
         {
             if (target != null)
             {
-                target.ActorStats.Health.CurrentValue += target.ActorStats.Health.MaxValue * HealthHealthRestorePercentage / 100;
-                target.ActorStats.Mana.CurrentValue += target.ActorStats.Mana.MaxValue * ManaRestorePercentage / 100;
-                target.ActorStats.Stamina.CurrentValue += target.ActorStats.Stamina.MaxValue * StaminaRestorePercentage / 100;
+                target.ActorStats.Health.CurrentValue += (int)Math.Round(target.ActorStats.Health.MaxValue * HealthHealthRestorePercentage / 100, MidpointRounding.AwayFromZero);
+                target.ActorStats.Mana.CurrentValue += (int)Math.Round(target.ActorStats.Mana.MaxValue * ManaRestorePercentage / 100, MidpointRounding.AwayFromZero);
+                target.ActorStats.Stamina.CurrentValue += (int)Math.Round(target.ActorStats.Stamina.MaxValue * StaminaRestorePercentage / 100, MidpointRounding.AwayFromZero);
             }
 
             switch (Type)

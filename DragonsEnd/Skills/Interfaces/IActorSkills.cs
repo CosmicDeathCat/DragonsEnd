@@ -11,6 +11,7 @@ using DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Mining;
+using DragonsEnd.Skills.NonCombat.GatheringSkills.Ranching;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Woodcutting;
 
 namespace DragonsEnd.Skills.Interfaces
@@ -30,6 +31,7 @@ namespace DragonsEnd.Skills.Interfaces
         ForagingSkill ForagingSkill { get; set; }
         MiningSkill MiningSkill { get; set; }
         SmithingSkill SmithingSkill { get; set; }
+        RanchingSkill RanchingSkill { get; set; }
         WoodcuttingSkill WoodcuttingSkill { get; set; }
     }
 }
