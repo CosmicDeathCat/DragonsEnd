@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DragonsEnd.Actor.Interfaces;
-using DragonsEnd.Items.Drops;
-using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Utility.Extensions.Random;
@@ -12,20 +10,23 @@ namespace DragonsEnd.Items.Loot
 {
     public class LootSystem
     {
-        public static (long gold, long experience, List<IItem> items) GenerateLoot
+        public static (long gold, long combatExperience, List<SkillExperience> skillExperiences, List<IItem> items) GenerateLoot
         (
             long minItemAmountDrop,
             long maxItemAmountDrop,
             long minGold,
             long maxGold,
-            long minExperience,
-            long maxExperience,
-            params IDropItem[] lootableItems
+            long combatExp,
+            List<SkillExperience>? skillExperiences,
+            params IItem[] lootableItems
         )
         {
             var rnd = new Random();
             var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
-            var experience = rnd.NextInt64(minValue: minExperience, maxValue: maxExperience + 1);
+            var combatExperience = combatExp;
+            // var experience = rnd.NextInt64(minValue: minExperience, maxValue: maxExperience + 1);
+            List<SkillExperience>? skillExps = skillExperiences;
+            
             var itemAmount = rnd.NextInt64(minValue: minItemAmountDrop, maxValue: maxItemAmountDrop + 1);
             var items = new List<IItem>();
 
@@ -37,51 +38,51 @@ namespace DragonsEnd.Items.Loot
                 foreach (var dropItem in lootableItems.OrderBy(keySelector: x => x.DropRate))
                 {
                     cumulativeProbability += dropItem.DropRate;
-                    if (items.Exists(match: x => x.Name.Equals(value: dropItem.Item.Name, comparisonType: StringComparison.OrdinalIgnoreCase)))
+                    if (items.Exists(match: x => x.Name.Equals(value: dropItem.Name, comparisonType: StringComparison.OrdinalIgnoreCase)))
                     {
                         continue;
                     }
 
                     if (diceRoll <= cumulativeProbability)
                     {
-                        var item = dropItem.Item.Copy();
+                        var item = dropItem.Copy();
                         items.Add(item: item);
                         break;
                     }
                 }
             }
 
-            return (gold, experience, items);
+            return (gold, combatExperience, skillExps, items);
         }
 
-        public static (long gold, long experience, List<IItem> items) GenerateLoot
+        public static (long gold, long combatExperience, List<SkillExperience> skillExperiences, List<IItem> items) GenerateLoot
         (
             ILootable lootedObject,
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
-            long minExperience = -1L,
-            long maxExperience = -1L,
-            params IDropItem[] specificLootableItems
+            long combatExp = -1L,
+            List<SkillExperience>? skillExperiences = null,
+            params IItem[] specificLootableItems
         )
         {
             var lootableItems = specificLootableItems.ToList();
-            lootableItems.AddRange(collection: lootedObject.DropItems);
+            lootableItems.AddRange(collection: lootedObject.LootContainer.Items);
 
             if (lootableItems.Count == 0)
             {
                 if (lootedObject is IActor actor)
                 {
                     // Default to using the actor's inventory and equipment as drop items with default drop rates
-                    foreach (var item in actor.Inventory)
+                    foreach (var item in actor.Inventory.Items)
                     {
                         if (item == null)
                         {
                             continue;
                         }
 
-                        lootableItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
+                        lootableItems.Add(item: new Item(item: item));
                     }
 
                     foreach (var item in actor.Equipment)
@@ -91,7 +92,7 @@ namespace DragonsEnd.Items.Loot
                             continue;
                         }
 
-                        lootableItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
+                        lootableItems.Add(item: new Item(item: item));
                     }
                 }
             }
@@ -109,22 +110,22 @@ namespace DragonsEnd.Items.Loot
 
             if (minGold == -1)
             {
-                minGold = lootedObject.Gold.CurrentValue;
+                minGold = lootedObject.LootContainer.Gold.CurrentValue;
             }
 
             if (maxGold == -1)
             {
-                maxGold = lootedObject.Gold.CurrentValue;
+                maxGold = lootedObject.LootContainer.Gold.CurrentValue;
             }
 
-            if (minExperience == -1)
+            if (combatExp == -1)
             {
-                minExperience = lootedObject.Leveling.Experience;
+                combatExp = lootedObject.LootContainer.CombatExperience;
             }
 
-            if (maxExperience == -1)
+            if (skillExperiences == null)
             {
-                maxExperience = lootedObject.Leveling.Experience;
+                skillExperiences = lootedObject.LootContainer.SkillExperiences;
             }
 
             return GenerateLoot(
@@ -132,8 +133,8 @@ namespace DragonsEnd.Items.Loot
                 maxItemAmountDrop: maxItemAmountDrop,
                 minGold: minGold,
                 maxGold: maxGold,
-                minExperience: minExperience,
-                maxExperience: maxExperience,
+                combatExp: combatExp,
+                skillExperiences: skillExperiences,
                 lootableItems: lootableItems.ToArray());
         }
     }

@@ -151,7 +151,7 @@ namespace DragonsEnd.Leveling
 
         public virtual void GainExperience(long amount)
         {
-            if (Experience >= ExperienceLevels[key: MaxLevel])
+            if (Experience >= ExperienceLevels[key: MaxLevel] || amount <= 0)
             {
                 return;
             }

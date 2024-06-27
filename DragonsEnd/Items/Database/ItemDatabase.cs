@@ -3,8 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
-using DragonsEnd.Items.Drops;
-using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Equipment;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Status;
@@ -5077,22 +5075,17 @@ namespace DragonsEnd.Items.Database
                 )
             };
 
-        public static IItem GetItems(string itemName, long quantity = 1)
+        public static IItem GetItems(string itemName, long quantity = 1, double dropRate = 1.0)
         {
             if (Items.TryGetValue(key: itemName, value: out var item))
             {
                 var newItem = item.Copy();
                 newItem.Quantity = quantity;
+                newItem.DropRate = dropRate;
                 return newItem;
             }
 
             throw new KeyNotFoundException(message: $"Item '{itemName}' not found in the database.");
-        }
-
-        public static IDropItem GetDropItems(string itemName, long quantity = 1, double dropRate = 1)
-        {
-            var item = GetItems(itemName: itemName, quantity: quantity);
-            return new DropItem(item: item, dropRate: dropRate);
         }
     }
 }

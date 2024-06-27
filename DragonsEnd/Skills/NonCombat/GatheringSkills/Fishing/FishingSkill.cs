@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Enums;
 using DragonsEnd.Lockable.Interfaces;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing.Constants;
 using DragonsEnd.Skills.Unlocks;
@@ -12,6 +13,8 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing
         public FishingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
+        
+        public override SkillType SkillType => SkillType.Fishing;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {

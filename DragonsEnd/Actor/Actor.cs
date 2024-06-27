@@ -9,12 +9,13 @@ using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Messages;
 using DragonsEnd.Enums;
+using DragonsEnd.Items;
 using DragonsEnd.Items.Currency;
 using DragonsEnd.Items.Currency.Extensions;
-using DragonsEnd.Items.Drops;
-using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Items.Inventory;
+using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Loot;
 using DragonsEnd.Items.Messages;
 using DragonsEnd.Leveling.Interfaces;
@@ -34,8 +35,8 @@ namespace DragonsEnd.Actor
         {
             Name = "Actor";
             Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
-            Inventory = new List<IItem?>();
-            DropItems = new List<IDropItem>();
+            Inventory = new Inventory();
+            LootContainer = new LootContainer();
             Leveling = new Leveling.Leveling(actor: this, name: "Level");
             ActorStats = new ActorStats(health: 100, mana: 100, stamina: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
                 magicDefense: 1);
@@ -56,10 +57,9 @@ namespace DragonsEnd.Actor
             double criticalHitMultiplier = 2.00,
             int level = -1,
             long experience = -1L,
-            long gold = 0L,
             IEquipmentItem[]? equipment = null,
-            IItem[]? inventory = null,
-            params IDropItem[] dropItems
+            IInventory? inventory = null,
+            LootContainer? lootContainer = null
         )
         {
             Name = name;
@@ -73,15 +73,8 @@ namespace DragonsEnd.Actor
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             IsAlive = true;
             Leveling = new Leveling.Leveling(actor: this, name: "Level", maxLevel: 100, level: level, experience: experience);
-            Gold = new GoldCurrency(quantity: gold);
-            if (inventory != null)
-            {
-                Inventory.AddRange(collection: inventory);
-            }
-            else
-            {
-                Inventory = new List<IItem?>();
-            }
+            Inventory = inventory;
+            LootContainer = lootContainer;
 
             if (equipment != null)
             {
@@ -95,31 +88,35 @@ namespace DragonsEnd.Actor
                 Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             }
 
-            if (dropItems.Length > 0)
+            if (LootContainer != null)
             {
-                DropItems = dropItems.ToList();
-            }
-            else
-            {
-                // Default to using the provided inventory and equipment as drop items with default drop rates
-                foreach (var item in Inventory)
+                if (LootContainer?.Items.Count > 0)
                 {
-                    if (item == null)
+                
+                }
+                else
+                {
+                    // Default to using the provided inventory and equipment as drop items with default drop rates
+                    foreach (var item in Inventory.Items)
                     {
-                        continue;
+                        if (item == null)
+                        {
+                            continue;
+                        }
+
+                        LootContainer?.Items.Add(item: new Item(item: item));
                     }
 
-                    DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
-                }
-
-                if (equipment != null)
-                {
-                    foreach (var item in equipment)
+                    if (equipment != null)
                     {
-                        DropItems.Add(item: new DropItem(item: item, dropRate: item.DropRate));
+                        foreach (var item in equipment)
+                        {
+                            lootContainer?.Items.Add(item: new Item(item: item));
+                        }
                     }
                 }
             }
+            
 
             MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
@@ -128,6 +125,7 @@ namespace DragonsEnd.Actor
         public virtual string Name { get; set; }
         public virtual Gender Gender { get; set; }
         public Vector2 Position { get; set; }
+        public GoldCurrency Gold { get; set; }
         public virtual ILeveling Leveling { get; set; }
         public virtual DoubleStat DamageMultiplier { get; set; } = new(baseValue: 1.00);
         public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(baseValue: 1.00);
@@ -135,14 +133,12 @@ namespace DragonsEnd.Actor
         public virtual CharacterClassType CharacterClass { get; set; }
 
         public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length - 1];
-
-        public virtual List<IItem?> Inventory { get; set; } = new();
-        public GoldCurrency Gold { get; set; } = new(quantity: 0);
+        public virtual IInventory? Inventory { get; set; }
         public virtual IActor? Target { get; set; }
         public virtual ActorStats ActorStats { get; set; }
         public virtual IActorSkills ActorSkills { get; set; }
-
-        public List<IDropItem> DropItems { get; set; } = new();
+        
+        public virtual LootContainer? LootContainer { get; set; }
 
         public CombatStyle CombatStyle
         {
@@ -199,7 +195,7 @@ namespace DragonsEnd.Actor
                         data.Item.Quantity--;
                         if (data.Item.Quantity <= 0)
                         {
-                            Inventory.Remove(item: data.Item);
+                            Inventory.Items.Remove(item: data.Item);
                         }
 
                         break;
@@ -427,9 +423,9 @@ namespace DragonsEnd.Actor
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
-            long minExperience = -1L,
-            long maxExperience = -1L,
-            params IDropItem[] specificLootableItems
+            long combatExp = -1L,
+            List<SkillExperience>? skillExperiences = null,
+            params IItem[] specificLootableItems
         )
         {
             var loot = LootSystem.GenerateLoot(
@@ -438,10 +434,10 @@ namespace DragonsEnd.Actor
                 maxItemAmountDrop: maxItemAmountDrop,
                 minGold: minGold,
                 maxGold: maxGold,
-                minExperience: minExperience,
-                maxExperience: maxExperience,
+                combatExp: combatExp,
+                skillExperiences: skillExperiences,
                 specificLootableItems: specificLootableItems);
-            var lootContainer = new LootContainer(gold: loot.gold, experience: loot.experience, items: loot.items.ToArray());
+            var lootContainer = new LootContainer(gold: loot.gold, combatExperience: loot.combatExperience, experiences: loot.skillExperiences, items: loot.items.ToArray());
             return lootContainer;
         }
 
@@ -469,9 +465,10 @@ namespace DragonsEnd.Actor
                 damageMultiplier: DamageMultiplier.BaseValue,
                 damageReductionMultiplier: DamageReductionMultiplier.BaseValue,
                 criticalHitMultiplier: CriticalHitMultiplier.BaseValue, level: Leveling.CurrentLevel, experience: Leveling.Experience,
-                gold: Gold.CurrentValue,
                 equipment: Equipment?.ToArray()!,
-                inventory: Inventory?.ToArray()!, dropItems: DropItems?.ToArray()!);
+                inventory: Inventory, 
+                lootContainer: LootContainer
+            );
         }
 
         public virtual void ActorDeathMessageHandler(IMessageEnvelope message)
@@ -487,17 +484,81 @@ namespace DragonsEnd.Actor
                 return;
             }
 
-            if (data.Target == this)
-            {
-                return;
-            }
-
             var loot = data.Target.Loot();
-            Leveling.GainExperience(amount: loot.Experience);
-            Gold.Add(otherCurrency: loot.Gold);
-            Inventory.AddRange(collection: loot.Items);
+            switch (CombatStyle)
+            {
+                case CombatStyle.Melee:
+                    ActorSkills.MeleeSkill.Leveling.GainExperience(loot.CombatExperience);
+                    break;
+                case CombatStyle.Ranged:
+                    ActorSkills.RangedSkill.Leveling.GainExperience(loot.CombatExperience);
+                    break;
+                case CombatStyle.Magic:
+                    ActorSkills.MagicSkill.Leveling.GainExperience(loot.CombatExperience);
+                    break;
+                case CombatStyle.Hybrid:
+                    var sharedExp = loot.CombatExperience / 3;
+                    ActorSkills.MeleeSkill.Leveling.GainExperience(sharedExp);
+                    ActorSkills.RangedSkill.Leveling.GainExperience(sharedExp);
+                    ActorSkills.MagicSkill.Leveling.GainExperience(sharedExp);
+                    break;
+            }
+            foreach (var skill in loot.SkillExperiences)
+            {
+                switch (skill.SkillType)
+                {
+                    case SkillType.None:
+                        break;
+                    case SkillType.Melee:
+                        ActorSkills.MeleeSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Ranged:
+                        ActorSkills.RangedSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Magic:
+                        ActorSkills.MagicSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Alchemy:
+                        ActorSkills.AlchemySkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Cooking:
+                        ActorSkills.CookingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Crafting:
+                        ActorSkills.CraftingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Enchanting:
+                        ActorSkills.EnchantingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Fishing:
+                        ActorSkills.FishingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Fletching:
+                        ActorSkills.FletchingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Foraging:
+                        ActorSkills.ForagingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Mining:
+                        ActorSkills.MiningSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Smithing:
+                        ActorSkills.SmithingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Ranching:
+                        ActorSkills.RanchingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                    case SkillType.Woodcutting:
+                        ActorSkills.WoodcuttingSkill.Leveling.GainExperience(skill.Experience);
+                        break;
+                }
+            }
+            
+            Inventory?.Gold.Add(otherCurrency: loot.Gold);
+            Inventory?.Items.AddRange(collection: loot.Items);
+            var itemsString = loot.Items.Count is > 0 and > 1 ? "Items" : "Item";
             var lootItemsDisplay = loot.Items.Count > 0
-                ? $"{loot.Items.Count} Items from {data.Target.Name}\n" +
+                ? $"{loot.Items.Count} {itemsString} from {data.Target.Name}\n" +
                   string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
                 : "No Items";
             Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
@@ -556,7 +617,8 @@ namespace DragonsEnd.Actor
                 // }
                 return;
             }
-
+            
+            if(!data.SenderIdentity.ID.Equals(Leveling.ID)) return;
 
             switch (data.Type)
             {

@@ -147,20 +147,6 @@ namespace DragonsEnd.Items.Status
                 target.ActorSkills.WoodcuttingSkill.Leveling.CurrentLevel += WoodcuttingLevel;
             }
 
-            switch (Type)
-            {
-                case ItemType.NonConsumable:
-                    break;
-                case ItemType.Consumable:
-                    Quantity--;
-                    if (Quantity <= 0)
-                    {
-                        source?.Inventory.Remove(item: this);
-                    }
-
-                    break;
-            }
-
             MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
                 message: new ItemMessage(item: this, source: source, target: target));
         }

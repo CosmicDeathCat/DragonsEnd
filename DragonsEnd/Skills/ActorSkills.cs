@@ -2,6 +2,7 @@
 using DragonsEnd.Skills.Combat.Magic;
 using DragonsEnd.Skills.Combat.Melee;
 using DragonsEnd.Skills.Combat.Ranged;
+using DragonsEnd.Skills.Constants;
 using DragonsEnd.Skills.Interfaces;
 using DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy;
 using DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking;
@@ -22,20 +23,20 @@ namespace DragonsEnd.Skills
         public ActorSkills(IActor actor)
         {
             Actor = actor;
-            MeleeSkill = new MeleeSkill(name: "Melee", actor: actor);
-            RangedSkill = new RangedSkill(name: "Ranged", actor: actor);
-            MagicSkill = new MagicSkill(name: "Magic", actor: actor);
-            AlchemySkill = new AlchemySkill(name: "Alchemy", actor: actor);
-            CookingSkill = new CookingSkill(name: "Cooking", actor: actor);
-            CraftingSkill = new CraftingSkill(name: "Crafting", actor: actor);
-            EnchantingSkill = new EnchantingSkill(name: "Enchanting", actor: actor);
-            FishingSkill = new FishingSkill(name: "Fishing", actor: actor);
-            FletchingSkill = new FletchingSkill(name: "Fletching", actor: actor);
-            ForagingSkill = new ForagingSkill(name: "Foraging", actor: actor);
-            MiningSkill = new MiningSkill(name: "Mining", actor: actor);
-            SmithingSkill = new SmithingSkill(name: "Smithing", actor: actor);
-            RanchingSkill = new RanchingSkill(name: "Ranching", actor: actor);
-            WoodcuttingSkill = new WoodcuttingSkill(name: "Woodcutting", actor: actor);
+            MeleeSkill = new MeleeSkill(name: SkillNames.MeleeSkill, actor: actor);
+            RangedSkill = new RangedSkill(name: SkillNames.RangedSkill, actor: actor);
+            MagicSkill = new MagicSkill(name: SkillNames.MagicSkill, actor: actor);
+            AlchemySkill = new AlchemySkill(name: SkillNames.AlchemySkill, actor: actor);
+            CookingSkill = new CookingSkill(name: SkillNames.CookingSkill, actor: actor);
+            CraftingSkill = new CraftingSkill(name: SkillNames.CraftingSkill, actor: actor);
+            EnchantingSkill = new EnchantingSkill(name: SkillNames.EnchantingSkill, actor: actor);
+            FishingSkill = new FishingSkill(name: SkillNames.FishingSkill, actor: actor);
+            FletchingSkill = new FletchingSkill(name: SkillNames.FletchingSkill, actor: actor);
+            ForagingSkill = new ForagingSkill(name: SkillNames.ForagingSkill, actor: actor);
+            MiningSkill = new MiningSkill(name: SkillNames.MiningSkill, actor: actor);
+            SmithingSkill = new SmithingSkill(name: SkillNames.SmithingSkill, actor: actor);
+            RanchingSkill = new RanchingSkill(name: SkillNames.RanchingSkill, actor: actor);
+            WoodcuttingSkill = new WoodcuttingSkill(name: SkillNames.WoodcuttingSkill, actor: actor);
         }
 
         public ActorSkills

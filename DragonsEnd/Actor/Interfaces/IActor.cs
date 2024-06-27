@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Numerics;
+﻿using System.Numerics;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills.Interfaces;
 using DragonsEnd.Stats;
@@ -18,7 +17,8 @@ namespace DragonsEnd.Actor.Interfaces
         Vector2 Position { get; set; }
         CharacterClassType CharacterClass { get; set; }
         IEquipmentItem?[] Equipment { get; set; }
-        List<IItem?> Inventory { get; set; }
+        IInventory Inventory { get; set; }
+        // List<IItem?> Inventory { get; set; }
         ActorStats ActorStats { get; set; }
         IActorSkills ActorSkills { get; set; }
         public DoubleStat DamageMultiplier { get; set; }

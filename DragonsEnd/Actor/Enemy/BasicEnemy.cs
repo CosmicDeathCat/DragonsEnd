@@ -1,9 +1,9 @@
 using DragonsEnd.Actor.Enemy.Interfaces;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
-using DragonsEnd.Items.Drops.Interfaces;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Items.Inventory.Interfaces;
+using DragonsEnd.Items.Loot;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.Actor.Enemy
@@ -27,15 +27,14 @@ namespace DragonsEnd.Actor.Enemy
             double damageMultiplier = 1.00,
             double damageReductionMultiplier = 1.00,
             double criticalHitMultiplier = 2.00,
-            long gold = 0,
             IEquipmentItem[]? equipment = null,
-            IItem[]? inventory = null,
-            params IDropItem[] dropItems
+            IInventory? inventory = null,
+            LootContainer? lootContainer = null
         )
             : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
-                criticalHitMultiplier: criticalHitMultiplier, level: level, experience: experience, gold: gold, equipment: equipment,
-                inventory: inventory, dropItems: dropItems)
+                criticalHitMultiplier: criticalHitMultiplier, level: level, experience: experience, equipment: equipment,
+                inventory: inventory, lootContainer: lootContainer)
         {
             EnemyTier = enemyTier;
         }
@@ -65,10 +64,10 @@ namespace DragonsEnd.Actor.Enemy
                 experience: Leveling.Experience,
                 damageMultiplier: DamageMultiplier.CurrentValue,
                 damageReductionMultiplier: DamageReductionMultiplier.CurrentValue,
-                gold: Gold.CurrentValue,
                 equipment: Equipment!,
-                inventory: Inventory?.ToArray()!,
-                dropItems: DropItems.ToArray());
+                inventory: Inventory,
+                lootContainer: LootContainer
+                );
         }
 
         IEnemy IEnemy.Copy()

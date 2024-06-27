@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using DLS.MessageSystem;
+using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Actor.Interfaces;
@@ -19,13 +21,21 @@ namespace DragonsEnd.Skills
             Name = name;
             Actor = actor;
             Leveling = new Leveling.Leveling(actor: actor, name: name, maxLevel: maxLevel);
+            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
+        ~BaseSkill()
+        {
+            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
+        }
+        
         public virtual string Name { get; set; }
         public virtual Guid ID { get; set; } = Guid.NewGuid();
+        
+        public virtual SkillType SkillType => SkillType.None;
         public virtual ILeveling Leveling { get; set; }
         public virtual IActor Actor { get; set; }
-        public virtual ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; }
+        public virtual ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new();
 
         public virtual void HandleUnlocks(int level)
         {
@@ -75,8 +85,10 @@ namespace DragonsEnd.Skills
                         HandleUnlocks(level: Leveling.CurrentLevel);
                         break;
                     case LevelingType.GainExperience:
+                        Console.WriteLine(value: $"{Actor.Name} has gained {data.Experience} {data.SenderIdentity.Name} experience!");
                         break;
                     case LevelingType.LoseExperience:
+                        Console.WriteLine(value: $"{Actor.Name} has lost {data.Experience} {data.SenderIdentity.Name} experience!");
                         break;
                     case LevelingType.LoseLevel:
                         Console.WriteLine(value: $"{Actor.Name} has lost a level in {Name}! now level {Leveling.CurrentLevel}!");

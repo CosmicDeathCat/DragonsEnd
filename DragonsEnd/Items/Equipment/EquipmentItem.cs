@@ -57,13 +57,13 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-
-            if (target.Leveling.CurrentLevel < RequiredLevel)
-            {
-                Console.WriteLine(
-                    value: $"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
-                return false;
-            }
+            //TODO: Add level requirements based on skill levels for the gear.
+            // if (target.Leveling.CurrentLevel < RequiredLevel)
+            // {
+            //     Console.WriteLine(
+            //         value: $"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
+            //     return false;
+            // }
 
 
             var isEquipped = false;
@@ -142,7 +142,7 @@ namespace DragonsEnd.Items.Equipment
 
             if (isEquipped)
             {
-                source?.Inventory.Remove(item: this);
+                source?.Inventory.Items.Remove(item: this);
                 ApplyModifiers(target: target, isEquipping: true);
             }
             else
@@ -188,7 +188,7 @@ namespace DragonsEnd.Items.Equipment
 
             ApplyModifiers(target: target, isEquipping: false);
 
-            source?.Inventory.Add(item: this);
+            source?.Inventory.Items.Add(item: this);
 
             isUnequipped = true;
             return isUnequipped;

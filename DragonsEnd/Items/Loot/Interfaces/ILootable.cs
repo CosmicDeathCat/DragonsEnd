@@ -1,15 +1,11 @@
 using System.Collections.Generic;
-using DragonsEnd.Items.Currency;
-using DragonsEnd.Items.Drops.Interfaces;
-using DragonsEnd.Leveling.Interfaces;
+using DragonsEnd.Items.Interfaces;
 
 namespace DragonsEnd.Items.Loot.Interfaces
 {
     public interface ILootable
     {
-        List<IDropItem> DropItems { get; set; }
-        GoldCurrency Gold { get; set; }
-        ILeveling Leveling { get; set; }
+        LootContainer? LootContainer { get; set; }
 
         LootContainer Loot
         (
@@ -17,9 +13,9 @@ namespace DragonsEnd.Items.Loot.Interfaces
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
-            long minExperience = -1L,
-            long maxExperience = -1L,
-            params IDropItem[] specificLootableItems
+            long combatExp = -1L,
+            List<SkillExperience>? skillExperiences = null,
+            params IItem[] specificLootableItems
         );
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Enums;
 using DragonsEnd.Lockable.Interfaces;
 using DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging.Constants;
 using DragonsEnd.Skills.Unlocks;
@@ -12,6 +13,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging
         public ForagingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
+        public override SkillType SkillType => SkillType.Foraging;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {

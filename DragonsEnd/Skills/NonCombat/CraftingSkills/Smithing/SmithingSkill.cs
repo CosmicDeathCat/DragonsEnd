@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Lockable.Interfaces;
 using DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing.Constants;
@@ -13,6 +14,8 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing
         public SmithingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
         }
+        
+        public override SkillType SkillType => SkillType.Smithing;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {

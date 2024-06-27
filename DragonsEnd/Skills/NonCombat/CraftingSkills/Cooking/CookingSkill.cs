@@ -1,9 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using DLS.MessageSystem;
-using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
-using DragonsEnd.Leveling.Messages;
+using DragonsEnd.Enums;
 using DragonsEnd.Lockable.Interfaces;
 using DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking.Constants;
 using DragonsEnd.Skills.Unlocks;
@@ -14,8 +12,8 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
     {
         public CookingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
         {
-            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
+        public override SkillType SkillType => SkillType.Cooking;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -113,10 +111,5 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
                     description: "You can now cook Dragon Roast (requires Dragon Meat, Rare Herbs, Exotic Mushrooms)!")
             }
         };
-
-        ~CookingSkill()
-        {
-            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
-        }
     }
 }

@@ -31,6 +31,21 @@ namespace DragonsEnd.Items
             DropRate = dropRate;
         }
 
+        public Item
+        (
+            IItem item
+        )
+        {
+            Name = item.Name;
+            ID = item.ID;
+            Description = item.Description;
+            Price = item.Price;
+            Type = item.Type;
+            Stackable = item.Stackable;
+            Quantity = item.Quantity;
+            DropRate = item.DropRate;
+        }
+
         public virtual string Name { get; set; }
         public virtual Guid ID { get; set; } = Guid.NewGuid();
         public virtual string Description { get; set; }

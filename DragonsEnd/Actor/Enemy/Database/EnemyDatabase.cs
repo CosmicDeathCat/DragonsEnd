@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using DragonsEnd.Actor.Enemy.Constants;
 using DragonsEnd.Actor.Enemy.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
+using DragonsEnd.Items.Inventory;
+using DragonsEnd.Items.Loot;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.Actor.Enemy.Database
@@ -34,22 +37,35 @@ namespace DragonsEnd.Actor.Enemy.Database
                     enemyTier: EnemyTierType.Puny,
                     level: -1,
                     experience: 25,
-                    gold: 10,
                     equipment: new IEquipmentItem[]
                     {
                         (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger)
                     },
-                    inventory: new[]
-                    {
-                        ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion, quantity: 2),
-                        ItemDatabase.GetItems(itemName: ItemNames.StrongHealthPotion, quantity: 3)
-                    },
-                    dropItems: new[]
-                    {
-                        ItemDatabase.GetDropItems(itemName: ItemNames.WeakHealthPotion),
-                        ItemDatabase.GetDropItems(itemName: ItemNames.BronzeDagger, quantity: 1, dropRate: 0.75),
-                        ItemDatabase.GetDropItems(itemName: ItemNames.BronzeSword, quantity: 1, dropRate: 0.50)
-                    }
+                    inventory: new Inventory
+                    (
+                        gold: 10,
+                        items: new []
+                        {
+                            ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion, quantity: 2),
+                            ItemDatabase.GetItems(itemName: ItemNames.StrongHealthPotion, quantity: 3)
+                        }
+                    ),
+                    lootContainer: new LootContainer
+                    (
+                        gold: 10, 
+                        combatExperience: 500,
+                        experiences: new List<SkillExperience>()
+                        {
+                            new(SkillType.Crafting, 10)
+                        },
+                        items: new []
+                        {
+                            ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                            ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger, quantity: 1, dropRate: 0.75),
+                            ItemDatabase.GetItems(itemName: ItemNames.BronzeSword, quantity: 1, dropRate: 0.50)
+                        }
+                    )
+
                 )
             };
 

@@ -46,20 +46,6 @@ namespace DragonsEnd.Items.Status
                 target.ActorStats.Stamina.CurrentValue += (int)Math.Round(target.ActorStats.Stamina.MaxValue * StaminaRestorePercentage / 100, MidpointRounding.AwayFromZero);
             }
 
-            switch (Type)
-            {
-                case ItemType.NonConsumable:
-                    break;
-                case ItemType.Consumable:
-                    Quantity--;
-                    if (Quantity <= 0)
-                    {
-                        source?.Inventory.Remove(item: this);
-                    }
-
-                    break;
-            }
-
             MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
                 message: new ItemMessage(item: this, source: source, target: target));
         }

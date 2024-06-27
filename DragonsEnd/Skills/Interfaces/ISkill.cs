@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Enums;
 using DragonsEnd.Identity.Interfaces;
 using DragonsEnd.Leveling.Interfaces;
 using DragonsEnd.Lockable.Interfaces;
@@ -10,6 +11,7 @@ namespace DragonsEnd.Skills.Interfaces
 {
     public interface ISkill : IIdentity
     {
+        SkillType SkillType { get; }
         ILeveling Leveling { get; set; }
         IActor Actor { get; set; }
         ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; }
