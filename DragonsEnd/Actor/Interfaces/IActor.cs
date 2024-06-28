@@ -15,6 +15,7 @@ namespace DragonsEnd.Actor.Interfaces
         string Name { get; set; }
         Gender Gender { get; set; }
         Vector2 Position { get; set; }
+        int CombatLevel { get; }
         CharacterClassType CharacterClass { get; set; }
         IEquipmentItem?[] Equipment { get; set; }
         IInventory Inventory { get; set; }

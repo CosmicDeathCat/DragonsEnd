@@ -9,6 +9,7 @@ using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Loot;
+using DragonsEnd.Skills;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.Actor.Enemy.Database
@@ -35,8 +36,6 @@ namespace DragonsEnd.Actor.Enemy.Database
                         magicDefense: -1),
                     combatStyle: CombatStyle.Melee,
                     enemyTier: EnemyTierType.Puny,
-                    level: -1,
-                    experience: 25,
                     equipment: new IEquipmentItem[]
                     {
                         (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger)

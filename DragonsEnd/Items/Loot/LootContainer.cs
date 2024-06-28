@@ -4,6 +4,7 @@ using DragonsEnd.Enums;
 using DragonsEnd.Items.Currency;
 using DragonsEnd.Items.Currency.Extensions;
 using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Skills;
 
 namespace DragonsEnd.Items.Loot
 {

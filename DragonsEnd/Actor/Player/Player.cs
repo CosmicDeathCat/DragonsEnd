@@ -39,7 +39,6 @@ namespace DragonsEnd.Actor.Player
             ActorStats = actorStats;
             ActorSkills = actorSkills;
             IsAlive = true;
-            Leveling = new Leveling.Leveling(actor: this, name: "Level");
             DamageMultiplier = new DoubleStat(baseValue: damageMultiplier);
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);

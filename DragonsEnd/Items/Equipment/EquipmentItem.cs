@@ -4,6 +4,7 @@ using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Skills;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.Items.Equipment
@@ -21,7 +22,7 @@ namespace DragonsEnd.Items.Equipment
             ActorStats stats,
             GearTier gearTier,
             CharacterClassType allowedClasses,
-            int requiredLevel,
+            List<SkillLevels>? requiredSkills = null,
             bool stackable = true,
             long quantity = 1,
             double dropRate = 1
@@ -32,7 +33,7 @@ namespace DragonsEnd.Items.Equipment
             Stats = stats;
             GearTier = gearTier;
             AllowedClasses = allowedClasses;
-            RequiredLevel = requiredLevel;
+            RequiredSkills = requiredSkills;
         }
 
         public virtual List<EquipmentSlot> Slots { get; set; }
@@ -42,7 +43,7 @@ namespace DragonsEnd.Items.Equipment
 
         public virtual CharacterClassType AllowedClasses { get; set; }
 
-        public virtual int RequiredLevel { get; set; }
+        public virtual List<SkillLevels>? RequiredSkills { get; set; }
 
         public virtual bool Equip(IActor? source, IActor? target)
         {
@@ -57,22 +58,107 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-            //TODO: Add level requirements based on skill levels for the gear.
-            // if (target.Leveling.CurrentLevel < RequiredLevel)
-            // {
-            //     Console.WriteLine(
-            //         value: $"{target.Name} is not high enough level to equip {Name}. must be at least level {RequiredLevel}.");
-            //     return false;
-            // }
+            bool hasAllRequiredSkillLevels = true;
+
+            if (RequiredSkills != null)
+            {
+                foreach (var requiredSkill in RequiredSkills)
+                {
+                    bool meetsRequirement = true;
+                    switch (requiredSkill.SkillType)
+                    {
+                        case SkillType.Melee:
+                            meetsRequirement = target.ActorSkills.MeleeSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Ranged:
+                            meetsRequirement = target.ActorSkills.RangedSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Magic:
+                            meetsRequirement = target.ActorSkills.MagicSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Alchemy:
+                            meetsRequirement = target.ActorSkills.AlchemySkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Cooking:
+                            meetsRequirement = target.ActorSkills.CookingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Crafting:
+                            meetsRequirement = target.ActorSkills.CraftingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Enchanting:
+                            meetsRequirement = target.ActorSkills.EnchantingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Fishing:
+                            meetsRequirement = target.ActorSkills.FishingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Fletching:
+                            meetsRequirement = target.ActorSkills.FletchingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Foraging:
+                            meetsRequirement = target.ActorSkills.ForagingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Mining:
+                            meetsRequirement = target.ActorSkills.MiningSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Smithing:
+                            meetsRequirement = target.ActorSkills.SmithingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Ranching:
+                            meetsRequirement = target.ActorSkills.RanchingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                        case SkillType.Woodcutting:
+                            meetsRequirement = target.ActorSkills.WoodcuttingSkill.Leveling.CurrentLevel >= requiredSkill.Level;
+                            break;
+                    }
+
+                    if (!meetsRequirement)
+                    {
+                        hasAllRequiredSkillLevels = false;
+                        Console.WriteLine($"{target.Name} is not high enough level to equip {Name}. Must be at least {requiredSkill.SkillType} level {requiredSkill.Level}.");
+                    }
+                }
+            }
+
+            if (!hasAllRequiredSkillLevels)
+            {
+                return false;
+            }
 
 
             var isEquipped = false;
             var mainHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.MainHand.ToString());
             var offHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.OffHand.ToString());
-
-            // First, handle items intended for both main and off hand.
-            if (Slots.Contains(item: EquipmentSlot.MainHand) && Slots.Contains(item: EquipmentSlot.OffHand))
+            var twoHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.TwoHanded.ToString());
+            // First, handle items intended for both hands as TwoHanded.
+            if (Slots.Contains(item: EquipmentSlot.TwoHanded))
             {
+                if (target.Equipment[twoHandIndex] == null)
+                {
+                    target.Equipment[twoHandIndex] = this;
+                }
+                else if (target.Equipment[twoHandIndex] != null && target.Equipment[twoHandIndex] != this)
+                {
+                    target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
+                    target.Equipment[twoHandIndex] = this;
+                }
+
+                if (target.Equipment[mainHandIndex] != null)
+                {
+                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.MainHand);
+                }
+
+                if (target.Equipment[offHandIndex] != null)
+                {
+                    target.Equipment[offHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
+                }
+                isEquipped = true;
+            }
+            else if (Slots.Contains(item: EquipmentSlot.MainHand) && Slots.Contains(item: EquipmentSlot.OffHand))
+            {
+                if (target.Equipment[twoHandIndex] != null)
+                {
+                    target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
+                }
                 if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
                 {
                     target.Equipment[mainHandIndex] = this;
@@ -97,25 +183,41 @@ namespace DragonsEnd.Items.Equipment
 
                 isEquipped = true;
             }
-            else if (Slots.Contains(item: EquipmentSlot.TwoHanded))
+            else if (Slots.Contains(item: EquipmentSlot.MainHand) && !Slots.Contains(item: EquipmentSlot.OffHand))
             {
-                if (target.Equipment[mainHandIndex] != null && target.Equipment[mainHandIndex] != this)
+                if (target.Equipment[twoHandIndex] != null)
                 {
-                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.MainHand);
+                    target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
                 }
-
-                if (target.Equipment[offHandIndex] != null && target.Equipment[offHandIndex] != this)
-                {
-                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
-                }
-                // Unequip(source, target, EquipmentSlot.TwoHanded);
-
-                if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
+                if (target.Equipment[mainHandIndex] == null)
                 {
                     target.Equipment[mainHandIndex] = this;
-                    target.Equipment[offHandIndex] = this;
-                    isEquipped = true;
                 }
+                else if (target.Equipment[mainHandIndex] != null && target.Equipment[mainHandIndex] != this)
+                {
+                    target.Equipment[mainHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.MainHand);
+                    target.Equipment[mainHandIndex] = this;
+                }
+
+                isEquipped = true;
+            }
+            else if (Slots.Contains(item: EquipmentSlot.OffHand) && !Slots.Contains(item: EquipmentSlot.MainHand))
+            {
+                if (target.Equipment[twoHandIndex] != null)
+                {
+                    target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
+                }
+                if (target.Equipment[offHandIndex] == null)
+                {
+                    target.Equipment[offHandIndex] = this;
+                }
+                else if (target.Equipment[offHandIndex] != null && target.Equipment[offHandIndex] != this)
+                {
+                    target.Equipment[offHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
+                    target.Equipment[offHandIndex] = this;
+                }
+
+                isEquipped = true;
             }
             else
             {
@@ -144,6 +246,7 @@ namespace DragonsEnd.Items.Equipment
             {
                 source?.Inventory.Items.Remove(item: this);
                 ApplyModifiers(target: target, isEquipping: true);
+                Console.WriteLine(value: $"{target.Name} equipped {Name}.");
             }
             else
             {
@@ -160,32 +263,14 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-            var mainHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.MainHand.ToString());
-            var offHandIndex = Array.IndexOf(array: Enum.GetNames(enumType: typeof(EquipmentSlot)), value: EquipmentSlot.OffHand.ToString());
             var isUnequipped = false;
 
             var slotIndex = Array.IndexOf(array: Enum.GetValues(enumType: typeof(EquipmentSlot)), value: slot);
-
-            if ((slot & EquipmentSlot.TwoHanded) == EquipmentSlot.TwoHanded)
+            if (target.Equipment[slotIndex] == this)
             {
-                if (target.Equipment[mainHandIndex] == this)
-                {
-                    target.Equipment[mainHandIndex] = null;
-                }
-
-                if (target.Equipment[offHandIndex] == this)
-                {
-                    target.Equipment[offHandIndex] = null;
-                }
+                target.Equipment[slotIndex] = null;
             }
-            else
-            {
-                if (target.Equipment[slotIndex] == this)
-                {
-                    target.Equipment[slotIndex] = null;
-                }
-            }
-
+            
             ApplyModifiers(target: target, isEquipping: false);
 
             source?.Inventory.Items.Add(item: this);
@@ -237,7 +322,7 @@ namespace DragonsEnd.Items.Equipment
         {
             return new EquipmentItem(name: Name, description: Description, price: Price, type: Type, slots: Slots, stats: Stats, gearTier: GearTier,
                 allowedClasses: AllowedClasses,
-                requiredLevel: RequiredLevel,
+                requiredSkills: RequiredSkills,
                 stackable: Stackable, quantity: Quantity);
         }
     }

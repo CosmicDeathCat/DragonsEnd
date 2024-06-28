@@ -19,7 +19,7 @@ public static class Program
         var player = new Player(
             name: "Mony",
             gender: Gender.Nonbinary,
-            characterClass: CharacterClassType.Mage,
+            characterClass: CharacterClassType.Freelancer,
             actorStats: new ActorStats(
                 health: 100,
                 mana: 100,
@@ -32,7 +32,14 @@ public static class Program
                 magicDefense: 5),
             equipment: new IEquipmentItem[]
             {
-                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff)
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger),
+                (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger),
+                (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword),
+                // (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeShield),
+                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeSword),
+                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword),
+                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger),
+                
             },
             inventory: new Inventory(
                 gold: 0, 
@@ -43,6 +50,9 @@ public static class Program
                 ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20),
             })
         );
+
+        // var bronzeHelm = (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeHelmet);
+        // bronzeHelm.Equip(player, player);
 
         // var exl = player.Inventory?[ItemNames.ElixerOfTheAncients];
 

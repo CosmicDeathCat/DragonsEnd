@@ -2,7 +2,7 @@ using System;
 using DragonsEnd.Enums;
 using DragonsEnd.Utility.Extensions.Random;
 
-namespace DragonsEnd.Items.Loot
+namespace DragonsEnd.Skills
 {
     public struct SkillExperience
     {

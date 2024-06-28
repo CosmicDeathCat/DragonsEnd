@@ -22,8 +22,6 @@ namespace DragonsEnd.Actor.Enemy
             ActorStats actorStats,
             CombatStyle combatStyle,
             EnemyTierType enemyTier,
-            int level = 1,
-            long experience = -1L,
             double damageMultiplier = 1.00,
             double damageReductionMultiplier = 1.00,
             double criticalHitMultiplier = 2.00,
@@ -33,7 +31,7 @@ namespace DragonsEnd.Actor.Enemy
         )
             : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
-                criticalHitMultiplier: criticalHitMultiplier, level: level, experience: experience, equipment: equipment,
+                criticalHitMultiplier: criticalHitMultiplier, equipment: equipment,
                 inventory: inventory, lootContainer: lootContainer)
         {
             EnemyTier = enemyTier;
@@ -60,8 +58,6 @@ namespace DragonsEnd.Actor.Enemy
                     criticalHitChance: ActorStats.CriticalHitChance.BaseValue),
                 combatStyle: CombatStyle,
                 enemyTier: EnemyTier,
-                level: Leveling.CurrentLevel,
-                experience: Leveling.Experience,
                 damageMultiplier: DamageMultiplier.CurrentValue,
                 damageReductionMultiplier: DamageReductionMultiplier.CurrentValue,
                 equipment: Equipment!,

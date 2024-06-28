@@ -4,6 +4,7 @@ using System.Linq;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
+using DragonsEnd.Skills;
 using DragonsEnd.Utility.Extensions.Random;
 
 namespace DragonsEnd.Items.Loot

@@ -37,7 +37,6 @@ namespace DragonsEnd.Actor
             Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             Inventory = new Inventory();
             LootContainer = new LootContainer();
-            Leveling = new Leveling.Leveling(actor: this, name: "Level");
             ActorStats = new ActorStats(health: 100, mana: 100, stamina: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
                 magicDefense: 1);
             ActorSkills = new ActorSkills(actor: this);
@@ -55,8 +54,6 @@ namespace DragonsEnd.Actor
             double damageMultiplier = 1.00,
             double damageReductionMultiplier = 1.00,
             double criticalHitMultiplier = 2.00,
-            int level = -1,
-            long experience = -1L,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
             LootContainer? lootContainer = null
@@ -72,7 +69,7 @@ namespace DragonsEnd.Actor
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             IsAlive = true;
-            Leveling = new Leveling.Leveling(actor: this, name: "Level", maxLevel: 100, level: level, experience: experience);
+            // Leveling = new Leveling.Leveling(actor: this, name: "Level", maxLevel: 100, level: level, experience: experience);
             Inventory = inventory;
             LootContainer = lootContainer;
 
@@ -125,14 +122,18 @@ namespace DragonsEnd.Actor
         public virtual string Name { get; set; }
         public virtual Gender Gender { get; set; }
         public Vector2 Position { get; set; }
-        public GoldCurrency Gold { get; set; }
-        public virtual ILeveling Leveling { get; set; }
+        public int CombatLevel => (ActorSkills.MeleeSkill.Leveling.CurrentLevel +
+                                   ActorSkills.RangedSkill.Leveling.CurrentLevel +
+                                   ActorSkills.MagicSkill.Leveling.CurrentLevel) / 3;
+
+        // public GoldCurrency Gold { get; set; }
+        // public virtual ILeveling Leveling { get; set; }
         public virtual DoubleStat DamageMultiplier { get; set; } = new(baseValue: 1.00);
         public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(baseValue: 1.00);
         public virtual DoubleStat CriticalHitMultiplier { get; set; } = new(baseValue: 1.5);
         public virtual CharacterClassType CharacterClass { get; set; }
 
-        public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length - 1];
+        public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
         public virtual IInventory? Inventory { get; set; }
         public virtual IActor? Target { get; set; }
         public virtual ActorStats ActorStats { get; set; }
@@ -464,7 +465,7 @@ namespace DragonsEnd.Actor
             return new Actor(name: Name, gender: Gender, characterClass: CharacterClass, actorStats: ActorStats, combatStyle: CombatStyle,
                 damageMultiplier: DamageMultiplier.BaseValue,
                 damageReductionMultiplier: DamageReductionMultiplier.BaseValue,
-                criticalHitMultiplier: CriticalHitMultiplier.BaseValue, level: Leveling.CurrentLevel, experience: Leveling.Experience,
+                criticalHitMultiplier: CriticalHitMultiplier.BaseValue,
                 equipment: Equipment?.ToArray()!,
                 inventory: Inventory, 
                 lootContainer: LootContainer
@@ -583,70 +584,7 @@ namespace DragonsEnd.Actor
             {
                 return;
             }
-
-            if (data.SenderIdentity.ID.Equals(g: ActorSkills.CookingSkill.Leveling.ID))
-            {
-                // if (data.Type == LevelingType.GainLevel)
-                // {
-                //     Console.WriteLine($"{Name} has gained a level in Cooking. {Name} is now level {data.Level}.");
-                // }
-                // switch (data.Type)
-                // {
-                //     case LevelingType.GainExperience:
-                //         Console.WriteLine(
-                //             $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                //         break;
-                //     case LevelingType.LoseExperience:
-                //         Console.WriteLine(
-                //             $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                //         break;
-                //     case LevelingType.SetExperience:
-                //         Console.WriteLine($"{Name} set experience to {data.Experience}.");
-                //         break;
-                //     case LevelingType.GainLevel:
-                //         Console.WriteLine($"{Name} gained a level. {Name} is now level {data.Level}.");
-                //         IncreaseStatsForLevel(data.Level);
-                //         break;
-                //     case LevelingType.LoseLevel:
-                //         Console.WriteLine($"{Name} lost a level. {Name} is now level {data.Level}.");
-                //         DecreaseStatsForLevel(data.Level);
-                //         break;
-                //     case LevelingType.SetLevel:
-                //         Console.WriteLine($"{Name} set level to {data.Level}.");
-                //         break;
-                // }
-                return;
-            }
             
-            if(!data.SenderIdentity.ID.Equals(Leveling.ID)) return;
-
-            switch (data.Type)
-            {
-                case LevelingType.GainExperience:
-                    Console.WriteLine(
-                        value:
-                        $"{Name} gained {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    break;
-                case LevelingType.LoseExperience:
-                    Console.WriteLine(
-                        value:
-                        $"{Name} lost {data.Experience} experience. {Name} now has {Leveling.Experience} experience. {Leveling.ExperienceToNextLevel} remaining till next level.");
-                    break;
-                case LevelingType.SetExperience:
-                    Console.WriteLine(value: $"{Name} set experience to {data.Experience}.");
-                    break;
-                case LevelingType.GainLevel:
-                    Console.WriteLine(value: $"{Name} gained a level. {Name} is now level {data.Level}.");
-                    IncreaseStatsForLevel(level: data.Level);
-                    break;
-                case LevelingType.LoseLevel:
-                    Console.WriteLine(value: $"{Name} lost a level. {Name} is now level {data.Level}.");
-                    DecreaseStatsForLevel(level: data.Level);
-                    break;
-                case LevelingType.SetLevel:
-                    Console.WriteLine(value: $"{Name} set level to {data.Level}.");
-                    break;
-            }
         }
     }
 }

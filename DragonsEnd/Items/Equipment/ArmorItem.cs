@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
+using DragonsEnd.Skills;
 using DragonsEnd.Stats;
 using DragonsEnd.Stats.Stat;
 
@@ -21,16 +22,16 @@ namespace DragonsEnd.Items.Equipment
             ActorStats stats,
             GearTier gearTier,
             CharacterClassType allowedClasses,
-            int requiredLevel,
             CombatStyle combatStyle,
             ArmorType armorType,
             double damageReductionMultiplier,
+            List<SkillLevels>? requiredSkills = null,
             bool stackable = true,
             long quantity = 1,
             double dropRate = 1
         ) : base(name: name, description: description, price: price, type: type, slots: slots, stats: stats,
             gearTier: gearTier,
-            allowedClasses: allowedClasses, requiredLevel: requiredLevel, stackable: stackable, quantity: quantity, dropRate: dropRate)
+            allowedClasses: allowedClasses, requiredSkills: requiredSkills, stackable: stackable, quantity: quantity, dropRate: dropRate)
         {
             CombatStyle = combatStyle;
             ArmorType = armorType;
@@ -44,7 +45,7 @@ namespace DragonsEnd.Items.Equipment
         public override IItem Copy()
         {
             return new ArmorItem(name: Name, description: Description, price: Price, type: Type, slots: Slots, stats: Stats, gearTier: GearTier,
-                allowedClasses: AllowedClasses, requiredLevel: RequiredLevel,
+                allowedClasses: AllowedClasses, requiredSkills: RequiredSkills,
                 combatStyle: CombatStyle, armorType: ArmorType, damageReductionMultiplier: DamageReductionMultiplier.BaseValue, stackable: Stackable,
                 quantity: Quantity);
         }
