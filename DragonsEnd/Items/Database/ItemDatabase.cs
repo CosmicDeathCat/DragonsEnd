@@ -45,7 +45,7 @@ namespace DragonsEnd.Items.Database
                     type: ItemType.Consumable,
                     healthRestorePercentage: 100.0
                 ),
-                
+
                 // Mana Items
                 [key: ItemNames.WeakManaPotion] = new RestoreItem(
                     name: ItemNames.WeakManaPotion,
@@ -75,7 +75,7 @@ namespace DragonsEnd.Items.Database
                     type: ItemType.Consumable,
                     manaRestorePercentage: 100.0
                 ),
-                
+
                 // Stamina Items
                 [key: ItemNames.WeakStaminaPotion] = new RestoreItem(
                     name: ItemNames.WeakStaminaPotion,
@@ -105,7 +105,7 @@ namespace DragonsEnd.Items.Database
                     type: ItemType.Consumable,
                     staminaRestorePercentage: 100.0
                 ),
-                
+
                 //Elixirs
                 [key: ItemNames.WeakElixir] = new RestoreItem(
                     name: ItemNames.WeakElixir,
@@ -200,9 +200,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -221,9 +221,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -242,9 +242,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -263,9 +263,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -284,9 +284,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -305,9 +305,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -326,9 +326,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -347,9 +347,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -368,9 +368,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Bronze,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Melee, 1)
+                        new(skillType: SkillType.Melee, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1868,9 +1868,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1889,9 +1889,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1910,9 +1910,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1931,9 +1931,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1952,9 +1952,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1973,9 +1973,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -1994,9 +1994,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -2015,9 +2015,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -2036,9 +2036,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Feeble,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Ranged, 1)
+                        new(skillType: SkillType.Ranged, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3535,9 +3535,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3556,9 +3556,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3577,9 +3577,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3598,9 +3598,9 @@ namespace DragonsEnd.Items.Database
                     damageReductionMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3619,9 +3619,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3640,9 +3640,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.All,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3661,9 +3661,9 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
@@ -3682,14 +3682,14 @@ namespace DragonsEnd.Items.Database
                     damageMultiplier: 1.00,
                     gearTier: GearTier.Old,
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
-                    requiredSkills: new()
+                    requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(SkillType.Magic, 1)
+                        new SkillLevels(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,
                     dropRate: 1
-                ),
+                )
 
                 // // Mage Gear - Worn Tier
                 // [key: ItemNames.WornMagicHat] = new ArmorItem(

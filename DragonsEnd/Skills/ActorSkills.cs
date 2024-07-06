@@ -20,7 +20,26 @@ namespace DragonsEnd.Skills
 {
     public class ActorSkills : IActorSkills
     {
-        public ActorSkills(IActor actor)
+        public ActorSkills()
+        {
+            Actor = null;
+            MeleeSkill = new MeleeSkill(name: SkillNames.MeleeSkill, actor: Actor);
+            RangedSkill = new RangedSkill(name: SkillNames.RangedSkill, actor: Actor);
+            MagicSkill = new MagicSkill(name: SkillNames.MagicSkill, actor: Actor);
+            AlchemySkill = new AlchemySkill(name: SkillNames.AlchemySkill, actor: Actor);
+            CookingSkill = new CookingSkill(name: SkillNames.CookingSkill, actor: Actor);
+            CraftingSkill = new CraftingSkill(name: SkillNames.CraftingSkill, actor: Actor);
+            EnchantingSkill = new EnchantingSkill(name: SkillNames.EnchantingSkill, actor: Actor);
+            FishingSkill = new FishingSkill(name: SkillNames.FishingSkill, actor: Actor);
+            FletchingSkill = new FletchingSkill(name: SkillNames.FletchingSkill, actor: Actor);
+            ForagingSkill = new ForagingSkill(name: SkillNames.ForagingSkill, actor: Actor);
+            MiningSkill = new MiningSkill(name: SkillNames.MiningSkill, actor: Actor);
+            SmithingSkill = new SmithingSkill(name: SkillNames.SmithingSkill, actor: Actor);
+            RanchingSkill = new RanchingSkill(name: SkillNames.RanchingSkill, actor: Actor);
+            WoodcuttingSkill = new WoodcuttingSkill(name: SkillNames.WoodcuttingSkill, actor: Actor);
+        }
+
+        public ActorSkills(IActor? actor)
         {
             Actor = actor;
             MeleeSkill = new MeleeSkill(name: SkillNames.MeleeSkill, actor: actor);
@@ -41,7 +60,7 @@ namespace DragonsEnd.Skills
 
         public ActorSkills
         (
-            IActor actor,
+            IActor? actor,
             MeleeSkill meleeSkill,
             RangedSkill rangedSkill,
             MagicSkill magicSkill,
@@ -75,7 +94,7 @@ namespace DragonsEnd.Skills
             WoodcuttingSkill = woodcuttingSkill;
         }
 
-        public virtual IActor Actor { get; set; }
+        public virtual IActor? Actor { get; set; }
         public virtual MeleeSkill MeleeSkill { get; set; }
         public virtual RangedSkill RangedSkill { get; set; }
         public virtual MagicSkill MagicSkill { get; set; }
@@ -90,5 +109,24 @@ namespace DragonsEnd.Skills
         public virtual SmithingSkill SmithingSkill { get; set; }
         public virtual RanchingSkill RanchingSkill { get; set; }
         public virtual WoodcuttingSkill WoodcuttingSkill { get; set; }
+
+        public virtual void UpdateActor(IActor actor)
+        {
+            Actor = actor;
+            MeleeSkill.UpdateActor(actor: actor);
+            RangedSkill.UpdateActor(actor: actor);
+            MagicSkill.UpdateActor(actor: actor);
+            AlchemySkill.UpdateActor(actor: actor);
+            CookingSkill.UpdateActor(actor: actor);
+            CraftingSkill.UpdateActor(actor: actor);
+            EnchantingSkill.UpdateActor(actor: actor);
+            FishingSkill.UpdateActor(actor: actor);
+            FletchingSkill.UpdateActor(actor: actor);
+            ForagingSkill.UpdateActor(actor: actor);
+            MiningSkill.UpdateActor(actor: actor);
+            SmithingSkill.UpdateActor(actor: actor);
+            RanchingSkill.UpdateActor(actor: actor);
+            WoodcuttingSkill.UpdateActor(actor: actor);
+        }
     }
 }

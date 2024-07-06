@@ -19,15 +19,14 @@ namespace DragonsEnd.Items.Loot
             long maxGold,
             long combatExp,
             List<SkillExperience>? skillExperiences,
-            params IItem[] lootableItems
+            params IItem[] specificLootableItems
         )
         {
             var rnd = new Random();
             var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
             var combatExperience = combatExp;
-            // var experience = rnd.NextInt64(minValue: minExperience, maxValue: maxExperience + 1);
-            List<SkillExperience>? skillExps = skillExperiences;
-            
+            var skillExps = skillExperiences;
+
             var itemAmount = rnd.NextInt64(minValue: minItemAmountDrop, maxValue: maxItemAmountDrop + 1);
             var items = new List<IItem>();
 
@@ -36,7 +35,7 @@ namespace DragonsEnd.Items.Loot
                 var cumulativeProbability = 0.0;
                 var diceRoll = rnd.NextDouble();
 
-                foreach (var dropItem in lootableItems.OrderBy(keySelector: x => x.DropRate))
+                foreach (var dropItem in specificLootableItems.OrderBy(keySelector: x => x.DropRate))
                 {
                     cumulativeProbability += dropItem.DropRate;
                     if (items.Exists(match: x => x.Name.Equals(value: dropItem.Name, comparisonType: StringComparison.OrdinalIgnoreCase)))
@@ -69,6 +68,7 @@ namespace DragonsEnd.Items.Loot
         )
         {
             var lootableItems = specificLootableItems.ToList();
+            lootedObject.LootContainer ??= new LootContainer();
             lootableItems.AddRange(collection: lootedObject.LootContainer.Items);
 
             if (lootableItems.Count == 0)
@@ -136,7 +136,7 @@ namespace DragonsEnd.Items.Loot
                 maxGold: maxGold,
                 combatExp: combatExp,
                 skillExperiences: skillExperiences,
-                lootableItems: lootableItems.ToArray());
+                specificLootableItems: lootableItems.ToArray());
         }
     }
 }

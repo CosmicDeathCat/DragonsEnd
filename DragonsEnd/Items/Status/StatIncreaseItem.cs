@@ -62,15 +62,16 @@ namespace DragonsEnd.Items.Status
         {
             if (target != null)
             {
-                target.ActorStats.Health.BaseValue += (int)Math.Round(target.ActorStats.Health.MaxValue * HealthIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.Mana.BaseValue += (int)Math.Round(target.ActorStats.Mana.MaxValue * ManaIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.Stamina.BaseValue += (int)Math.Round(target.ActorStats.Stamina.MaxValue * StaminaIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.MeleeAttack.BaseValue += (int)Math.Round(target.ActorStats.MeleeAttack.MaxValue * MeleeAttackIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.MeleeDefense.BaseValue += (int)Math.Round(target.ActorStats.MeleeDefense.MaxValue * MeleeDefenseIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.RangedAttack.BaseValue += (int)Math.Round(target.ActorStats.RangedAttack.MaxValue * RangedAttackIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.RangedDefense.BaseValue += (int)Math.Round(target.ActorStats.RangedDefense.MaxValue * RangedDefenseIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.MagicAttack.BaseValue += (int)Math.Round(target.ActorStats.MagicAttack.MaxValue * MagicAttackIncreasePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.MagicDefense.BaseValue += (int)Math.Round(target.ActorStats.MagicDefense.MaxValue * MagicDefenseIncreasePercentage / 100, MidpointRounding.AwayFromZero);
+                target.ActorStats.Health.BaseValue += (int)Math.Round(value: target.ActorStats.Health.MaxValue * HealthIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.Mana.BaseValue += (int)Math.Round(value: target.ActorStats.Mana.MaxValue * ManaIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.Stamina.BaseValue += (int)Math.Round(value: target.ActorStats.Stamina.MaxValue * StaminaIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.MeleeAttack.BaseValue += (int)Math.Round(value: target.ActorStats.MeleeAttack.MaxValue * MeleeAttackIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.MeleeDefense.BaseValue += (int)Math.Round(value: target.ActorStats.MeleeDefense.MaxValue * MeleeDefenseIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.RangedAttack.BaseValue += (int)Math.Round(value: target.ActorStats.RangedAttack.MaxValue * RangedAttackIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.RangedDefense.BaseValue +=
+                    (int)Math.Round(value: target.ActorStats.RangedDefense.MaxValue * RangedDefenseIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.MagicAttack.BaseValue += (int)Math.Round(value: target.ActorStats.MagicAttack.MaxValue * MagicAttackIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.MagicDefense.BaseValue += (int)Math.Round(value: target.ActorStats.MagicDefense.MaxValue * MagicDefenseIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
                 target.ActorStats.CriticalHitChance.BaseValue += CriticalHitChanceIncreasePercentage;
             }
 
@@ -78,7 +79,7 @@ namespace DragonsEnd.Items.Status
                 message: new ItemMessage(item: this, source: source, target: target));
         }
 
-        override public IItem Copy()
+        public override IItem Copy()
         {
             return new StatIncreaseItem(name: Name, description: Description, price: Price, type: Type,
                 healthIncreasePercentage: HealthIncreasePercentage, manaIncreasePercentage: ManaIncreasePercentage,
@@ -88,6 +89,5 @@ namespace DragonsEnd.Items.Status
                 magicDefenseIncreasePercentage: MagicDefenseIncreasePercentage, criticalHitChanceIncreasePercentage: CriticalHitChanceIncreasePercentage,
                 stackable: Stackable, quantity: Quantity);
         }
-
     }
 }

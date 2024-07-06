@@ -1,5 +1,7 @@
-﻿using System.Numerics;
+﻿using System.Collections.Generic;
+using System.Numerics;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
+using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Inventory.Interfaces;
@@ -12,22 +14,26 @@ namespace DragonsEnd.Actor.Interfaces
 {
     public interface IActor : ILootable
     {
-        string Name { get; set; }
         Gender Gender { get; set; }
         Vector2 Position { get; set; }
         int CombatLevel { get; }
         CharacterClassType CharacterClass { get; set; }
         IEquipmentItem?[] Equipment { get; set; }
-        IInventory Inventory { get; set; }
+
+        IInventory? Inventory { get; set; }
+
         // List<IItem?> Inventory { get; set; }
-        ActorStats ActorStats { get; set; }
-        IActorSkills ActorSkills { get; set; }
+        ActorStats? ActorStats { get; set; }
+        IActorSkills? ActorSkills { get; set; }
         public DoubleStat DamageMultiplier { get; set; }
         public DoubleStat DamageReductionMultiplier { get; set; }
         DoubleStat CriticalHitMultiplier { get; set; }
         IActor? Target { get; set; }
         bool IsAlive { get; set; }
+        int Initiative { get; set; }
         CombatStyle CombatStyle { get; set; }
+        int TurnCount { get; set; }
+        void ResetTurns();
         IWeaponItem?[] GetWeapons();
         IArmorItem?[] GetArmor();
         void ItemMessageHandler(IMessageEnvelope message);
@@ -47,10 +53,14 @@ namespace DragonsEnd.Actor.Interfaces
             int defenseValue
         );
 
+        int RollInitiative();
+        bool TakeTurn(ICombatContext combatContext, List<IActor> targets, List<IActor> allies);
+        IActor? SelectRandomTarget(List<IActor> targets);
         void Die();
         void IncreaseStatsForLevel(int level);
         void DecreaseStatsForLevel(int level);
+
         IActor Copy();
-        void ActorDeathMessageHandler(IMessageEnvelope message);
+        // void ActorDeathMessageHandler(IMessageEnvelope message);
     }
 }

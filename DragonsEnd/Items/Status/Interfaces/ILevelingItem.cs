@@ -2,7 +2,7 @@
 
 namespace DragonsEnd.Items.Status.Interfaces
 {
-    public interface ILevelingItem :IItem
+    public interface ILevelingItem : IItem
     {
         long MeleeExperience { get; set; }
         long RangedExperience { get; set; }

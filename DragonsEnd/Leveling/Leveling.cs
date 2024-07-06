@@ -19,23 +19,24 @@ namespace DragonsEnd.Leveling
 
         protected int _maxLevel = DefaultMaxLevel;
 
-        public Leveling(IActor actor, string name, int maxLevel = 100)
+        public Leveling(string name, int level = 1, int maxLevel = 100)
         {
-            Name = name;
-            Actor = actor;
-            _maxLevel = maxLevel;
-        }
-
-        public Leveling(IActor actor, string name, int maxLevel, int level = 1)
-        {
-            Actor = actor;
             Name = name;
             _maxLevel = maxLevel;
             _currentLevel = ValidateLevel(level: level);
-            _experience = ExperienceLevels[key: (_currentLevel + 1).Clamp(min: 1, max: MaxLevel)];
+            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
         }
 
-        public Leveling(IActor actor, string name, int maxLevel, int level = -1, long experience = -1)
+        public Leveling(IActor? actor, string name, int level = 1, int maxLevel = 100)
+        {
+            Name = name;
+            Actor = actor;
+            _maxLevel = maxLevel;
+            _currentLevel = ValidateLevel(level: level);
+            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
+        }
+
+        public Leveling(IActor? actor, string name, int level = -1, int maxLevel = 100, long experience = -1)
         {
             Actor = actor;
             Name = name;
@@ -54,7 +55,7 @@ namespace DragonsEnd.Leveling
             {
                 _currentLevel = ValidateLevel(level: level);
                 _experience = experience == -1
-                    ? ExperienceLevels[key: (_currentLevel + 1).Clamp(min: 1, max: MaxLevel)]
+                    ? ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)]
                     : ValidateExperience(experience: experience);
             }
         }
@@ -69,7 +70,7 @@ namespace DragonsEnd.Leveling
 
         public double LevelingThreshold { get; set; } = DefaultLevelingThreshold;
 
-        public IActor Actor { get; set; }
+        public IActor? Actor { get; set; }
 
         public virtual int CurrentLevel { get => _currentLevel; set => _currentLevel = ValidateLevel(level: value); }
 

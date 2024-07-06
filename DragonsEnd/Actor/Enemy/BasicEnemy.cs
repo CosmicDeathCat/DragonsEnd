@@ -3,7 +3,9 @@ using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Inventory.Interfaces;
-using DragonsEnd.Items.Loot;
+using DragonsEnd.Items.Loot.Interfaces;
+using DragonsEnd.Skills;
+using DragonsEnd.Skills.Interfaces;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.Actor.Enemy
@@ -20,6 +22,7 @@ namespace DragonsEnd.Actor.Enemy
             Gender gender,
             CharacterClassType characterClass,
             ActorStats actorStats,
+            IActorSkills actorSkills,
             CombatStyle combatStyle,
             EnemyTierType enemyTier,
             double damageMultiplier = 1.00,
@@ -27,9 +30,9 @@ namespace DragonsEnd.Actor.Enemy
             double criticalHitMultiplier = 2.00,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
-            LootContainer? lootContainer = null
+            ILootContainer? lootContainer = null
         )
-            : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, combatStyle: combatStyle,
+            : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, actorSkills: actorSkills, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
                 criticalHitMultiplier: criticalHitMultiplier, equipment: equipment,
                 inventory: inventory, lootContainer: lootContainer)
@@ -56,6 +59,22 @@ namespace DragonsEnd.Actor.Enemy
                     magicAttack: ActorStats.MagicAttack.BaseValue,
                     magicDefense: ActorStats.MagicDefense.BaseValue,
                     criticalHitChance: ActorStats.CriticalHitChance.BaseValue),
+                actorSkills: new ActorSkills(
+                    actor: this,
+                    meleeSkill: ActorSkills.MeleeSkill,
+                    rangedSkill: ActorSkills.RangedSkill,
+                    magicSkill: ActorSkills.MagicSkill,
+                    alchemySkill: ActorSkills.AlchemySkill,
+                    cookingSkill: ActorSkills.CookingSkill,
+                    craftingSkill: ActorSkills.CraftingSkill,
+                    enchantingSkill: ActorSkills.EnchantingSkill,
+                    fishingSkill: ActorSkills.FishingSkill,
+                    fletchingSkill: ActorSkills.FletchingSkill,
+                    foragingSkill: ActorSkills.ForagingSkill,
+                    miningSkill: ActorSkills.MiningSkill,
+                    smithingSkill: ActorSkills.SmithingSkill,
+                    ranchingSkill: ActorSkills.RanchingSkill,
+                    woodcuttingSkill: ActorSkills.WoodcuttingSkill),
                 combatStyle: CombatStyle,
                 enemyTier: EnemyTier,
                 damageMultiplier: DamageMultiplier.CurrentValue,
@@ -63,7 +82,7 @@ namespace DragonsEnd.Actor.Enemy
                 equipment: Equipment!,
                 inventory: Inventory,
                 lootContainer: LootContainer
-                );
+            );
         }
 
         IEnemy IEnemy.Copy()

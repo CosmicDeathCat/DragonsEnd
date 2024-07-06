@@ -10,9 +10,10 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
 {
     public class CookingSkill : BaseNonCombatSkill
     {
-        public CookingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public CookingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
         {
         }
+
         public override SkillType SkillType => SkillType.Cooking;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()

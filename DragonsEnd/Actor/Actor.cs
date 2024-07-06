@@ -8,17 +8,16 @@ using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Messages;
+using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
-using DragonsEnd.Items.Currency;
-using DragonsEnd.Items.Currency.Extensions;
 using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Loot;
+using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Items.Messages;
-using DragonsEnd.Leveling.Interfaces;
 using DragonsEnd.Leveling.Messages;
 using DragonsEnd.Skills;
 using DragonsEnd.Skills.Interfaces;
@@ -34,6 +33,7 @@ namespace DragonsEnd.Actor
         public Actor()
         {
             Name = "Actor";
+            ID = Guid.NewGuid();
             Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             Inventory = new Inventory();
             LootContainer = new LootContainer();
@@ -50,26 +50,28 @@ namespace DragonsEnd.Actor
             Gender gender,
             CharacterClassType characterClass,
             ActorStats actorStats,
+            IActorSkills? actorSkills,
             CombatStyle combatStyle,
             double damageMultiplier = 1.00,
             double damageReductionMultiplier = 1.00,
             double criticalHitMultiplier = 2.00,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
-            LootContainer? lootContainer = null
+            ILootContainer? lootContainer = null
         )
         {
             Name = name;
+            ID = Guid.NewGuid();
             Gender = gender;
             CharacterClass = characterClass;
             ActorStats = actorStats;
-            ActorSkills = new ActorSkills(actor: this);
+            ActorSkills = actorSkills;
+            ActorSkills?.UpdateActor(actor: this);
             _combatStyle = combatStyle;
             DamageMultiplier = new DoubleStat(baseValue: damageMultiplier);
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             IsAlive = true;
-            // Leveling = new Leveling.Leveling(actor: this, name: "Level", maxLevel: 100, level: level, experience: experience);
             Inventory = inventory;
             LootContainer = lootContainer;
 
@@ -89,7 +91,6 @@ namespace DragonsEnd.Actor
             {
                 if (LootContainer?.Items.Count > 0)
                 {
-                
                 }
                 else
                 {
@@ -113,21 +114,22 @@ namespace DragonsEnd.Actor
                     }
                 }
             }
-            
+
 
             MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
         public virtual string Name { get; set; }
+        public virtual Guid ID { get; set; }
         public virtual Gender Gender { get; set; }
         public Vector2 Position { get; set; }
+
         public int CombatLevel => (ActorSkills.MeleeSkill.Leveling.CurrentLevel +
                                    ActorSkills.RangedSkill.Leveling.CurrentLevel +
                                    ActorSkills.MagicSkill.Leveling.CurrentLevel) / 3;
 
-        // public GoldCurrency Gold { get; set; }
-        // public virtual ILeveling Leveling { get; set; }
+        public virtual int Initiative { get; set; }
         public virtual DoubleStat DamageMultiplier { get; set; } = new(baseValue: 1.00);
         public virtual DoubleStat DamageReductionMultiplier { get; set; } = new(baseValue: 1.00);
         public virtual DoubleStat CriticalHitMultiplier { get; set; } = new(baseValue: 1.5);
@@ -136,10 +138,12 @@ namespace DragonsEnd.Actor
         public virtual IEquipmentItem?[] Equipment { get; set; } = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
         public virtual IInventory? Inventory { get; set; }
         public virtual IActor? Target { get; set; }
-        public virtual ActorStats ActorStats { get; set; }
-        public virtual IActorSkills ActorSkills { get; set; }
-        
-        public virtual LootContainer? LootContainer { get; set; }
+        public virtual ActorStats? ActorStats { get; set; }
+        public virtual IActorSkills? ActorSkills { get; set; }
+
+        public virtual ILootContainer? LootContainer { get; set; }
+
+        public bool HasAlreadyBeenLooted { get; set; }
 
         public CombatStyle CombatStyle
         {
@@ -152,20 +156,27 @@ namespace DragonsEnd.Actor
             set => _combatStyle = value;
         }
 
+        public int TurnCount { get; set; }
+
         public virtual bool IsAlive
         {
-            get => ActorStats.Health.CurrentValue > 0;
+            get => ActorStats?.Health.CurrentValue > 0;
             set
             {
-                if (value && ActorStats.Health.CurrentValue <= 0)
+                if (value && ActorStats?.Health.CurrentValue <= 0)
                 {
                     ActorStats.Health.CurrentValue = ActorStats.Health.MaxValue;
                 }
-                else if (!value && ActorStats.Health.CurrentValue > 0)
+                else if (!value && ActorStats?.Health.CurrentValue > 0)
                 {
                     Die();
                 }
             }
+        }
+
+        public void ResetTurns()
+        {
+            TurnCount = 0;
         }
 
         public virtual IWeaponItem?[] GetWeapons()
@@ -217,13 +228,13 @@ namespace DragonsEnd.Actor
         {
             var statIncrease = level - 1; // Linear increase
 
-            var oldHealth = ActorStats.Health.BaseValue;
-            var oldMeleeAttack = ActorStats.MeleeAttack.BaseValue;
-            var oldRangedAttack = ActorStats.RangedAttack.BaseValue;
-            var oldMagicAttack = ActorStats.MagicAttack.BaseValue;
-            var oldMeleeDefense = ActorStats.MeleeDefense.BaseValue;
-            var oldRangedDefense = ActorStats.RangedDefense.BaseValue;
-            var oldMagicDefense = ActorStats.MagicDefense.BaseValue;
+            var oldHealth = ActorStats?.Health.BaseValue;
+            var oldMeleeAttack = ActorStats?.MeleeAttack.BaseValue;
+            var oldRangedAttack = ActorStats?.RangedAttack.BaseValue;
+            var oldMagicAttack = ActorStats?.MagicAttack.BaseValue;
+            var oldMeleeDefense = ActorStats?.MeleeDefense.BaseValue;
+            var oldRangedDefense = ActorStats?.RangedDefense.BaseValue;
+            var oldMagicDefense = ActorStats?.MagicDefense.BaseValue;
 
             ActorStats.Health.BaseValue += statIncrease;
             ActorStats.MeleeAttack.BaseValue += statIncrease;
@@ -417,8 +428,46 @@ namespace DragonsEnd.Actor
             return (hit, blocked, killed, damage, isCriticalHit);
         }
 
+        public virtual int RollInitiative()
+        {
+            var rnd = new Random();
+            Initiative = rnd.Next(minValue: 1, maxValue: 21);
+            return Initiative;
+        }
 
-        public virtual LootContainer Loot
+        public virtual bool TakeTurn(ICombatContext combatContext, List<IActor> targets, List<IActor> allies)
+        {
+            if (IsAlive && targets.Any(predicate: a => a.IsAlive))
+            {
+                Console.WriteLine(value: $"{Name} is taking their turn.");
+                TurnCount++;
+                var target = SelectRandomTarget(targets: targets);
+                if (target == null)
+                {
+                    return false;
+                }
+
+                var attackResult = Attack(source: this, target: target);
+                return true;
+            }
+
+            return false;
+        }
+
+        public virtual IActor? SelectRandomTarget(List<IActor> targets)
+        {
+            var rnd = new Random();
+            var aliveTargets = targets.Where(predicate: a => a.IsAlive).ToList();
+            if (aliveTargets.Count <= 0)
+            {
+                return null;
+            }
+
+            return aliveTargets[index: rnd.Next(maxValue: aliveTargets.Count)];
+        }
+
+
+        public virtual ILootContainer? Loot
         (
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,
@@ -439,6 +488,7 @@ namespace DragonsEnd.Actor
                 skillExperiences: skillExperiences,
                 specificLootableItems: specificLootableItems);
             var lootContainer = new LootContainer(gold: loot.gold, combatExperience: loot.combatExperience, experiences: loot.skillExperiences, items: loot.items.ToArray());
+            HasAlreadyBeenLooted = true;
             return lootContainer;
         }
 
@@ -462,108 +512,108 @@ namespace DragonsEnd.Actor
 
         public virtual IActor Copy()
         {
-            return new Actor(name: Name, gender: Gender, characterClass: CharacterClass, actorStats: ActorStats, combatStyle: CombatStyle,
+            return new Actor(name: Name, gender: Gender, characterClass: CharacterClass, actorStats: ActorStats, actorSkills: ActorSkills, combatStyle: CombatStyle,
                 damageMultiplier: DamageMultiplier.BaseValue,
                 damageReductionMultiplier: DamageReductionMultiplier.BaseValue,
                 criticalHitMultiplier: CriticalHitMultiplier.BaseValue,
                 equipment: Equipment?.ToArray()!,
-                inventory: Inventory, 
+                inventory: Inventory,
                 lootContainer: LootContainer
             );
         }
 
-        public virtual void ActorDeathMessageHandler(IMessageEnvelope message)
-        {
-            if (!message.Message<ActorDeathMessage>().HasValue)
-            {
-                return;
-            }
-
-            var data = message.Message<ActorDeathMessage>().GetValueOrDefault();
-            if (data.Source != this)
-            {
-                return;
-            }
-
-            var loot = data.Target.Loot();
-            switch (CombatStyle)
-            {
-                case CombatStyle.Melee:
-                    ActorSkills.MeleeSkill.Leveling.GainExperience(loot.CombatExperience);
-                    break;
-                case CombatStyle.Ranged:
-                    ActorSkills.RangedSkill.Leveling.GainExperience(loot.CombatExperience);
-                    break;
-                case CombatStyle.Magic:
-                    ActorSkills.MagicSkill.Leveling.GainExperience(loot.CombatExperience);
-                    break;
-                case CombatStyle.Hybrid:
-                    var sharedExp = loot.CombatExperience / 3;
-                    ActorSkills.MeleeSkill.Leveling.GainExperience(sharedExp);
-                    ActorSkills.RangedSkill.Leveling.GainExperience(sharedExp);
-                    ActorSkills.MagicSkill.Leveling.GainExperience(sharedExp);
-                    break;
-            }
-            foreach (var skill in loot.SkillExperiences)
-            {
-                switch (skill.SkillType)
-                {
-                    case SkillType.None:
-                        break;
-                    case SkillType.Melee:
-                        ActorSkills.MeleeSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Ranged:
-                        ActorSkills.RangedSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Magic:
-                        ActorSkills.MagicSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Alchemy:
-                        ActorSkills.AlchemySkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Cooking:
-                        ActorSkills.CookingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Crafting:
-                        ActorSkills.CraftingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Enchanting:
-                        ActorSkills.EnchantingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Fishing:
-                        ActorSkills.FishingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Fletching:
-                        ActorSkills.FletchingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Foraging:
-                        ActorSkills.ForagingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Mining:
-                        ActorSkills.MiningSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Smithing:
-                        ActorSkills.SmithingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Ranching:
-                        ActorSkills.RanchingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                    case SkillType.Woodcutting:
-                        ActorSkills.WoodcuttingSkill.Leveling.GainExperience(skill.Experience);
-                        break;
-                }
-            }
-            
-            Inventory?.Gold.Add(otherCurrency: loot.Gold);
-            Inventory?.Items.AddRange(collection: loot.Items);
-            var itemsString = loot.Items.Count is > 0 and > 1 ? "Items" : "Item";
-            var lootItemsDisplay = loot.Items.Count > 0
-                ? $"{loot.Items.Count} {itemsString} from {data.Target.Name}\n" +
-                  string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
-                : "No Items";
-            Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
-        }
+        // public virtual void ActorDeathMessageHandler(IMessageEnvelope message)
+        // {
+        //     if (!message.Message<ActorDeathMessage>().HasValue)
+        //     {
+        //         return;
+        //     }
+        //
+        //     var data = message.Message<ActorDeathMessage>().GetValueOrDefault();
+        //     if (data.Source != this)
+        //     {
+        //         return;
+        //     }
+        //
+        //     var loot = data.Target.Loot();
+        //     switch (CombatStyle)
+        //     {
+        //         case CombatStyle.Melee:
+        //             ActorSkills.MeleeSkill.Leveling.GainExperience(loot.CombatExperience);
+        //             break;
+        //         case CombatStyle.Ranged:
+        //             ActorSkills.RangedSkill.Leveling.GainExperience(loot.CombatExperience);
+        //             break;
+        //         case CombatStyle.Magic:
+        //             ActorSkills.MagicSkill.Leveling.GainExperience(loot.CombatExperience);
+        //             break;
+        //         case CombatStyle.Hybrid:
+        //             var sharedExp = loot.CombatExperience / 3;
+        //             ActorSkills.MeleeSkill.Leveling.GainExperience(sharedExp);
+        //             ActorSkills.RangedSkill.Leveling.GainExperience(sharedExp);
+        //             ActorSkills.MagicSkill.Leveling.GainExperience(sharedExp);
+        //             break;
+        //     }
+        //     foreach (var skill in loot.SkillExperiences)
+        //     {
+        //         switch (skill.SkillType)
+        //         {
+        //             case SkillType.None:
+        //                 break;
+        //             case SkillType.Melee:
+        //                 ActorSkills.MeleeSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Ranged:
+        //                 ActorSkills.RangedSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Magic:
+        //                 ActorSkills.MagicSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Alchemy:
+        //                 ActorSkills.AlchemySkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Cooking:
+        //                 ActorSkills.CookingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Crafting:
+        //                 ActorSkills.CraftingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Enchanting:
+        //                 ActorSkills.EnchantingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Fishing:
+        //                 ActorSkills.FishingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Fletching:
+        //                 ActorSkills.FletchingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Foraging:
+        //                 ActorSkills.ForagingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Mining:
+        //                 ActorSkills.MiningSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Smithing:
+        //                 ActorSkills.SmithingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Ranching:
+        //                 ActorSkills.RanchingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //             case SkillType.Woodcutting:
+        //                 ActorSkills.WoodcuttingSkill.Leveling.GainExperience(skill.Experience);
+        //                 break;
+        //         }
+        //     }
+        //     
+        //     Inventory?.Gold.Add(otherCurrency: loot.Gold);
+        //     Inventory?.Items.AddRange(collection: loot.Items);
+        //     var itemsString = loot.Items.Count is > 0 and > 1 ? "Items" : "Item";
+        //     var lootItemsDisplay = loot.Items.Count > 0
+        //         ? $"{loot.Items.Count} {itemsString} from {data.Target.Name}\n" +
+        //           string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
+        //         : "No Items";
+        //     Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
+        // }
 
         ~Actor()
         {
@@ -582,9 +632,7 @@ namespace DragonsEnd.Actor
             var data = message.Message<LevelingMessage>().GetValueOrDefault();
             if (data.Actor != this)
             {
-                return;
             }
-            
         }
     }
 }

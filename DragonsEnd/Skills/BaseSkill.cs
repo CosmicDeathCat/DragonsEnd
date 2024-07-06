@@ -16,25 +16,28 @@ namespace DragonsEnd.Skills
 {
     public abstract class BaseSkill : ISkill
     {
-        public BaseSkill(string name, IActor actor, int maxLevel = 100)
+        public BaseSkill(string name, int startingLevel = 1, int maxLevel = 100)
         {
             Name = name;
-            Actor = actor;
-            Leveling = new Leveling.Leveling(actor: actor, name: name, maxLevel: maxLevel);
+            Leveling = new Leveling.Leveling(name: name, level: startingLevel, maxLevel: maxLevel);
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
 
-        ~BaseSkill()
+        public BaseSkill(string name, IActor? actor, int startingLevel = 1, int maxLevel = 100)
         {
-            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
+            Name = name;
+            Actor = actor;
+            Leveling = new Leveling.Leveling(actor: actor, name: name, level: startingLevel, maxLevel: maxLevel);
+            MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
-        
+
+
         public virtual string Name { get; set; }
         public virtual Guid ID { get; set; } = Guid.NewGuid();
-        
+
         public virtual SkillType SkillType => SkillType.None;
         public virtual ILeveling Leveling { get; set; }
-        public virtual IActor Actor { get; set; }
+        public virtual IActor? Actor { get; set; }
         public virtual ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new();
 
         public virtual void HandleUnlocks(int level)
@@ -96,6 +99,17 @@ namespace DragonsEnd.Skills
                         break;
                 }
             }
+        }
+
+        public virtual void UpdateActor(IActor actor)
+        {
+            Actor = actor;
+            Leveling.Actor = actor;
+        }
+
+        ~BaseSkill()
+        {
+            MessageSystem.MessageManager.UnregisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
     }
 }

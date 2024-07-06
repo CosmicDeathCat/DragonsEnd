@@ -58,13 +58,13 @@ namespace DragonsEnd.Items.Equipment
                 return false;
             }
 
-            bool hasAllRequiredSkillLevels = true;
+            var hasAllRequiredSkillLevels = true;
 
             if (RequiredSkills != null)
             {
                 foreach (var requiredSkill in RequiredSkills)
                 {
-                    bool meetsRequirement = true;
+                    var meetsRequirement = true;
                     switch (requiredSkill.SkillType)
                     {
                         case SkillType.Melee:
@@ -114,7 +114,7 @@ namespace DragonsEnd.Items.Equipment
                     if (!meetsRequirement)
                     {
                         hasAllRequiredSkillLevels = false;
-                        Console.WriteLine($"{target.Name} is not high enough level to equip {Name}. Must be at least {requiredSkill.SkillType} level {requiredSkill.Level}.");
+                        Console.WriteLine(value: $"{target.Name} is not high enough level to equip {Name}. Must be at least {requiredSkill.SkillType} level {requiredSkill.Level}.");
                     }
                 }
             }
@@ -151,6 +151,7 @@ namespace DragonsEnd.Items.Equipment
                 {
                     target.Equipment[offHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.OffHand);
                 }
+
                 isEquipped = true;
             }
             else if (Slots.Contains(item: EquipmentSlot.MainHand) && Slots.Contains(item: EquipmentSlot.OffHand))
@@ -159,6 +160,7 @@ namespace DragonsEnd.Items.Equipment
                 {
                     target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
                 }
+
                 if (target.Equipment[mainHandIndex] == null && target.Equipment[offHandIndex] == null)
                 {
                     target.Equipment[mainHandIndex] = this;
@@ -189,6 +191,7 @@ namespace DragonsEnd.Items.Equipment
                 {
                     target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
                 }
+
                 if (target.Equipment[mainHandIndex] == null)
                 {
                     target.Equipment[mainHandIndex] = this;
@@ -207,6 +210,7 @@ namespace DragonsEnd.Items.Equipment
                 {
                     target.Equipment[twoHandIndex]?.Unequip(source: source, target: target, slot: EquipmentSlot.TwoHanded);
                 }
+
                 if (target.Equipment[offHandIndex] == null)
                 {
                     target.Equipment[offHandIndex] = this;
@@ -244,7 +248,7 @@ namespace DragonsEnd.Items.Equipment
 
             if (isEquipped)
             {
-                source?.Inventory.Items.Remove(item: this);
+                source?.Inventory?.Items.Remove(item: this);
                 ApplyModifiers(target: target, isEquipping: true);
                 Console.WriteLine(value: $"{target.Name} equipped {Name}.");
             }
@@ -270,7 +274,7 @@ namespace DragonsEnd.Items.Equipment
             {
                 target.Equipment[slotIndex] = null;
             }
-            
+
             ApplyModifiers(target: target, isEquipping: false);
 
             source?.Inventory.Items.Add(item: this);

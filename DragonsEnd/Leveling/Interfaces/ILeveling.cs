@@ -9,7 +9,7 @@ namespace DragonsEnd.Leveling.Interfaces
         int CurrentLevel { get; set; }
         int MaxLevel { get; set; }
         long Experience { get; set; }
-        IActor Actor { get; set; }
+        IActor? Actor { get; set; }
         long ExperienceToNextLevel { get; }
         Dictionary<int, long> ExperienceLevels { get; set; }
         double LevelingThreshold { get; set; }

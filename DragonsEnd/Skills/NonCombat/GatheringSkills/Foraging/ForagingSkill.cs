@@ -10,9 +10,10 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging
 {
     public class ForagingSkill : BaseNonCombatSkill
     {
-        public ForagingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public ForagingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
         {
         }
+
         public override SkillType SkillType => SkillType.Foraging;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()

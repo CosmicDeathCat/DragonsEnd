@@ -1,6 +1,8 @@
+using System;
+
 namespace DragonsEnd.Enums
 {
-    [System.Flags]
+    [Flags]
     public enum SkillType
     {
         None = 0,

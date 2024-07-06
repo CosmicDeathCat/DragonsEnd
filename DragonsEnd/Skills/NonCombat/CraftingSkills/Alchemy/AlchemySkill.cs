@@ -11,7 +11,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Alchemy
 {
     public class AlchemySkill : BaseNonCombatSkill
     {
-        public AlchemySkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public AlchemySkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
         {
         }
 

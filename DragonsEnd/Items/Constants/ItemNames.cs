@@ -30,7 +30,7 @@ namespace DragonsEnd.Items.Constants
         public const string NormalStaminaPotion = "Normal Stamina Potion";
         public const string StrongStaminaPotion = "Strong Stamina Potion";
         public const string UltraStaminaPotion = "Ultra Stamina Potion";
-        
+
         // Melee Attack Potions
         public const string WeakMeleeAttackPotion = "Weak Melee Attack Potion";
         public const string NormalMeleeAttackPotion = "Normal Melee Attack Potion";

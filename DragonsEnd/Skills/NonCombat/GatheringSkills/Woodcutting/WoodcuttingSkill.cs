@@ -10,9 +10,10 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Woodcutting
 {
     public class WoodcuttingSkill : BaseNonCombatSkill
     {
-        public WoodcuttingSkill(string name, IActor actor, int maxLevel = 100) : base(name: name, actor: actor, maxLevel: maxLevel)
+        public WoodcuttingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
         {
         }
+
         public override SkillType SkillType => SkillType.Woodcutting;
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()

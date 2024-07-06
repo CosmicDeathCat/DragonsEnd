@@ -1,58 +1,57 @@
-﻿using DLS.MessageSystem;
+﻿using System;
+using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Messages;
 using DragonsEnd.Items.Status.Interfaces;
-using System;
 
 namespace DragonsEnd.Items.Status
 {
     [Serializable]
     public class LevelingItem : Item, ILevelingItem
     {
-
         public LevelingItem
-         (
-             string name,
-             string description,
-             long price,
-             ItemType type,
-             long meleeExperience = 0,
-             long rangedExperience = 0,
-             long magicExperience = 0,
-             long alchemyExperience = 0,
-             long cookingExperience = 0,
-             long craftingExperience = 0,
-             long enchantingExperience = 0,
-             long fletchingExperience = 0,
-             long smithingExperience = 0,
-             long fishingExperience = 0,
-             long foragingExperience = 0,
-             long miningExperience = 0,
-             long ranchingExperience = 0,
-             long woodcuttingExperience = 0,
-             int meleeLevel = 0,
-             int rangedLevel = 0,
-             int magicLevel = 0,
-             int alchemyLevel = 0,
-             int cookingLevel = 0,
-             int craftingLevel = 0,
-             int enchantingLevel = 0,
-             int fletchingLevel = 0,
-             int smithingLevel = 0,
-             int fishingLevel = 0,
-             int foragingLevel = 0,
-             int miningLevel = 0,
-             int ranchingLevel = 0,
-             int woodcuttingLevel = 0,
-             bool stackable = true,
-             long quantity = 1,
-             double dropRate = 1
-         ) : base(name: name, description: description, price: price, type: type,
-             stackable: stackable,
-             quantity: quantity, dropRate: dropRate)
+        (
+            string name,
+            string description,
+            long price,
+            ItemType type,
+            long meleeExperience = 0,
+            long rangedExperience = 0,
+            long magicExperience = 0,
+            long alchemyExperience = 0,
+            long cookingExperience = 0,
+            long craftingExperience = 0,
+            long enchantingExperience = 0,
+            long fletchingExperience = 0,
+            long smithingExperience = 0,
+            long fishingExperience = 0,
+            long foragingExperience = 0,
+            long miningExperience = 0,
+            long ranchingExperience = 0,
+            long woodcuttingExperience = 0,
+            int meleeLevel = 0,
+            int rangedLevel = 0,
+            int magicLevel = 0,
+            int alchemyLevel = 0,
+            int cookingLevel = 0,
+            int craftingLevel = 0,
+            int enchantingLevel = 0,
+            int fletchingLevel = 0,
+            int smithingLevel = 0,
+            int fishingLevel = 0,
+            int foragingLevel = 0,
+            int miningLevel = 0,
+            int ranchingLevel = 0,
+            int woodcuttingLevel = 0,
+            bool stackable = true,
+            long quantity = 1,
+            double dropRate = 1
+        ) : base(name: name, description: description, price: price, type: type,
+            stackable: stackable,
+            quantity: quantity, dropRate: dropRate)
         {
             MeleeExperience = meleeExperience;
             RangedExperience = rangedExperience;
@@ -117,20 +116,20 @@ namespace DragonsEnd.Items.Status
         {
             if (target != null)
             {
-                target.ActorSkills.MeleeSkill.Leveling.GainExperience(MeleeExperience);
-                target.ActorSkills.RangedSkill.Leveling.GainExperience(RangedExperience);
-                target.ActorSkills.MagicSkill.Leveling.GainExperience(MagicExperience);
-                target.ActorSkills.AlchemySkill.Leveling.GainExperience(AlchemyExperience);
-                target.ActorSkills.CookingSkill.Leveling.GainExperience(CookingExperience);
-                target.ActorSkills.CraftingSkill.Leveling.GainExperience(CraftingExperience);
-                target.ActorSkills.EnchantingSkill.Leveling.GainExperience(EnchantingExperience);
-                target.ActorSkills.FletchingSkill.Leveling.GainExperience(FletchingExperience);
-                target.ActorSkills.SmithingSkill.Leveling.GainExperience(SmithingExperience);
-                target.ActorSkills.FishingSkill.Leveling.GainExperience(FishingExperience);
-                target.ActorSkills.ForagingSkill.Leveling.GainExperience(ForagingExperience);
-                target.ActorSkills.MiningSkill.Leveling.GainExperience(MiningExperience);
-                target.ActorSkills.RanchingSkill.Leveling.GainExperience(RanchingExperience);
-                target.ActorSkills.WoodcuttingSkill.Leveling.GainExperience(WoodcuttingExperience);
+                target.ActorSkills.MeleeSkill.Leveling.GainExperience(amount: MeleeExperience);
+                target.ActorSkills.RangedSkill.Leveling.GainExperience(amount: RangedExperience);
+                target.ActorSkills.MagicSkill.Leveling.GainExperience(amount: MagicExperience);
+                target.ActorSkills.AlchemySkill.Leveling.GainExperience(amount: AlchemyExperience);
+                target.ActorSkills.CookingSkill.Leveling.GainExperience(amount: CookingExperience);
+                target.ActorSkills.CraftingSkill.Leveling.GainExperience(amount: CraftingExperience);
+                target.ActorSkills.EnchantingSkill.Leveling.GainExperience(amount: EnchantingExperience);
+                target.ActorSkills.FletchingSkill.Leveling.GainExperience(amount: FletchingExperience);
+                target.ActorSkills.SmithingSkill.Leveling.GainExperience(amount: SmithingExperience);
+                target.ActorSkills.FishingSkill.Leveling.GainExperience(amount: FishingExperience);
+                target.ActorSkills.ForagingSkill.Leveling.GainExperience(amount: ForagingExperience);
+                target.ActorSkills.MiningSkill.Leveling.GainExperience(amount: MiningExperience);
+                target.ActorSkills.RanchingSkill.Leveling.GainExperience(amount: RanchingExperience);
+                target.ActorSkills.WoodcuttingSkill.Leveling.GainExperience(amount: WoodcuttingExperience);
                 target.ActorSkills.MeleeSkill.Leveling.CurrentLevel += MeleeLevel;
                 target.ActorSkills.RangedSkill.Leveling.CurrentLevel += RangedLevel;
                 target.ActorSkills.MagicSkill.Leveling.CurrentLevel += MagicLevel;
@@ -153,8 +152,7 @@ namespace DragonsEnd.Items.Status
 
         public override IItem Copy()
         {
-
-           return new LevelingItem(
+            return new LevelingItem(
                 name: Name,
                 description: Description,
                 price: Price,

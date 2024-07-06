@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using DragonsEnd.Identity.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Skills;
 
 namespace DragonsEnd.Items.Loot.Interfaces
 {
-    public interface ILootable
+    public interface ILootable : IIdentity
     {
-        LootContainer? LootContainer { get; set; }
+        ILootContainer? LootContainer { get; set; }
+        bool HasAlreadyBeenLooted { get; set; }
 
-        LootContainer Loot
+        ILootContainer? Loot
         (
             long minItemAmountDrop = -1L,
             long maxItemAmountDrop = -1L,

@@ -41,9 +41,9 @@ namespace DragonsEnd.Items.Status
         {
             if (target != null)
             {
-                target.ActorStats.Health.CurrentValue += (int)Math.Round(target.ActorStats.Health.MaxValue * HealthHealthRestorePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.Mana.CurrentValue += (int)Math.Round(target.ActorStats.Mana.MaxValue * ManaRestorePercentage / 100, MidpointRounding.AwayFromZero);
-                target.ActorStats.Stamina.CurrentValue += (int)Math.Round(target.ActorStats.Stamina.MaxValue * StaminaRestorePercentage / 100, MidpointRounding.AwayFromZero);
+                target.ActorStats.Health.CurrentValue += (int)Math.Round(value: target.ActorStats.Health.MaxValue * HealthHealthRestorePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.Mana.CurrentValue += (int)Math.Round(value: target.ActorStats.Mana.MaxValue * ManaRestorePercentage / 100, mode: MidpointRounding.AwayFromZero);
+                target.ActorStats.Stamina.CurrentValue += (int)Math.Round(value: target.ActorStats.Stamina.MaxValue * StaminaRestorePercentage / 100, mode: MidpointRounding.AwayFromZero);
             }
 
             MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,

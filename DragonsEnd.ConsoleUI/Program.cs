@@ -1,6 +1,9 @@
 ﻿using DragonsEnd.Actor.Enemy.Constants;
 using DragonsEnd.Actor.Enemy.Database;
+using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Player;
+using DragonsEnd.Combat;
+using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
@@ -8,6 +11,8 @@ using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Status.Interfaces;
+using DragonsEnd.Party.Enemy;
+using DragonsEnd.Party.Player;
 using DragonsEnd.Stats;
 
 namespace DragonsEnd.ConsoleUI;
@@ -16,12 +21,12 @@ public static class Program
 {
     public static void Main()
     {
-        var player = new Player(
+        var mony = new Player(
             name: "Mony",
             gender: Gender.Nonbinary,
             characterClass: CharacterClassType.Freelancer,
             actorStats: new ActorStats(
-                health: 100,
+                health: 1000,
                 mana: 100,
                 stamina: 100,
                 meleeAttack: 5,
@@ -30,27 +35,214 @@ public static class Program
                 rangedDefense: 5,
                 magicAttack: 5,
                 magicDefense: 5),
-            equipment: new IEquipmentItem[]
-            {
-                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger),
-                (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger),
-                (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword),
-                // (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeShield),
-                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeSword),
-                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeGreatSword),
-                // (IWeaponItem)ItemDatabase.GetItems(ItemNames.BronzeDagger),
-                
-            },
+            equipment:
+            [
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger)
+            ],
             inventory: new Inventory(
-                gold: 0, 
-                new []
-            {
-                ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
-                ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20),
-            })
+                gold: 0,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                ])
         );
+        
+        var stormi = new Player(
+            name: "Stormi",
+            gender: Gender.Female,
+            characterClass: CharacterClassType.Warrior,
+            actorStats: new ActorStats(
+                health: 1000,
+                mana: 100,
+                stamina: 100,
+                meleeAttack: 5,
+                meleeDefense: 5,
+                rangedAttack: 5,
+                rangedDefense: 5,
+                magicAttack: 5,
+                magicDefense: 5),
+            equipment:
+            [
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeSword)
+            ],
+            inventory: new Inventory(
+                gold: 0,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                ])
+        );
+        
+        var coty = new Player(
+            name: "Coty",
+            gender: Gender.Male,
+            characterClass: CharacterClassType.Mage,
+            actorStats: new ActorStats(
+                health: 1000,
+                mana: 100,
+                stamina: 100,
+                meleeAttack: 5,
+                meleeDefense: 5,
+                rangedAttack: 5,
+                rangedDefense: 5,
+                magicAttack: 5,
+                magicDefense: 5),
+            equipment:
+            [
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff)
+            ],
+            inventory: new Inventory(
+                gold: 0,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                ])
+        );
+        
+        var daerpyre = new Player(
+            name: "Daerpyre",
+            gender: Gender.Male,
+            characterClass: CharacterClassType.Archer,
+            actorStats: new ActorStats(
+                health: 1000,
+                mana: 100,
+                stamina: 100,
+                meleeAttack: 5,
+                meleeDefense: 5,
+                rangedAttack: 5,
+                rangedDefense: 5,
+                magicAttack: 5,
+                magicDefense: 5),
+            equipment:
+            [
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow)
+            ],
+            inventory: new Inventory(
+                gold: 0,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                ])
+        );
+        
+        var playerManager = new PlayerPartyManager(
+            members:
+            [
+                mony,
+                stormi,
+                coty,
+                daerpyre
+            ],
+            sharedInventory: new Inventory(
+                gold: 0,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                ])
+        );
+        
+        playerManager.SyncInventories();
 
+        var enemyGroups = new List<EnemyPartyManager>
+        {
+            new(
+                members:
+                [
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeArcher),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
+                ],
+                sharedInventory: new Inventory(
+                    gold: 50,
+                    [
+                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
+                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
+                    ])
+            ),
+            new(
+                members:
+                [
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior)
+                ],
+                sharedInventory: new Inventory(
+                    gold: 50,
+                    [
+                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
+                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
+                    ])
+            ),
+            new(
+                members:
+                [
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
+                    EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
+                ],
+                sharedInventory: new Inventory(
+                    gold: 50,
+                    [
+                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
+                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
+                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
+                    ])
+            ),
+        };
+        
+        var enemyPartyManager = new EnemyPartyManager(
+            members:
+            [
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeArcher),
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
+            ],
+            sharedInventory: new Inventory(
+                gold: 50,
+                [
+                    ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
+                    ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
+                    ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
+                    ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
+                ])
+        );
+        // var players = new List<IActor>()
+        // {
+        //     mony,
+        //     stormi,
+        //     coty,
+        //     daerpyre,
+        // };
+
+        // var enemies = new List<IActor>()
+        // {
+        //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+        //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+        //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+        //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+        // };
+
+        ICombatSystem combatSystem = new CombatSystem(playerManager.Members, enemyPartyManager.Members);
+        combatSystem.StartCombat();
+        foreach (var enemyGroup in enemyGroups)
+        {
+            combatSystem.Setup(playerManager.Members, enemyGroup.Members);
+            combatSystem.StartCombat();
+        }
+        
+        Console.WriteLine(playerManager.Members.Count);
+        
+        // var wep = player.Inventory?[ItemNames.BronzeDagger] as IWeaponItem;
         // var bronzeHelm = (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeHelmet);
         // bronzeHelm.Equip(player, player);
 
@@ -98,35 +290,35 @@ public static class Program
 
         // player.Leveling.SetLevel(100);
 
-        var killCount = 0;
-        while (player.IsAlive && killCount < 5)
-        {
-            var enemy = EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior);
-            while (player.IsAlive && enemy.IsAlive)
-            {
-                var enemyHit = player.Attack(source: player, target: enemy);
-                if (enemyHit.hasKilled)
-                {
-                    killCount++;
-                    break; // Breaks out of the inner while loop
-                }
-
-                var playerHit = enemy.Attack(source: enemy, target: player);
-                if (playerHit.hasKilled)
-                {
-                    break; // Breaks out of the inner while loop
-                }
-            }
-
-            if (!enemy.IsAlive)
-            {
-                continue; // Continues with the next iteration of the outer while loop
-            }
-
-            if (!player.IsAlive)
-            {
-                break; // Breaks out of the outer while loop
-            }
-        }
+        // var killCount = 0;
+        // while (player.IsAlive && killCount < 5)
+        // {
+        //     var enemy = EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior);
+        //     while (player.IsAlive && enemy.IsAlive)
+        //     {
+        //         var enemyHit = player.Attack(source: player, target: enemy);
+        //         if (enemyHit.hasKilled)
+        //         {
+        //             killCount++;
+        //             break; // Breaks out of the inner while loop
+        //         }
+        //
+        //         var playerHit = enemy.Attack(source: enemy, target: player);
+        //         if (playerHit.hasKilled)
+        //         {
+        //             break; // Breaks out of the inner while loop
+        //         }
+        //     }
+        //
+        //     if (!enemy.IsAlive)
+        //     {
+        //         continue; // Continues with the next iteration of the outer while loop
+        //     }
+        //
+        //     if (!player.IsAlive)
+        //     {
+        //         break; // Breaks out of the outer while loop
+        //     }
+        // }
     }
 }

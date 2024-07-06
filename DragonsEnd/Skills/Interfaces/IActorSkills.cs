@@ -18,7 +18,7 @@ namespace DragonsEnd.Skills.Interfaces
 {
     public interface IActorSkills
     {
-        IActor Actor { get; set; }
+        IActor? Actor { get; set; }
         MeleeSkill MeleeSkill { get; set; }
         RangedSkill RangedSkill { get; set; }
         MagicSkill MagicSkill { get; set; }
@@ -33,5 +33,7 @@ namespace DragonsEnd.Skills.Interfaces
         SmithingSkill SmithingSkill { get; set; }
         RanchingSkill RanchingSkill { get; set; }
         WoodcuttingSkill WoodcuttingSkill { get; set; }
+
+        void UpdateActor(IActor actor);
     }
 }

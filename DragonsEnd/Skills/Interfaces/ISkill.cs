@@ -13,9 +13,10 @@ namespace DragonsEnd.Skills.Interfaces
     {
         SkillType SkillType { get; }
         ILeveling Leveling { get; set; }
-        IActor Actor { get; set; }
+        IActor? Actor { get; set; }
         ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; }
         void HandleUnlocks(int level);
         void LevelingMessageHandler(IMessageEnvelope message);
+        void UpdateActor(IActor actor);
     }
 }
