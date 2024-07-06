@@ -14,10 +14,9 @@ namespace DragonsEnd.Party
         public BasicPartyManager()
         {
             Members = new List<IActor>();
-            SharedInventory = new Inventory();
         }
 
-        public BasicPartyManager(List<IActor> members, IInventory? sharedInventory, bool useMaxMembers = true, int maxMembers = 4)
+        public BasicPartyManager(List<IActor> members, IInventory? sharedInventory = null, bool useMaxMembers = true, int maxMembers = 4)
         {
             Members = members;
             SharedInventory = sharedInventory;
@@ -35,7 +34,7 @@ namespace DragonsEnd.Party
             }
         }
 
-        public virtual IInventory? SharedInventory { get; set; } = new Inventory();
+        public virtual IInventory? SharedInventory { get; set; }
         public virtual bool UseMaxMembers { get; set; } = true;
         public virtual int MaxMembers { get; set; } = 4;
         public virtual bool IsFull => UseMaxMembers && Members.Count >= MaxMembers;
@@ -116,6 +115,11 @@ namespace DragonsEnd.Party
 
         public virtual void SyncInventories()
         {
+            if(SharedInventory == null)
+            {
+                return;
+            }
+            
             foreach (var member in Members)
             {
                 member.Inventory = SharedInventory;

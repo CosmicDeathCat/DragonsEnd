@@ -19,7 +19,6 @@ namespace DragonsEnd.Actor.Interfaces
         int CombatLevel { get; }
         CharacterClassType CharacterClass { get; set; }
         IEquipmentItem?[] Equipment { get; set; }
-
         IInventory? Inventory { get; set; }
 
         // List<IItem?> Inventory { get; set; }

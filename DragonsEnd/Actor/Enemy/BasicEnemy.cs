@@ -30,12 +30,13 @@ namespace DragonsEnd.Actor.Enemy
             double criticalHitMultiplier = 2.00,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
+            ILootConfig? lootConfig = null,
             ILootContainer? lootContainer = null
         )
             : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, actorSkills: actorSkills, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
                 criticalHitMultiplier: criticalHitMultiplier, equipment: equipment,
-                inventory: inventory, lootContainer: lootContainer)
+                inventory: inventory, lootConfig: lootConfig, lootContainer: lootContainer)
         {
             EnemyTier = enemyTier;
         }
@@ -81,6 +82,7 @@ namespace DragonsEnd.Actor.Enemy
                 damageReductionMultiplier: DamageReductionMultiplier.CurrentValue,
                 equipment: Equipment!,
                 inventory: Inventory,
+                lootConfig: LootConfig,
                 lootContainer: LootContainer
             );
         }

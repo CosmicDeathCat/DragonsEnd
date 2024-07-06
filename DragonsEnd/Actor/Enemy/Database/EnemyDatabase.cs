@@ -7,6 +7,7 @@ using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
+using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Loot;
 using DragonsEnd.Skills;
@@ -57,15 +58,19 @@ namespace DragonsEnd.Actor.Enemy.Database
                             ItemDatabase.GetItems(itemName: ItemNames.StrongHealthPotion, quantity: 3)
                         }
                     ),
-                    lootContainer: new LootContainer
+                    lootConfig: new LootConfig
                     (
-                        gold: 10,
-                        combatExperience: 100,
-                        experiences: new List<SkillExperience>
+                        minItemAmountDrop: 1,
+                        maxItemAmountDrop: 2,
+                        minGold: 5,
+                        maxGold: 15,
+                        minCombatExperience: 50,
+                        maxCombatExperience: 150, 
+                        skillExperiences: new List<SkillExperience>
                         {
-                            new(skillType: SkillType.Crafting, experience: 10)
+                            new(skillType: SkillType.Crafting, minExperience: 10, maxExperience: 50)
                         },
-                        items: new[]
+                        lootableItems: new List<IItem>()
                         {
                             ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                             ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger, quantity: 1, dropRate: 0.75),

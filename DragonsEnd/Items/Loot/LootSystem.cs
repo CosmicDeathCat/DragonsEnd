@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DragonsEnd.Actor.Interfaces;
+using DragonsEnd.Enums;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills;
@@ -11,31 +12,56 @@ namespace DragonsEnd.Items.Loot
 {
     public class LootSystem
     {
+        public static (long gold, long combatExperience, List<SkillExperience> skillExperiences, List<IItem> items) GenerateLoot(ILootable lootedObject, ILootConfig? lootConfig)
+        {
+            if (lootConfig == null)
+            {
+                return GenerateLoot(lootedObject: lootedObject);
+            }
+            
+            return GenerateLoot(
+                lootedObject: lootedObject,
+                minItemAmountDrop: lootConfig.MinItemAmountDrop,
+                maxItemAmountDrop: lootConfig.MaxItemAmountDrop,
+                minGold: lootConfig.MinGold,
+                maxGold: lootConfig.MaxGold,
+                minCombatExp: lootConfig.MinCombatExperience,
+                maxCombatExp: lootConfig.MaxCombatExperience,
+                skillExperiences: lootConfig.SkillExperiences,
+                lootableItems: lootConfig.LootableItems);
+        }
+        
         public static (long gold, long combatExperience, List<SkillExperience> skillExperiences, List<IItem> items) GenerateLoot
         (
             long minItemAmountDrop,
             long maxItemAmountDrop,
             long minGold,
             long maxGold,
-            long combatExp,
+            long minCombatExp,
+            long maxCombatExp,
             List<SkillExperience>? skillExperiences,
-            params IItem[] specificLootableItems
+            List<IItem>? lootableItems
         )
         {
             var rnd = new Random();
             var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
-            var combatExperience = combatExp;
+            var combatExperience = rnd.NextInt64(minValue: minCombatExp, maxValue: maxCombatExp + 1);;
             var skillExps = skillExperiences;
 
             var itemAmount = rnd.NextInt64(minValue: minItemAmountDrop, maxValue: maxItemAmountDrop + 1);
             var items = new List<IItem>();
-
+            
+            if(lootableItems == null)
+            {
+                return (gold, combatExperience, skillExps, items);
+            }
+            
             for (var i = 0; i < itemAmount; i++)
             {
                 var cumulativeProbability = 0.0;
                 var diceRoll = rnd.NextDouble();
 
-                foreach (var dropItem in specificLootableItems.OrderBy(keySelector: x => x.DropRate))
+                foreach (var dropItem in lootableItems.OrderBy(keySelector: x => x.DropRate))
                 {
                     cumulativeProbability += dropItem.DropRate;
                     if (items.Exists(match: x => x.Name.Equals(value: dropItem.Name, comparisonType: StringComparison.OrdinalIgnoreCase)))
@@ -62,18 +88,24 @@ namespace DragonsEnd.Items.Loot
             long maxItemAmountDrop = -1L,
             long minGold = -1L,
             long maxGold = -1L,
-            long combatExp = -1L,
+            long minCombatExp = -1L,
+            long maxCombatExp = -1L,
             List<SkillExperience>? skillExperiences = null,
-            params IItem[] specificLootableItems
+            List<IItem>? lootableItems = null
         )
         {
-            var lootableItems = specificLootableItems.ToList();
-            lootedObject.LootContainer ??= new LootContainer();
-            lootableItems.AddRange(collection: lootedObject.LootContainer.Items);
+            lootedObject.LootConfig ??= new LootConfig();
 
-            if (lootableItems.Count == 0)
+            lootableItems ??= new List<IItem>();
+
+            if (lootedObject.LootContainer != null)
             {
-                if (lootedObject is IActor actor)
+                lootableItems.AddRange(collection: lootedObject.LootContainer.Items);
+            }
+
+            if (lootedObject is IActor actor)
+            {
+                if (lootableItems?.Count == 0)
                 {
                     // Default to using the actor's inventory and equipment as drop items with default drop rates
                     foreach (var item in actor.Inventory.Items)
@@ -96,37 +128,65 @@ namespace DragonsEnd.Items.Loot
                         lootableItems.Add(item: new Item(item: item));
                     }
                 }
-            }
 
-            // Set default values if -1 is provided
-            if (minItemAmountDrop == -1)
-            {
-                minItemAmountDrop = 0;
-            }
+                // Set default values if -1 is provided
+                if (minItemAmountDrop == -1)
+                {
+                    minItemAmountDrop = 0;
+                }
 
-            if (maxItemAmountDrop == -1)
-            {
-                maxItemAmountDrop = lootableItems.Count;
-            }
+                if (maxItemAmountDrop == -1)
+                {
+                    maxItemAmountDrop = lootableItems.Count;
+                }
 
-            if (minGold == -1)
-            {
-                minGold = lootedObject.LootContainer.Gold.CurrentValue;
-            }
+                if (minGold == -1)
+                {
+                    minGold = lootedObject.LootContainer != null ? lootedObject.LootContainer.Gold.CurrentValue : actor.Inventory.Gold.CurrentValue;
+                }
 
-            if (maxGold == -1)
-            {
-                maxGold = lootedObject.LootContainer.Gold.CurrentValue;
-            }
+                if (maxGold == -1)
+                {
+                    maxGold = lootedObject.LootContainer != null ? lootedObject.LootContainer.Gold.CurrentValue : actor.Inventory.Gold.CurrentValue;
+                }
 
-            if (combatExp == -1)
-            {
-                combatExp = lootedObject.LootContainer.CombatExperience;
-            }
+                if (minCombatExp == -1)
+                {
+                    if (lootedObject.LootContainer != null)
+                    {
+                        minCombatExp = lootedObject.LootContainer.CombatExperience;
+                    }
+                    else
+                    {
+                        minCombatExp = (actor.ActorSkills.MeleeSkill.Leveling.Experience + actor.ActorSkills.RangedSkill.Leveling.Experience + actor.ActorSkills.MagicSkill.Leveling.Experience) / 3;
+                    }
+                }
 
-            if (skillExperiences == null)
-            {
-                skillExperiences = lootedObject.LootContainer.SkillExperiences;
+                if (maxCombatExp == -1)
+                {
+                    if (lootedObject.LootContainer != null)
+                    {
+                        maxCombatExp = lootedObject.LootContainer.CombatExperience;
+                    }
+                    else
+                    {
+                        maxCombatExp = (actor.ActorSkills.MeleeSkill.Leveling.Experience + actor.ActorSkills.RangedSkill.Leveling.Experience + actor.ActorSkills.MagicSkill.Leveling.Experience) / 3;
+                    }
+
+                }
+
+                if (skillExperiences == null)
+                {
+                    if (lootedObject.LootContainer != null)
+                    {
+                        skillExperiences = lootedObject.LootContainer.SkillExperiences;
+                    }
+                    else
+                    {
+                        skillExperiences = new List<SkillExperience>();
+                    
+                    }
+                }
             }
 
             return GenerateLoot(
@@ -134,9 +194,12 @@ namespace DragonsEnd.Items.Loot
                 maxItemAmountDrop: maxItemAmountDrop,
                 minGold: minGold,
                 maxGold: maxGold,
-                combatExp: combatExp,
+                minCombatExp: minCombatExp,
+                maxCombatExp: maxCombatExp,
                 skillExperiences: skillExperiences,
-                specificLootableItems: lootableItems.ToArray());
+                lootableItems: lootableItems);
         }
+        
+        
     }
 }

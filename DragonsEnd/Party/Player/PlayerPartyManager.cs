@@ -39,7 +39,7 @@ namespace DragonsEnd.Party.Player
             }
 
             var data = message.Message<VictoryMessage>().GetValueOrDefault();
-            var individualLoot = data.Enemies.Select(selector: x => x.Loot()).ToList();
+            var individualLoot = data.Enemies.Select(selector: x => x.Loot(x.LootConfig)).ToList();
             if (individualLoot.Count <= 0)
             {
                 return;

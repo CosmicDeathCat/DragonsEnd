@@ -10,6 +10,7 @@ using DragonsEnd.Items.Equipment.Interfaces;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Lists;
+using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills;
 using DragonsEnd.Skills.Interfaces;
 using DragonsEnd.Stats;
@@ -31,7 +32,8 @@ namespace DragonsEnd.Actor.Player
             double criticalHitMultiplier = 2.00,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
-            params IItem[] dropItems
+            ILootConfig? lootConfig = null,
+            ILootContainer? lootContainer = null
         )
         {
             Name = name;
@@ -45,6 +47,8 @@ namespace DragonsEnd.Actor.Player
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             Inventory = inventory;
+            LootConfig = lootConfig;
+            LootContainer = lootContainer;
 
             if (actorSkills != null)
             {
@@ -67,20 +71,15 @@ namespace DragonsEnd.Actor.Player
                 Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             }
 
-            if (dropItems.Length > 0)
+            if (LootContainer != null)
             {
-                if (LootContainer != null)
+                if (LootContainer?.Items.Count > 0)
                 {
-                    LootContainer.Items = new ItemList<IItem>();
-                    dropItems.ToList().ForEach(action: x => LootContainer.Items.Add(item: new Item(item: x)));
                 }
-            }
-            else
-            {
-                // Default to using the provided inventory and equipment as drop items with default drop rates
-                if (Inventory?.Items != null)
+                else
                 {
-                    foreach (var item in Inventory?.Items)
+                    // Default to using the provided inventory and equipment as drop items with default drop rates
+                    foreach (var item in Inventory.Items)
                     {
                         if (item == null)
                         {
@@ -89,21 +88,16 @@ namespace DragonsEnd.Actor.Player
 
                         LootContainer?.Items.Add(item: new Item(item: item));
                     }
-                }
 
-                if (equipment != null)
-                {
-                    foreach (var item in equipment)
+                    if (equipment != null)
                     {
-                        LootContainer?.Items.Add(item: new Item(item: item));
+                        foreach (var item in equipment)
+                        {
+                            lootContainer?.Items.Add(item: new Item(item: item));
+                        }
                     }
                 }
             }
-
-            // MessageSystem.MessageManager.RegisterForChannel<VictoryMessage>(channel: MessageChannels.Combat, handler: VictoryMessageHandler);
-
-            // MessageSystem.MessageManager.RegisterForChannel<ActorDeathMessage>(channel: MessageChannels.Combat,
-            //     handler: ActorDeathMessageHandler);
         }
 
         public override bool TakeTurn(ICombatContext combatContext, List<IActor> targets, List<IActor> allies)

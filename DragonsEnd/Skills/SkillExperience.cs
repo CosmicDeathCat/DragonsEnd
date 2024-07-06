@@ -27,5 +27,11 @@ namespace DragonsEnd.Skills
             MaxExperience = experience;
             Experience = experience;
         }
+        
+        public void GenerateRandomExperience()
+        {
+            var rnd = new Random();
+            Experience = rnd.NextInt64(minValue: MinExperience, maxValue: MaxExperience + 1);
+        }
     }
 }

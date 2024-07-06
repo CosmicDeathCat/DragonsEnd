@@ -147,6 +147,16 @@ public static class Program
         );
         
         playerManager.SyncInventories();
+        
+        var slimeWarriorGroup = new EnemyPartyManager(
+            members:
+            [
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
+                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
+                // EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior)
+            ]);
 
         var enemyGroups = new List<EnemyPartyManager>
         {
@@ -156,15 +166,7 @@ public static class Program
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeArcher),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
-                ],
-                sharedInventory: new Inventory(
-                    gold: 50,
-                    [
-                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
-                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
-                    ])
+                ]
             ),
             new(
                 members:
@@ -172,15 +174,7 @@ public static class Program
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior)
-                ],
-                sharedInventory: new Inventory(
-                    gold: 50,
-                    [
-                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
-                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
-                    ])
+                ]
             ),
             new(
                 members:
@@ -188,15 +182,7 @@ public static class Program
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
-                ],
-                sharedInventory: new Inventory(
-                    gold: 50,
-                    [
-                        ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
-                        ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
-                        ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
-                    ])
+                ]
             ),
         };
         
@@ -206,15 +192,7 @@ public static class Program
                 EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
                 EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeArcher),
                 EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
-            ],
-            sharedInventory: new Inventory(
-                gold: 50,
-                [
-                    ItemDatabase.GetItems(itemName: ItemNames.WeakElixir, 2),
-                    ItemDatabase.GetItems(itemName: ItemNames.FeebleWoodShortbow, dropRate: 0.50),
-                    ItemDatabase.GetItems(itemName: ItemNames.BronzeGreatSword, dropRate: 0.50),
-                    ItemDatabase.GetItems(itemName: ItemNames.OldMagicStaff, dropRate: 0.50)
-                ])
+            ]
         );
         // var players = new List<IActor>()
         // {
@@ -232,13 +210,16 @@ public static class Program
         //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
         // };
 
-        ICombatSystem combatSystem = new CombatSystem(playerManager.Members, enemyPartyManager.Members);
+        ICombatSystem combatSystem = new CombatSystem(playerManager.Members, slimeWarriorGroup.Members);
         combatSystem.StartCombat();
-        foreach (var enemyGroup in enemyGroups)
-        {
-            combatSystem.Setup(playerManager.Members, enemyGroup.Members);
-            combatSystem.StartCombat();
-        }
+        
+        // ICombatSystem combatSystem = new CombatSystem(playerManager.Members, enemyPartyManager.Members);
+        // combatSystem.StartCombat();
+        // foreach (var enemyGroup in enemyGroups)
+        // {
+        //     combatSystem.Setup(playerManager.Members, enemyGroup.Members);
+        //     combatSystem.StartCombat();
+        // }
         
         Console.WriteLine(playerManager.Members.Count);
         

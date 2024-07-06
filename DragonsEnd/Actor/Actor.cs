@@ -36,6 +36,7 @@ namespace DragonsEnd.Actor
             ID = Guid.NewGuid();
             Equipment = new IEquipmentItem[Enum.GetNames(enumType: typeof(EquipmentSlot)).Length];
             Inventory = new Inventory();
+            LootConfig = new LootConfig();
             LootContainer = new LootContainer();
             ActorStats = new ActorStats(health: 100, mana: 100, stamina: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
                 magicDefense: 1);
@@ -57,6 +58,7 @@ namespace DragonsEnd.Actor
             double criticalHitMultiplier = 2.00,
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
+            ILootConfig? lootConfig = null,
             ILootContainer? lootContainer = null
         )
         {
@@ -73,6 +75,7 @@ namespace DragonsEnd.Actor
             CriticalHitMultiplier = new DoubleStat(baseValue: criticalHitMultiplier);
             IsAlive = true;
             Inventory = inventory;
+            LootConfig = lootConfig;
             LootContainer = lootContainer;
 
             if (equipment != null)
@@ -142,8 +145,10 @@ namespace DragonsEnd.Actor
         public virtual IActorSkills? ActorSkills { get; set; }
 
         public virtual ILootContainer? LootContainer { get; set; }
+        public virtual ILootConfig? LootConfig { get; set; }
 
         public bool HasAlreadyBeenLooted { get; set; }
+
 
         public CombatStyle CombatStyle
         {
@@ -466,30 +471,17 @@ namespace DragonsEnd.Actor
             return aliveTargets[index: rnd.Next(maxValue: aliveTargets.Count)];
         }
 
-
-        public virtual ILootContainer? Loot
-        (
-            long minItemAmountDrop = -1L,
-            long maxItemAmountDrop = -1L,
-            long minGold = -1L,
-            long maxGold = -1L,
-            long combatExp = -1L,
-            List<SkillExperience>? skillExperiences = null,
-            params IItem[] specificLootableItems
-        )
+        public ILootContainer? Loot(ILootConfig? lootConfig = null)
         {
-            var loot = LootSystem.GenerateLoot(
-                lootedObject: this,
-                minItemAmountDrop: minItemAmountDrop,
-                maxItemAmountDrop: maxItemAmountDrop,
-                minGold: minGold,
-                maxGold: maxGold,
-                combatExp: combatExp,
-                skillExperiences: skillExperiences,
-                specificLootableItems: specificLootableItems);
-            var lootContainer = new LootContainer(gold: loot.gold, combatExperience: loot.combatExperience, experiences: loot.skillExperiences, items: loot.items.ToArray());
+            if(LootContainer != null)
+            {
+                return LootContainer;
+            }
+            
+            var loot = LootSystem.GenerateLoot(lootedObject: this, lootConfig: lootConfig);
+            LootContainer = new LootContainer(gold: loot.gold, combatExperience: loot.combatExperience, experiences: loot.skillExperiences, items: loot.items.ToArray());
             HasAlreadyBeenLooted = true;
-            return lootContainer;
+            return LootContainer;
         }
 
         public virtual void TakeDamage(IActor sourceActor, int damage)
@@ -518,6 +510,7 @@ namespace DragonsEnd.Actor
                 criticalHitMultiplier: CriticalHitMultiplier.BaseValue,
                 equipment: Equipment?.ToArray()!,
                 inventory: Inventory,
+                lootConfig: LootConfig,
                 lootContainer: LootContainer
             );
         }

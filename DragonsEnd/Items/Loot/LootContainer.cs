@@ -41,13 +41,15 @@ namespace DragonsEnd.Items.Loot
         public List<SkillExperience> SkillExperiences { get; set; } = new();
         public ItemList<IItem> Items { get; set; } = new();
 
-        public void AddLoot(GoldCurrency? gold, long combatExperience, List<SkillExperience> experiences, params IItem[] items)
+        public void AddLoot(GoldCurrency? gold, long combatExperience, List<SkillExperience>? experiences, params IItem[] items)
         {
             gold ??= new GoldCurrency(quantity: 0);
             Gold.Add(otherCurrency: gold);
             CombatExperience += combatExperience;
+            experiences ??= new List<SkillExperience>();
             foreach (var skillExperience in experiences)
             {
+                skillExperience.GenerateRandomExperience();
                 var skillExp = SkillExperiences.FirstOrDefault(predicate: x => x.SkillType == skillExperience.SkillType);
                 if (skillExp.SkillType == skillExperience.SkillType)
                 {
@@ -62,12 +64,14 @@ namespace DragonsEnd.Items.Loot
             Items.AddRange(collection: items);
         }
 
-        public void AddLoot(long gold, long combatExperience, List<SkillExperience> experiences, params IItem[] items)
+        public void AddLoot(long gold, long combatExperience, List<SkillExperience>? experiences, params IItem[] items)
         {
             Gold.Add(otherCurrency: new GoldCurrency(quantity: gold));
             CombatExperience += combatExperience;
+            experiences ??= new List<SkillExperience>();
             foreach (var skillExperience in experiences)
             {
+                skillExperience.GenerateRandomExperience();
                 var skillExp = SkillExperiences.FirstOrDefault(predicate: x => x.SkillType == skillExperience.SkillType);
                 if (skillExp.SkillType == skillExperience.SkillType)
                 {
@@ -93,6 +97,7 @@ namespace DragonsEnd.Items.Loot
             CombatExperience += lootContainer.CombatExperience;
             foreach (var skillExperience in lootContainer.SkillExperiences)
             {
+                skillExperience.GenerateRandomExperience();
                 var skillExp = SkillExperiences.FirstOrDefault(predicate: x => x.SkillType == skillExperience.SkillType);
                 if (skillExp.SkillType == skillExperience.SkillType)
                 {

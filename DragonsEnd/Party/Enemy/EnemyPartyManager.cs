@@ -11,7 +11,7 @@ namespace DragonsEnd.Party.Enemy
         }
 
         public EnemyPartyManager
-            (List<IActor> members, IInventory? sharedInventory, bool useMaxMembers = true, int maxMembers = 4) : base(members: members, sharedInventory: sharedInventory, useMaxMembers: useMaxMembers,
+            (List<IActor> members, IInventory? sharedInventory = null, bool useMaxMembers = true, int maxMembers = 4) : base(members: members, sharedInventory: sharedInventory, useMaxMembers: useMaxMembers,
             maxMembers: maxMembers)
         {
         }
