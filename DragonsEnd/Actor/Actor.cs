@@ -12,7 +12,6 @@ using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Loot;

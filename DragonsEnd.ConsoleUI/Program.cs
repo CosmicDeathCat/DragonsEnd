@@ -1,6 +1,5 @@
 ﻿using DragonsEnd.Actor.Enemy.Constants;
 using DragonsEnd.Actor.Enemy.Database;
-using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Player;
 using DragonsEnd.Combat;
 using DragonsEnd.Combat.Interfaces;
@@ -8,9 +7,7 @@ using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
-using DragonsEnd.Items.Status.Interfaces;
 using DragonsEnd.Party.Enemy;
 using DragonsEnd.Party.Player;
 using DragonsEnd.Stats;
@@ -146,14 +143,12 @@ public static class Program
                 ])
         );
         
-        playerManager.SyncInventories();
-        
         var slimeWarriorGroup = new EnemyPartyManager(
             members:
             [
-                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
-                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
-                EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
+                // EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                // EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
+                // EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
                 EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
                 // EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior)
             ]);

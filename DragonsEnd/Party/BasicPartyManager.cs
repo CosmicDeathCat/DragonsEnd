@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
-using DragonsEnd.Items.Inventory;
 using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Party.Interfaces;
 

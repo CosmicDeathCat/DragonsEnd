@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DragonsEnd.Actor.Interfaces;
-using DragonsEnd.Enums;
 using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills;

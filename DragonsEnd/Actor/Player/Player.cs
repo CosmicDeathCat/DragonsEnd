@@ -7,9 +7,7 @@ using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory.Interfaces;
-using DragonsEnd.Items.Lists;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills;
 using DragonsEnd.Skills.Interfaces;
@@ -40,8 +38,6 @@ namespace DragonsEnd.Actor.Player
             Gender = gender;
             CharacterClass = characterClass;
             ActorStats = actorStats;
-            ActorSkills = actorSkills;
-            ActorSkills?.UpdateActor(actor: this);
             IsAlive = true;
             DamageMultiplier = new DoubleStat(baseValue: damageMultiplier);
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
@@ -53,6 +49,7 @@ namespace DragonsEnd.Actor.Player
             if (actorSkills != null)
             {
                 ActorSkills = actorSkills;
+                ActorSkills?.UpdateActor(actor: this);
             }
             else
             {

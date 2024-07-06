@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using DragonsEnd.Identity.Interfaces;
-using DragonsEnd.Items.Interfaces;
-using DragonsEnd.Skills;
 
 namespace DragonsEnd.Items.Loot.Interfaces
 {
