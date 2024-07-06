@@ -11,11 +11,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Crafting
 {
     public class CraftingSkill : BaseNonCombatSkill
     {
-        public CraftingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Crafting;
+        public override SkillType SkillType { get => SkillType.Crafting; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -118,5 +114,9 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Crafting
                 new BasicSkillUnlock(name: ItemNames.DragonfireBuckler, description: "You can now craft Dragonfire Bucklers!")
             }
         };
+
+        public CraftingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

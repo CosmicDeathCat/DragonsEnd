@@ -11,11 +11,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Fletching
 {
     public class FletchingSkill : BaseNonCombatSkill
     {
-        public FletchingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Fletching;
+        public override SkillType SkillType { get => SkillType.Fletching; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -96,5 +92,9 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Fletching
                 new BasicSkillUnlock(name: ItemNames.DragonfireFirearm, description: "You can now craft Dragonfire Firearms!")
             }
         };
+
+        public FletchingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

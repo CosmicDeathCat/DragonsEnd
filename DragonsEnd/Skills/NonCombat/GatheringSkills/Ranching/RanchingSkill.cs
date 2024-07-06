@@ -11,11 +11,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Ranching
 {
     public class RanchingSkill : BaseNonCombatSkill
     {
-        public RanchingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Ranching;
+        public override SkillType SkillType { get => SkillType.Ranching; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -94,5 +90,9 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Ranching
                 new BasicSkillUnlock(name: ItemNames.DragonScale, description: "You can now collect Dragon Scales!")
             }
         };
+
+        public RanchingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

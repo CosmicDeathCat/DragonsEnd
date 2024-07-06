@@ -10,11 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing
 {
     public class FishingSkill : BaseNonCombatSkill
     {
-        public FishingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Fishing;
+        public override SkillType SkillType { get => SkillType.Fishing; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -73,5 +69,9 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Fishing
                 new BasicSkillUnlock(name: FishNames.Kraken, description: "You can now catch Kraken!")
             }
         };
+
+        public FishingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

@@ -11,6 +11,16 @@ namespace DragonsEnd.Items
     [Serializable]
     public class Item : IItem
     {
+        public virtual string Name { get; set; }
+        public virtual Guid ID { get; set; } = Guid.NewGuid();
+        public virtual string Description { get; set; }
+        public virtual long Price { get; set; }
+        public virtual ItemType Type { get; set; }
+        public virtual bool Stackable { get; set; }
+        public virtual long Quantity { get; set; }
+
+        public virtual double DropRate { get; set; }
+
         public Item
         (
             string name,
@@ -46,15 +56,6 @@ namespace DragonsEnd.Items
             DropRate = item.DropRate;
         }
 
-        public virtual string Name { get; set; }
-        public virtual Guid ID { get; set; } = Guid.NewGuid();
-        public virtual string Description { get; set; }
-        public virtual long Price { get; set; }
-        public virtual ItemType Type { get; set; }
-        public virtual bool Stackable { get; set; }
-        public virtual long Quantity { get; set; }
-
-        public virtual double DropRate { get; set; }
 
         public virtual void Use(IActor? source, IActor? target)
         {

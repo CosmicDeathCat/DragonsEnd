@@ -7,6 +7,7 @@ using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
+using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Party.Enemy;
 using DragonsEnd.Party.Player;
@@ -18,6 +19,11 @@ public static class Program
 {
     public static void Main()
     {
+        IEquipmentItem item1 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
+        IEquipmentItem item2 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
+        Console.WriteLine(value: item1);
+
+        
         var mony = new Player(
             name: "Mony",
             gender: Gender.Nonbinary,

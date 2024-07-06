@@ -12,6 +12,10 @@ namespace DragonsEnd.Items.Equipment
     [Serializable]
     public class ArmorItem : EquipmentItem, IArmorItem
     {
+        public virtual CombatStyle CombatStyle { get; set; }
+        public virtual ArmorType ArmorType { get; set; }
+        public virtual DoubleStat DamageReductionMultiplier { get; set; }
+
         public ArmorItem
         (
             string name,
@@ -37,10 +41,6 @@ namespace DragonsEnd.Items.Equipment
             ArmorType = armorType;
             DamageReductionMultiplier = new DoubleStat(baseValue: damageReductionMultiplier);
         }
-
-        public virtual CombatStyle CombatStyle { get; set; }
-        public virtual ArmorType ArmorType { get; set; }
-        public virtual DoubleStat DamageReductionMultiplier { get; set; }
 
         public override IItem Copy()
         {

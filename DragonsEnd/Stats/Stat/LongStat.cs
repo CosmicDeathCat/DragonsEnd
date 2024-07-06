@@ -5,22 +5,6 @@ namespace DragonsEnd.Stats.Stat
     [Serializable]
     public class LongStat
     {
-        private long _baseValue;
-        private long _currentValue;
-        private long _modifierValue;
-
-        public LongStat(long baseValue)
-        {
-            BaseValue = baseValue;
-            CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
-        }
-
-        public LongStat(long currentValue, long baseValue)
-        {
-            _baseValue = baseValue;
-            CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
-        }
-
         public long CurrentValue
         {
             get => _currentValue;
@@ -28,7 +12,10 @@ namespace DragonsEnd.Stats.Stat
                 Math.Clamp(value: value, min: long.MinValue, max: MaxValue); // Ensures CurrentValue never exceeds MaxValue.
         }
 
-        public long MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
+        public long MaxValue
+        {
+            get => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
+        }
 
         public long BaseValue
         {
@@ -48,6 +35,18 @@ namespace DragonsEnd.Stats.Stat
                 _modifierValue = value;
                 _currentValue = MaxValue; // Directly set CurrentValue to MaxValue.
             }
+        }
+
+        public LongStat(long baseValue)
+        {
+            BaseValue = baseValue;
+            CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
+        }
+
+        public LongStat(long currentValue, long baseValue)
+        {
+            _baseValue = baseValue;
+            CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
         }
 
         public static LongStat operator +(LongStat a, LongStat b)
@@ -82,5 +81,11 @@ namespace DragonsEnd.Stats.Stat
         {
             ModifierValue -= modifier;
         }
+
+        private long _baseValue;
+
+        private long _currentValue;
+
+        private long _modifierValue;
     }
 }

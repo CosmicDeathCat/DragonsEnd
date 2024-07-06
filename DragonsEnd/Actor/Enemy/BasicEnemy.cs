@@ -12,6 +12,8 @@ namespace DragonsEnd.Actor.Enemy
 {
     public class BasicEnemy : Actor, IEnemy
     {
+        public virtual EnemyTierType EnemyTier { get; set; }
+
         public BasicEnemy()
         {
         }
@@ -40,8 +42,6 @@ namespace DragonsEnd.Actor.Enemy
         {
             EnemyTier = enemyTier;
         }
-
-        public virtual EnemyTierType EnemyTier { get; set; }
 
         public override IActor Copy()
         {

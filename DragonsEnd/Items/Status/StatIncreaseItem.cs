@@ -12,6 +12,17 @@ namespace DragonsEnd.Items.Status
     [Serializable]
     public class StatIncreaseItem : Item, IStatIncreaseItem
     {
+        public virtual double HealthIncreasePercentage { get; set; }
+        public virtual double ManaIncreasePercentage { get; set; }
+        public virtual double StaminaIncreasePercentage { get; set; }
+        public virtual double MeleeAttackIncreasePercentage { get; set; }
+        public virtual double MeleeDefenseIncreasePercentage { get; set; }
+        public virtual double RangedAttackIncreasePercentage { get; set; }
+        public virtual double RangedDefenseIncreasePercentage { get; set; }
+        public virtual double MagicAttackIncreasePercentage { get; set; }
+        public virtual double MagicDefenseIncreasePercentage { get; set; }
+        public virtual double CriticalHitChanceIncreasePercentage { get; set; }
+
         public StatIncreaseItem
         (
             string name,
@@ -46,17 +57,6 @@ namespace DragonsEnd.Items.Status
             MagicDefenseIncreasePercentage = magicDefenseIncreasePercentage;
             CriticalHitChanceIncreasePercentage = criticalHitChanceIncreasePercentage;
         }
-
-        public virtual double HealthIncreasePercentage { get; set; }
-        public virtual double ManaIncreasePercentage { get; set; }
-        public virtual double StaminaIncreasePercentage { get; set; }
-        public virtual double MeleeAttackIncreasePercentage { get; set; }
-        public virtual double MeleeDefenseIncreasePercentage { get; set; }
-        public virtual double RangedAttackIncreasePercentage { get; set; }
-        public virtual double RangedDefenseIncreasePercentage { get; set; }
-        public virtual double MagicAttackIncreasePercentage { get; set; }
-        public virtual double MagicDefenseIncreasePercentage { get; set; }
-        public virtual double CriticalHitChanceIncreasePercentage { get; set; }
 
         public override void Use(IActor? source, IActor? target)
         {

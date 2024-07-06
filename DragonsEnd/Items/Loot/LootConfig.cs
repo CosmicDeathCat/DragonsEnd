@@ -15,7 +15,7 @@ namespace DragonsEnd.Items.Loot
         public virtual long MaxCombatExperience { get; set; }
         public virtual List<SkillExperience>? SkillExperiences { get; set; }
         public virtual List<IItem>? LootableItems { get; set; }
-        
+
         public LootConfig
         (
             long minItemAmountDrop = -1L,

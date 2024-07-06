@@ -10,11 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Enchanting
 {
     public class EnchantingSkill : BaseNonCombatSkill
     {
-        public EnchantingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Enchanting;
+        public override SkillType SkillType { get => SkillType.Enchanting; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -73,5 +69,9 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Enchanting
                 new BasicSkillUnlock(name: "Enchant: Draconic", description: "You can now enchant Draconic Mage gear!")
             }
         };
+
+        public EnchantingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

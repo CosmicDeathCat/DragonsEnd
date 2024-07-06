@@ -5,16 +5,16 @@ namespace DragonsEnd.Skills.Unlocks
 {
     public class BasicSkillUnlock : ILockable
     {
+        public virtual string Name { get; set; }
+        public virtual Guid ID { get; set; } = Guid.NewGuid();
+        public virtual string Description { get; set; }
+        public virtual bool IsLocked { get; set; } = true;
+
         public BasicSkillUnlock(string name, string description, bool isLocked = true)
         {
             Name = name;
             Description = description;
         }
-
-        public virtual string Name { get; set; }
-        public virtual Guid ID { get; set; } = Guid.NewGuid();
-        public virtual string Description { get; set; }
-        public virtual bool IsLocked { get; set; } = true;
 
         public virtual bool Lock()
         {

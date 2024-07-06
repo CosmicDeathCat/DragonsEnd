@@ -11,11 +11,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing
 {
     public class SmithingSkill : BaseNonCombatSkill
     {
-        public SmithingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Smithing;
+        public override SkillType SkillType { get => SkillType.Smithing; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -185,5 +181,9 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Smithing
                 new BasicSkillUnlock(name: ItemNames.CrystalThrowingKnife, description: "You can now smith Crystal Throwing Knives!")
             }
         };
+
+        public SmithingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

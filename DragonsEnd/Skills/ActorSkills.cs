@@ -20,6 +20,22 @@ namespace DragonsEnd.Skills
 {
     public class ActorSkills : IActorSkills
     {
+        public virtual IActor? Actor { get; set; }
+        public virtual MeleeSkill MeleeSkill { get; set; }
+        public virtual RangedSkill RangedSkill { get; set; }
+        public virtual MagicSkill MagicSkill { get; set; }
+        public virtual AlchemySkill AlchemySkill { get; set; }
+        public virtual CookingSkill CookingSkill { get; set; }
+        public virtual CraftingSkill CraftingSkill { get; set; }
+        public virtual EnchantingSkill EnchantingSkill { get; set; }
+        public virtual FishingSkill FishingSkill { get; set; }
+        public virtual FletchingSkill FletchingSkill { get; set; }
+        public virtual ForagingSkill ForagingSkill { get; set; }
+        public virtual MiningSkill MiningSkill { get; set; }
+        public virtual SmithingSkill SmithingSkill { get; set; }
+        public virtual RanchingSkill RanchingSkill { get; set; }
+        public virtual WoodcuttingSkill WoodcuttingSkill { get; set; }
+
         public ActorSkills()
         {
             Actor = null;
@@ -93,22 +109,6 @@ namespace DragonsEnd.Skills
             RanchingSkill = ranchingSkill;
             WoodcuttingSkill = woodcuttingSkill;
         }
-
-        public virtual IActor? Actor { get; set; }
-        public virtual MeleeSkill MeleeSkill { get; set; }
-        public virtual RangedSkill RangedSkill { get; set; }
-        public virtual MagicSkill MagicSkill { get; set; }
-        public virtual AlchemySkill AlchemySkill { get; set; }
-        public virtual CookingSkill CookingSkill { get; set; }
-        public virtual CraftingSkill CraftingSkill { get; set; }
-        public virtual EnchantingSkill EnchantingSkill { get; set; }
-        public virtual FishingSkill FishingSkill { get; set; }
-        public virtual FletchingSkill FletchingSkill { get; set; }
-        public virtual ForagingSkill ForagingSkill { get; set; }
-        public virtual MiningSkill MiningSkill { get; set; }
-        public virtual SmithingSkill SmithingSkill { get; set; }
-        public virtual RanchingSkill RanchingSkill { get; set; }
-        public virtual WoodcuttingSkill WoodcuttingSkill { get; set; }
 
         public virtual void UpdateActor(IActor actor)
         {

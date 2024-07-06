@@ -8,21 +8,6 @@ namespace DragonsEnd.Party
 {
     public class BasicPartyManager : IPartyManager
     {
-        protected List<IActor> _members;
-
-        public BasicPartyManager()
-        {
-            Members = new List<IActor>();
-        }
-
-        public BasicPartyManager(List<IActor> members, IInventory? sharedInventory = null, bool useMaxMembers = true, int maxMembers = 4)
-        {
-            Members = members;
-            SharedInventory = sharedInventory;
-            UseMaxMembers = useMaxMembers;
-            MaxMembers = maxMembers;
-        }
-
         public virtual List<IActor> Members
         {
             get => _members;
@@ -36,7 +21,20 @@ namespace DragonsEnd.Party
         public virtual IInventory? SharedInventory { get; set; }
         public virtual bool UseMaxMembers { get; set; } = true;
         public virtual int MaxMembers { get; set; } = 4;
-        public virtual bool IsFull => UseMaxMembers && Members.Count >= MaxMembers;
+        public virtual bool IsFull { get => UseMaxMembers && Members.Count >= MaxMembers; }
+
+        public BasicPartyManager()
+        {
+            Members = new List<IActor>();
+        }
+
+        public BasicPartyManager(List<IActor> members, IInventory? sharedInventory = null, bool useMaxMembers = true, int maxMembers = 4)
+        {
+            Members = members;
+            SharedInventory = sharedInventory;
+            UseMaxMembers = useMaxMembers;
+            MaxMembers = maxMembers;
+        }
 
         public virtual bool AddMember(IActor actor)
         {
@@ -114,15 +112,17 @@ namespace DragonsEnd.Party
 
         public virtual void SyncInventories()
         {
-            if(SharedInventory == null)
+            if (SharedInventory == null)
             {
                 return;
             }
-            
+
             foreach (var member in Members)
             {
                 member.Inventory = SharedInventory;
             }
         }
+
+        protected List<IActor> _members;
     }
 }

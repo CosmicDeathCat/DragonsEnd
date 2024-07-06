@@ -10,11 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
 {
     public class CookingSkill : BaseNonCombatSkill
     {
-        public CookingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Cooking;
+        public override SkillType SkillType { get => SkillType.Cooking; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -112,5 +108,9 @@ namespace DragonsEnd.Skills.NonCombat.CraftingSkills.Cooking
                     description: "You can now cook Dragon Roast (requires Dragon Meat, Rare Herbs, Exotic Mushrooms)!")
             }
         };
+
+        public CookingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

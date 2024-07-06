@@ -5,22 +5,6 @@ namespace DragonsEnd.Stats.Stat
     [Serializable]
     public class DoubleStat
     {
-        private double _baseValue;
-        private double _currentValue;
-        private double _modifierValue;
-
-        public DoubleStat(double baseValue)
-        {
-            BaseValue = baseValue;
-            CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
-        }
-
-        public DoubleStat(double currentValue, double baseValue)
-        {
-            _baseValue = baseValue;
-            CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
-        }
-
         public double CurrentValue
         {
             get => _currentValue;
@@ -28,7 +12,10 @@ namespace DragonsEnd.Stats.Stat
                 Math.Clamp(value: value, min: double.MinValue, max: MaxValue); // Ensures CurrentValue never exceeds MaxValue.
         }
 
-        public double MaxValue => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
+        public double MaxValue
+        {
+            get => _baseValue + _modifierValue; // Calculates MaxValue on the fly.
+        }
 
         public double BaseValue
         {
@@ -48,6 +35,18 @@ namespace DragonsEnd.Stats.Stat
                 _modifierValue = value;
                 _currentValue = MaxValue; // Directly set CurrentValue to MaxValue.
             }
+        }
+
+        public DoubleStat(double baseValue)
+        {
+            BaseValue = baseValue;
+            CurrentValue = baseValue; // Initialize CurrentValue to BaseValue.
+        }
+
+        public DoubleStat(double currentValue, double baseValue)
+        {
+            _baseValue = baseValue;
+            CurrentValue = currentValue; // Set CurrentValue, which will clamp to the calculated MaxValue.
         }
 
         public static DoubleStat operator +(DoubleStat a, DoubleStat b)
@@ -82,5 +81,11 @@ namespace DragonsEnd.Stats.Stat
         {
             ModifierValue -= modifier;
         }
+
+        private double _baseValue;
+
+        private double _currentValue;
+
+        private double _modifierValue;
     }
 }

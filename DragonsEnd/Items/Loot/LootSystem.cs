@@ -17,7 +17,7 @@ namespace DragonsEnd.Items.Loot
             {
                 return GenerateLoot(lootedObject: lootedObject);
             }
-            
+
             return GenerateLoot(
                 lootedObject: lootedObject,
                 minItemAmountDrop: lootConfig.MinItemAmountDrop,
@@ -29,7 +29,7 @@ namespace DragonsEnd.Items.Loot
                 skillExperiences: lootConfig.SkillExperiences,
                 lootableItems: lootConfig.LootableItems);
         }
-        
+
         public static (long gold, long combatExperience, List<SkillExperience> skillExperiences, List<IItem> items) GenerateLoot
         (
             long minItemAmountDrop,
@@ -44,17 +44,18 @@ namespace DragonsEnd.Items.Loot
         {
             var rnd = new Random();
             var gold = rnd.NextInt64(minValue: minGold, maxValue: maxGold + 1);
-            var combatExperience = rnd.NextInt64(minValue: minCombatExp, maxValue: maxCombatExp + 1);;
+            var combatExperience = rnd.NextInt64(minValue: minCombatExp, maxValue: maxCombatExp + 1);
+            ;
             var skillExps = skillExperiences;
 
             var itemAmount = rnd.NextInt64(minValue: minItemAmountDrop, maxValue: maxItemAmountDrop + 1);
             var items = new List<IItem>();
-            
-            if(lootableItems == null)
+
+            if (lootableItems == null)
             {
                 return (gold, combatExperience, skillExps, items);
             }
-            
+
             for (var i = 0; i < itemAmount; i++)
             {
                 var cumulativeProbability = 0.0;
@@ -171,7 +172,6 @@ namespace DragonsEnd.Items.Loot
                     {
                         maxCombatExp = (actor.ActorSkills.MeleeSkill.Leveling.Experience + actor.ActorSkills.RangedSkill.Leveling.Experience + actor.ActorSkills.MagicSkill.Leveling.Experience) / 3;
                     }
-
                 }
 
                 if (skillExperiences == null)
@@ -183,7 +183,6 @@ namespace DragonsEnd.Items.Loot
                     else
                     {
                         skillExperiences = new List<SkillExperience>();
-                    
                     }
                 }
             }
@@ -198,7 +197,5 @@ namespace DragonsEnd.Items.Loot
                 skillExperiences: skillExperiences,
                 lootableItems: lootableItems);
         }
-        
-        
     }
 }

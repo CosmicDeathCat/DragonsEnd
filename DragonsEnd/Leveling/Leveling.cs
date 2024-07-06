@@ -13,53 +13,6 @@ namespace DragonsEnd.Leveling
     //TODO: Handle types of levels like skills and regular combat levels
     public class Leveling : ILeveling
     {
-        protected int _currentLevel = 1;
-
-        protected long _experience;
-
-        protected int _maxLevel = DefaultMaxLevel;
-
-        public Leveling(string name, int level = 1, int maxLevel = 100)
-        {
-            Name = name;
-            _maxLevel = maxLevel;
-            _currentLevel = ValidateLevel(level: level);
-            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
-        }
-
-        public Leveling(IActor? actor, string name, int level = 1, int maxLevel = 100)
-        {
-            Name = name;
-            Actor = actor;
-            _maxLevel = maxLevel;
-            _currentLevel = ValidateLevel(level: level);
-            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
-        }
-
-        public Leveling(IActor? actor, string name, int level = -1, int maxLevel = 100, long experience = -1)
-        {
-            Actor = actor;
-            Name = name;
-            _maxLevel = maxLevel;
-            if (level == -1 && experience == -1)
-            {
-                _currentLevel = 1; // Default to level 1
-                _experience = ExperienceLevels[key: 2]; // Default experience for level 1 to 2
-            }
-            else if (level == -1)
-            {
-                _experience = ValidateExperience(experience: experience);
-                _currentLevel = CalculateLevelFromExperience(experience: _experience); // Calculate level based on experience
-            }
-            else
-            {
-                _currentLevel = ValidateLevel(level: level);
-                _experience = experience == -1
-                    ? ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)]
-                    : ValidateExperience(experience: experience);
-            }
-        }
-
         public static long BaseExperience { get; set; } = 50;
         public static double ExperienceExponent { get; set; } = 1.25;
         public static int DefaultMaxLevel { get; set; } = 100;
@@ -126,6 +79,47 @@ namespace DragonsEnd.Leveling
 
         public Dictionary<int, long> ExperienceLevels { get; set; } =
             GenerateExperienceLevels(maxLevel: DefaultMaxLevel, baseExperience: BaseExperience, exponent: ExperienceExponent);
+
+        public Leveling(string name, int level = 1, int maxLevel = 100)
+        {
+            Name = name;
+            _maxLevel = maxLevel;
+            _currentLevel = ValidateLevel(level: level);
+            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
+        }
+
+        public Leveling(IActor? actor, string name, int level = 1, int maxLevel = 100)
+        {
+            Name = name;
+            Actor = actor;
+            _maxLevel = maxLevel;
+            _currentLevel = ValidateLevel(level: level);
+            _experience = ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)];
+        }
+
+        public Leveling(IActor? actor, string name, int level = -1, int maxLevel = 100, long experience = -1)
+        {
+            Actor = actor;
+            Name = name;
+            _maxLevel = maxLevel;
+            if (level == -1 && experience == -1)
+            {
+                _currentLevel = 1; // Default to level 1
+                _experience = ExperienceLevels[key: 2]; // Default experience for level 1 to 2
+            }
+            else if (level == -1)
+            {
+                _experience = ValidateExperience(experience: experience);
+                _currentLevel = CalculateLevelFromExperience(experience: _experience); // Calculate level based on experience
+            }
+            else
+            {
+                _currentLevel = ValidateLevel(level: level);
+                _experience = experience == -1
+                    ? ExperienceLevels[key: _currentLevel.Clamp(min: 1, max: MaxLevel)]
+                    : ValidateExperience(experience: experience);
+            }
+        }
 
 
         public virtual void LevelUp()
@@ -295,5 +289,11 @@ namespace DragonsEnd.Leveling
 
             return levels;
         }
+
+        protected int _currentLevel = 1;
+
+        protected long _experience;
+
+        protected int _maxLevel = DefaultMaxLevel;
     }
 }

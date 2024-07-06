@@ -10,11 +10,7 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging
 {
     public class ForagingSkill : BaseNonCombatSkill
     {
-        public ForagingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
-        {
-        }
-
-        public override SkillType SkillType => SkillType.Foraging;
+        public override SkillType SkillType { get => SkillType.Foraging; }
 
         public override ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new()
         {
@@ -78,5 +74,9 @@ namespace DragonsEnd.Skills.NonCombat.GatheringSkills.Foraging
                 new BasicSkillUnlock(name: ForageNames.LifeBloom, description: "You can now forage Life Blooms!")
             }
         };
+
+        public ForagingSkill(string name, IActor? actor = null, int startingLevel = 1, int maxLevel = 100) : base(name: name, actor: actor, startingLevel: startingLevel, maxLevel: maxLevel)
+        {
+        }
     }
 }

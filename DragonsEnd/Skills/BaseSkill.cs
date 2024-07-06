@@ -16,6 +16,14 @@ namespace DragonsEnd.Skills
 {
     public abstract class BaseSkill : ISkill
     {
+        public virtual string Name { get; set; }
+        public virtual Guid ID { get; set; } = Guid.NewGuid();
+
+        public virtual SkillType SkillType { get => SkillType.None; }
+        public virtual ILeveling Leveling { get; set; }
+        public virtual IActor? Actor { get; set; }
+        public virtual ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new();
+
         public BaseSkill(string name, int startingLevel = 1, int maxLevel = 100)
         {
             Name = name;
@@ -30,15 +38,6 @@ namespace DragonsEnd.Skills
             Leveling = new Leveling.Leveling(actor: actor, name: name, level: startingLevel, maxLevel: maxLevel);
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
-
-
-        public virtual string Name { get; set; }
-        public virtual Guid ID { get; set; } = Guid.NewGuid();
-
-        public virtual SkillType SkillType => SkillType.None;
-        public virtual ILeveling Leveling { get; set; }
-        public virtual IActor? Actor { get; set; }
-        public virtual ConcurrentDictionary<int, List<ILockable>> Unlocks { get; set; } = new();
 
         public virtual void HandleUnlocks(int level)
         {

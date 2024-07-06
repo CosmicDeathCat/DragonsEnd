@@ -6,6 +6,13 @@ namespace DragonsEnd.Combat
 {
     public class CombatContext : ICombatContext
     {
+        public virtual int CurrentRound { get; set; }
+        public virtual int CurrentTurn { get; set; }
+        public virtual IActor CurrentActor { get; set; }
+        public virtual List<IActor> Players { get; set; } = new();
+        public virtual List<IActor> Enemies { get; set; } = new();
+        public virtual List<IActor> Combatants { get; set; } = new();
+
         public CombatContext()
         {
             Players = new List<IActor>();
@@ -18,12 +25,6 @@ namespace DragonsEnd.Combat
             Setup(players: players, enemies: enemies);
         }
 
-        public virtual int CurrentRound { get; set; }
-        public virtual IActor CurrentActor { get; set; }
-        public virtual List<IActor> Players { get; set; } = new();
-        public virtual List<IActor> Enemies { get; set; } = new();
-        public virtual List<IActor> Combatants { get; set; } = new();
-
         public virtual void Setup(List<IActor> players, List<IActor> enemies)
         {
             Players = players;
@@ -32,6 +33,7 @@ namespace DragonsEnd.Combat
             Combatants.AddRange(collection: Players);
             Combatants.AddRange(collection: Enemies);
             CurrentRound = 0;
+            CurrentTurn = 0;
         }
 
         public virtual void RollInitiative()
@@ -44,6 +46,8 @@ namespace DragonsEnd.Combat
 
         public void ResetTurns()
         {
+            CurrentTurn = 0;
+            CurrentRound = 0;
             foreach (var actor in Combatants)
             {
                 actor.ResetTurns();

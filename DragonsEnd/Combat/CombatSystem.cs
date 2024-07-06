@@ -11,18 +11,16 @@ namespace DragonsEnd.Combat
 {
     public class CombatSystem : ICombatSystem
     {
+        public ICombatContext CombatContext { get; set; } = new CombatContext();
+
         public CombatSystem()
         {
-            CombatContext = new CombatContext();
         }
 
         public CombatSystem(List<IActor> players, List<IActor> enemies)
         {
-            CombatContext = new CombatContext();
             CombatContext.Setup(players: players, enemies: enemies);
         }
-
-        public ICombatContext CombatContext { get; set; }
 
         public void Setup(List<IActor> players, List<IActor> enemies)
         {
@@ -44,6 +42,8 @@ namespace DragonsEnd.Combat
                 {
                     if (actor.IsAlive)
                     {
+                        StartTurn(actor: actor);
+                        CombatContext.CurrentTurn++;
                         CombatContext.CurrentActor = actor;
                         if (CombatContext.Players.Contains(item: actor))
                         {
@@ -72,6 +72,11 @@ namespace DragonsEnd.Combat
                     break;
                 }
             }
+        }
+
+        public void StartTurn(IActor actor)
+        {
+            MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Combat, message: new TurnStartMessage(combatContext: CombatContext, sender: actor));
         }
 
         public void EndTurn(IActor actor)

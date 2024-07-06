@@ -6,21 +6,6 @@ namespace DragonsEnd.Items.Currency
     [Serializable]
     public class GoldCurrency : ICurrency
     {
-        public GoldCurrency()
-        {
-        }
-
-        public GoldCurrency(long quantity)
-        {
-            Quantity = quantity;
-        }
-
-        public GoldCurrency(long quantity, long baseValue)
-        {
-            Quantity = quantity;
-            BaseValue = baseValue;
-        }
-
         public virtual string Name { get; set; } = "Gold";
         public virtual Guid ID { get; set; } = Guid.NewGuid();
         public virtual string Description { get; set; } = "Shiny gold coins. used for purchasing items.";
@@ -40,6 +25,21 @@ namespace DragonsEnd.Items.Currency
 
         public virtual long BaseValue { get; set; } = 1;
         public virtual long Quantity { get; set; }
+
+        public GoldCurrency()
+        {
+        }
+
+        public GoldCurrency(long quantity)
+        {
+            Quantity = quantity;
+        }
+
+        public GoldCurrency(long quantity, long baseValue)
+        {
+            Quantity = quantity;
+            BaseValue = baseValue;
+        }
 
         public static long operator +(GoldCurrency currency, GoldCurrency otherCurrency)
         {

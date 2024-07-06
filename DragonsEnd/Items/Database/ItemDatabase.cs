@@ -3684,7 +3684,7 @@ namespace DragonsEnd.Items.Database
                     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                     requiredSkills: new List<SkillLevels>
                     {
-                        new SkillLevels(skillType: SkillType.Magic, level: 1)
+                        new(skillType: SkillType.Magic, level: 1)
                     },
                     stackable: false,
                     quantity: 1,

@@ -6,6 +6,7 @@ namespace DragonsEnd.Combat.Interfaces
     public interface ICombatContext
     {
         int CurrentRound { get; set; }
+        int CurrentTurn { get; set; }
         IActor CurrentActor { get; set; }
         List<IActor> Players { get; set; }
         List<IActor> Enemies { get; set; }

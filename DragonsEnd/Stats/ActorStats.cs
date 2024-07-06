@@ -6,6 +6,17 @@ namespace DragonsEnd.Stats
     [Serializable]
     public class ActorStats
     {
+        public virtual IntStat Health { get; set; }
+        public virtual IntStat Mana { get; set; }
+        public virtual IntStat Stamina { get; set; }
+        public virtual IntStat MeleeAttack { get; set; }
+        public virtual IntStat RangedAttack { get; set; }
+        public virtual IntStat MagicAttack { get; set; }
+        public virtual IntStat MeleeDefense { get; set; }
+        public virtual IntStat RangedDefense { get; set; }
+        public virtual IntStat MagicDefense { get; set; }
+        public virtual DoubleStat CriticalHitChance { get; set; } // Configurable critical hit chance
+
         public ActorStats
         (
             int health,
@@ -57,17 +68,6 @@ namespace DragonsEnd.Stats
             MagicDefense = magicDefense;
             CriticalHitChance = criticalHitChance;
         }
-
-        public virtual IntStat Health { get; set; }
-        public virtual IntStat Mana { get; set; }
-        public virtual IntStat Stamina { get; set; }
-        public virtual IntStat MeleeAttack { get; set; }
-        public virtual IntStat RangedAttack { get; set; }
-        public virtual IntStat MagicAttack { get; set; }
-        public virtual IntStat MeleeDefense { get; set; }
-        public virtual IntStat RangedDefense { get; set; }
-        public virtual IntStat MagicDefense { get; set; }
-        public virtual DoubleStat CriticalHitChance { get; set; } // Configurable critical hit chance
 
         public static ActorStats operator +(ActorStats a, ActorStats b)
         {

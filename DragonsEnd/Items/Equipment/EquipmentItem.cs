@@ -12,6 +12,15 @@ namespace DragonsEnd.Items.Equipment
     [Serializable]
     public class EquipmentItem : Item, IEquipmentItem
     {
+        public virtual List<EquipmentSlot> Slots { get; set; }
+        public virtual ActorStats Stats { get; set; }
+
+        public virtual GearTier GearTier { get; set; }
+
+        public virtual CharacterClassType AllowedClasses { get; set; }
+
+        public virtual List<SkillLevels>? RequiredSkills { get; set; }
+
         public EquipmentItem
         (
             string name,
@@ -35,15 +44,6 @@ namespace DragonsEnd.Items.Equipment
             AllowedClasses = allowedClasses;
             RequiredSkills = requiredSkills;
         }
-
-        public virtual List<EquipmentSlot> Slots { get; set; }
-        public virtual ActorStats Stats { get; set; }
-
-        public virtual GearTier GearTier { get; set; }
-
-        public virtual CharacterClassType AllowedClasses { get; set; }
-
-        public virtual List<SkillLevels>? RequiredSkills { get; set; }
 
         public virtual bool Equip(IActor? source, IActor? target)
         {

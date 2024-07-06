@@ -12,6 +12,10 @@ namespace DragonsEnd.Items.Status
     [Serializable]
     public class RestoreItem : Item, IRestoreItem
     {
+        public virtual double HealthHealthRestorePercentage { get; set; }
+        public virtual double ManaRestorePercentage { get; set; }
+        public virtual double StaminaRestorePercentage { get; set; }
+
         public RestoreItem
         (
             string name,
@@ -32,10 +36,6 @@ namespace DragonsEnd.Items.Status
             ManaRestorePercentage = manaRestorePercentage;
             StaminaRestorePercentage = staminaRestorePercentage;
         }
-
-        public virtual double HealthHealthRestorePercentage { get; set; }
-        public virtual double ManaRestorePercentage { get; set; }
-        public virtual double StaminaRestorePercentage { get; set; }
 
         public override void Use(IActor? source, IActor? target)
         {

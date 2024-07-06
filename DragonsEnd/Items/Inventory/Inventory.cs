@@ -8,6 +8,11 @@ namespace DragonsEnd.Items.Inventory
 {
     public class Inventory : IInventory
     {
+        public virtual GoldCurrency Gold { get; set; } = new(quantity: 0);
+        public virtual ItemList<IItem> Items { get; set; } = new();
+
+        public IItem? this[string name] { get => Items.FirstOrDefault(predicate: x => x != null && x.Name.Equals(value: name)); }
+
         public Inventory()
         {
         }
@@ -17,10 +22,5 @@ namespace DragonsEnd.Items.Inventory
             Gold = new GoldCurrency(quantity: gold);
             Items.AddRange(collection: items);
         }
-
-        public virtual GoldCurrency Gold { get; set; } = new(quantity: 0);
-        public virtual ItemList<IItem> Items { get; set; } = new();
-
-        public IItem? this[string name] => Items.FirstOrDefault(predicate: x => x != null && x.Name.Equals(value: name));
     }
 }

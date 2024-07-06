@@ -12,6 +12,35 @@ namespace DragonsEnd.Items.Status
     [Serializable]
     public class LevelingItem : Item, ILevelingItem
     {
+        public virtual long MeleeExperience { get; set; }
+        public virtual long RangedExperience { get; set; }
+        public virtual long MagicExperience { get; set; }
+        public virtual long AlchemyExperience { get; set; }
+        public virtual long CookingExperience { get; set; }
+        public virtual long CraftingExperience { get; set; }
+        public virtual long EnchantingExperience { get; set; }
+        public virtual long FletchingExperience { get; set; }
+        public virtual long SmithingExperience { get; set; }
+        public virtual long FishingExperience { get; set; }
+        public virtual long ForagingExperience { get; set; }
+        public virtual long MiningExperience { get; set; }
+        public virtual long RanchingExperience { get; set; }
+        public virtual long WoodcuttingExperience { get; set; }
+        public virtual int MeleeLevel { get; set; }
+        public virtual int RangedLevel { get; set; }
+        public virtual int MagicLevel { get; set; }
+        public virtual int AlchemyLevel { get; set; }
+        public virtual int CookingLevel { get; set; }
+        public virtual int CraftingLevel { get; set; }
+        public virtual int EnchantingLevel { get; set; }
+        public virtual int FletchingLevel { get; set; }
+        public virtual int SmithingLevel { get; set; }
+        public virtual int FishingLevel { get; set; }
+        public virtual int ForagingLevel { get; set; }
+        public virtual int MiningLevel { get; set; }
+        public virtual int RanchingLevel { get; set; }
+        public virtual int WoodcuttingLevel { get; set; }
+
         public LevelingItem
         (
             string name,
@@ -82,35 +111,6 @@ namespace DragonsEnd.Items.Status
             RanchingLevel = ranchingLevel;
             WoodcuttingLevel = woodcuttingLevel;
         }
-
-        public virtual long MeleeExperience { get; set; }
-        public virtual long RangedExperience { get; set; }
-        public virtual long MagicExperience { get; set; }
-        public virtual long AlchemyExperience { get; set; }
-        public virtual long CookingExperience { get; set; }
-        public virtual long CraftingExperience { get; set; }
-        public virtual long EnchantingExperience { get; set; }
-        public virtual long FletchingExperience { get; set; }
-        public virtual long SmithingExperience { get; set; }
-        public virtual long FishingExperience { get; set; }
-        public virtual long ForagingExperience { get; set; }
-        public virtual long MiningExperience { get; set; }
-        public virtual long RanchingExperience { get; set; }
-        public virtual long WoodcuttingExperience { get; set; }
-        public virtual int MeleeLevel { get; set; }
-        public virtual int RangedLevel { get; set; }
-        public virtual int MagicLevel { get; set; }
-        public virtual int AlchemyLevel { get; set; }
-        public virtual int CookingLevel { get; set; }
-        public virtual int CraftingLevel { get; set; }
-        public virtual int EnchantingLevel { get; set; }
-        public virtual int FletchingLevel { get; set; }
-        public virtual int SmithingLevel { get; set; }
-        public virtual int FishingLevel { get; set; }
-        public virtual int ForagingLevel { get; set; }
-        public virtual int MiningLevel { get; set; }
-        public virtual int RanchingLevel { get; set; }
-        public virtual int WoodcuttingLevel { get; set; }
 
         public override void Use(IActor? source, IActor? target)
         {

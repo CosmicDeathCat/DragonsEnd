@@ -65,7 +65,7 @@ namespace DragonsEnd.Actor.Enemy.Database
                         minGold: 5,
                         maxGold: 15,
                         minCombatExperience: 50,
-                        maxCombatExperience: 150, 
+                        maxCombatExperience: 150,
                         skillExperiences: new List<SkillExperience>
                         {
                             new(skillType: SkillType.Crafting, minExperience: 10, maxExperience: 50)

@@ -13,6 +13,11 @@ namespace DragonsEnd.Items.Loot
     [Serializable]
     public class LootContainer : ILootContainer
     {
+        public GoldCurrency Gold { get; set; } = new(quantity: 0);
+        public long CombatExperience { get; set; }
+        public List<SkillExperience> SkillExperiences { get; set; } = new();
+        public ItemList<IItem> Items { get; set; } = new();
+
         public LootContainer()
         {
             Items = new ItemList<IItem>();
@@ -35,11 +40,6 @@ namespace DragonsEnd.Items.Loot
         {
             AddLoot(lootContainer: lootContainer);
         }
-
-        public GoldCurrency Gold { get; set; } = new(quantity: 0);
-        public long CombatExperience { get; set; }
-        public List<SkillExperience> SkillExperiences { get; set; } = new();
-        public ItemList<IItem> Items { get; set; } = new();
 
         public void AddLoot(GoldCurrency? gold, long combatExperience, List<SkillExperience>? experiences, params IItem[] items)
         {
