@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Identity.Interfaces;
@@ -12,7 +13,10 @@ namespace DragonsEnd.Items.Interfaces
         bool Stackable { get; set; }
         long Quantity { get; set; }
         double DropRate { get; set; }
-        void Use(IActor? source, IActor? target);
+        TargetingType TargetingType { get; set; }
+        TargetingScope TargetingScope { get; set; }
+        ActorScopeType ActorScopeType { get; set; }
+        void Use(IActor? source, List<IActor?> targets = null);
         IItem Copy();
     }
 }

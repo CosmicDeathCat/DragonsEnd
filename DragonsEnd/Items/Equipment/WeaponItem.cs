@@ -32,10 +32,13 @@ namespace DragonsEnd.Items.Equipment
             List<SkillLevels>? requiredSkills = null,
             bool stackable = true,
             long quantity = 1,
-            double dropRate = 1
+            double dropRate = 1,
+            TargetingType targetingType = TargetingType.None,
+            TargetingScope targetingScope = TargetingScope.None,
+            ActorScopeType actorScopeType = ActorScopeType.None
         ) : base(name: name, description: description, price: price, type: type, slots: slots, stats: stats,
-            gearTier: gearTier,
-            allowedClasses: allowedClasses, requiredSkills: requiredSkills, stackable: stackable, quantity: quantity, dropRate: dropRate)
+            gearTier: gearTier, allowedClasses: allowedClasses, requiredSkills: requiredSkills, stackable: stackable,
+            quantity: quantity, dropRate: dropRate, targetingType: targetingType, targetingScope: targetingScope, actorScopeType: actorScopeType)
         {
             CombatStyle = combatStyle;
             WeaponType = weaponType;
@@ -45,9 +48,9 @@ namespace DragonsEnd.Items.Equipment
         public override IItem Copy()
         {
             return new WeaponItem(name: Name, description: Description, price: Price, type: Type, slots: Slots, stats: Stats, gearTier: GearTier,
-                allowedClasses: AllowedClasses, requiredSkills: RequiredSkills,
-                combatStyle: CombatStyle, weaponType: WeaponType, damageMultiplier: DamageMultiplier.BaseValue, stackable: Stackable,
-                quantity: Quantity);
+                allowedClasses: AllowedClasses, requiredSkills: RequiredSkills, combatStyle: CombatStyle, weaponType: WeaponType,
+                damageMultiplier: DamageMultiplier.BaseValue, stackable: Stackable, quantity: Quantity, dropRate: DropRate,
+                targetingType: TargetingType, targetingScope: TargetingScope, actorScopeType: ActorScopeType);
         }
     }
 }

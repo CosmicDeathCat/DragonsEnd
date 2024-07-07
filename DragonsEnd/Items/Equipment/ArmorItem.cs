@@ -32,10 +32,13 @@ namespace DragonsEnd.Items.Equipment
             List<SkillLevels>? requiredSkills = null,
             bool stackable = true,
             long quantity = 1,
-            double dropRate = 1
+            double dropRate = 1,
+            TargetingType targetingType = TargetingType.None,
+            TargetingScope targetingScope = TargetingScope.None,
+            ActorScopeType actorScopeType = ActorScopeType.None
         ) : base(name: name, description: description, price: price, type: type, slots: slots, stats: stats,
-            gearTier: gearTier,
-            allowedClasses: allowedClasses, requiredSkills: requiredSkills, stackable: stackable, quantity: quantity, dropRate: dropRate)
+            gearTier: gearTier, allowedClasses: allowedClasses, requiredSkills: requiredSkills, stackable: stackable,
+            quantity: quantity, dropRate: dropRate, targetingType: targetingType, targetingScope: targetingScope, actorScopeType: actorScopeType)
         {
             CombatStyle = combatStyle;
             ArmorType = armorType;
@@ -47,7 +50,7 @@ namespace DragonsEnd.Items.Equipment
             return new ArmorItem(name: Name, description: Description, price: Price, type: Type, slots: Slots, stats: Stats, gearTier: GearTier,
                 allowedClasses: AllowedClasses, requiredSkills: RequiredSkills,
                 combatStyle: CombatStyle, armorType: ArmorType, damageReductionMultiplier: DamageReductionMultiplier.BaseValue, stackable: Stackable,
-                quantity: Quantity);
+                quantity: Quantity, dropRate: DropRate, targetingType: TargetingType, targetingScope: TargetingScope, actorScopeType: ActorScopeType);
         }
     }
 }

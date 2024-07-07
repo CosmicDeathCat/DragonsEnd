@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
@@ -10,7 +11,7 @@ using DragonsEnd.Items.Status.Interfaces;
 namespace DragonsEnd.Items.Status
 {
     [Serializable]
-    public class StatIncreaseItem : Item, IStatIncreaseItem
+    public class StatIncreasePercentageItem : Item, IStatIncreasePercentageItem
     {
         public virtual double HealthIncreasePercentage { get; set; }
         public virtual double ManaIncreasePercentage { get; set; }
@@ -23,7 +24,7 @@ namespace DragonsEnd.Items.Status
         public virtual double MagicDefenseIncreasePercentage { get; set; }
         public virtual double CriticalHitChanceIncreasePercentage { get; set; }
 
-        public StatIncreaseItem
+        public StatIncreasePercentageItem
         (
             string name,
             string description,
@@ -41,10 +42,13 @@ namespace DragonsEnd.Items.Status
             double criticalHitChanceIncreasePercentage = 0.0,
             bool stackable = true,
             long quantity = 1,
-            double dropRate = 1
+            double dropRate = 1,
+            TargetingType targetingType = TargetingType.None,
+            TargetingScope targetingScope = TargetingScope.None,
+            ActorScopeType actorScopeType = ActorScopeType.None
         ) : base(name: name, description: description, price: price, type: type,
             stackable: stackable,
-            quantity: quantity, dropRate: dropRate)
+            quantity: quantity, dropRate: dropRate, targetingType: targetingType, targetingScope: targetingScope, actorScopeType: actorScopeType)
         {
             HealthIncreasePercentage = healthIncreasePercentage;
             ManaIncreasePercentage = manaIncreasePercentage;
@@ -58,9 +62,11 @@ namespace DragonsEnd.Items.Status
             CriticalHitChanceIncreasePercentage = criticalHitChanceIncreasePercentage;
         }
 
-        public override void Use(IActor? source, IActor? target)
+        public override void Use(IActor? source, List<IActor?>? targets = null)
         {
-            if (target != null)
+            if(targets == null) return;
+
+            foreach (var target in targets)
             {
                 target.ActorStats.Health.BaseValue += (int)Math.Round(value: target.ActorStats.Health.MaxValue * HealthIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
                 target.ActorStats.Mana.BaseValue += (int)Math.Round(value: target.ActorStats.Mana.MaxValue * ManaIncreasePercentage / 100, mode: MidpointRounding.AwayFromZero);
@@ -75,19 +81,20 @@ namespace DragonsEnd.Items.Status
                 target.ActorStats.CriticalHitChance.BaseValue += CriticalHitChanceIncreasePercentage;
             }
 
+
             MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
-                message: new ItemMessage(item: this, source: source, target: target));
+                message: new ItemMessage(item: this, source: source, targets: targets));
         }
 
         public override IItem Copy()
         {
-            return new StatIncreaseItem(name: Name, description: Description, price: Price, type: Type,
+            return new StatIncreasePercentageItem(name: Name, description: Description, price: Price, type: Type,
                 healthIncreasePercentage: HealthIncreasePercentage, manaIncreasePercentage: ManaIncreasePercentage,
                 staminaIncreasePercentage: StaminaIncreasePercentage, meleeAttackIncreasePercentage: MeleeAttackIncreasePercentage,
                 meleeDefenseIncreasePercentage: MeleeDefenseIncreasePercentage, rangedAttackIncreasePercentage: RangedAttackIncreasePercentage,
                 rangedDefenseIncreasePercentage: RangedDefenseIncreasePercentage, magicAttackIncreasePercentage: MagicAttackIncreasePercentage,
                 magicDefenseIncreasePercentage: MagicDefenseIncreasePercentage, criticalHitChanceIncreasePercentage: CriticalHitChanceIncreasePercentage,
-                stackable: Stackable, quantity: Quantity);
+                stackable: Stackable, quantity: Quantity, dropRate: DropRate, targetingType: TargetingType, targetingScope: TargetingScope, actorScopeType: ActorScopeType);
         }
     }
 }

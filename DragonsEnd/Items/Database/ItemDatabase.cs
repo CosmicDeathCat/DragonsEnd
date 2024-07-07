@@ -144,21 +144,21 @@ namespace DragonsEnd.Items.Database
                     staminaRestorePercentage: 100.0
                 ),
                 // Special Potions
-                [key: ItemNames.ElixirOfLife] = new StatIncreaseItem(
+                [key: ItemNames.ElixirOfLife] = new StatIncreasePercentageItem(
                     name: ItemNames.ElixirOfLife,
                     description: "An elixir that permanently increases Base Health by 10%",
                     price: 5000,
                     type: ItemType.Consumable,
                     healthIncreasePercentage: 10.0
                 ),
-                [key: ItemNames.ElixirOfMana] = new StatIncreaseItem(
+                [key: ItemNames.ElixirOfMana] = new StatIncreasePercentageItem(
                     name: ItemNames.ElixirOfMana,
                     description: "An elixir that permanently increases Base Mana by 10%",
                     price: 5000,
                     type: ItemType.Consumable,
                     manaIncreasePercentage: 10.0
                 ),
-                [key: ItemNames.ElixirOfStamina] = new StatIncreaseItem(
+                [key: ItemNames.ElixirOfStamina] = new StatIncreasePercentageItem(
                     name: ItemNames.ElixirOfStamina,
                     description: "An elixir that permanently increases Base Stamina by 10%",
                     price: 5000,
@@ -204,7 +204,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -225,7 +225,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -246,7 +246,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -267,7 +267,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -288,7 +288,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -309,7 +309,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -330,7 +330,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -351,7 +351,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -372,7 +372,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Melee, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -392,7 +392,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -410,7 +410,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -428,7 +428,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -446,7 +446,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -464,7 +464,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -482,7 +482,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -500,7 +500,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -518,7 +518,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -536,7 +536,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Iron,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -557,7 +557,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -575,7 +575,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -593,7 +593,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -611,7 +611,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -629,7 +629,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -647,7 +647,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -665,7 +665,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -683,7 +683,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -701,7 +701,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Steel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -722,7 +722,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -740,7 +740,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -758,7 +758,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -776,7 +776,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -794,7 +794,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -812,7 +812,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -830,7 +830,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -848,7 +848,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -866,7 +866,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mithril,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -886,7 +886,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -904,7 +904,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -922,7 +922,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -940,7 +940,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -958,7 +958,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -976,7 +976,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -994,7 +994,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1012,7 +1012,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1030,7 +1030,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Adamantium,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1050,7 +1050,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1068,7 +1068,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1086,7 +1086,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1104,7 +1104,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1122,7 +1122,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1140,7 +1140,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1158,7 +1158,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1176,7 +1176,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1194,7 +1194,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Orichalcum,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1214,7 +1214,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1232,7 +1232,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1250,7 +1250,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1268,7 +1268,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1286,7 +1286,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1304,7 +1304,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1322,7 +1322,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1340,7 +1340,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1358,7 +1358,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.DarkSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1378,7 +1378,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1396,7 +1396,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1414,7 +1414,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1432,7 +1432,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1450,7 +1450,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1468,7 +1468,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1486,7 +1486,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1504,7 +1504,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1522,7 +1522,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.SunSteel,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1542,7 +1542,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1560,7 +1560,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1578,7 +1578,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1596,7 +1596,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1614,7 +1614,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1632,7 +1632,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1650,7 +1650,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1668,7 +1668,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1686,7 +1686,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Celestial,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1705,7 +1705,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1723,7 +1723,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1741,7 +1741,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1759,7 +1759,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1777,7 +1777,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1795,7 +1795,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1813,7 +1813,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1831,7 +1831,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1849,7 +1849,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Dragon,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Warrior,
                 //     requiredSkillLevelLevels: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -1872,7 +1872,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1893,7 +1893,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1914,7 +1914,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1935,7 +1935,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1956,7 +1956,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1977,7 +1977,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -1998,7 +1998,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -2019,7 +2019,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -2040,7 +2040,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Ranged, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -2060,7 +2060,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2078,7 +2078,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2096,7 +2096,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2114,7 +2114,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2132,7 +2132,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2150,7 +2150,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2168,7 +2168,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2186,7 +2186,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2204,7 +2204,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Weak,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2224,7 +2224,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2242,7 +2242,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2260,7 +2260,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2278,7 +2278,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2296,7 +2296,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2314,7 +2314,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2332,7 +2332,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2350,7 +2350,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2368,7 +2368,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Strong,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2388,7 +2388,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2406,7 +2406,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2424,7 +2424,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2442,7 +2442,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2460,7 +2460,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2478,7 +2478,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2496,7 +2496,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2514,7 +2514,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2532,7 +2532,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Reinforced,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2552,7 +2552,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2570,7 +2570,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2588,7 +2588,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2606,7 +2606,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2624,7 +2624,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2642,7 +2642,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2660,7 +2660,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2678,7 +2678,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2696,7 +2696,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Hardened,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2716,7 +2716,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2734,7 +2734,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2752,7 +2752,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2770,7 +2770,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2788,7 +2788,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2806,7 +2806,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2824,7 +2824,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2842,7 +2842,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2860,7 +2860,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Sharpshooter,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2880,7 +2880,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2898,7 +2898,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2916,7 +2916,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2934,7 +2934,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2952,7 +2952,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2970,7 +2970,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -2988,7 +2988,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3006,7 +3006,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3024,7 +3024,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Precision,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3044,7 +3044,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3062,7 +3062,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3080,7 +3080,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3098,7 +3098,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3116,7 +3116,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3134,7 +3134,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3152,7 +3152,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3170,7 +3170,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3188,7 +3188,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Marksman,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3208,7 +3208,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3226,7 +3226,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3244,7 +3244,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3262,7 +3262,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3280,7 +3280,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3298,7 +3298,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3316,7 +3316,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3334,7 +3334,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3352,7 +3352,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Phantom,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3372,7 +3372,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3390,7 +3390,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3408,7 +3408,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3426,7 +3426,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3444,7 +3444,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3462,7 +3462,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3480,7 +3480,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3498,7 +3498,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Archer,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3516,7 +3516,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Crystal,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3539,7 +3539,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3560,7 +3560,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3581,7 +3581,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3602,7 +3602,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3623,7 +3623,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3644,7 +3644,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3665,7 +3665,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 ),
@@ -3686,7 +3686,7 @@ namespace DragonsEnd.Items.Database
                     {
                         new(skillType: SkillType.Magic, level: 1)
                     },
-                    stackable: false,
+                    stackable: true,
                     quantity: 1,
                     dropRate: 1
                 )
@@ -3706,7 +3706,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3724,7 +3724,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3742,7 +3742,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3760,7 +3760,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3778,7 +3778,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3796,7 +3796,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3814,7 +3814,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3832,7 +3832,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3852,7 +3852,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3870,7 +3870,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3888,7 +3888,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3906,7 +3906,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3924,7 +3924,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3942,7 +3942,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3960,7 +3960,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3978,7 +3978,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Worn,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 10,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -3998,7 +3998,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4016,7 +4016,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4034,7 +4034,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4052,7 +4052,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4070,7 +4070,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4088,7 +4088,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4106,7 +4106,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4124,7 +4124,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Enchanted,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 20,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4145,7 +4145,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4163,7 +4163,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4181,7 +4181,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4199,7 +4199,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4217,7 +4217,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4235,7 +4235,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4253,7 +4253,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4271,7 +4271,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Arcane,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 30,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4291,7 +4291,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4309,7 +4309,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4327,7 +4327,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4345,7 +4345,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4363,7 +4363,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4381,7 +4381,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4399,7 +4399,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4417,7 +4417,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ancient,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 40,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4438,7 +4438,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4456,7 +4456,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4474,7 +4474,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4492,7 +4492,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4510,7 +4510,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4528,7 +4528,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4546,7 +4546,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4564,7 +4564,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Eldritch,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 50,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4584,7 +4584,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4602,7 +4602,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4620,7 +4620,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4638,7 +4638,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4656,7 +4656,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4674,7 +4674,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4692,7 +4692,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4710,7 +4710,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Divine,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 60,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4730,7 +4730,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4748,7 +4748,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4766,7 +4766,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4784,7 +4784,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4802,7 +4802,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4820,7 +4820,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4838,7 +4838,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4856,7 +4856,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Runic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 70,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4876,7 +4876,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4894,7 +4894,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4912,7 +4912,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4930,7 +4930,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4948,7 +4948,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4966,7 +4966,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -4984,7 +4984,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5002,7 +5002,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Ethereal,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 80,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5022,7 +5022,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5040,7 +5040,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5058,7 +5058,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5076,7 +5076,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5094,7 +5094,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5112,7 +5112,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.All,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5130,7 +5130,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // ),
@@ -5148,7 +5148,7 @@ namespace DragonsEnd.Items.Database
                 //     gearTier: GearTier.Mystic,
                 //     allowedClasses: CharacterClassType.Freelancer | CharacterClassType.Mage,
                 //     requiredSkills: 90,
-                //     stackable: false,
+                //     stackable: true,
                 //     quantity: 1,
                 //     dropRate: 1
                 // )

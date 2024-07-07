@@ -34,9 +34,12 @@ namespace DragonsEnd.Items.Equipment
             List<SkillLevels>? requiredSkills = null,
             bool stackable = true,
             long quantity = 1,
-            double dropRate = 1
+            double dropRate = 1,
+            TargetingType targetingType = TargetingType.None,
+            TargetingScope targetingScope = TargetingScope.None,
+            ActorScopeType actorScopeType = ActorScopeType.None
         )
-            : base(name: name, description: description, price: price, type: type, stackable: stackable, quantity: quantity, dropRate: dropRate)
+            : base(name: name, description: description, price: price, type: type, stackable: stackable, quantity: quantity, dropRate: dropRate, targetingType: targetingType, targetingScope: targetingScope, actorScopeType: actorScopeType)
         {
             Slots = slots;
             Stats = stats;

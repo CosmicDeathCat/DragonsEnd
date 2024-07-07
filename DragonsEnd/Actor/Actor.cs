@@ -30,9 +30,9 @@ namespace DragonsEnd.Actor
         public virtual string Name { get; set; }
         public virtual Guid ID { get; set; }
         public virtual Gender Gender { get; set; }
-        public Vector2 Position { get; set; }
+        public virtual Vector2 Position { get; set; }
 
-        public int CombatLevel
+        public virtual int CombatLevel
         {
             get => (ActorSkills.MeleeSkill.Leveling.CurrentLevel +
                     ActorSkills.RangedSkill.Leveling.CurrentLevel +
@@ -56,8 +56,9 @@ namespace DragonsEnd.Actor
 
         public bool HasAlreadyBeenLooted { get; set; }
 
+        protected CombatStyle _combatStyle = CombatStyle.Melee;
 
-        public CombatStyle CombatStyle
+        public virtual CombatStyle CombatStyle
         {
             get
             {
@@ -68,7 +69,7 @@ namespace DragonsEnd.Actor
             set => _combatStyle = value;
         }
 
-        public int TurnCount { get; set; }
+        public virtual int TurnCount { get; set; }
 
         public virtual bool IsAlive
         {
@@ -181,7 +182,7 @@ namespace DragonsEnd.Actor
 
 
 
-        public void ResetTurns()
+        public virtual void ResetTurns()
         {
             TurnCount = 0;
         }
@@ -221,10 +222,14 @@ namespace DragonsEnd.Actor
                 }
             }
 
-            if (data.Target == this)
+            if(data.Targets == null)
             {
-                var equipmentItem = data.Item as IEquipmentItem;
-                if (equipmentItem != null)
+                return;
+            }
+            
+            if (data.Targets.Contains(this))
+            {
+                if (data.Item is IEquipmentItem equipmentItem)
                 {
                     equipmentItem.Equip(source: data.Source, target: this);
                 }
@@ -473,7 +478,7 @@ namespace DragonsEnd.Actor
             return aliveTargets[index: rnd.Next(maxValue: aliveTargets.Count)];
         }
 
-        public ILootContainer? Loot(ILootConfig? lootConfig = null)
+        public virtual ILootContainer? Loot(ILootConfig? lootConfig = null)
         {
             if (LootContainer != null)
             {
@@ -530,100 +535,6 @@ namespace DragonsEnd.Actor
             }
         }
 
-        protected CombatStyle _combatStyle = CombatStyle.Melee;
-
-        // public virtual void ActorDeathMessageHandler(IMessageEnvelope message)
-        // {
-        //     if (!message.Message<ActorDeathMessage>().HasValue)
-        //     {
-        //         return;
-        //     }
-        //
-        //     var data = message.Message<ActorDeathMessage>().GetValueOrDefault();
-        //     if (data.Source != this)
-        //     {
-        //         return;
-        //     }
-        //
-        //     var loot = data.Target.Loot();
-        //     switch (CombatStyle)
-        //     {
-        //         case CombatStyle.Melee:
-        //             ActorSkills.MeleeSkill.Leveling.GainExperience(loot.CombatExperience);
-        //             break;
-        //         case CombatStyle.Ranged:
-        //             ActorSkills.RangedSkill.Leveling.GainExperience(loot.CombatExperience);
-        //             break;
-        //         case CombatStyle.Magic:
-        //             ActorSkills.MagicSkill.Leveling.GainExperience(loot.CombatExperience);
-        //             break;
-        //         case CombatStyle.Hybrid:
-        //             var sharedExp = loot.CombatExperience / 3;
-        //             ActorSkills.MeleeSkill.Leveling.GainExperience(sharedExp);
-        //             ActorSkills.RangedSkill.Leveling.GainExperience(sharedExp);
-        //             ActorSkills.MagicSkill.Leveling.GainExperience(sharedExp);
-        //             break;
-        //     }
-        //     foreach (var skill in loot.SkillExperiences)
-        //     {
-        //         switch (skill.SkillType)
-        //         {
-        //             case SkillType.None:
-        //                 break;
-        //             case SkillType.Melee:
-        //                 ActorSkills.MeleeSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Ranged:
-        //                 ActorSkills.RangedSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Magic:
-        //                 ActorSkills.MagicSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Alchemy:
-        //                 ActorSkills.AlchemySkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Cooking:
-        //                 ActorSkills.CookingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Crafting:
-        //                 ActorSkills.CraftingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Enchanting:
-        //                 ActorSkills.EnchantingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Fishing:
-        //                 ActorSkills.FishingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Fletching:
-        //                 ActorSkills.FletchingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Foraging:
-        //                 ActorSkills.ForagingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Mining:
-        //                 ActorSkills.MiningSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Smithing:
-        //                 ActorSkills.SmithingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Ranching:
-        //                 ActorSkills.RanchingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //             case SkillType.Woodcutting:
-        //                 ActorSkills.WoodcuttingSkill.Leveling.GainExperience(skill.Experience);
-        //                 break;
-        //         }
-        //     }
-        //     
-        //     Inventory?.Gold.Add(otherCurrency: loot.Gold);
-        //     Inventory?.Items.AddRange(collection: loot.Items);
-        //     var itemsString = loot.Items.Count is > 0 and > 1 ? "Items" : "Item";
-        //     var lootItemsDisplay = loot.Items.Count > 0
-        //         ? $"{loot.Items.Count} {itemsString} from {data.Target.Name}\n" +
-        //           string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
-        //         : "No Items";
-        //     Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
-        // }
 
         ~Actor()
         {

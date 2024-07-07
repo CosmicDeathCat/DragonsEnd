@@ -7,7 +7,6 @@ using DragonsEnd.Enums;
 using DragonsEnd.Items.Constants;
 using DragonsEnd.Items.Database;
 using DragonsEnd.Items.Equipment.Interfaces;
-using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory;
 using DragonsEnd.Party.Enemy;
 using DragonsEnd.Party.Player;
@@ -19,11 +18,11 @@ public static class Program
 {
     public static void Main()
     {
-        IEquipmentItem item1 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
-        IEquipmentItem item2 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
+        var item1 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
+        var item2 = (IEquipmentItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeClaws);
         Console.WriteLine(value: item1);
 
-        
+
         var mony = new Player(
             name: "Mony",
             gender: Gender.Nonbinary,
@@ -40,17 +39,19 @@ public static class Program
                 magicDefense: 5),
             equipment:
             [
+                (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger),
                 (IWeaponItem)ItemDatabase.GetItems(itemName: ItemNames.BronzeDagger)
             ],
             inventory: new Inventory(
                 gold: 0,
+                items:
                 [
                     ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                     ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, quantity: 20)
                 ])
         );
-        
+
         var stormi = new Player(
             name: "Stormi",
             gender: Gender.Female,
@@ -71,13 +72,14 @@ public static class Program
             ],
             inventory: new Inventory(
                 gold: 0,
+                items:
                 [
                     ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                     ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, quantity: 20)
                 ])
         );
-        
+
         var coty = new Player(
             name: "Coty",
             gender: Gender.Male,
@@ -98,13 +100,14 @@ public static class Program
             ],
             inventory: new Inventory(
                 gold: 0,
+                items:
                 [
                     ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                     ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, quantity: 20)
                 ])
         );
-        
+
         var daerpyre = new Player(
             name: "Daerpyre",
             gender: Gender.Male,
@@ -125,13 +128,14 @@ public static class Program
             ],
             inventory: new Inventory(
                 gold: 0,
+                items:
                 [
                     ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                     ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, quantity: 20)
                 ])
         );
-        
+
         var playerManager = new PlayerPartyManager(
             members:
             [
@@ -142,13 +146,14 @@ public static class Program
             ],
             sharedInventory: new Inventory(
                 gold: 0,
+                items:
                 [
                     ItemDatabase.GetItems(itemName: ItemNames.WeakHealthPotion),
                     ItemDatabase.GetItems(itemName: ItemNames.ElixirOfLife),
-                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, 20)
+                    ItemDatabase.GetItems(itemName: ItemNames.ElixerOfTheAncients, quantity: 20)
                 ])
         );
-        
+
         var slimeWarriorGroup = new EnemyPartyManager(
             members:
             [
@@ -184,9 +189,9 @@ public static class Program
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage),
                     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeMage)
                 ]
-            ),
+            )
         };
-        
+
         var enemyPartyManager = new EnemyPartyManager(
             members:
             [
@@ -211,9 +216,9 @@ public static class Program
         //     EnemyDatabase.GetEnemy(enemyName: EnemyNames.PunySlimeWarrior),
         // };
 
-        ICombatSystem combatSystem = new CombatSystem(playerManager.Members, slimeWarriorGroup.Members);
+        ICombatSystem combatSystem = new CombatSystem(players: playerManager.Members, enemies: slimeWarriorGroup.Members);
         combatSystem.StartCombat();
-        
+
         // ICombatSystem combatSystem = new CombatSystem(playerManager.Members, enemyPartyManager.Members);
         // combatSystem.StartCombat();
         // foreach (var enemyGroup in enemyGroups)
@@ -221,9 +226,9 @@ public static class Program
         //     combatSystem.Setup(playerManager.Members, enemyGroup.Members);
         //     combatSystem.StartCombat();
         // }
-        
-        Console.WriteLine(playerManager.Members.Count);
-        
+
+        Console.WriteLine(value: playerManager.Members.Count);
+
         // var wep = player.Inventory?[ItemNames.BronzeDagger] as IWeaponItem;
         // var bronzeHelm = (IArmorItem)ItemDatabase.GetItems(ItemNames.BronzeHelmet);
         // bronzeHelm.Equip(player, player);
@@ -238,14 +243,14 @@ public static class Program
         //     }
         //     // elixer.Use(source: player, target: player);
         // }
-        
+
         //player.ActorSkills.CookingSkill.Leveling.SetLevel(15);
 
         // Console.WriteLine(value: player);
-        
+
         //player.ActorSkills.CookingSkill.Leveling.SetLevel(2);
         // Console.WriteLine(value: player);
-        
+
         // var equippedWeapon = player.Equipment.OfType<IWeaponItem>().FirstOrDefault();
         // equippedWeapon?.Unequip(source: player, target: player, slot: EquipmentSlot.TwoHanded);
         //

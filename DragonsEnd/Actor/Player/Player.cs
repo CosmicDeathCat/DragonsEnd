@@ -7,6 +7,7 @@ using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
 using DragonsEnd.Items.Equipment.Interfaces;
+using DragonsEnd.Items.Interfaces;
 using DragonsEnd.Items.Inventory.Interfaces;
 using DragonsEnd.Items.Loot.Interfaces;
 using DragonsEnd.Skills;
@@ -103,163 +104,371 @@ namespace DragonsEnd.Actor.Player
             {
                 Console.WriteLine(value: $"{Name} is taking their turn.");
                 TurnCount++;
-                var target = ChooseTarget(targets: targets);
-                if (target == null)
-                {
-                    return false;
-                }
-
-                var attackResult = Attack(source: this, target: target);
+                ShowCombatActions();
+                PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
+                // var target = ChooseTarget(targets: targets);
+                // if (target == null)
+                // {
+                //     return false;
+                // }
+                //
+                // var attackResult = Attack(source: this, target: target);
                 return true;
             }
 
             return false;
         }
 
-        public virtual IActor? ChooseTarget(List<IActor> targets)
+        public virtual void ShowCombatActions()
         {
-            Console.WriteLine(value: "Choose a target to attack:");
-            for (var i = 1; i <= targets.Count; i++)
+            Console.WriteLine(value: "Choose an action:");
+            Console.WriteLine(value: "1: Attack");
+            Console.WriteLine(value: "2: Defend");
+            Console.WriteLine(value: "3: Skills");
+            Console.WriteLine(value: "4: Use Item");
+            Console.WriteLine(value: "5: Unequip Item");
+            Console.WriteLine(value: "6: Flee");
+            Console.WriteLine(value: "7: Display Inventory");
+            Console.WriteLine(value: "8: Display Equipment");
+            Console.WriteLine(value: "9: Display Stats");
+            Console.WriteLine(value: "10: Display Skills");
+        }
+
+        public virtual bool PerformCombatAction(ICombatContext combatContext, List<IActor> targets, List<IActor> allies)
+        {
+            var input = Console.ReadLine();
+            switch (input)
             {
-                var target = targets[index: i - 1];
-                if (target.IsAlive)
-                {
-                    Console.WriteLine(value: $"{i}: {target.Name} (Combat Level: {target?.CombatLevel} HP: {target?.ActorStats?.Health.CurrentValue})");
-                }
+                case "1": // Attack
+                    //TODO: Implement choosing a target based on weapon and skills make Attack a ability that can be customized
+                    var attackTargets = ChooseTargets(enemies: targets, allies: allies);
+                    if (!attackTargets.Any())
+                    {
+                        return false;
+                    }
+
+                    foreach (var attackTarget in attackTargets)
+                    {
+                        if (attackTarget == null)
+                        {
+                            continue;
+                        }
+
+                        var attackResult = Attack(source: this, target: attackTarget);
+                    }
+                    break;
+                case "2": // Defend
+                    Console.WriteLine(value: "You defend yourself. (Not yet implemented)");
+                    break;
+                case "3": // Skills
+                    Console.WriteLine(value: "Skills (Not yet implemented)");
+                    break;
+                case "4": // Use Item
+                    DisplayInventory();
+                    var item = ChooseItem();
+                    if (item != null)
+                    {
+                        var useItemTargets = ChooseTargets(enemies: targets, allies: allies, targetingScope: item.TargetingScope, targetingType: item.TargetingType, actorScopeType: item.ActorScopeType);
+                        item.Use(source: this, useItemTargets);
+                    }
+                    break;
+                case "5": // Equip/Unequip Item
+                    Console.WriteLine(value: "Unequip Item (Not yet implemented)");
+                    break;
+                case "6": // Flee
+                    Console.WriteLine(value: "You attempt to flee. (Not yet implemented)");
+                    break;
+                case "7": // Display Inventory
+                    DisplayInventory();
+                    ShowCombatActions();
+                    PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
+                    break;
+                case "8": // Display Equipment
+                    DisplayEquipment();
+                    ShowCombatActions();
+                    PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
+                    break;
+                case "9": // Display Stats
+                    DisplayStats();
+                    ShowCombatActions();
+                    PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
+                    break;
+                case "10": // Display Skills
+                    DisplaySkills();
+                    ShowCombatActions();
+                    PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);                    break;
+                default:
+                    Console.WriteLine(value: "Invalid choice. Please choose a valid action.");
+                    ShowCombatActions();
+                    PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
+                    break;
+            }
+
+            return true;
+        }
+
+        public virtual IItem? ChooseItem()
+        {
+            Console.WriteLine(value: "Choose an item to use:");
+            if (Inventory == null || Inventory.Items.Count == 0)
+            {
+                Console.WriteLine(value: "No items in inventory.");
+                return null;
             }
 
             var chosenIndex = -1;
-            while (chosenIndex < 0 || chosenIndex > targets.Count || !targets[index: chosenIndex].IsAlive)
+            while (chosenIndex < 0 || chosenIndex > Inventory.Items.Count)
             {
-                Console.Write(value: "Enter the number of the target: ");
+                Console.Write(value: "Enter the number of the item: ");
                 var input = Console.ReadLine();
-                if (int.TryParse(s: input, result: out var index) && index >= 1 && index <= targets.Count && targets[index: index - 1].IsAlive)
+                if (int.TryParse(s: input, result: out var index) && index >= 1 && index <= Inventory.Items.Count)
                 {
                     chosenIndex = index - 1;
                 }
                 else
                 {
-                    Console.WriteLine(value: "Invalid choice. Please choose a valid target.");
+                    Console.WriteLine(value: "Invalid choice. Please choose a valid item.");
                 }
             }
 
-            return targets[index: chosenIndex];
+            return Inventory.Items[index: chosenIndex];
         }
 
-        // private void VictoryMessageHandler(IMessageEnvelope message)
-        // {
-        //     if(!message.Message<VictoryMessage>().HasValue)
-        //     {
-        //         return;
-        //     }
-        //
-        //     var data = message.Message<VictoryMessage>().GetValueOrDefault();
-        //     var player = data.Players.FirstOrDefault(x=> x.ID.Equals(ID));
-        //     if(player == null)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (player.IsAlive)
-        //     {
-        //         foreach (var enemy in data.Enemies)
-        //         {
-        //             var loot = enemy.Loot();
-        //             if (loot == null)
-        //             {
-        //                 continue;
-        //             }
-        //             if(ActorSkills == null)
-        //             {
-        //                 continue;
-        //             }
-        //             switch (CombatStyle)
-        //             {
-        //                 case CombatStyle.Melee:
-        //                     ActorSkills.MeleeSkill.Leveling.GainExperience(loot.CombatExperience);
-        //                     break;
-        //                 case CombatStyle.Ranged:
-        //                     ActorSkills.RangedSkill.Leveling.GainExperience(loot.CombatExperience);
-        //                     break;
-        //                 case CombatStyle.Magic:
-        //                     ActorSkills.MagicSkill.Leveling.GainExperience(loot.CombatExperience);
-        //                     break;
-        //                 case CombatStyle.Hybrid:
-        //                     var sharedExp = loot.CombatExperience / 3;
-        //                     ActorSkills.MeleeSkill.Leveling.GainExperience(sharedExp);
-        //                     ActorSkills.RangedSkill.Leveling.GainExperience(sharedExp);
-        //                     ActorSkills.MagicSkill.Leveling.GainExperience(sharedExp);
-        //                     break;
-        //             }
-        //             foreach (var skill in loot.SkillExperiences)
-        //             {
-        //                 switch (skill.SkillType)
-        //                 {
-        //                     case SkillType.None:
-        //                         break;
-        //                     case SkillType.Melee:
-        //                         ActorSkills.MeleeSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Ranged:
-        //                         ActorSkills.RangedSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Magic:
-        //                         ActorSkills.MagicSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Alchemy:
-        //                         ActorSkills.AlchemySkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Cooking:
-        //                         ActorSkills.CookingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Crafting:
-        //                         ActorSkills.CraftingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Enchanting:
-        //                         ActorSkills.EnchantingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Fishing:
-        //                         ActorSkills.FishingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Fletching:
-        //                         ActorSkills.FletchingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Foraging:
-        //                         ActorSkills.ForagingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Mining:
-        //                         ActorSkills.MiningSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Smithing:
-        //                         ActorSkills.SmithingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Ranching:
-        //                         ActorSkills.RanchingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                     case SkillType.Woodcutting:
-        //                         ActorSkills.WoodcuttingSkill.Leveling.GainExperience(skill.Experience);
-        //                         break;
-        //                 }
-        //             }
-        //             
-        //             if(!enemy.HasAlreadyBeenLooted)
-        //             {
-        //                 MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Combat, message: new LootMessage(source: enemy, target: this, loot: loot ));
-        //             }
-        //             // Inventory?.Gold.Add(otherCurrency: loot.Gold);
-        //             // Inventory?.Items.AddRange(collection: loot.Items);
-        //             // var itemsString = loot.Items.Count is > 0 and > 1 ? "Items" : "Item";
-        //             // var lootItemsDisplay = loot.Items.Count > 0
-        //             //     ? $"{loot.Items.Count} {itemsString} from {enemy.Name}\n" +
-        //             //       string.Join(separator: ", \n", values: loot.Items.Select(selector: x => "Looted " + x.Name))
-        //             //     : "No Items";
-        //             // Console.WriteLine(value: $"{Name} has looted {loot.Gold} and {lootItemsDisplay}");
-        //         }
-        //         
-        //
-        //     }
-        // }
+        public virtual void DisplayInventory()
+        {
+            Console.WriteLine(value: "Inventory:");
+            if (Inventory == null)
+            {
+                Console.WriteLine(value: "No items in inventory.");
+                return;
+            }
 
+            for (var index = 1; index <= Inventory.Items.Count; index++)
+            {
+                var item = Inventory.Items[index -1];
+                if (item == null)
+                {
+                    continue;
+                }
+
+                Console.WriteLine(value: $"[{index}]: {item.Name} x{item.Quantity}");
+            }
+        }
+
+        public virtual void DisplayStats()
+        {
+            Console.WriteLine(value: "Stats:");
+            if (ActorStats == null)
+            {
+                Console.WriteLine(value: "No stats available.");
+                return;
+            }
+
+            Console.WriteLine(value: $"Health: {ActorStats.Health.CurrentValue}/{ActorStats.Health.MaxValue}");
+            Console.WriteLine(value: $"Mana: {ActorStats.Mana.CurrentValue}/{ActorStats.Mana.MaxValue}");
+            Console.WriteLine(value: $"Stamina: {ActorStats.Stamina.CurrentValue}/{ActorStats.Stamina.MaxValue}");
+            Console.WriteLine(value: $"Combat Level: {CombatLevel}");
+            Console.WriteLine(value: $"Melee Attack: {ActorStats.MeleeAttack.CurrentValue}/{ActorStats.MeleeAttack.MaxValue}");
+            Console.WriteLine(value: $"Melee Defense: {ActorStats.MeleeDefense.CurrentValue}/{ActorStats.MeleeDefense.MaxValue}");
+            Console.WriteLine(value: $"Ranged Attack: {ActorStats.RangedAttack.CurrentValue}/{ActorStats.RangedAttack.MaxValue}");
+            Console.WriteLine(value: $"Ranged Defense: {ActorStats.RangedDefense.CurrentValue}/{ActorStats.RangedDefense.MaxValue}");
+            Console.WriteLine(value: $"Magic Attack: {ActorStats.MagicAttack.CurrentValue}/{ActorStats.MagicAttack.MaxValue}");
+            Console.WriteLine(value: $"Magic Defense: {ActorStats.MagicDefense.CurrentValue}/{ActorStats.MagicDefense.MaxValue}");
+            Console.WriteLine(value: $"Critical Hit Chance: {ActorStats.CriticalHitChance.CurrentValue}/{ActorStats.CriticalHitChance.MaxValue}");
+        }
+
+        public virtual void DisplayEquipment()
+        {
+            Console.WriteLine(value: "Equipment:");
+
+            var slotNames = Enum.GetNames(enumType: typeof(EquipmentSlot));
+            for (int i = 2; i <= Equipment.Length; i++)
+            {
+                var slotName = slotNames[i-1];
+                var item = Equipment[i-1];
+                if (item == null)
+                {
+                    Console.WriteLine(value: $"[{i-1} - {slotName}]: Empty");
+                    continue;
+                }
+                Console.WriteLine(value: $"[{i-1} - {slotName}]: {item.Name}");
+            } 
+            
+        }
+
+        public virtual void DisplaySkills()
+        {
+            Console.WriteLine(value: "Skills:");
+            if (ActorSkills == null)
+            {
+                Console.WriteLine(value: "No skills available.");
+                return;
+            }
+            
+            Console.WriteLine(value: $"Melee: {ActorSkills.MeleeSkill.Leveling.CurrentLevel} Experience: {ActorSkills.MeleeSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Ranged: {ActorSkills.RangedSkill.Leveling.CurrentLevel} Experience: {ActorSkills.RangedSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Magic: {ActorSkills.MagicSkill.Leveling.CurrentLevel} Experience: {ActorSkills.MagicSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Alchemy: {ActorSkills.AlchemySkill.Leveling.CurrentLevel} Experience: {ActorSkills.AlchemySkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Cooking: {ActorSkills.CookingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.CookingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Crafting: {ActorSkills.CraftingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.CraftingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Enchanting: {ActorSkills.EnchantingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.EnchantingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Fishing: {ActorSkills.FishingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.FishingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Fletching: {ActorSkills.FletchingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.FletchingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Foraging: {ActorSkills.ForagingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.ForagingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Mining: {ActorSkills.MiningSkill.Leveling.CurrentLevel} Experience: {ActorSkills.MiningSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Smithing: {ActorSkills.SmithingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.SmithingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Ranching: {ActorSkills.RanchingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.RanchingSkill.Leveling.Experience}");
+            Console.WriteLine(value: $"Woodcutting: {ActorSkills.WoodcuttingSkill.Leveling.CurrentLevel} Experience: {ActorSkills.WoodcuttingSkill.Leveling.Experience}");
+        }
+
+        public virtual List<IActor?> ChooseTargets(List<IActor> enemies, List<IActor> allies, TargetingScope targetingScope = TargetingScope.Single, TargetingType targetingType = TargetingType.Enemy, ActorScopeType actorScopeType = ActorScopeType.Alive)
+        {
+            var targets = new List<IActor?>();
+            var selectedTargets = new List<IActor?>();
+            switch (targetingType)
+            {
+                case TargetingType.Self:
+                    switch (actorScopeType)
+                    {
+                        case ActorScopeType.Alive:
+                            if (IsAlive)
+                            {
+                                targets.Add(item: this);
+                            }
+                            break;
+                        case ActorScopeType.Dead:
+                            if (!IsAlive)
+                            {
+                                targets.Add(item: this);
+                            }
+                            break;
+                        case ActorScopeType.All:
+                            targets.Add(item: this);
+                            break;
+                    }
+                    break;
+                case TargetingType.Ally:
+                    switch (actorScopeType)
+                    {
+                        case ActorScopeType.Alive:
+                            targets.AddRange(collection: allies.Where(x=> x.IsAlive));
+                            break;
+                        case ActorScopeType.Dead:
+                            targets.AddRange(collection: allies.Where(x=> !x.IsAlive));
+                            break;
+                        case ActorScopeType.All:
+                            targets.AddRange(collection: allies);
+                            break;
+                    }
+                    break;
+                case TargetingType.Enemy:
+                    switch (actorScopeType)
+                    {
+                        case ActorScopeType.Alive:
+                            targets.AddRange(collection: enemies.Where(x=> x.IsAlive));
+                            break;
+                        case ActorScopeType.Dead:
+                            targets.AddRange(collection: enemies.Where(x=> !x.IsAlive));
+                            break;
+                        case ActorScopeType.All:
+                            targets.AddRange(collection: enemies);
+                            break;
+                    }
+                    break;
+                case TargetingType.All:
+                    switch (actorScopeType)
+                    {
+                        case ActorScopeType.Alive:
+                            targets.AddRange(collection: allies.Where(x=> x.IsAlive));
+                            targets.AddRange(collection: enemies.Where(x=> x.IsAlive));
+                            break;
+                        case ActorScopeType.Dead:
+                            targets.AddRange(collection: allies.Where(x=> !x.IsAlive));
+                            targets.AddRange(collection: enemies.Where(x=> !x.IsAlive));
+                            break;
+                        case ActorScopeType.All:
+                            targets.AddRange(collection: allies);
+                            targets.AddRange(collection: enemies);
+                            break;
+                    }
+                    break;
+            }
+            switch (targetingScope)
+            {
+                case TargetingScope.Single:
+                    Console.WriteLine(value: "Choose a single target");
+                    for (var i = 1; i <= targets.Count; i++)
+                    {
+                        var target = targets[index: i - 1];
+                        Console.WriteLine(value: $"{i}: {target?.Name} (Combat Level: {target?.CombatLevel} HP: {target?.ActorStats?.Health.CurrentValue}/{target?.ActorStats?.Health.MaxValue})");
+                    }
+                    var singleSelectIndex = -1;
+                    while (singleSelectIndex < 0 || singleSelectIndex > targets.Count)
+                    {
+                        Console.Write(value: "Enter the number of the target: ");
+                        var input = Console.ReadLine();
+                        if (int.TryParse(s: input, result: out var index) && index >= 1 && index <= targets.Count)
+                        {
+                            singleSelectIndex = index - 1;
+                            selectedTargets.Add(item: targets[index: singleSelectIndex]);
+                        }
+                        else
+                        {
+                            Console.WriteLine(value: "Invalid choice. Please choose a valid target.");
+                        }
+                    }
+                    break;
+                case TargetingScope.Multiple:
+                    Console.WriteLine(value: "Choose multiple targets");
+                    for (var i = 1; i <= targets.Count; i++)
+                    {
+                        var target = targets[index: i - 1];
+                        Console.WriteLine(value: $"{i}: {target?.Name} (Combat Level: {target?.CombatLevel} HP: {target?.ActorStats?.Health.CurrentValue}/{target?.ActorStats?.Health.MaxValue})");
+                    }
+                    var muliselectIndex = -1;
+                    var doneSelecting = false;
+                    var availableTargets = targets.Count;
+                    while (muliselectIndex < 0 || muliselectIndex > targets.Count || selectedTargets.Count < availableTargets || !doneSelecting)
+                    {
+                        Console.Write(value: "Enter the number of the target: ");
+                        var input = Console.ReadLine();
+                        if (int.TryParse(s: input, result: out var index) && index >= 1 && index <= targets.Count)
+                        {
+                            muliselectIndex = index - 1;
+                            if (!selectedTargets.Contains(item: targets[index: muliselectIndex]))
+                            {
+                                selectedTargets.Add(item: targets[index: muliselectIndex]);
+                            }
+                            else
+                            {
+                                Console.WriteLine(value: "Target already selected.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(value: "Invalid choice. Please choose a valid target.");
+                        }
+                        Console.WriteLine(value: "Select another target? (Y/N)");
+                        var selectAnother = Console.ReadLine()?.ToUpper();
+                        if(selectAnother?.Equals("N", StringComparison.OrdinalIgnoreCase) == true || selectAnother?.Equals("Y", StringComparison.OrdinalIgnoreCase) == true)
+                        {
+                            if (selectAnother?.Equals("N", StringComparison.OrdinalIgnoreCase) == false) continue;
+                            doneSelecting = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine(value: "Invalid choice. Please choose Y or N.");
+                        }
+                    }
+                    break;
+                case TargetingScope.All:
+                    Console.WriteLine(value: "Selecting all available targets");
+                    selectedTargets.AddRange(collection: targets);
+                    break;
+            }
+
+            return selectedTargets;
+        }
 
         ~Player()
         {

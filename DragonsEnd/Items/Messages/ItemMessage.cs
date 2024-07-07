@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Items.Interfaces;
 
@@ -7,13 +8,13 @@ namespace DragonsEnd.Items.Messages
     {
         public IItem Item { get; }
         public IActor? Source { get; }
-        public IActor? Target { get; }
-
-        public ItemMessage(IItem item, IActor? source, IActor? target)
+        public List<IActor?>? Targets { get; }
+        
+        public ItemMessage(IItem item, IActor? source, List<IActor?>? targets)
         {
             Item = item;
             Source = source;
-            Target = target;
+            Targets = targets;
         }
     }
 }

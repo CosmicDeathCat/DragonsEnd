@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DragonsEnd.Actor.Interfaces;
@@ -77,10 +78,12 @@ namespace DragonsEnd.Items.Status
             int woodcuttingLevel = 0,
             bool stackable = true,
             long quantity = 1,
-            double dropRate = 1
-        ) : base(name: name, description: description, price: price, type: type,
-            stackable: stackable,
-            quantity: quantity, dropRate: dropRate)
+            double dropRate = 1,
+            TargetingType targetingType = TargetingType.None,
+            TargetingScope targetingScope = TargetingScope.None,
+            ActorScopeType actorScopeType = ActorScopeType.None
+        ) : base(name: name, description: description, price: price, type: type, stackable: stackable, quantity: quantity,
+            dropRate: dropRate, targetingType: targetingType, targetingScope: targetingScope, actorScopeType: actorScopeType)
         {
             MeleeExperience = meleeExperience;
             RangedExperience = rangedExperience;
@@ -112,42 +115,48 @@ namespace DragonsEnd.Items.Status
             WoodcuttingLevel = woodcuttingLevel;
         }
 
-        public override void Use(IActor? source, IActor? target)
+        public override void Use(IActor? source, List<IActor?>? targets = null)
         {
-            if (target != null)
+            if (targets != null)
             {
-                target.ActorSkills.MeleeSkill.Leveling.GainExperience(amount: MeleeExperience);
-                target.ActorSkills.RangedSkill.Leveling.GainExperience(amount: RangedExperience);
-                target.ActorSkills.MagicSkill.Leveling.GainExperience(amount: MagicExperience);
-                target.ActorSkills.AlchemySkill.Leveling.GainExperience(amount: AlchemyExperience);
-                target.ActorSkills.CookingSkill.Leveling.GainExperience(amount: CookingExperience);
-                target.ActorSkills.CraftingSkill.Leveling.GainExperience(amount: CraftingExperience);
-                target.ActorSkills.EnchantingSkill.Leveling.GainExperience(amount: EnchantingExperience);
-                target.ActorSkills.FletchingSkill.Leveling.GainExperience(amount: FletchingExperience);
-                target.ActorSkills.SmithingSkill.Leveling.GainExperience(amount: SmithingExperience);
-                target.ActorSkills.FishingSkill.Leveling.GainExperience(amount: FishingExperience);
-                target.ActorSkills.ForagingSkill.Leveling.GainExperience(amount: ForagingExperience);
-                target.ActorSkills.MiningSkill.Leveling.GainExperience(amount: MiningExperience);
-                target.ActorSkills.RanchingSkill.Leveling.GainExperience(amount: RanchingExperience);
-                target.ActorSkills.WoodcuttingSkill.Leveling.GainExperience(amount: WoodcuttingExperience);
-                target.ActorSkills.MeleeSkill.Leveling.CurrentLevel += MeleeLevel;
-                target.ActorSkills.RangedSkill.Leveling.CurrentLevel += RangedLevel;
-                target.ActorSkills.MagicSkill.Leveling.CurrentLevel += MagicLevel;
-                target.ActorSkills.AlchemySkill.Leveling.CurrentLevel += AlchemyLevel;
-                target.ActorSkills.CookingSkill.Leveling.CurrentLevel += CookingLevel;
-                target.ActorSkills.CraftingSkill.Leveling.CurrentLevel += CraftingLevel;
-                target.ActorSkills.EnchantingSkill.Leveling.CurrentLevel += EnchantingLevel;
-                target.ActorSkills.FletchingSkill.Leveling.CurrentLevel += FletchingLevel;
-                target.ActorSkills.SmithingSkill.Leveling.CurrentLevel += SmithingLevel;
-                target.ActorSkills.FishingSkill.Leveling.CurrentLevel += FishingLevel;
-                target.ActorSkills.ForagingSkill.Leveling.CurrentLevel += ForagingLevel;
-                target.ActorSkills.MiningSkill.Leveling.CurrentLevel += MiningLevel;
-                target.ActorSkills.RanchingSkill.Leveling.CurrentLevel += RanchingLevel;
-                target.ActorSkills.WoodcuttingSkill.Leveling.CurrentLevel += WoodcuttingLevel;
-            }
+                foreach (var target in targets)
+                {
+                    if (target is { ActorSkills: not null })
+                    {
+                        target.ActorSkills.MeleeSkill.Leveling.GainExperience(amount: MeleeExperience);
+                        target.ActorSkills.RangedSkill.Leveling.GainExperience(amount: RangedExperience);
+                        target.ActorSkills.MagicSkill.Leveling.GainExperience(amount: MagicExperience);
+                        target.ActorSkills.AlchemySkill.Leveling.GainExperience(amount: AlchemyExperience);
+                        target.ActorSkills.CookingSkill.Leveling.GainExperience(amount: CookingExperience);
+                        target.ActorSkills.CraftingSkill.Leveling.GainExperience(amount: CraftingExperience);
+                        target.ActorSkills.EnchantingSkill.Leveling.GainExperience(amount: EnchantingExperience);
+                        target.ActorSkills.FletchingSkill.Leveling.GainExperience(amount: FletchingExperience);
+                        target.ActorSkills.SmithingSkill.Leveling.GainExperience(amount: SmithingExperience);
+                        target.ActorSkills.FishingSkill.Leveling.GainExperience(amount: FishingExperience);
+                        target.ActorSkills.ForagingSkill.Leveling.GainExperience(amount: ForagingExperience);
+                        target.ActorSkills.MiningSkill.Leveling.GainExperience(amount: MiningExperience);
+                        target.ActorSkills.RanchingSkill.Leveling.GainExperience(amount: RanchingExperience);
+                        target.ActorSkills.WoodcuttingSkill.Leveling.GainExperience(amount: WoodcuttingExperience);
+                        target.ActorSkills.MeleeSkill.Leveling.CurrentLevel += MeleeLevel;
+                        target.ActorSkills.RangedSkill.Leveling.CurrentLevel += RangedLevel;
+                        target.ActorSkills.MagicSkill.Leveling.CurrentLevel += MagicLevel;
+                        target.ActorSkills.AlchemySkill.Leveling.CurrentLevel += AlchemyLevel;
+                        target.ActorSkills.CookingSkill.Leveling.CurrentLevel += CookingLevel;
+                        target.ActorSkills.CraftingSkill.Leveling.CurrentLevel += CraftingLevel;
+                        target.ActorSkills.EnchantingSkill.Leveling.CurrentLevel += EnchantingLevel;
+                        target.ActorSkills.FletchingSkill.Leveling.CurrentLevel += FletchingLevel;
+                        target.ActorSkills.SmithingSkill.Leveling.CurrentLevel += SmithingLevel;
+                        target.ActorSkills.FishingSkill.Leveling.CurrentLevel += FishingLevel;
+                        target.ActorSkills.ForagingSkill.Leveling.CurrentLevel += ForagingLevel;
+                        target.ActorSkills.MiningSkill.Leveling.CurrentLevel += MiningLevel;
+                        target.ActorSkills.RanchingSkill.Leveling.CurrentLevel += RanchingLevel;
+                        target.ActorSkills.WoodcuttingSkill.Leveling.CurrentLevel += WoodcuttingLevel;
+                    }
 
-            MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
-                message: new ItemMessage(item: this, source: source, target: target));
+                    MessageSystem.MessageManager.SendImmediate(channel: MessageChannels.Items,
+                        message: new ItemMessage(item: this, source: source, targets: targets));
+                }
+            }
         }
 
         public override IItem Copy()
@@ -186,7 +195,11 @@ namespace DragonsEnd.Items.Status
                 ranchingLevel: RanchingLevel,
                 woodcuttingLevel: WoodcuttingLevel,
                 stackable: Stackable,
-                quantity: Quantity
+                quantity: Quantity,
+                dropRate: DropRate,
+                targetingType: TargetingType,
+                targetingScope: TargetingScope,
+                actorScopeType: ActorScopeType
             );
         }
     }

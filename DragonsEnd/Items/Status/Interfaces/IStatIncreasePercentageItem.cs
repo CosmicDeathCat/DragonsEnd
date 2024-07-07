@@ -2,7 +2,7 @@
 
 namespace DragonsEnd.Items.Status.Interfaces
 {
-    public interface IStatIncreaseItem : IItem
+    public interface IStatIncreasePercentageItem : IItem
     {
         double HealthIncreasePercentage { get; set; }
         double ManaIncreasePercentage { get; set; }
