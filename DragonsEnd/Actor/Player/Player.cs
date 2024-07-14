@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DragonsEnd.Actions.Player.Constants;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Player.Interfaces;
 using DragonsEnd.Combat.Interfaces;
+using DragonsEnd.ConsoleHandlers.Input;
 using DragonsEnd.Enums;
 using DragonsEnd.Items;
 using DragonsEnd.Items.Equipment.Interfaces;
@@ -104,7 +106,6 @@ namespace DragonsEnd.Actor.Player
             {
                 Console.WriteLine(value: $"{Name} is taking their turn.");
                 TurnCount++;
-                ShowCombatActions();
                 PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
                 // var target = ChooseTarget(targets: targets);
                 // if (target == null)
@@ -118,28 +119,27 @@ namespace DragonsEnd.Actor.Player
 
             return false;
         }
-
-        public virtual void ShowCombatActions()
-        {
-            Console.WriteLine(value: "Choose an action:");
-            Console.WriteLine(value: "1: Attack");
-            Console.WriteLine(value: "2: Defend");
-            Console.WriteLine(value: "3: Skills");
-            Console.WriteLine(value: "4: Use Item");
-            Console.WriteLine(value: "5: Unequip Item");
-            Console.WriteLine(value: "6: Flee");
-            Console.WriteLine(value: "7: Display Inventory");
-            Console.WriteLine(value: "8: Display Equipment");
-            Console.WriteLine(value: "9: Display Stats");
-            Console.WriteLine(value: "10: Display Skills");
-        }
-
+        
         public virtual bool PerformCombatAction(ICombatContext combatContext, List<IActor> targets, List<IActor> allies)
         {
-            var input = Console.ReadLine();
+            var input = ConsoleInputHandler.GetInput<string> (message: "Choose an action:", allowNumberInput: true, availableStringOptions: new [] 
+            {
+                CombatActionNames.Attack,
+                CombatActionNames.Defend,
+                CombatActionNames.Skills,
+                CombatActionNames.UseItem,
+                CombatActionNames.UnequipItem,
+                CombatActionNames.Flee,
+                NonCombatActionNames.DisplayInventory,
+                NonCombatActionNames.DisplayEquipment,
+                NonCombatActionNames.DisplayStats,
+                NonCombatActionNames.DisplaySkills
+            });
+            
+            // var input = Console.ReadLine();
             switch (input)
             {
-                case "1": // Attack
+                case CombatActionNames.Attack: // Attack
                     //TODO: Implement choosing a target based on weapon and skills make Attack a ability that can be customized
                     var attackTargets = ChooseTargets(enemies: targets, allies: allies);
                     if (!attackTargets.Any())
@@ -157,13 +157,13 @@ namespace DragonsEnd.Actor.Player
                         var attackResult = Attack(source: this, target: attackTarget);
                     }
                     break;
-                case "2": // Defend
+                case CombatActionNames.Defend: // Defend
                     Console.WriteLine(value: "You defend yourself. (Not yet implemented)");
                     break;
-                case "3": // Skills
+                case CombatActionNames.Skills: // Skills
                     Console.WriteLine(value: "Skills (Not yet implemented)");
                     break;
-                case "4": // Use Item
+                case CombatActionNames.UseItem: // Use Item
                     DisplayInventory();
                     var item = ChooseItem();
                     if (item != null)
@@ -172,34 +172,29 @@ namespace DragonsEnd.Actor.Player
                         item.Use(source: this, useItemTargets);
                     }
                     break;
-                case "5": // Equip/Unequip Item
+                case CombatActionNames.UnequipItem: // Equip/Unequip Item
                     Console.WriteLine(value: "Unequip Item (Not yet implemented)");
                     break;
-                case "6": // Flee
+                case CombatActionNames.Flee: // Flee
                     Console.WriteLine(value: "You attempt to flee. (Not yet implemented)");
                     break;
-                case "7": // Display Inventory
+                case NonCombatActionNames.DisplayInventory: // Display Inventory
                     DisplayInventory();
-                    ShowCombatActions();
                     PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
                     break;
-                case "8": // Display Equipment
+                case NonCombatActionNames.DisplayEquipment: // Display Equipment
                     DisplayEquipment();
-                    ShowCombatActions();
                     PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
                     break;
-                case "9": // Display Stats
+                case NonCombatActionNames.DisplayStats: // Display Stats
                     DisplayStats();
-                    ShowCombatActions();
                     PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
                     break;
-                case "10": // Display Skills
+                case NonCombatActionNames.DisplaySkills: // Display Skills
                     DisplaySkills();
-                    ShowCombatActions();
                     PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);                    break;
                 default:
                     Console.WriteLine(value: "Invalid choice. Please choose a valid action.");
-                    ShowCombatActions();
                     PerformCombatAction(combatContext: combatContext, targets: targets, allies: allies);
                     break;
             }

@@ -7,7 +7,7 @@ namespace DragonsEnd.Actor.Player.Interfaces
 {
     public interface IPlayer : IActor
     {
-        void ShowCombatActions();
+        // void ShowCombatActions();
         bool PerformCombatAction(ICombatContext combatContext, List<IActor> targets, List<IActor> allies);
         void DisplayInventory();
         void DisplayStats();
