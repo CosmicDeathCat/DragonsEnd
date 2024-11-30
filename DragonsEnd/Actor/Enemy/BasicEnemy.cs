@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using DragonsEnd.Abilities.Interfaces;
 using DragonsEnd.Actor.Enemy.Interfaces;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Enums;
@@ -33,12 +35,13 @@ namespace DragonsEnd.Actor.Enemy
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
             ILootConfig? lootConfig = null,
-            ILootContainer? lootContainer = null
+            ILootContainer? lootContainer = null,
+            List<IAbility>? activeAbilities = null
         )
             : base(name: name, gender: gender, characterClass: characterClass, actorStats: actorStats, actorSkills: actorSkills, combatStyle: combatStyle,
                 damageMultiplier: damageMultiplier, damageReductionMultiplier: damageReductionMultiplier,
                 criticalHitMultiplier: criticalHitMultiplier, equipment: equipment,
-                inventory: inventory, lootConfig: lootConfig, lootContainer: lootContainer)
+                inventory: inventory, lootConfig: lootConfig, lootContainer: lootContainer, activeAbilities: activeAbilities)
         {
             EnemyTier = enemyTier;
         }
@@ -83,7 +86,8 @@ namespace DragonsEnd.Actor.Enemy
                 equipment: Equipment!,
                 inventory: Inventory,
                 lootConfig: LootConfig,
-                lootContainer: LootContainer
+                lootContainer: LootContainer,
+                activeAbilities: ActiveAbilities
             );
         }
 

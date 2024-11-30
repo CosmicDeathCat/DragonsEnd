@@ -6,6 +6,9 @@ using DLS.MessageSystem;
 using DLS.MessageSystem.Messaging.MessageChannels.Enums;
 using DLS.MessageSystem.Messaging.MessageWrappers.Extensions;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
+using DragonsEnd.Abilities.Combat;
+using DragonsEnd.Abilities.Combat.Interfaces;
+using DragonsEnd.Abilities.Interfaces;
 using DragonsEnd.Actor.Interfaces;
 using DragonsEnd.Actor.Messages;
 using DragonsEnd.Combat.Interfaces;
@@ -69,6 +72,9 @@ namespace DragonsEnd.Actor
             set => _combatStyle = value;
         }
 
+        public IAttackAbility? AttackAbility { get; set; }
+        public IDefendAbility? DefendAbility { get; set; }
+
         public virtual int TurnCount { get; set; }
 
         public virtual bool IsAlive
@@ -86,6 +92,9 @@ namespace DragonsEnd.Actor
                 }
             }
         }
+        
+        public virtual List<IAbility> ActiveAbilities { get; set; } = new();
+
 
         public Actor()
         {
@@ -98,6 +107,7 @@ namespace DragonsEnd.Actor
             ActorStats = new ActorStats(health: 100, mana: 100, stamina: 100, meleeAttack: 1, meleeDefense: 1, rangedAttack: 1, rangedDefense: 1, magicAttack: 1,
                 magicDefense: 1);
             ActorSkills = new ActorSkills(actor: this);
+            // AttackAbility = new BasicAttackAbility(name: "Basic Attack", description: "A basic attack.", type: AbilityType.Attack, requiredStatResourceCost: null, targetingType: TargetingType.Enemy, targetingScope: TargetingScope.Single, actorScopeType: ActorScopeType.Alive, targets: new List<IActor?>(), style: CombatStyle);
             MessageSystem.MessageManager.RegisterForChannel<ItemMessage>(channel: MessageChannels.Items, handler: ItemMessageHandler);
             MessageSystem.MessageManager.RegisterForChannel<LevelingMessage>(channel: MessageChannels.Level, handler: LevelingMessageHandler);
         }
@@ -116,7 +126,10 @@ namespace DragonsEnd.Actor
             IEquipmentItem[]? equipment = null,
             IInventory? inventory = null,
             ILootConfig? lootConfig = null,
-            ILootContainer? lootContainer = null
+            ILootContainer? lootContainer = null,
+            IAttackAbility? attackAbility = null,
+            IDefendAbility? defendAbility = null,
+            List<IAbility>? activeAbilities = null
         )
         {
             Name = name;
@@ -134,6 +147,9 @@ namespace DragonsEnd.Actor
             Inventory = inventory;
             LootConfig = lootConfig;
             LootContainer = lootContainer;
+            AttackAbility = attackAbility;
+            DefendAbility = defendAbility;
+            ActiveAbilities = activeAbilities ?? new List<IAbility>();
 
             if (equipment != null)
             {
@@ -459,7 +475,9 @@ namespace DragonsEnd.Actor
                     return false;
                 }
 
-                var attackResult = Attack(source: this, target: target);
+                // var attackResult = Attack(source: this, target: target);
+                // var attackResult = AttackAbility?.Attack(source: this, target: target);
+                var attackResult = AttackAbility?.Use(source: this, targets: new List<IActor?> { target });
                 return true;
             }
 
@@ -518,7 +536,8 @@ namespace DragonsEnd.Actor
                 equipment: Equipment?.ToArray()!,
                 inventory: Inventory,
                 lootConfig: LootConfig,
-                lootContainer: LootContainer
+                lootContainer: LootContainer,
+                activeAbilities: ActiveAbilities
             );
         }
 

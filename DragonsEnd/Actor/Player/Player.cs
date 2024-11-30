@@ -146,16 +146,8 @@ namespace DragonsEnd.Actor.Player
                     {
                         return false;
                     }
-
-                    foreach (var attackTarget in attackTargets)
-                    {
-                        if (attackTarget == null)
-                        {
-                            continue;
-                        }
-
-                        var attackResult = Attack(source: this, target: attackTarget);
-                    }
+                    
+                    var attackResult = AttackAbility?.Use(source: this, targets: attackTargets);
                     break;
                 case CombatActionNames.Defend: // Defend
                     Console.WriteLine(value: "You defend yourself. (Not yet implemented)");

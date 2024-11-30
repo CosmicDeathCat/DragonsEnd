@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 using DLS.MessageSystem.Messaging.MessageWrappers.Interfaces;
+using DragonsEnd.Abilities.Combat.Interfaces;
+using DragonsEnd.Abilities.Interfaces;
 using DragonsEnd.Combat.Interfaces;
 using DragonsEnd.Enums;
 using DragonsEnd.Items.Equipment.Interfaces;
@@ -31,7 +33,10 @@ namespace DragonsEnd.Actor.Interfaces
         bool IsAlive { get; set; }
         int Initiative { get; set; }
         CombatStyle CombatStyle { get; set; }
+        IAttackAbility? AttackAbility { get; set; }
+        IDefendAbility? DefendAbility { get; set; }
         int TurnCount { get; set; }
+        List<IAbility> ActiveAbilities { get; set; }
         void ResetTurns();
         IWeaponItem?[] GetWeapons();
         IArmorItem?[] GetArmor();
